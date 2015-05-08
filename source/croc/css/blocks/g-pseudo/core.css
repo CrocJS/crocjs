@@ -1,0 +1,33 @@
+
+/* pseudo anchor */
+.g-pseudo {
+    cursor: pointer;
+    text-decoration: none !important;
+    }
+    .g-pseudo-h {
+        border-bottom: 1px dotted;
+        }
+        .g-pseudo:hover .g-pseudo-h,
+        .g-pseudo-h:hover,
+        .g-pseudo.state_hover .g-pseudo-h {
+            color: #f66b0e !important;
+            }
+        .g-pseudo-h.g-link {
+            text-decoration: none !important;
+            }
+    /* State disabled */
+    .g-pseudo.state_disabled,
+    .g-pseudo.state_disabled .g-pseudo-h {
+        color: #999 !important;
+        cursor: default !important;
+        }
+    /* Border null */
+    .g-pseudo.border_null .g-pseudo-h {
+        border-bottom: 0 !important;
+        }
+
+
+
+
+
+

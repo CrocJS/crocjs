@@ -1,0 +1,46 @@
+
+/* pseudo radio button */
+.b-selector {
+    
+    }
+
+/* View pseudo */
+.b-selector.view_pseudo {
+    
+    }
+    .b-selector.view_pseudo .b-selector-item {
+        color: #0073b8;
+        transition: color 0.1s ease;
+        }
+        .b-selector.view_pseudo .b-selector-item:hover {
+            color: #f66b0e;
+            }
+        /* State active */
+        .b-selector.view_pseudo .b-selector-item.state_active {
+            color: #fff;
+            cursor: default;
+            background-color: #0073b8;
+            border: none;
+            }
+            .b-selector.view_pseudo .b-selector-item.state_active .b-selector-item-h {
+                cursor: default;
+                border: none;
+                }
+        .b-selector.view_pseudo .b-selector-item-h {
+            cursor: pointer;
+            border-bottom: 1px dotted;
+            }
+    /* Direction left-to-right */
+    .b-selector.view_pseudo.dir_ltr {
+        margin: -0.1em 0;
+        letter-spacing: -0.25em;
+        }
+        .b-selector.view_pseudo.dir_ltr .b-selector-item {
+            padding: .1em .5em;
+            letter-spacing: normal;
+            }
+
+
+
+
+

@@ -1,0 +1,42 @@
+
+/* @description:
+    b-form-check - обязательный контейнер для радио-кнопок и чекбоксов */
+.b-form-check {
+    
+    }
+
+/* View none */
+.b-form-check.view_none {
+    display: none;
+    }
+    #nojs .b-form-check.view_none {
+        display: block;
+        }
+
+/* Stand outside */
+.b-form-check.stand_outside {
+    padding-left: 0 !important;
+    }
+
+/* Size 1 */
+.b-form-check.size_1 {
+    min-width: 1px;
+    padding-left: 20px;
+    }
+    .b-form-check.size_1 .b-input-radio,
+    .b-form-check.size_1 .b-input-checkbox {
+        margin: -1px 0 0 -20px;
+        }
+/* Size 2 */
+.b-form-check.size_2 {
+    min-width: 1px;
+    padding-left: 24px;
+    }
+    .b-form-check.size_2 .b-input-radio,
+    .b-form-check.size_2 .b-input-checkbox {
+        margin: -1px 0 0 -24px;
+        }
+
+
+
+

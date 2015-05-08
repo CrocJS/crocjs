@@ -1,0 +1,86 @@
+
+/* Set default */
+._b-bar {
+    margin-bottom: 20px;
+    font-size: 13px;
+    line-height: 18px;
+    background: #eaebec;
+    position: relative;
+    border-radius: 3px;
+    }
+    ._b-bar-h {
+        display: table;
+        width: 100%;
+        }
+        ._b-bar-cell {
+            display: table-cell;
+            vertical-align: top;
+            text-align: left;
+            }
+            /* Side right */
+            ._b-bar-cell.side_right {
+                text-align: right;
+                }
+    /* list */
+    ._b-bar-list {
+        display: inline-block;
+        vertical-align: top;
+        text-align: left;
+        letter-spacing: -4px;
+        white-space: nowrap;
+        }
+        /* item */
+        ._b-bar-item {
+            display: inline-block;
+            vertical-align: top;
+            padding: 11px 10px;
+            color: #373839;
+            letter-spacing: normal;
+            white-space: normal;
+            cursor: pointer;
+            border-left: 1px solid #dcddde;
+            user-select: none;
+            transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
+            box-sizing: border-box;
+            text-align: center;
+            }
+            ._b-bar-item:first-child {
+                border-left: none;
+                border-bottom-left-radius: 2px;
+                border-top-left-radius: 2px;
+                }
+                /* Side right */
+                ._b-bar-h > ._b-bar-list ._b-bar-item:last-child,
+                ._b-bar-cell:last-child ._b-bar-item:last-child {
+                    border-bottom-right-radius: 2px;
+                    border-top-right-radius: 2px;
+                    }
+            ._b-bar-item:hover {
+                background-color: #dcddde;
+                }
+            ._b-bar-item:active {
+                background-color: #9d9fa0;
+                box-shadow: 0 2px 0 0 rgba(25, 26, 27, .15) inset;
+                }
+            ._b-bar-item.item_splitter {
+                padding: 0;
+                }
+            /* State active */
+            ._b-bar-item.state_active {
+                color: #fff;
+                cursor: default;
+                background: #9d9fa0;
+                box-shadow: 0 1px 0 0 rgba(25, 26, 27, .15) inset;
+                }
+            /* scheme yellow */
+            ._b-bar-item.scheme_yellow {
+                background: #ffdd33;
+                }
+            /* count */
+            ._b-bar-item-count {
+                color: #7d7e7f;
+                font-size: 11px;
+                }
+                ._b-bar-item.state_active ._b-bar-item-count {
+                    color: #ddd;
+                    }

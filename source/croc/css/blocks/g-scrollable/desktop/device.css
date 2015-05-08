@@ -1,0 +1,200 @@
+
+/* g-scrollable */
+.g-scrollable {
+    position: relative;
+    }
+    .g-scrollable-h {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        }
+    .l-html.mod_mobile-desktop .g-scrollable-h {
+        overflow: auto !important;
+        overflow-y: scroll !important;
+        -webkit-overflow-scrolling: touch;
+        z-index: 0;
+        width: auto;
+        height: auto;
+        }
+    
+    .g-scrollable-bar {
+        position: absolute;
+        cursor: pointer;
+        }
+        .g-scrollable-bar.orient_ver {
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 10px;
+            }
+            .g-scrollable.scroll_both .g-scrollable-bar.size_1.orient_ver {
+                bottom: 4px;
+                }
+            .g-scrollable.scroll_both .g-scrollable-bar.size_2.orient_ver {
+                bottom: 6px;
+                }
+        .g-scrollable-bar.orient_hor {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            }
+            .g-scrollable.scroll_both .g-scrollable-bar.size_1.orient_hor {
+                right: 4px;
+                }
+            .g-scrollable.scroll_both .g-scrollable-bar.size_2.orient_hor {
+                right: 6px;
+                }
+    
+        .g-scrollable-bar-padding {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: #404040;
+            opacity: 0.05;
+            }
+            .g-scrollable-bar.size_1 .g-scrollable-bar-padding {
+                border-radius: 2px;
+                }
+                .g-scrollable-bar.size_1.orient_hor .g-scrollable-bar-padding {
+                    top: 6px;
+                    }
+                .g-scrollable-bar.size_1.orient_ver .g-scrollable-bar-padding {
+                    left: 6px;
+                    }
+            .g-scrollable-bar.size_2 .g-scrollable-bar-padding {
+                border-radius: 3px;
+                }
+                .g-scrollable-bar.size_2.orient_hor .g-scrollable-bar-padding {
+                    top: 4px;
+                    }
+                .g-scrollable-bar.size_2.orient_ver .g-scrollable-bar-padding {
+                    left: 4px;
+                    }
+                
+        .g-scrollable-bar-button {
+            position: absolute;
+            }
+            .g-scrollable-bar.orient_hor .g-scrollable-bar-button {
+                left: 0;
+                bottom: 0;
+                top: 0;
+                width: 10%;
+                }
+            .g-scrollable-bar.orient_ver .g-scrollable-bar-button {
+                top: 0;
+                right: 0;
+                left: 0;
+                height: 10%;
+                }
+            .g-scrollable-bar-button-h {
+                background: #404040;
+                opacity: 0.2;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                transition: opacity 0.1s ease;
+                }
+                .g-scrollable-bar.size_1 .g-scrollable-bar-button-h {
+                    border-radius: 2px;
+                    }
+                    .g-scrollable-bar.orient_hor.size_1 .g-scrollable-bar-button-h {
+                        top: 6px;
+                        }
+                    .g-scrollable-bar.orient_ver.size_1 .g-scrollable-bar-button-h {
+                        left: 6px;
+                        }
+                .g-scrollable-bar.size_2 .g-scrollable-bar-button-h {
+                    border-radius: 3px;
+                    }
+                    .g-scrollable-bar.orient_hor.size_2 .g-scrollable-bar-button-h {
+                        top: 4px;
+                        }
+                    .g-scrollable-bar.orient_ver.size_2 .g-scrollable-bar-button-h {
+                        left: 4px;
+                        }
+                .g-scrollable-bar-button:hover .g-scrollable-bar-button-h,
+                .g-scrollable-bar-button.state_active .g-scrollable-bar-button-h {
+                    opacity: 0.5;
+                    }
+    /* scroll_hidden */
+    .g-scrollable.scroll_hidden .g-scrollable-bar {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        cursor: default;
+        }
+        .ie8 .g-scrollable.scroll_hidden .g-scrollable-bar {
+            visibility: hidden;
+            }
+        .g-scrollable.scroll_hidden.scroll_delayed-hide .g-scrollable-bar {
+            transition: opacity 0.1s ease 2s;
+            }
+        .g-scrollable.scroll_hidden .g-scrollable-bar-button {
+            cursor: pointer;
+            }
+        .g-scrollable.scroll_hidden .g-scrollable-bar-padding {
+            display: none;
+            }
+            .g-scrollable.scroll_hidden:active .g-scrollable-bar,
+            .g-scrollable.scroll_hidden:hover .g-scrollable-bar {
+                transition: opacity 0.1s ease;
+                opacity: 1;
+                }
+                .ie8 .g-scrollable.scroll_hidden:active .g-scrollable-bar,
+                .ie8 .g-scrollable.scroll_hidden:hover .g-scrollable-bar {
+                    visibility: visible;
+                    }
+    /* markers */
+    .g-scrollable-marker {
+        display: none;
+        height: 10px;
+        left: 0;
+        right: 0;
+        position: absolute;
+        pointer-events: none;
+        transition: opacity 0.1s ease;
+        }
+        .g-scrollable-marker.state_hover {
+            opacity: 0;
+            }
+    .g-scrollable-prev-marker {
+        top: 0;
+        background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0) 100%); /* W3C */
+        }
+        .ie9 .g-scrollable-prev-marker {
+            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjElIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuOTkiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+            }
+    .g-scrollable-next-marker {
+        bottom: 0;
+        background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.01) 1%,rgba(255,255,255,1) 100%); /* W3C */
+        }
+        .ie9 .g-scrollable-next-marker {
+            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjElIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMDEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+            }
+        .g-scrollable.state_has-prev .g-scrollable-prev-marker,
+        .g-scrollable.state_has-next .g-scrollable-next-marker {
+            display: block;
+            }
+        .ie8 .g-scrollable.state_has-prev .g-scrollable-prev-marker,
+        .ie8 .g-scrollable.state_has-next .g-scrollable-next-marker {
+            display: none;
+            }
+    /* fit_both */
+    .g-scrollable.fit_both {
+        width: 100%;
+        height: 100%;
+        }
+    /* fit_height */
+    .g-scrollable.fit_height {
+        height: 100%;
+        }
+    /* fit_width */
+    .g-scrollable.fit_width {
+        width: 100%;
+        }
+
+

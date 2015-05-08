@@ -1,0 +1,209 @@
+
+/* b-sbutton */
+
+
+
+/* SIZE: 1 */
+.b-sbutton.type_image.set_tooltip.mod_system.size_1 {
+    height: 18px;
+    font-size: 13px;
+    line-height: 18px;
+    }
+    .b-sbutton.type_image.set_tooltip.mod_system.size_1:before,
+    .b-sbutton.type_image.set_tooltip.mod_system.size_1:after {
+        top: -3px;
+        bottom: -3px;
+        }
+    /* DIRECTION: ltr */
+    .b-sbutton.type_image.set_tooltip.mod_system.size_1.dir_ltr {
+        padding: 4px 9px 4px 16px;
+        }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_1.dir_ltr:before {
+            left: -2px;
+            right: 8px;
+            background-position: 0 0;
+            }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_1.dir_ltr:after {
+            width: 10px;
+            margin-left: -8px;
+            background-position: 100% 0;
+            }
+    /* DIRECTION: rtl */
+    .b-sbutton.type_image.set_tooltip.mod_system.size_1.dir_rtl {
+        padding: 4px 16px 4px 9px;
+        }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_1.dir_rtl:before {
+            left: -2px;
+            right: 18px;
+            background-position: 0 -32px;
+            }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_1.dir_rtl:after {
+            width: 18px;
+            margin-left: -18px;
+            background-position: 100% -32px;
+            }
+/* SIZE: 2 */
+.b-sbutton.type_image.set_tooltip.mod_system.size_2 {
+    height: 20px;
+    font-size: 16px;
+    line-height: 20px;
+    }
+    .b-sbutton.type_image.set_tooltip.mod_system.size_2:before,
+    .b-sbutton.type_image.set_tooltip.mod_system.size_2:after {
+        top: -3px;
+        bottom: -2px;
+        }
+    /* DIRECTION: ltr */
+    .b-sbutton.type_image.set_tooltip.mod_system.size_2.dir_ltr {
+        padding: 6px 12px 6px 18px;
+        }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_2.dir_ltr:before {
+            left: -2px;
+            right: 10px;
+            background-position: 0 -64px;
+            }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_2.dir_ltr:after {
+            width: 12px;
+            margin-left: -10px;
+            background-position: 100% -64px;
+            }
+    /* DIRECTION: rtl */
+    .b-sbutton.type_image.set_tooltip.mod_system.size_2.dir_rtl {
+        padding: 6px 18px 6px 12px;
+        }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_2.dir_rtl:before {
+            left: -2px;
+            right: 20px;
+            background-position: 0 -101px;
+            }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_2.dir_rtl:after {
+            width: 20px;
+            margin-left: -20px;
+            background-position: 100% -101px;
+            }
+/* SIZE: 3 */
+.b-sbutton.type_image.set_tooltip.mod_system.size_3 {
+    height: 24px;
+    font-size: 18px;
+    line-height: 24px;
+    }
+    .b-sbutton.type_image.set_tooltip.mod_system.size_3:before,
+    .b-sbutton.type_image.set_tooltip.mod_system.size_3:after {
+        top: -2px;
+        bottom: -3px;
+        }
+    /* DIRECTION: ltr */
+    .b-sbutton.type_image.set_tooltip.mod_system.size_3.dir_ltr {
+        padding: 7px 14px 7px 22px;
+        }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_3.dir_ltr:before {
+            left: -2px;
+            right: 10px;
+            background-position: 0 -138px;
+            }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_3.dir_ltr:after {
+            width: 12px;
+            margin-left: -10px;
+            background-position: 100% -138px;
+            }
+    /* DIRECTION: rtl */
+    .b-sbutton.type_image.set_tooltip.mod_system.size_3.dir_rtl {
+        padding: 7px 22px 7px 14px;
+        }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_3.dir_rtl:before {
+            left: -2px;
+            right: 21px;
+            background-position: 0 -181px;
+            }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_3.dir_rtl:after {
+            width: 21px;
+            margin-left: -21px;
+            background-position: 100% -181px;
+            }
+/* SIZE: 4 */
+.b-sbutton.type_image.set_tooltip.mod_system.size_4 {
+    height: 26px;
+    font-size: 21px;
+    line-height: 26px;
+    }
+    .b-sbutton.type_image.set_tooltip.mod_system.size_4:before,
+    .b-sbutton.type_image.set_tooltip.mod_system.size_4:after {
+        top: -2px;
+        bottom: -2px;
+        }
+    /* DIRECTION: ltr */
+    .b-sbutton.type_image.set_tooltip.mod_system.size_4.dir_ltr {
+        padding: 10px 12px 10px 26px;
+        }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_4.dir_ltr:before {
+            left: -2px;
+            right: 12px;
+            background-position: 0 -224px;
+            }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_4.dir_ltr:after {
+            width: 14px;
+            margin-left: -12px;
+            background-position: 100% -224px;
+            }
+    /* DIRECTION: rtl */
+    .b-sbutton.type_image.set_tooltip.mod_system.size_4.dir_rtl {
+        padding: 10px 26px 10px 12px;
+        }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_4.dir_rtl:before {
+            left: -2px;
+            right: 24px;
+            background-position: 0 -274px;
+            }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_4.dir_rtl:after {
+            width: 24px;
+            margin-left: -24px;
+            background-position: 100% -274px;
+            }
+/* SIZE: 5 */
+.b-sbutton.type_image.set_tooltip.mod_system.size_5 {
+    height: 30px;
+    font-size: 27px;
+    line-height: 30px;
+    }
+    .b-sbutton.type_image.set_tooltip.mod_system.size_5:before,
+    .b-sbutton.type_image.set_tooltip.mod_system.size_5:after {
+        top: -2px;
+        bottom: -3px;
+        }
+    /* DIRECTION: ltr */
+    .b-sbutton.type_image.set_tooltip.mod_system.size_5.dir_ltr {
+        padding: 12px 16px 12px 28px;
+        }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_5.dir_ltr:before {
+            left: -2px;
+            right: 14px;
+            background-position: 0 -324px;
+            }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_5.dir_ltr:after {
+            width: 16px;
+            margin-left: -14px;
+            background-position: 100% -324px;
+            }
+    /* DIRECTION: rtl */
+    .b-sbutton.type_image.set_tooltip.mod_system.size_5.dir_rtl {
+        padding: 12px 28px 12px 16px;
+        }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_5.dir_rtl:before {
+            left: -2px;
+            right: 27px;
+            background-position: 0 -383px;
+            }
+        .b-sbutton.type_image.set_tooltip.mod_system.size_5.dir_rtl:after {
+            width: 27px;
+            margin-left: -27px;
+            background-position: 100% -383px;
+            }
+
+
+
+
+
+
+
+
+

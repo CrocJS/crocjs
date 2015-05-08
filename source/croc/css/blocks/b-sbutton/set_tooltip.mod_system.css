@@ -1,0 +1,35 @@
+
+/* b-sbutton */
+
+
+
+/* SCHEME: red */
+.b-sbutton.type_image.set_tooltip.mod_system.scheme_red {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+    }
+    .b-sbutton.type_image.set_tooltip.mod_system.scheme_red:before,
+    .b-sbutton.type_image.set_tooltip.mod_system.scheme_red:after {
+        background-image: url(/croc/images/blocks/b-sbutton/set_tooltip.mod_system.scheme_red.png);
+        }
+/* SCHEME: yellow */
+.b-sbutton.type_image.set_tooltip.mod_system.scheme_yellow {
+    color: #000;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .45);
+    }
+    .b-sbutton.type_image.set_tooltip.mod_system.scheme_yellow:before,
+    .b-sbutton.type_image.set_tooltip.mod_system.scheme_yellow:after {
+        background-image: url(/croc/images/blocks/b-sbutton/set_tooltip.mod_system.scheme_yellow.png);
+        }
+/* SCHEME: blue */
+.b-sbutton.type_image.set_tooltip.mod_system.scheme_blue {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+    }
+    .b-sbutton.type_image.set_tooltip.mod_system.scheme_blue:before,
+    .b-sbutton.type_image.set_tooltip.mod_system.scheme_blue:after {
+        background-image: url(/croc/images/blocks/b-sbutton/set_tooltip.mod_system.scheme_blue.png);
+        }
+
+
+

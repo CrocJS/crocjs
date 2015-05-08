@@ -1,0 +1,104 @@
+
+/* b-popup */
+
+
+
+/* b-popup */
+.b-popup {
+    
+    }
+    .b-popup-h {
+        
+        }
+    .b-popup-button {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 0;
+        line-height: 0;
+        position: relative;
+        }
+        /* MOD back */
+        .b-popup-button.mod_back {
+            width: 16px;
+            height: 20px;
+            cursor: pointer;
+            background: url(/croc/images/blocks/b-popup/common/popup-button.mod_back.png) 0 0 no-repeat;
+            }
+            .b-popup-button.mod_back:hover {
+                background-position: 0 -20px;
+                }
+            .b-popup-button.mod_back:active {
+                background-position: 0 -40px;
+                }
+            /* ROLE head */
+            .b-popup-button.mod_back.role_head {
+                left: 12px;
+                top: 7px;
+                position: absolute;
+                z-index: 10;
+                }
+                .b-popup-button.mod_back.role_head:after {
+                    content: '';
+                    display: block;
+                    left: -12px;
+                    right: -12px;
+                    top: -7px;
+                    position: absolute;
+                    bottom: -8px;
+                    font: 0/0 sans-serif;
+                    overflow: hidden;
+                    background: url(about:blank);
+                    z-index: 12;
+                    border-top-left-radius: 10px;
+                    }
+    /* STATE: active */
+    .b-popup.state_active {
+        display: block;
+        }
+    /* POS: fixed */
+    .b-popup.pos_fixed {
+        position: fixed;
+        top: 50%; /* optional */
+        left: 50%; /* optional */
+        }
+    /* POS: relative */
+    .b-popup.pos_relative {
+        position: relative;
+        }
+    /* SHADOW: on */
+    .b-popup.shadow_on {
+        
+        }
+        .b-popup.shadow_on .b-popup-h {
+            box-shadow: 0 0 18px 3px rgba(0, 0, 0, .5);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

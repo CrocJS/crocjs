@@ -1,0 +1,44 @@
+
+/* b-popup */
+
+
+
+/* SKIN: default */
+.b-popup.skin_default {
+    
+    }
+    .b-popup.skin_default .b-popup-h {
+        border-radius: 6px;
+        }
+    /* head */
+    .b-popup.skin_default .b-popup-head {
+        
+        }
+        .b-popup.skin_default .b-popup-head-h {
+            padding: 8px 40px;
+            border-radius: 6px 6px 0 0;
+            }
+        .b-popup.skin_default .b-popup-head-title {
+            font-size: 16px;
+            line-height: 20px;
+            position: relative;
+            }
+    /* body */
+    .b-popup.skin_default .b-popup-body {
+        
+        }
+        .b-popup.skin_default .b-popup-body-h {
+            padding: 15px 20px 15px;
+            border-radius: 0 0 6px 6px;
+            }
+    /* foot */
+    .b-popup.skin_default .b-popup-foot {
+        
+        }
+        .b-popup.skin_default .b-popup-foot-h {
+            padding: 10px 20px;
+            border-radius: 0px 0px 6px 6px;
+            }
+
+
+

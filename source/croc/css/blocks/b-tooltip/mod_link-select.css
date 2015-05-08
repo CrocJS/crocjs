@@ -1,0 +1,43 @@
+
+/* MOD: link select */
+.b-tooltip.mod_link-select .b-tooltip-body {
+    max-width: none;
+    }
+
+.b-tooltip.mod_link-select .g-pseudo.state_active,
+.b-tooltip.mod_link-select .g-pseudo.state_active:hover,
+.b-tooltip.mod_link-select .g-pseudo.state_active .g-pseudo-h,
+.b-tooltip.mod_link-select .g-pseudo.state_active .g-pseudo-h:hover {
+    color: #000 !important;
+    cursor: default;
+    border: none;
+    }
+
+/* SIZE: 1 */
+.b-tooltip.mod_link-select.size_1 {
+    font-size: 13px;
+    line-height: 18px;
+    }
+/* SIZE: 2 */
+.b-tooltip.mod_link-select.size_2 {
+    font-size: 16px;
+    line-height: 20px;
+    }
+/* SIZE: 3 */
+.b-tooltip.mod_link-select.size_3 {
+    font-size: 18px;
+    line-height: 23px;
+    }
+/* SIZE: 4 */
+.b-tooltip.mod_link-select.size_4 {
+    font-size: 21px;
+    line-height: 25px;
+    }
+/* SIZE: 5 */
+.b-tooltip.mod_link-select.size_5 {
+    font-size: 27px;
+    line-height: 34px;
+    }
+
+
+

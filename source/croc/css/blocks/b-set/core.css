@@ -1,0 +1,123 @@
+
+/* Set of couple blocks / elements inline */
+
+/* b-set */
+.b-set {
+    display: block;
+    letter-spacing: -0.27em;
+    white-space: nowrap;
+    position: relative;
+    }
+    .gecko .b-set {
+        letter-spacing: -0.31em;
+        }
+    /* item */
+    .b-set-item {
+        display: inline-block;
+        vertical-align: top;
+        letter-spacing: normal;
+        word-spacing: normal;
+        white-space: normal;
+        }
+        .b-set.dir_ttb .b-set-item {
+            display: block;
+            }
+
+/* Box inline */
+.b-set.box_inline {
+    display: inline-block;
+    vertical-align: middle;
+    }
+/* Box table */
+.b-set.box_table {
+    display: table;
+    width: 100%;
+    }
+    /* Vertical-align top */
+    .b-set.box_table.valign_top .b-set-item {
+        vertical-align: top;
+        }
+    /* Vertical-align middle */
+    .b-set.box_table.valign_middle .b-set-item {
+        vertical-align: middle;
+        }
+    /* Vertical-align bottom */
+    .b-set.box_table.valign_bottom .b-set-item {
+        vertical-align: bottom;
+        }
+    .b-set.box_table > .b-set-item {
+        display: table-cell;
+        vertical-align: top;
+        }
+/* Box flex */
+.b-set.box_flex {
+    display: flex;
+    letter-spacing: normal;
+    }
+    .b-set.box_flex .b-set-item {
+        display: block;
+        flex: 1 1 100%;
+        }
+    .b-set.box_flex.dir_ttb {
+        flex-direction: column;
+        }
+    .b-set.box_flex.dir_ttb.spacing_0 > .b-sbutton.set_system .b-sbutton-text {
+        border-top-width: 1px;
+        }
+        .b-set.box_flex.dir_ttb.spacing_0 > .b-sbutton.set_system:first-child .b-sbutton-text {
+            border-top-width: 0;
+            }
+        .b-set.box_flex.dir_ttb.spacing_0 > .b-sbutton.set_system:not(:first-child) .b-sbutton-text {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            }
+        .b-set.box_flex.dir_ttb.spacing_0 > .b-sbutton.set_system:not(:last-child) .b-sbutton-text {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            }
+
+/* Spacing 0 */
+.b-set.spacing_0 {
+    
+    }
+    .b-set.spacing_0 > .b-set-item {
+        
+        }
+    /* buttons */
+    .b-set.spacing_0 > .b-sbutton {
+        
+        }
+        .b-set:not(.dir_ttb).spacing_0 > .b-sbutton.set_system .b-sbutton-text {
+            border-left-width: 1px;
+            }
+            .b-set:not(.dir_ttb).spacing_0 > .b-sbutton.set_system:first-child .b-sbutton-text {
+                border-left-width: 0;
+                }
+            .b-set:not(.dir_ttb).spacing_0 > .b-sbutton.set_system:not(:first-child) .b-sbutton-text {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                }
+            .b-set:not(.dir_ttb).spacing_0 > .b-sbutton.set_system:not(:last-child) .b-sbutton-text {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                }
+        /* Scheme white */
+        .b-set.spacing_0 > .b-sbutton.set_system.scheme_white .b-sbutton-text {
+            border-left-width: 0;
+            }
+            .b-set.spacing_0 > .b-sbutton.set_system.scheme_white:first-child .b-sbutton-text {
+                border-left-width: 1px;
+                }
+/* Spacing 1 */
+.b-set.spacing_1 {
+    margin-left: -5px;
+    }
+    .b-set.spacing_1 > .b-set-item {
+        margin-left: 5px;
+        }
+
+
+
+
+
+

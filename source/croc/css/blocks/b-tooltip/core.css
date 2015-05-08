@@ -1,0 +1,174 @@
+
+/* b-tooltip */
+.b-tooltip {
+    position: absolute;
+    z-index: 10000;
+    }
+    .b-tooltip .b-tooltip-tri {
+        display: block;
+        position: absolute;
+        font: 0/0 sans-serif;
+        overflow: hidden;
+        text-indent: -9999px;
+        }
+    /* head */
+    .b-tooltip-head {
+        position: relative;
+        }
+    /* body */
+    .b-tooltip-body {
+        position: relative;
+        box-sizing: border-box;
+        }
+    /* foot */
+    .b-tooltip-foot {
+        position: relative;
+        }
+        .ie11 .b-tooltip-foot {
+            margin-top: -1px;
+            }
+
+/* tri */
+.b-tooltip.skin_default .b-tooltip-tri {
+    display: none;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    z-index: 1;
+    }
+    /* Dir top-to-bottom */
+    .b-tooltip.skin_default.dir_ttb .b-tooltip-tri {
+        display: block;
+        height: 10px;
+        left: 50%;
+        bottom: 100%;
+        margin: 0 0 -1px -10px;
+        background-position: 0 0;
+        }
+    /* Dir bottom-to-top */
+    .b-tooltip.skin_default.dir_btt .b-tooltip-tri {
+        display: block;
+        height: 10px;
+        left: 50%;
+        top: 100%;
+        margin: -1px 0 0 -10px;
+        background-position: 0 100%;
+        }
+    /* Dir left-to-right */
+    .b-tooltip.skin_default.dir_ltr .b-tooltip-tri {
+        display: block;
+        width: 10px;
+        right: 100%;
+        top: 50%;
+        margin: -10px -1px 0 0;
+        background-position: 0 0;
+        }
+    /* Dir right-to-left */
+    .b-tooltip.skin_default.dir_rtl .b-tooltip-tri {
+        display: block;
+        width: 10px;
+        left: 100%;
+        top: 50%;
+        margin: -10px 0 0 -1px;
+        background-position: 100% 0;
+        }
+
+/* Skin default */
+.b-tooltip.skin_default {
+    border-radius: 6px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .5);
+    }
+    .b-tooltip.skin_default .b-tooltip-body {
+        max-width: 250px;
+        padding: 9px 14px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background-clip: padding-box;
+        }
+    .b-tooltip.skin_default.is_unlimited .b-tooltip-body {
+        max-width: none;
+        }
+    /* Scheme white */
+    .b-tooltip.skin_default.scheme_white {
+        
+        }
+        .b-tooltip.skin_default.scheme_white .b-tooltip-tri {
+            background-image: url(/croc/images/blocks/b-tooltip/b-tooltip-tri.scheme_white.png);
+            }
+        .b-tooltip.skin_default.scheme_white .b-tooltip-body {
+            background-color: #fff;
+            }
+            .ie8 .b-tooltip.skin_default.scheme_white .b-tooltip-body {
+                border: 1px solid #ddd;
+                }
+    /* Scheme red */
+    .b-tooltip.skin_default.scheme_red {
+        
+        }
+        .b-tooltip.skin_default.scheme_red .b-tooltip-tri {
+            background-image: url(/croc/images/blocks/b-tooltip/b-tooltip-tri.scheme_red.png);
+            }
+        .b-tooltip.skin_default.scheme_red .b-tooltip-body {
+            background-color: #ff001f;
+            color: #fff;
+            border-color: #fff;
+            }
+            .ie8 .b-tooltip.skin_default.scheme_red .b-tooltip-body {
+                border: 1px solid #fff;
+                }
+    /* Indent small */
+    .b-tooltip.skin_default.dir_btt.indent_small {
+        margin-top: -4px;
+        }
+    .b-tooltip.skin_default.dir_ttb.indent_small {
+        margin-top: 4px;
+        }
+
+/* list */
+.b-tooltip-list {
+    
+    }
+    .b-tooltip-item {
+        
+        }
+    /* View inline */
+    .b-tooltip-list.view_inline {
+        
+        }
+        .b-tooltip-list.view_inline .b-tooltip-item {
+            padding-top: 6px;
+            }
+            .b-tooltip-list.view_inline.padding_double .b-tooltip-item {
+                padding-top: 12px;
+                }
+            .b-tooltip-list.view_inline .b-tooltip-item:first-child {
+                padding-top: 0;
+                }
+    /* View block (list) */
+    .b-tooltip-list.view_block {
+        margin: 0 -18px;
+        }
+        .b-tooltip-list.view_block .b-tooltip-item {
+            display: block;
+            padding: 3px 15px;
+            cursor: pointer;
+            transition: color 0.1s ease, background-color 0.1s ease;
+            }
+            .b-tooltip-list.view_block .b-tooltip-item:hover {
+                color: #fff !important;
+                background-color: #0073b8;
+                }
+            /* State active */
+            .b-tooltip-list.view_block .b-tooltip-item.state_active {
+                cursor: default;
+                color: #000 !important;
+                background-color: transparent !important;
+                }
+
+
+
+
+
+

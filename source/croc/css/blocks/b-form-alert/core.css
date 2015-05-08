@@ -1,0 +1,112 @@
+
+/* @description:
+    b-form-alert - сообщение об ошибке или успехе */
+
+/* b-form-alert */
+.b-form-alert {
+    font-size: 13px;
+    line-height: 18px;
+    }
+    .b-form-alert-icon {
+        position: absolute;
+        background: url(/croc/images/blocks/b-form-alert/icons.png) 0 0 no-repeat;
+        }
+
+/* Size 0 */
+.b-form-alert.size_0 {
+    padding-left: 18px;
+    }
+    .b-form-alert.size_0 .b-form-alert-icon {
+        width: 14px;
+        height: 14px;
+        margin-left: -18px;
+        margin-top: 2px;
+        }
+/* Size 1 */
+.b-form-alert.size_1 {
+    padding-left: 24px;
+    }
+    .b-form-alert.size_1 .b-form-alert-icon {
+        width: 18px;
+        height: 18px;
+        margin-left: -24px;
+        }
+/* Size 2 */
+.b-form-alert.size_2 {
+    padding-left: 24px;
+    }
+    .b-form-alert.size_2 .b-form-alert-icon {
+        width: 20px;
+        height: 20px;
+        margin-left: -24px;
+        }
+
+/* Type error */
+.b-form-alert.type_error {
+    color: #ff0101;
+    }
+    /* Size 0 */
+    .b-form-alert.type_error.size_0 .b-form-alert-icon {
+        background-position: -78px 0;
+        }
+    /* Size 1 */
+    .b-form-alert.type_error.size_1 .b-form-alert-icon {
+        background-position: -78px -15px;
+        }
+/* Type success */
+.b-form-alert.type_success {
+    color: #019b00;
+    }
+    /* Size 0 */
+    .b-form-alert.type_success.size_0 .b-form-alert-icon {
+        background-position: -39px 0;
+        }
+    /* Size 0 */
+    .b-form-alert.type_success.size_1 .b-form-alert-icon {
+        background-position: -39px -15px;
+        }
+
+/* View message */
+.b-form-alert.view_message {
+    display: block;
+    max-width: 608px;
+    padding: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px;
+    }
+    /* Type error */
+    .b-form-alert.view_message.type_error {
+        background-color: #ffdfdd;
+        }
+    /* Type success */
+    .b-form-alert.view_message.type_success {
+        background-color: #e9fde5;
+        }
+    /* Size 0 */
+    .b-form-alert.view_message.size_0 {
+        padding-left: 32px;
+        }
+        .b-form-alert.view_message.size_0 .b-form-alert-icon {
+            margin-left: -22px;
+            margin-top: 2px;
+            }
+    /* Size 1 */
+    .b-form-alert.view_message.size_1 {
+        padding-left: 36px;
+        }
+        .b-form-alert.view_message.size_1 .b-form-alert-icon {
+            margin-left: -26px;
+            }
+    /* Mod certificate */
+    .b-form-alert.view_message.mod_certificate {
+        max-width: none;
+        height: 100%;
+        box-sizing: border-box;
+        }
+
+
+
+
+

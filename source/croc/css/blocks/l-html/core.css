@@ -1,0 +1,83 @@
+
+/* html + body */
+.l-html,
+.l-body {
+    height: 100%;
+    pointer-events: auto;
+    }
+    /* State no-events */
+    .l-body.state_noevents {
+        pointer-events: none;
+        }
+.l-html {
+    overflow-x: auto;
+    overflow-y: scroll;
+    }
+    /* /////////// OLD */
+                            /* View crop */
+                            .l-html.view_crop {
+                                overflow: hidden;
+                                }
+                                .l-html.view_crop ._b-toolbar {
+                                    right: 15px;
+                                    }
+                                .win.l-html.view_crop ._b-toolbar {
+                                    right: 17px;
+                                    }
+                            /* OLD /////////// */
+    /* Crop full */
+    .l-html.crop_full {
+        overflow: hidden;
+        }
+        .l-html.crop_full ._b-toolbar {
+            right: 15px;
+            }
+        .win.l-html.crop_full ._b-toolbar {
+            right: 17px;
+            }
+    /* Crop mobile */
+    .l-html.crop_mobile .l-body {
+        overflow: hidden;
+        }
+    /* View alert */
+    .l-html.view_alert .b-alert {
+        display: block;
+        }
+
+/* Header footer */
+.l-html.header_foot {
+    
+    }
+    .l-html:not(.header_foot) .b-header-foot {
+        display: none;
+        }
+    .l-html.header_foot .b-header-foot {
+        display: block;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

@@ -1,0 +1,55 @@
+
+/* @description:
+    b-form-label - контейнер лейбла, описывающего предназначение поля ввода, соответствующего данной строке
+    Для позиционирования «напротив» поля ввода нужно указывать размер, соответствующий размеру поля ввода,
+    а также кеглю в поле ввода.
+    size 1 - 13пкс (g-font size_10)
+    size 2 - 16пкс (g-font size_9)
+    size 3 - 18пкс (g-font size_8)
+    size 4 - 21пкс (g-font size_7)
+    size 5 - 27пкс (g-font size_4) */
+
+/* b-form-label */
+.b-form-label {
+    
+    }
+
+/* Pos top */
+.b-form-label.pos_top {
+    margin-bottom: 3px;
+    }
+
+/* For input */
+.b-form-label.pos_left.for_input {
+    padding-top: 3px; /* @default */
+    }
+    /* Size text */
+    .b-form-label.pos_left.for_input.size_text {
+        padding-top: 0;
+        }
+    /* Size 1 */
+    .b-form-label.pos_left.for_input.size_1 {
+        padding-top: 4px;
+        }
+    /* Size 2 */
+    .b-form-label.pos_left.for_input.size_2 {
+        padding-top: 5px;
+        }
+    /* Size 3 */
+    .b-form-label.pos_left.for_input.size_3 {
+        padding-top: 7px;
+        }
+    /* Size 4 */
+    .b-form-label.pos_left.for_input.size_4 {
+        padding-top: 9px;
+        }
+    /* Size 5 */
+    .b-form-label.pos_left.for_input.size_5 {
+        padding-top: 10px;
+        }
+
+
+
+
+
+

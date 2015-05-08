@@ -1,0 +1,6 @@
+
+/* g-hidden */
+#js .g-hidden,
+#nojs .g-hidden {
+    display: none;
+    }

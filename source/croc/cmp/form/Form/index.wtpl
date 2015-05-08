@@ -1,0 +1,33 @@
+<index:>
+    <form action="{{action || '#'}}" class="b-form" method="post">
+        {{if @content}}
+            {{@content}}
+        {{else}}
+            <virtualView is="body" optional/>
+        {{/if}}
+    </form>
+</index:>
+
+<fieldset:>
+    <fieldset class="b-form-fset">
+        {{@content}}
+    </fieldset>
+</fieldset:>
+
+<row:>
+    <div class="b-form-row pos_{{@position || 'left'}}{{if @margin}} margin_{{@margin}}{{/if}} js-wrapper">
+        {{if @label}}
+            <div class="b-form-label for_input pos_{{@label.position || 'left'}} size_{{@label.size || '1'}}">
+                <label class="g-font size_{{@label.fontSize || v.getLabelFontSize(@label.size)}}">{{@label.text || @label}}</label>
+            </div>
+        {{/if}}
+        <div class="b-form-input pos_{{@position || 'left'}}">
+            <div class="b-form-input-h">{{@content}}</div>
+            {{if @hint}}
+                <div class="b-form-hint pos_bot g-font size_{{@hint.size || '12'}}{{if @hint.state}} state_{{@hint.state}}{{/if}}">
+                    {{@hint.text || @hint}}
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</row:>

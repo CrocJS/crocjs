@@ -1,0 +1,65 @@
+
+/* g-icon */
+.g-icon {
+    
+    }
+    .android-stock .g-icon:before {
+        content: '\200b';
+        }
+    .g-icon-h {
+        position: absolute;
+        text-align: left;
+        }
+    .g-icon-h img,
+    .g-icon-item {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 0;
+        line-height: 0;
+        overflow: hidden;
+        }
+
+/* TYPE: button */
+.g-icon.type_button {
+    
+    }
+    .g-icon.type_button .g-icon-h {
+        text-align: center !important;
+        position: relative;
+        }
+
+/* BOX block */
+.g-icon.box_block {
+    display: block;
+    }
+    .g-icon.box_block:before {
+        display: none;
+        }
+/* BOX inline block */
+.g-icon.box_iblock {
+    display: inline-block;
+    }
+
+/* STAND alone */
+.g-icon.stand_alone {
+    
+    }
+    .g-icon.stand_alone .g-icon-h {
+        position: relative;
+        }
+/* STAND outside */
+.g-icon.stand_outside {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    }
+    .g-icon.stand_outside:before {
+        display: none;
+        }
+    .g-icon.stand_outside.side_right {
+        
+        }
+
+/* icon text */
+.g-icon-text {
+    margin-left: 5px;
+    }

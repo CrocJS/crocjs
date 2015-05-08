@@ -1,0 +1,48 @@
+
+/* @description:
+    b-form-group - обязательный контейнер для списка радио-кнопок и чекбоксов 
+    Тип списка нужен исключительно для нужд JS
+    Направлений у списка два: слева направо, сверху вниз */
+
+/* b-form-group */
+.b-form-group {
+    
+    }
+    .b-form-group .b-form-group {
+        padding: 9px 0 9px 21px;
+        }
+
+/* Type radio */
+.b-form-group.type_radio {
+    /* Just for JavaScript needs */
+    }
+/* Type checkbox */
+.b-form-group.type_check {
+    /* Just for JavaScript needs */
+    }
+
+/* Direction top-to-bottom */
+.b-form-group.dir_ttb {
+    
+    }
+    .b-form-group.dir_ttb .b-form-check {
+        display: block;
+        margin-top: 3px;
+        }
+        .b-form-group.dir_ttb .b-form-check:first-child {
+            margin-top: 0 !important;
+            }
+/* Direction left-to-right */
+.b-form-group.dir_ltr {
+    margin-left: -8px;
+    }
+    .b-form-group.dir_ltr .b-form-check {
+        display: inline;
+        margin-left: 8px;
+        }
+
+
+
+
+
+

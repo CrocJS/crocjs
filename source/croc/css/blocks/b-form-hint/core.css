@@ -1,0 +1,39 @@
+
+/* @description:
+    b-form-hint - подсказка для правильного заполнения формы */
+
+/* hint */
+.b-form-hint {
+    color: #999; /* @deprecated */
+    }
+    .b-form-hint a,
+    .b-form-hint .g-link {
+        color: #999;
+        }
+
+/* State error */
+.b-form-hint.state_error {
+    color: #ff525e;
+    }
+/* State valid */
+.b-form-hint.state_valid {
+    color: #00d500;
+    }
+
+/* Pos bot */
+.b-form-hint.pos_bot {
+    margin-top: 4px;
+    }
+/* Pos left */
+.b-form-hint.pos_left {
+    float: left;
+    margin-left: 10px;
+    }
+/* Pos right */ /* ? */
+.b-form-hint.pos_right {
+    float: right;
+    }
+
+
+
+

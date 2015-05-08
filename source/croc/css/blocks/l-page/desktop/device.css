@@ -1,0 +1,11 @@
+
+/* page */
+.l-page {
+    min-width: 1080px;
+    }
+    /* Mod mobile-desktop */
+    .l-html.mod_mobile-desktop .l-page {
+        min-width: 1000px;
+        }
+
+

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html id="nojs" class="l-html " lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script>
+        "use strict";
+        document.documentElement.id = 'js';
+    </script>
+    <script src="../resources/preinit.js"></script>
+
+    <title>Popup</title>
+
+    <link rel="stylesheet" href="/croc/css/main.css">
+    <style>
+        #page {
+            max-width: 700px;
+            margin: auto;
+            padding-top: 20px;
+            }
+    </style>
+</head>
+
+<body class="l-body">
+
+    <div id="page">
+        <div id="control" style="margin-bottom: 20px"></div>
+    </div>
+
+    <script src="index.js"></script>
+
+    <script type="text/javascript">
+        croc.initialize();
+
+        croc.subscribe('system.application.ready', function() {
+            var controlForm = new croc.ui.form.Form({
+                renderTo: '#control',
+                dItemDefaults: {
+                    size: '2'
+                },
+                labelsConf: {
+                    pos: 'left'
+                },
+                stateManager: {
+                    removeEmptyValue: false
+                },
+                items: {
+                    fields: [
+                        {
+                            xtype: croc.ui.form.field.TextField,
+                            identifier: 'title',
+                            value: 'Popup title',
+                            validation: {
+                                required: true
+                            },
+                            meta: {
+                                label: 'Title'
+                            }
+                        },
+                        {
+                            xtype: croc.ui.form.field.RadioButtonsSet,
+                            identifier: 'skin',
+                            items: [
+                                {
+                                    value: 'default',
+                                    text: 'default',
+                                    active: true
+                                },
+                                {
+                                    text: 'mini',
+                                    value: 'mini'
+                                }
+                            ],
+                            meta: {
+                                label: 'Skin'
+                            }
+                        },
+                        {
+                            xtype: croc.ui.form.field.RadioButtonsSet,
+                            identifier: 'scheme',
+                            items: [
+                                {
+                                    value: 'default',
+                                    text: 'default',
+                                    active: true
+                                },
+                                {
+                                    text: 'gray',
+                                    value: 'gray'
+                                }
+                            ],
+                            meta: {
+                                label: 'Scheme'
+                            }
+                        },
+                        {
+                            xtype: croc.ui.form.field.CheckBoxesGroup,
+                            size: '1',
+                            removeUnchecked: false,
+                            items: [
+                                {
+                                    identifier: 'overlay',
+                                    checked: true,
+                                    meta: {
+                                        label: 'Overlay'
+                                    }
+                                },
+                                {
+                                    identifier: 'fullscreen',
+                                    meta: {
+                                        label: 'Fullscreen'
+                                    }
+                                },
+                                {
+                                    identifier: 'shadow',
+                                    checked: true,
+                                    meta: {
+                                        label: 'Shadow'
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    buttons: [
+                        {
+                            text: 'Open popup',
+                            listeners: {
+                                execute: _.ary(openPopup, 0)
+                            }
+                        },
+                        {
+                            text: 'Open loooong popup',
+                            listeners: {
+                                execute: _.ary(_.partial(openPopup, true), 0)
+                            }
+                        },
+                        {
+                            text: 'Show message box',
+                            listeners: {
+                                execute: function() {
+                                    new croc.ui.popup.MessageBox({
+                                        acceptButton: 'Yes',
+                                        cancelButton: 'No',
+                                        title: 'Question',
+                                        text: 'It\'s really awesome framework, isn\'t it?!' 
+                                    }).open();
+                                }
+                            }
+                        }
+                    ]
+                }
+            });
+            
+            function openPopup(long) {
+                controlForm.validate().done(function(valid) {
+                    if (valid) {
+                        var values = controlForm.getValues();
+                        new croc.ui.popup.Popup(_.assign({
+                            items: [
+                                {
+                                    xtype: croc.ui.form.Button,
+                                    text: 'Open another popup',
+                                    size: '5',
+                                    style: {
+                                        verticalAlign: 'baseline'
+                                    },
+                                    listeners: {
+                                        execute: function() {
+                                            new croc.ui.popup.Popup({
+                                                backButton: true,
+                                                title: 'Another one',
+                                                content: '<div style="height: 300px"></div>',
+                                                style: {width: 300}
+                                            }).open();
+                                        }
+                                    }
+                                }
+                            ],
+                            style: {
+                                width: values.fullscreen ? null : 400
+                            },
+                            listeners: {
+                                changeRendered: function() {
+                                    this.getElement().find('.b-popup-body-h').css({
+                                        height: long ? 3000 : values.fullscreen ? '' : 200,
+                                        lineHeight: '200px',
+                                        textAlign: 'center'
+                                    });
+                                }
+                            }
+                        }, values)).open();
+                        controlForm.getValidationManager().resetValidation();
+                    }
+                });
+            }
+
+            controlForm.getItem('skin').listenProperty('value', function(skin) {
+                controlForm.toggleField('scheme', skin === 'default');
+                controlForm.toggleField('title', skin === 'default');
+            });
+        });
+    </script>
+</body>
+</html>

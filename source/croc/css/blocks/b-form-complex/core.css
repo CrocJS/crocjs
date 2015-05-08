@@ -1,0 +1,24 @@
+
+/* @description:
+    b-form-complex - контейнер для нескольких полей ввода на одной строке
+    пример: дата рождения
+    по умолчанию ширина плавающая */
+.b-form-complex {
+    display: table;
+    }
+    .b-form-complex-cell {
+        display: table-cell;
+        vertical-align: top;
+        }
+
+/* Box block */
+.b-form-complex.box_block {
+    width: 100%;
+    }
+
+
+
+
+
+
+

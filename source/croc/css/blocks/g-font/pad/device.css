@@ -1,0 +1,133 @@
+
+/* g-font */
+.g-font {
+    
+    }
+
+h1, h2, h3 {
+    font-weight: normal;
+    }
+/* Size 1 */
+.g-font.size_1 {
+    font-size: 40px;
+    line-height: 44px;
+    }
+/* Size 2 */
+.g-font.size_2 {
+    font-size: 35px;
+    line-height: 40px;
+    }
+/* Size 3 */
+.g-font.size_3 {
+    font-size: 30px;
+    line-height: 36px;
+    }
+/* Size 4 */
+.g-font.size_4,
+.g-font.size_h1,
+h1 {
+    font-size: 27px;
+    line-height: 34px;
+    }
+/* Size 5 */
+.g-font.size_5 {
+    font-size: 25px;
+    line-height: 32px;
+    }
+/* Size 6 */
+.g-font.size_6 {
+    font-size: 23px;
+    line-height: 30px;
+    }
+/* Size 7 */
+.g-font.size_7,
+.g-font.size_h2,
+h2 {
+    font-size: 21px;
+    line-height: 24px;
+    }
+/* Size 8 */
+.g-font.size_8 {
+    font-size: 18px;
+    line-height: 22px;
+    }
+/* Size 9 */
+.g-font.size_9,
+.g-font.size_h3,
+h3 {
+    font-size: 16px;
+    line-height: 20px;
+    }
+/* Size 10 */
+.g-font.size_10 {
+    font-size: 13px;
+    line-height: 18px;
+    }
+/* Size 11 */
+.g-font.size_11 {
+    font-size: 12px;
+    line-height: 16px;
+    }
+/* Size 12 */
+.g-font.size_12 {
+    font-size: 11px;
+    line-height: 16px;
+    }
+/* Size 13 */
+.g-font.size_13 {
+    font-size: 10px;
+    line-height: 15px;
+    }
+/* Size 14 */
+.g-font.size_14 {
+    font-size: 9px;
+    line-height: 14px;
+    }
+/* Size smaller */
+.g-font.size_smaller {
+    font-size: .85em; /* sets font-size to 85% of parent */
+    line-height: .85em;
+    }
+
+/* Color black */
+.g-font.color_black {
+    color: #000;
+    }
+/* Color gray */
+.g-font.color_gray {
+    color: #777;
+    }
+/* Color light gray */
+.g-font.color_lgray {
+    color: #999;
+    }
+/* Color red */
+.g-font.color_red {
+    color: #f00;
+    }
+/* Color white */
+.g-font.color_white {
+    color: #fff;
+    }
+
+/* Case upper */
+.g-font.case_upper {
+    text-transform: uppercase;
+    }
+/* Case lower */
+.g-font.case_lower {
+    text-transform: lowercase;
+    }
+
+/* View hint */
+.g-font.view_hint {
+    font-size: .85em;
+    line-height: .85em;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    }
+
+
+
+

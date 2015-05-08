@@ -1,0 +1,38 @@
+<index: arrays="item/items">
+    <div class="b-suggestion{{if size}} size_{{size}}{{/if}}">
+        <virtualView is="top" optional/>
+        <div class="g-scrollable" on-create="v.initList($element)">
+            <div class="b-suggestion-container g-scrollable-h">
+                <!--<div class="b-suggestion-error g-hidden"></div>-->
+                <div class="b-suggestion-list">
+                    <virtualView is="items"/>
+                </div>
+                <!--<div class="b-suggestion-more g-loader loader_small g-hidden">&nbsp;</div>-->
+            </div>
+        </div>
+    </div>
+</index:>
+
+<items:>
+    {{if shown}}
+        {{each items as #item}}
+            <virtualView is="item" item="{{#item}}" normalized="{{normalizeItem(#item)}}" label="{{labelItem}}"/>
+        {{else}}
+            <virtualView is="noItems" optional/>
+        {{/each}}
+    {{/if}}
+</items:>
+
+<item:>
+    <tag is="{{@label ? 'label' : 'div'}}" class="b-suggestion-item" on-click="v.onClick(@item)">
+        <virtualView is="itemContent" item="{{@item}}" normalized="{{@normalized}}"/>
+    </tag>
+</item:>
+
+<itemContent:>
+    {{if fromItems}}
+        {{@item.content}}
+    {{else}}
+        {{@normalized.text}}
+    {{/if}}
+</itemContent:>

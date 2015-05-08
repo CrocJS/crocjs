@@ -1,0 +1,13 @@
+<index:>
+    <label class="b-input-checkbox scheme_system size_{{size || 1}}{{if value}} state_checked{{/if}}">
+        <input type="checkbox" name="{{identifier}}" value="{{permanentValue}}" checked="{{value}}"><span class="b-input-checkbox-h"></span>
+    </label>
+</index:>
+
+<wrapper:>
+    <div class="b-form-check size_{{@size || 1}}">
+        <label class="g-ui cursor_pointer">
+            {{@content}} {{@text}}
+        </label>
+    </div>
+</wrapper:>

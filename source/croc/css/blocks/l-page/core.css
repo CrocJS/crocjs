@@ -1,0 +1,11 @@
+
+/* page */
+.l-page {
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    }
+    /* View modern */
+    .l-page.view_modern {
+        background: url(/croc/images/misc/l-page.png) 50% 0;
+        }

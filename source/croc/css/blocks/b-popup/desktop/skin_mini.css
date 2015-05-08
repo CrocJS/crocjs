@@ -1,0 +1,43 @@
+
+/* b-popup */
+
+
+
+/* SKIN: mini */
+.b-popup.skin_mini {
+    }
+    .b-popup.skin_mini .b-popup-h {
+        border-radius: 6px;
+        }
+    /* head */
+    .b-popup.skin_mini .b-popup-head {
+        
+        }
+        .b-popup.skin_mini .b-popup-head-h {
+            padding: 7px 40px;
+            border-radius: 6px 6px 0px 0px;
+            }
+        .b-popup.skin_mini .b-popup-head-title {
+            
+            }
+    /* body */
+    .b-popup.skin_mini .b-popup-body {
+        
+        }
+        .b-popup.skin_mini .b-popup-body-h {
+            padding: 20px;
+            }
+        .b-popup.skin_mini .b-popup-image {
+            margin: 14px 0;
+            }
+    /* foot */
+    .b-popup.skin_mini .b-popup-foot {
+        
+        }
+        .b-popup.skin_mini .b-popup-foot-h {
+            
+            }
+
+
+
+

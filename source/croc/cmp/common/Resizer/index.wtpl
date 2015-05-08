@@ -1,0 +1,25 @@
+<index:>
+    <div class="b-resizer{{if resizeZone}} state_resize{{/if}}"
+        on-mousemove="v.onMouseMove($event)"
+        on-mouseleave="stopResize()"
+        on-mouseup="stopResize()">
+        {{each zones as #zone, #i}}
+            {{with #i === zones.length - 1 as #last}}
+                <div class="b-resizer-zone zone_{{#i}}{{if #zone.hidden}} state_hidden{{/if}}"
+                    style="{{v.getZoneStyle(#zone, zones)}}"
+                    on-create="saveEl($at(m), '_zones.' + #i, $element)"
+                    on-click="toggle($at(#zone.hidden), false)">
+                    <view is="{{resolveVirtualView('zone' + #i)}}" zone="{{#zone}}"/>
+                    {{if #zone.hidden}}
+                        <div class="b-resizer-zone-hidden"></div>
+                    {{/if}}
+                </div>
+                {{unless #last}}
+                    <div class="b-resizer-border zone_{{#i}}{{if #zone.hidden}} state_hidden{{/if}}" style="{{v.getBorderStyle(#zone, zones)}}"
+                        on-mousedown="startResize(#zone)"
+                        on-dblclick="toggle($at(#zone.hidden))"></div>
+                {{/unless}}
+            {{/with}}
+        {{/each}}
+    </div>
+</index:>

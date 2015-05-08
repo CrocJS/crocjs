@@ -1,0 +1,24 @@
+
+/* b-popup-close */
+.b-popup-close {
+    display: block;
+    right: 10px; /* default value */
+    top: 10px; /* default value */
+    position: absolute;
+    font-size: 0;
+    line-height: 0;
+    /* background: url(/croc/images/blocks/b-popup-close/b-popup-close.png) 0 0 no-repeat; */
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAgMAAAANjH3HAAAADFBMVEX///8AAAAAAAD////4MiRfAAAAA3RSTlMAAECMqoVOAAAAcklEQVR4Xu3PsQ1AUBSF4fsYQkTEBozgTUGh0BhBzxLm0OoYgg3YgEQEzx3gaiWS87V/cw59xk00ycKsJjWVQonbgeztFEpgNFlmF4pzaVL9LBTv5lKNQokMLzCrtCDnBYe0wE95wdKRTDUF/RkAAADAAxu/GeeVrDNVAAAAAElFTkSuQmCC) 0 0 no-repeat;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.1s ease, box-shadow 0.05s ease;
+    }
+
+
+
+
+
+
+
+
+

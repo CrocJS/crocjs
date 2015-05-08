@@ -1,0 +1,28 @@
+/* g-loader */
+
+.g-loader {
+    zoom: 1;
+    }
+    .g-loader.loader_blank {
+        background: url(about:blank);
+        }
+
+    .g-loader.loader_big {
+        /*inline*/background: url(/croc/images/gui/loaders/loader_big.gif) no-repeat center center;
+        min-width: 52px;
+        min-height: 22px;
+        }
+
+    .g-loader.loader_small {
+        /*inline*/background: url(/croc/images/gui/loaders/loader_small.gif) no-repeat center center;
+        min-width: 16px;
+        min-height: 11px;
+        }
+
+    .g-loader.opacity_05 {
+        background-color: rgba(255, 255, 255, 0.5);
+        }
+
+    .g-loader.opacity_1 {
+        background-color: #fff;
+        }

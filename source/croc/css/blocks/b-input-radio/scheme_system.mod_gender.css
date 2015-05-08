@@ -1,0 +1,55 @@
+
+.b-input-radio.scheme_system.size_1.mod_gender:before {
+    display: block;
+    position: absolute;
+    content: '';
+    font-size: 0;
+    line-height: 0;
+    background: url(/croc/images/blocks/b-input-radio/b-input-radio.mod_gender.png) no-repeat;
+    }
+
+    /* role male */
+    .b-input-radio.scheme_system.size_1.mod_gender.role_male:before {
+        content: 'male';
+        background-position: 0 0;
+        width: 5px;
+        height: 5px;
+        left: 13px;
+        top: 0;
+        }
+        .b-input-radio.scheme_system.size_1.mod_gender.role_male.state_active:before,
+        .b-input-radio.scheme_system.size_1.mod_gender.role_male.state_hover:before,
+        .b-input-radio.scheme_system.size_1.mod_gender.role_male.state_focus:before,
+        .b-input-radio.scheme_system.size_1.mod_gender.role_male.state_checked.state_active:before,
+        .b-input-radio.scheme_system.size_1.mod_gender.role_male.state_checked.state_focus:before {
+            content: 'male2';
+            background-position: 0 -5px;
+            }
+        .b-input-radio.scheme_system.size_1.mod_gender.role_male.state_disabled:before,
+        .b-input-radio.scheme_system.size_1.mod_gender.role_male.state_checked:before {
+            content: 'male3';
+            background-position: 0 0;
+            }
+
+    /* role female */
+    .b-input-radio.scheme_system.size_1.mod_gender.role_female:before {
+        content: 'female';
+        background-position: 0 -10px;
+        width: 8px;
+        height: 6px;
+        left: 4px;
+        top: 17px;
+        }
+        .b-input-radio.scheme_system.size_1.mod_gender.role_female.state_active:before,
+        .b-input-radio.scheme_system.size_1.mod_gender.role_female.state_hover:before,
+        .b-input-radio.scheme_system.size_1.mod_gender.role_female.state_focus:before,
+        .b-input-radio.scheme_system.size_1.mod_gender.role_female.state_checked.state_active:before,
+        .b-input-radio.scheme_system.size_1.mod_gender.role_female.state_checked.state_focus:before {
+            content: 'female2';
+            background-position: 0 -16px;
+            }
+        .b-input-radio.scheme_system.size_1.mod_gender.role_female.state_disabled:before,
+        .b-input-radio.scheme_system.size_1.mod_gender.role_female.state_checked:before {
+            content: 'female3';
+            background-position: 0 -10px;
+            }

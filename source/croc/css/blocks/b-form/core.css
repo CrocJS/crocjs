@@ -1,0 +1,42 @@
+
+/* common styles */
+input, button {
+    overflow: visible;
+    }
+input, button, select, textarea {
+    vertical-align: middle;
+    line-height: normal;
+    outline: none;
+    }
+
+
+
+/* b-form */
+.b-form {
+    position: relative;
+    }
+    /* fieldset */
+    .b-form-fset {
+        position: relative;
+        }
+
+
+/* State disabled */
+.b-form.state_disabled .b-form-overlay {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: url(about:blank);
+    z-index: 100;
+    }
+
+
+
+
+
+
+
+

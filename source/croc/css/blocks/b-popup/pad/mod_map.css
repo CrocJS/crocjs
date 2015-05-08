@@ -1,0 +1,13 @@
+
+.b-popup.mod_map {
+
+    }
+    .b-popup.mod_map .b-popup-body-h {
+        padding: 0;
+        height: 450px;
+        }
+        .b-popup.mod_map .b-map.mod_google,
+        .b-popup.mod_map .ymaps-map {
+            border-radius: 0 0 6px 6px;
+            overflow: hidden;
+            }

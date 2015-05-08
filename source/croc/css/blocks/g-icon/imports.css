@@ -1,0 +1,9 @@
+
+/* g-icon */
+@import url(core.css);
+
+@import url(common/set_common.css); /* system set */
+@import url(common/size_x.css); /* size x */
+
+@import url(other/set_lock.css); /* size x */
+

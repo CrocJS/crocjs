@@ -1,0 +1,66 @@
+
+/* b-map */
+.b-map {
+    position: relative;
+    }
+    .b-map-balloon-content {
+        position: relative;
+        overflow: hidden;
+        }
+    .b-map-balloon-content,
+    .b-map-balloon-content div {
+        font: 13px/18px Arial,Helvetica,sans-serif !important;
+        }
+    .b-map-error {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        margin-top: -9px;
+        text-align: center;
+        }
+
+/* MOD google maps */
+.b-map.mod_google {
+    
+    }
+    /*.b-map.mod_google .b-map-balloon-content {
+        padding: 0 10px !important;
+        }
+    .b-map.mod_google .gm-style-iw {
+        left: 0 !important;
+        top: 0 !important;
+        position: relative !important;
+        width: auto !important;
+        height: auto !important;
+        margin: 12px 1px 1px !important;
+        }
+        .b-map.mod_google .gm-style-iw > div {
+            overflow: hidden !important;
+            width: auto !important;
+            }*/
+    .b-map.mod_google .gm-style div,
+    .b-map.mod_google .gm-style span,
+    .b-map.mod_google .gm-style label,
+    .b-map.mod_google .gm-style a {
+        font-family: Arial, Helvetica, sans-serif !important;
+        }
+    .b-input.mod_gmaps-search-control {
+        position: absolute;
+        z-index: 1;
+        width: 300px;
+        left: 40%;
+        margin-left: -150px;
+        top: 5px;
+        }
+
+/* MOD yandex maps */
+.b-map.mod_yandex {
+    
+    }
+    .b-map.mod_yandex .ymaps-b-select_control_search {
+        margin-left: -50px;
+        }
+    .b-map.mod_yandex .b-map-balloon-content {
+        padding: 0 !important;
+        overflow: visible;
+        }

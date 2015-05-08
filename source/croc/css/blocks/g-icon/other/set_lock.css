@@ -1,0 +1,46 @@
+.g-icon.set_lock {
+    }
+    .g-icon.set_lock .g-icon-item {
+        background: url(/croc/images/blocks/g-icon/other/set_lock/set_lock.png);
+        }
+
+/* size_small */
+.g-icon.set_lock.size_small {
+    padding-left: 19px;
+    }
+    .g-icon.set_lock.size_small .g-icon-h {
+        margin-left: -19px;
+        margin-top: -2px;
+        }
+    .g-icon.set_lock.size_small .g-icon-item {
+        width: 19px;
+        height: 16px;
+        }
+
+/* size_big */
+.g-icon.set_lock.size_big {
+    padding-left: 26px;
+    }
+    .g-icon.set_lock.size_big .g-icon-h {
+        margin-left: -26px;
+        }
+    .g-icon.set_lock.size_big .g-icon-item {
+        width: 26px;
+        height: 21px;
+        }
+
+/* mod_locked */
+.g-icon.set_lock.size_small.mod_locked .g-icon-item {
+    background-position: 0 0;
+    }
+.g-icon.set_lock.size_big.mod_locked .g-icon-item {
+    background-position: 0 -16px;
+    }
+
+/* mod_unlocked */
+.g-icon.set_lock.size_small.mod_unlocked .g-icon-item {
+    background-position: -26px 0;
+    }
+.g-icon.set_lock.size_big.mod_unlocked .g-icon-item {
+    background-position: -26px -16px;
+    }

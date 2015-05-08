@@ -1,0 +1,39 @@
+
+/* overlay */
+.b-overlay {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    overflow: hidden;
+    z-index: 10000;
+    }
+    .b-overlay-h {
+        left: 0;
+        top: 0;
+        width: 100%;
+        min-height: 100%;
+        position: absolute;
+        overflow: visible;
+        }
+
+/* background black */
+.b-overlay.bg_black {
+    background: rgba(0, 0, 0, .8);
+    }
+
+/* view default */
+.b-overlay.view_default {
+    
+    }
+    .b-overlay.view_default .b-overlay-h {
+        
+        }
+        .b-overlay.view_default .b-popup {
+            position: relative;
+            }
+
+
+
+

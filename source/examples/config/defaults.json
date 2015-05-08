@@ -1,0 +1,7 @@
+{
+  "NODE_ENV": "development",
+  "PORT": 8008,
+  "MONGO_URL": "mongodb://localhost:27017/land",
+  "SESSION_SECRET": "6347027d612fd373dad3e8f408bbbac178d51485",
+  "SESSION_COOKIE": "c9b3fd054671503a0233c6bc8bb1b3cd32a17319"
+}

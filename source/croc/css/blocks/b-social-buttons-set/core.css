@@ -1,0 +1,56 @@
+
+/* b-social-buttons-set */
+.b-social-buttons-set {
+    font-size: 0;
+    line-height: 0;
+    user-select: none;
+    }
+
+/* layout: stack */
+.b-social-buttons-set.layout_stack {
+    height: auto;
+    }
+    .b-social-buttons-set.layout_stack .b-social-button {
+        display: block !important;
+        margin-top: 4px !important;
+        }
+        .b-social-buttons-set.layout_stack .b-social-button:first-child {
+            margin-top: 0 !important;
+            }
+
+/* layout: inline */
+.b-social-buttons-set.layout_inline {
+    height: auto;
+    }
+
+/* action: like */
+.b-social-buttons-set.action_like {
+    
+    }
+    /* layout: line */
+    .b-social-buttons-set.action_like.layout_line {
+        height: 20px;
+        }
+
+    /* layout: inline */
+    .b-social-buttons-set.action_like.layout_inline {
+        line-height: 24px;
+        margin-bottom: -4px;
+        }
+    
+    /* view: close to edge */
+    .b-social-buttons-set.action_like.view_close-to-edge,
+    .b-social-buttons-set.action_like.view_close-to-edge .b-social-button {
+        overflow: hidden;
+        }
+
+/* action: share, skin: default */
+.b-social-buttons-set.action_share.skin_default {
+    
+    }
+    .b-social-buttons-set.action_share.skin_default .b-social-button {
+        margin-left: 5px;
+        }
+        .b-social-buttons-set.action_share.skin_default .b-social-button:first-child {
+            margin-left: 0;
+            }

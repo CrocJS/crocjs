@@ -1,0 +1,66 @@
+
+/* b-notification */
+.b-notification {
+    position: fixed;
+    min-height: 62px;
+    padding: 10px 10px 10px 36px;
+    border: 1px solid;
+    border-color: #fbf8f4 transparent #e4dfd7;
+    border-left: none;
+    border-right: none;
+    background: #f3f0eb;
+    border-radius: 5px;
+    box-shadow: 0 0 7px rgba(50, 50, 50, .1);
+    box-sizing: border-box;
+    z-index: 2147483647;
+    }
+    .b-notification-side {
+        position: absolute;
+        left: 0;
+        top: -1px;
+        bottom: -1px;
+        width: 27px;
+        border: 1px solid;
+        border-left: none;
+        border-right: none;
+        border-radius: 5px 0 0 5px;
+        }
+        /* TYPE error */
+        .b-notification.type_error .b-notification-side {
+            background: #fe324a;
+            border-color: #ff6b7c transparent #dc001a;
+            }
+        /* TYPE warning */
+        .b-notification.type_warning .b-notification-side {
+            background: #ffda64;
+            border-color: #ffebad transparent #e7c148;
+            }
+        /* TYPE info */
+        .b-notification.type_info .b-notification-side {
+            background: #cde2f5;
+            border-color: #deefff transparent #c1d5e8;
+            }
+    .b-notification-side-icon {
+        position: absolute;
+        left: 6px;
+        top: 10px;
+        background: url(/croc/images/blocks/b-notification/icons-sprite.png);
+        width: 16px;
+        height: 17px;
+        }
+        /* TYPE error */
+        .b-notification.type_error .b-notification-side-icon {
+            
+            }
+        /* TYPE warning */
+        .b-notification.type_warning .b-notification-side-icon {
+            background-position: -16px;
+            }
+        /* TYPE info */
+        .b-notification.type_info .b-notification-side-icon {
+            background-position: -32px;
+            }
+
+
+
+

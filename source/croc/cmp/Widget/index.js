@@ -1,0 +1,602 @@
+var Component = require('derby/lib/components').Component;
+
+var oldComponentPrototype = Component.prototype;
+Component.prototype = Object.create(croc.Object.prototype);
+Component.prototype.constructor = Component;
+Component.superclass = croc.Object.prototype;
+_.defaults(Component.prototype, oldComponentPrototype);
+Component.config = croc.Object.config;
+
+/**
+ * Базовый класс для всех виджетов, которые имеют привязку к одному единственному элементу
+ */
+croc.Class.define('croc.cmp.Widget', {
+    extend: Component,
+    implement: croc.ui.IWidget,
+    
+    statics: {
+        CLASSES: [],
+        
+        /**
+         * @private
+         * @static
+         */
+        __NONUNIT_CSS_PROPERTIES: {
+            'z-index': true,
+            'opacity': true
+        },
+        
+        /**
+         * @param {Function} widgetCls
+         */
+        getView: function(widgetCls) {
+            return widgetCls.View || (widgetCls.View = this.getView(widgetCls.baseclass));
+        },
+        
+        /**
+         * Возвращает виджет по его DOM-элементу
+         * @param {jQuery|Element|string} el
+         * @returns {croc.ui.Widget}
+         * @static
+         */
+        getByElement: function(el) {
+            el = $(el);
+            var cmps = croc.app.model.data.$components;
+            var cmp = cmps && cmps[el.attr('id')];
+            return cmp && cmp.$controller;
+        },
+        
+        /**
+         * Возвращает ближайший родительский виджет для переданного элемента
+         * @param {jQuery} el
+         * @returns {croc.ui.Widget}
+         */
+        getClosestWidget: function(el) {
+            var closest = el.closest('.js-widget');
+            return closest.length ? this.getByElement(closest) : null;//croc.ui.WidgetsManager.getPageWidget();
+        },
+        
+        /**
+         * Если передан виджет, то возрвщает его элемент, иначе возвращает параметр
+         * @param {jQuery|croc.cmp.Widget} from
+         */
+        resolveElement: function(from) {
+            return from instanceof croc.cmp.Widget ? from.getElement() : from;
+        }
+    },
+    
+    events: {
+        /**
+         * A child widget was added
+         * @param {croc.cmp.Widget} widget
+         */
+        addChild: null,
+        
+        appear: null,
+        
+        create: null,
+        destroy: null,
+        init: null,
+        
+        /**
+         * @param model
+         */
+        model: null,
+        
+        /**
+         * @param {string} reason
+         */
+        resize: null
+    },
+    
+    properties: {
+        detachParent: {
+            apply: function() {
+                this.__previousSibling = null;
+            }
+        },
+        
+        /**
+         * @type {string}
+         */
+        mod: {
+            model: true
+        },
+        
+        /**
+         * @type {boolean}
+         */
+        rendered: {
+            value: false,
+            __setter: null,
+            event: true
+        },
+        
+        /**
+         * @type {boolean}
+         */
+        shown: {
+            value: true,
+            model: true
+        }
+    },
+    
+    options: {
+        content: {},
+        id: {},
+        $controller: {},
+        
+        /**
+         * Дополнительные классы для блока через пробел
+         * @type {string}
+         */
+        'class': {},
+        
+        /**
+         * Метод сокрытия виджета при изменении свойства {@link #shown}.
+         * @type {string}
+         */
+        hideMethod: {
+            check: ['hide', 'detach'],
+            value: 'hide'
+        },
+        
+        /**
+         * Идентификатор виджета, по которому его можно получить из родительского
+         * @type {string}
+         */
+        identifier: {},
+        
+        /**
+         * Секция, родительского виджета, в которой будет содержаться данный
+         * @type {string}
+         */
+        section: {},
+        
+        /**
+         * Css-стили корневого элемента виджета
+         * @type {string}
+         */
+        style: {
+            type: 'string'
+        },
+        
+        /**
+         * Дополнительные классы для корневого элемента
+         * @type {Array.<string>}
+         */
+        _addClasses: {
+            type: 'array',
+            concat: true
+        }
+    },
+    
+    construct: function(options) {
+        this.__itemsHash = {};
+        this.__sections = {};
+        croc.Object.prototype.__construct__.call(this, options);
+    },
+    
+    destruct: function() {
+        if (this.v) {
+            this.v.dispose();
+        }
+    },
+    
+    members: {
+        $$deferConstruct: true,
+        
+        /**
+         * Подписаться на событие
+         * @param {string} eventName
+         * @param {Function|Object} [callback=null]
+         * @param {Object} [context=null]
+         * @returns {croc.Object}
+         */
+        addListener: function(eventName, callback, context) {
+            var propName = this['$$event-' + eventName];
+            if (typeof propName === 'string') {
+                callback = context ? callback.bind(context) : callback;
+                callback.listener = this.model.on('change', propName, callback);
+            }
+            else {
+                croc.cmp.Widget.superclass.addListener.apply(this, arguments);
+            }
+            return this;
+        },
+        
+        /**
+         * Всплывающий ресайз компонента
+         */
+        bubbleResize: function() {
+            var parent = this;
+            var widget;
+            do {
+                var checkResult = parent.__checkSizeChange();
+                if (checkResult === null) {
+                    this.__lastWidth = 0;
+                    this.__lastHeight = 0;
+                    return;
+                }
+                if (!checkResult) {
+                    break;
+                }
+                widget = parent;
+                parent = widget.__parent;
+            } while (parent);
+            
+            if (widget) {
+                widget.checkResize('bubbleResize');
+            }
+        },
+        
+        /**
+         * Уведомить виджет о том, что размеры рамок изменились
+         * Причины вызова метода: reposition, modelChange, render, parentResize, bubbleResize, auto
+         * @param {string} [reason]
+         * @returns {boolean}
+         */
+        checkResize: function(reason) {
+            if (this.getElement() && this.__checkSizeChange(true)) {
+                this.fireEvent('resize', reason);
+                this.innerResize();
+                return true;
+            }
+            return false;
+        },
+        
+        /**
+         * Секция дочерних элементов по-умолчанию
+         * @return {String}
+         * @protected
+         */
+        getDefaultItemsSection: function() {
+            return 'items';
+        },
+        
+        /**
+         * Получить DOM-элемент виджета
+         * @returns {jQuery}
+         */
+        getElement: function() {
+            if (this.__el) {
+                return this.__el;
+            }
+            var el = document.getElementById(this._options.id);
+            return el && (this.__el = $(el));
+        },
+        
+        /**
+         * Идентификатор виджета
+         * @returns {string}
+         */
+        getIdentifier: function() {
+            return this._options.identifier;
+        },
+        
+        /**
+         * Получить дочерний виджет по его идентификатору
+         * @param {string} identifier
+         * @returns {croc.cmp.Widget}
+         */
+        getItem: function(identifier) {
+            return this.__itemsHash[identifier];
+        },
+        
+        /**
+         * Получить все дочерние виджеты
+         * @param {string} [section=null]
+         * @returns {Array.<croc.cmp.Widget>}
+         */
+        getItems: function(section) {
+            return (this.__sections && this.__sections[section || this.getDefaultItemsSection()]) || [];
+        },
+        
+        /**
+         * Родительский виджет
+         * @return {croc.cmp.Widget}
+         */
+        getParent: function() {
+            return this.__parent;
+        },
+        
+        /**
+         * @returns {string}
+         */
+        getSection: function() {
+            return this._options.section;
+        },
+        
+        /**
+         * Get element which is contained by the widget element
+         * @param {string} id
+         * @returns {jQuery}
+         */
+        getSubElement: function(id) {
+            return this.getElement().find('.' + this.subElement(id));
+        },
+        
+        /**
+         * Враппер виджета. Если нет то возвращает корневой элемент виджета.
+         * @returns {jQuery}
+         */
+        getWrapperElement: function() {
+            if (!this.__wrapperEl) {
+                this.__wrapperEl = this.getElement().parent().closest('.js-wrapper,.js-widget');
+                if (!this.__wrapperEl.hasClass('.js-wrapper')) {
+                    this.__wrapperEl = this.getElement();
+                }
+            }
+            return this.__wrapperEl;
+        },
+        
+        innerResize: function() {
+            _.forOwn(this.__itemsHash, function(item) {
+                item.checkResize('parentResize');
+            });
+        },
+        
+        /**
+         * Виден ли в данный момент виджет
+         * @returns {boolean}
+         */
+        isVisible: function() {
+            return !!this.getElement() && this.getElement().is(':visible');
+        },
+        
+        /**
+         * Если элемент виден, то callback вызывается сразу иначе на событие appear
+         * @param {function} callback
+         * @param {Object} [context]
+         * @returns {Function}
+         */
+        onAppear: function(callback, context) {
+            if (this.isVisible()) {
+                callback.call(context || window);
+                return _.noop;
+            }
+            else {
+                return this.once('appear', function() {
+                    callback.call(context || window);
+                });
+            }
+        },
+        
+        resolveVirtualView: function(name) {
+            return this._options['_pass_view_' + name] || (this.constructor.classname + ':' + name);
+        },
+        
+        /**
+         * Css class for subelement
+         * @param {string} id
+         * @returns {string}
+         */
+        subElement: function(id) {
+            return 'js-widget' + this._options.id + '-' + id;
+        },
+        
+        /**
+         * Инициализация модели виджета
+         * @protected
+         */
+        _initModel: function() {
+        },
+        
+        /**
+         * Инициализация виджета после его отрисовки в DOM
+         * @protected
+         */
+        _initWidget: function() {
+        },
+        
+        /**
+         * @private
+         */
+        create: function() {
+            var el = this.getElement();
+            this.listenProperty('shown', function(value) {
+                if (this._options.hideMethod === 'detach') {
+                    if (!value) {
+                        this.setDetachParent(el[0].parentNode);
+                        this.__previousSibling = el[0].previousSibling;
+                        el.detach();
+                    }
+                    else if (this.getDetachParent()) {
+                        this.getDetachParent()
+                            .insertBefore(el[0], this.__previousSibling && this.__previousSibling.nextSibling);
+                    }
+                }
+                if (value) {
+                    if (this.hasListeners('appear') && el.is(':visible')) {
+                        this.fireEvent('appear');
+                    }
+                    var iterateChildren = function(widget) {
+                        _.forOwn(widget.__itemsHash, function(item) {
+                            if (item.hasListeners('appear') && item.isVisible()) {
+                                item.fireEvent('appear');
+                            }
+                            iterateChildren(item);
+                        });
+                    };
+                    iterateChildren(this);
+                }
+            }, this);
+            
+            this._initWidget();
+            this.__setRendered(true);
+            this.v.onCreate();
+            
+            //autoresize
+            if (!this.__parent) {
+                this._getDisposer().addListener($(window), 'resize', function() {
+                    this.checkResize('auto');
+                }, this);
+                this.onAppear(function() {
+                    this.checkResize('render');
+                }, this);
+            }
+        },
+        
+        /**
+         * @private
+         */
+        destroy: function() {
+            croc.cmp.Widget.superclass.destroy.apply(this, arguments);
+            this.dispose();
+            
+            var parent = this.parent;
+            if (parent && parent instanceof croc.cmp.Widget) {
+                delete parent.__itemsHash[this._options.identifier];
+                croc.utils.arrRemove(parent.__sections[this._options.section], this);
+            }
+        },
+        
+        /**
+         * @private
+         */
+        init: function() {
+            var model = this._model = this.model;
+            var options = this.$$optionsSource = model.data;
+            
+            croc.Class.deferredConstruction(this, options);
+            for (var key in model.$$attrsRefs) {
+                var rootKey = model.$$attrsRefs[key];
+                if (model.root.get(rootKey) !== options[key]) {
+                    model.root.set(rootKey, options[key]);
+                }
+            }
+            
+            if (!options.identifier) {
+                model.set('identifier', this.getUniqueId().toString());
+            }
+            model.set('self', this.constructor.classname);
+            
+            var parent = this.parent;
+            if (parent && parent instanceof croc.cmp.Widget) {
+                this.__parent = parent;
+                if (!options.section) {
+                    model.set('section', this.getDefaultItemsSection());
+                }
+                parent.__addChild(this);
+            }
+            
+            this._initModel();
+            this.fireEvent('model', this._model);
+            
+            //view
+            this._options.v = this.v = new (croc.cmp.Widget.getView(this.constructor))({model: model, widget: this});
+            //widget
+            this._options.w = this.w = this;
+            //model
+            this._options.m = this.m = this._options;
+            
+            //parent and it's view
+            this.p = this.parent;
+            this.pv = this.parent && this.parent.v;
+            if (this.parent && this.parent._model) {
+                //this._model.root.ref(this._model._at + '.pm', this.parent._model._at);
+                this.pm = this.parent._options;
+            }
+        },
+        
+        /**
+         * @param saveSize
+         * @returns {*}
+         * @private
+         */
+        __checkSizeChange: function(saveSize) {
+            if (!this.getShown()) {
+                return false;
+            }
+            var width = this.getElement().width();
+            var height = this.getElement().height();
+            if (this.__lastWidth !== width || this.__lastHeight !== height) {
+                if (saveSize) {
+                    this.__lastWidth = width;
+                    this.__lastHeight = height;
+                }
+                if (width === 0 && height === 0) {
+                    return null;
+                }
+                return true;
+            }
+            return false;
+        },
+        
+        /**
+         * @param {croc.cmp.Widget} widget
+         * @private
+         */
+        __addChild: function(widget) {
+            this.__itemsHash[widget.getIdentifier()] = widget;
+            (this.__sections[widget.getSection()] || (this.__sections[widget.getSection()] = [])).push(widget);
+            this.fireEvent('addChild', widget);
+        }
+    },
+    
+    /**
+     * Создать свойство для объекта
+     * @param name
+     * @param prop
+     * @param dest
+     * @param [Cls]
+     */
+    createProperty: function(name, prop, dest, Cls) {
+        if (!prop || !prop.model) {
+            return croc.Class.createProperty.apply(croc.Class, arguments);
+        }
+        
+        prop.name = name;
+        if (prop.inherit) {
+            croc.Class._inheritProperty(prop, Cls);
+        }
+        
+        var ucfPropName = croc.utils.strUcFirst(name);
+        
+        //getter
+        prop.getterName = 'get' + ucfPropName;
+        dest[prop.getterName] = function() {
+            return this._options[name];
+        };
+        
+        //event
+        prop.event = 'change' + ucfPropName;
+        dest['$$event-' + prop.event] = name;
+        
+        //setter
+        var setterPrefix = ('__setter' in prop && '__') || ('_setter' in prop && '_') || '';
+        prop.setterName = setterPrefix + 'set' + ucfPropName;
+        var setter = prop[setterPrefix + 'setter'];
+        dest[prop.setterName] = function(value) {
+            var old = this._options[name];
+            if (prop.transform) {
+                value = (typeof prop.transform === 'function' ? prop.transform : this[prop.transform])
+                    .call(this, value, old);
+            }
+            if (old !== value) {
+                if (prop.type || prop.check) {
+                    croc.Class.checkType(prop, value, true, Cls.classname, prop.name);
+                }
+                if (setter) {
+                    setter.call(this, value, old);
+                }
+                else {
+                    this.model.set(name, value);
+                }
+            }
+        };
+        
+        //add option
+        var propOption = Cls.config.options[name] = {name: name};
+        if ('value' in prop) {
+            propOption.value = prop.value;
+        }
+        
+        return prop;
+    },
+    
+    onClassCreate: function(Cls) {
+        Cls.$$widgetClass = true;
+        croc.cmp.Widget.CLASSES.push(Cls);
+    }
+});

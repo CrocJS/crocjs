@@ -1,0 +1,55 @@
+
+/* @description:
+    b-form-row - строка формы.
+    По умолчанию отступ между строками - 10пкс
+    Для позиционирования «в ряд» ширина для лейбла по умолчанию - 180пкс */
+
+/* b-form-row */
+.b-form-row {
+    margin-top: 10px; /* @default */
+    position: relative;
+    }
+    .b-form-row:first-child {
+        margin-top: 0 !important;
+        }
+
+/* Pos left */
+.b-form-row.pos_left {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    }
+    /* label */
+    .b-form-row.pos_left .b-form-label.pos_left {
+        display: table-cell;
+        vertical-align: top;
+        width: 180px; /* @default */
+        padding-right: 10px;
+        }
+    /* input */
+    .b-form-row.pos_left .b-form-input.pos_left {
+        display: table-cell;
+        vertical-align: top;
+        }
+
+/* Margin null */
+.b-form-row.margin_null {
+    margin-top: 0;
+    }
+/* Margin half */
+.b-form-row.margin_half {
+    margin-top: 5px;
+    }
+/* Margin normal */
+.b-form-row.margin_normal {
+    margin-top: 10px;
+    }
+/* Margin double */
+.b-form-row.margin_double {
+    margin-top: 20px;
+    }
+
+
+
+
+

@@ -1,0 +1,44 @@
+
+/* Scheme gray */
+.b-popup-close.scheme_gray {
+    right: 11px;
+    top: 11px;
+    width: 18px;
+    height: 18px;
+    background: #777;
+    border-radius: 50%;
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, .15), 0 -1px 0 0 rgba(0, 0, 0, .1);
+    }
+    .b-popup-close.scheme_gray:after {
+        content: '';
+        top: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        font-size: 0;
+        line-height: 0;
+        overflow: hidden;
+        background: url(/croc/images/blocks/b-popup-close/b-popup-close.png) 0 0 no-repeat;
+        border-radius: 50%;
+        }
+    .b-popup-close.scheme_gray:before {
+        content: '';
+        top: -10px;
+        right: -10px;
+        bottom: -10px;
+        left: -10px;
+        position: absolute;
+        font-size: 0;
+        line-height: 0;
+        overflow: hidden;
+        background: url(about:blank);
+        }
+    /* Event active */
+    .b-popup-close.scheme_gray:active {
+        background: #aaa;
+        background-position: -18px 0;
+        box-shadow: 0 1px 0 0 rgba(255, 255, 255, .15), 0 0 2px 0 rgba(0, 0, 0, .25) inset;
+        }
+
+

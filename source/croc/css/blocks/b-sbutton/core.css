@@ -1,0 +1,66 @@
+
+/* b-sbutton */
+.b-sbutton {
+    display: inline-block;
+    vertical-align: top;
+    letter-spacing: normal;
+    word-spacing: normal;
+    white-space: nowrap;
+    text-align: center;
+    position: relative;
+    user-select: none;
+    background-clip: padding-box;
+    }
+    .b-sbutton-text {
+        text-decoration: none;
+        }
+    .b-sbutton-image {
+        display: inline-block;
+        vertical-align: middle;
+        }
+a.b-sbutton {
+    text-decoration: none !important;
+    }
+
+/* STATE: loading/disabled */
+.b-sbutton.state_loading,
+.b-sbutton.state_disabled {
+    cursor: default !important;
+    }
+
+/* BOX: block */
+.b-sbutton.box_block {
+    display: block;
+    }
+
+/* TYPE: image */
+.b-sbutton.type_image {
+    background: none;
+    z-index: 0;
+    }
+    .b-sbutton.type_image:before,
+    .b-sbutton.type_image:after {
+        content: '';
+        display: block;
+        left: 100%;
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        overflow: hidden;
+        font: 0/0 serif;
+        background-repeat: no-repeat;
+        z-index: -1;
+        /* width: px; */
+        /* margin-left: px; */
+        /* background-image: url(../i/); */
+        /* background-position: px px; */
+        }
+    .b-sbutton.type_image:before {
+        left: 0;
+        }
+
+/* selectable */
+.b-sbutton.is_selectable {
+    cursor: text;
+    user-select: text;
+    }

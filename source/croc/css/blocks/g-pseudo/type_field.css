@@ -1,0 +1,59 @@
+
+.g-pseudo.type_field {
+
+    }
+    /* SIZE: 1 */
+    .g-pseudo.type_field.size_1 {
+        font-size: 13px;
+        line-height: 18px;
+        }
+    /* SIZE: 2 */
+    .g-pseudo.type_field.size_2 {
+        font-size: 16px;
+        line-height: 20px;
+        }
+    /* SIZE: 3 */
+    .g-pseudo.type_field.size_3 {
+        font-size: 18px;
+        line-height: 23px;
+        }
+    /* SIZE: 4 */
+    .g-pseudo.type_field.size_4 {
+        font-size: 21px;
+        line-height: 25px;
+        }
+    /* SIZE: 5 */
+    .g-pseudo.type_field.size_5 {
+        font-size: 27px;
+        line-height: 34px;
+        }
+
+    /* STATE: error */
+    .g-pseudo.type_field.state_error .g-pseudo-h {
+        color: #ff525e;
+        }
+
+    /* block */
+    .g-pseudo.type_field.is_block {
+        display: inline-block;
+        }
+        /* SIZE: 1 */
+        .g-pseudo.type_field.is_block.size_1 {
+            padding-top: 4px;
+            }
+        /* SIZE: 2 */
+        .g-pseudo.type_field.is_block.size_2 {
+            padding-top: 5px;
+            }
+        /* SIZE: 3 */
+        .g-pseudo.type_field.is_block.size_3 {
+            padding-top: 7px;
+            }
+        /* SIZE: 4 */
+        .g-pseudo.type_field.is_block.size_4 {
+            padding-top: 9px;
+            }
+        /* SIZE: 5 */
+        .g-pseudo.type_field.is_block.size_5 {
+            padding-top: 10px;
+            }

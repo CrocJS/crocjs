@@ -1,0 +1,34 @@
+<index:>
+    <label class="b-input set_default type_text size_{{=size}}{{if focused}} state_focus{{/if}}">
+        <div class="b-input-h">
+            <div class="b-input-cell cell_field">
+                <div class="b-input-field">
+                    {{if placeholder && !instantValue}}
+                        <div class="b-input-field-placeholder">{{placeholder}}</div>
+                    {{/if}}
+                    <input type="text" value="{{instantValue}}" class="b-input-field-h"
+                        on-bind="[bFocus($at(focused)), bSelect($at(selectField))]"
+                        on-blur="setValue(instantValue)"
+                        on-create="saveEl($at(_fieldElement), $element)">
+                </div>
+            </div>
+            <div class="b-input-cell cell_action role_{{action || 'reset'}}{{if action || instantValue}} state_active{{/if}}">
+                <div class="b-input-action role_reset" on-click="setValue('')"></div>
+                <div class="b-input-action role_loader"></div>
+                <div class="b-input-action role_unfold"></div>
+            </div>
+            <div class="b-input-cell cell_validation">
+                <div class="b-input-validation"></div>
+            </div>
+            <virtualView is="cellsAfter"/>
+        </div>
+    </label>
+</index:>
+
+<cellsAfter:></cellsAfter:>
+
+<cell:>
+    <div class="b-input-cell{{if cls}} {{cls}}{{/if}}">
+        {{@content}}
+    </div>
+</cell:>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html id="nojs" class="l-html " lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script>
+        "use strict";
+        document.documentElement.id = 'js';
+    </script>
+    <script src="../resources/preinit.js"></script>
+
+    <title>Tooltip</title>
+
+    <link rel="stylesheet" href="/croc/css/main.css">
+    <link rel="stylesheet" href="../resources/jquery-ui.css">
+    <style>
+        #target {
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            background: #c0c0c0;
+            z-index: 20;
+            }
+
+        #form {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            background: white;
+            width: 900px;
+            padding: 10px;
+            z-index: 10;
+            }
+        #form .b-form-label.pos_left {
+            width: 120px;
+            }
+        #form .b-form-fset {
+            height: 440px;
+            overflow: auto;
+            }
+        .webkit #form .b-form-fset {
+            -moz-column-count: 2;
+            -webkit-column-count: 2;
+            column-count: 2;
+            -moz-column-gap: 20px;
+            -webkit-column-gap: 20px;
+            column-gap: 20px;
+            overflow: hidden;
+            }
+        #form .b-form-row {
+            width: 95%;
+            }
+        .webkit #form .b-form-row {
+            width: 100%;
+            }
+        #form .b-form-group.dir_ttb.type_radio.is_columns,
+        #form .b-form-group.dir_ttb.type_checkbox {
+            -moz-column-count: 2;
+            -webkit-column-count: 2;
+            column-count: 2;
+            }
+        #form .b-form-check {
+            position: relative;
+            }
+        #form textarea {
+            height: 96px !important;
+            }
+        .ui-resizable-handle {
+            background: #ffff00;
+            opacity: 0.3;
+            }
+
+        #samples {
+            position: relative;
+            top: 300px;
+            z-index: 0;
+            }
+        .tooltip-target {
+            color: #fff;
+            background-color: #0000ff;
+            }
+    </style>
+</head>
+
+<body class="l-body" style="background: #bfd0ff">
+
+    <!-- PAGE -->
+    <div class="l-page">
+        <div id="samples">
+            <div class="b-tooltip skin_default scheme_red dir_btt" style="width: 250px; left: 30px; top: 30px; filter: alpha(opacity=50); zoom: 1; overflow: visible !important;">
+                <div class="b-tooltip-tri"></div>
+                <div class="b-tooltip-head"></div>
+                <div class="b-tooltip-body">
+                    тултип тултип тултип тултип тултип
+                    <span class="tooltip-target">target1</span> тултип тултип тултип тултип тултип тултип тултип
+                    тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип
+                </div>
+                <div class="b-tooltip-foot"></div>
+            </div>
+
+            <div class="b-tooltip skin_default scheme_red dir_ttb" style="width: 250px; left: 330px; top: 30px;">
+                <div class="b-tooltip-tri"></div>
+                <div class="b-tooltip-head"></div>
+                <div class="b-tooltip-body">
+                    тултип тултип тултип тултип тултип
+                    <span class="tooltip-target">target2</span> тултип тултип тултип тултип тултип тултип тултип
+                    тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип
+                </div>
+                <div class="b-tooltip-foot"></div>
+            </div>
+
+            <div class="b-tooltip skin_default scheme_red dir_ltr" style="width: 250px; left: 630px; top: 30px;">
+                <div class="b-tooltip-tri"></div>
+                <div class="b-tooltip-head"></div>
+                <div class="b-tooltip-body">
+                    тултип тултип тултип тултип тултип
+                    <span class="tooltip-target">target3</span> тултип тултип тултип тултип тултип тултип тултип
+                    тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип
+                </div>
+                <div class="b-tooltip-foot"></div>
+            </div>
+
+            <div class="b-tooltip skin_default scheme_red dir_rtl" style="width: 250px; left: 930px; top: 30px;">
+                <div class="b-tooltip-tri"></div>
+                <div class="b-tooltip-head"></div>
+                <div class="b-tooltip-body">
+                    тултип тултип тултип тултип тултип
+                    <span class="tooltip-target">target4</span> тултип тултип тултип тултип тултип тултип тултип
+                    тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип
+                </div>
+                <div class="b-tooltip-foot"></div>
+            </div>
+        </div>
+
+        <div id="target" style="left: 433px; top: 117px;"></div>
+
+        <div id="form"></div>
+
+    </div>
+    <!-- PAGE -->
+
+    <script src="index.js"></script>
+    <script src="../resources/jquery-ui.min.js"></script>
+
+    <script type="text/javascript">
+        //+use croc.ui.tooltip.Pointer
+        croc.initialize();
+
+        var tooltip;
+        var target = $('#target');
+        var form;
+
+        target.draggable().resizable();
+
+        function showTooltip() {
+            if (!form) {
+                return;
+            }
+
+            if (tooltip) {
+                tooltip.destroy();
+                tooltip = null;
+            }
+
+            var values = form.getValues();
+
+            var Cls = croc.utils.objAccess(values['class']);
+            delete values['class'];
+
+            if (values.offset) {
+                var offset = parseFloat(values.offset);
+                if (isNaN(offset)) {
+                    offset = JSON.parse(values.offset);
+                }
+                values.offset = offset;
+            }
+
+            if (values.target) {
+                values.target = JSON.parse(values.target);
+            }
+            else {
+                delete values.target;
+            }
+
+            if (values.autoSizeGap) {
+                values.autoSizeGap = parseFloat(values.autoSizeGap);
+            }
+            if (values.openDelay) {
+                values.openDelay = parseFloat(values.openDelay);
+            }
+            if (values.triggerSelector) {
+                values.trigger = $('#samples');
+                values.triggerSelector = '.tooltip-target';
+                values.target = null;
+            }
+            else {
+                delete values.triggerSelector;
+            }
+
+            tooltip = new Cls(_.assign({
+                autoClose: false,
+                target: target,
+                listeners: {
+                    beforeOpen: croc.utils.fnRetentiveBind(function(tooltip, target) {
+                        if (target && target instanceof jQuery && target.hasClass('tooltip-target')) {
+                            tooltip.setContent(target.closest('.b-tooltip-body').html());
+                        }
+                    }, this)
+                },
+                style: {
+                    maxWidth: 300
+                }
+            }, values));
+            tooltip.open();
+        }
+
+        var schemes = {
+            'croc.ui.tooltip.Tooltip': {
+                xtype: croc.ui.form.field.RadioButtonsSet,
+                identifier: 'scheme',
+                items: [
+                    {
+                        text: 'white',
+                        value: 'white',
+                        active: true
+                    }//,
+//                    {
+//                        text: 'red',
+//                        value: 'red'
+//                    }
+                ],
+                meta: {
+                    label: 'scheme'
+                }
+            },
+            'croc.ui.tooltip.Pointer': {
+                xtype: croc.ui.form.field.RadioButtonsSet,
+                identifier: 'scheme',
+                items: [
+                    {
+                        text: 'yellow',
+                        value: 'yellow',
+                        active: true
+                    },
+                    {
+                        text: 'red',
+                        value: 'red'
+                    },
+                    {
+                        text: 'blue',
+                        value: 'blue'
+                    }
+                ],
+                meta: {
+                    label: 'scheme'
+                }
+            }
+        };
+
+        var sequences = {
+            'croc.ui.tooltip.Tooltip': {
+                xtype: croc.ui.form.field.CheckBoxesGroup,
+                arrayValues: true,
+                identifier: 'autoPositioningSequence',
+                items: ['top', 'right', 'bottom', 'left'].map(function(pos) {
+                    return {
+                        permanentValue: pos,
+                        checked: true,
+                        meta: {
+                            label: pos
+                        }
+                    };
+                }),
+                meta: {
+                    label: 'sequence',
+                    labelHint: 'autoPositioningSequence'
+                }
+            },
+            'croc.ui.tooltip.Pointer': {
+                xtype: croc.ui.form.field.CheckBoxesGroup,
+                arrayValues: true,
+                identifier: 'autoPositioningSequence',
+                items: ['right', 'left'].map(function(pos) {
+                    return {
+                        permanentValue: pos,
+                        checked: true,
+                        meta: {
+                            label: pos
+                        }
+                    };
+                }),
+                meta: {
+                    label: 'sequence',
+                    labelHint: 'autoPositioningSequence'
+                }
+            }
+        };
+
+        var positions = {
+            'croc.ui.tooltip.Tooltip': {
+                xtype: croc.ui.form.field.RadioButtonsSet,
+                identifier: 'position',
+                items: [
+                    {
+                        text: 'left',
+                        value: 'left',
+                        active: true
+                    },
+                    {
+                        text: 'top',
+                        value: 'top'
+                    },
+                    {
+                        text: 'bottom',
+                        value: 'bottom'
+                    },
+                    {
+                        text: 'right',
+                        value: 'right'
+                    },
+                    {
+                        text: 'center',
+                        value: 'center'
+                    }
+                ],
+                meta: {
+                    label: 'position'
+                }
+            },
+            'croc.ui.tooltip.Pointer': {
+                xtype: croc.ui.form.field.RadioButtonsSet,
+                identifier: 'position',
+                items: [
+                    {
+                        text: 'left',
+                        value: 'left'
+                    },
+                    {
+                        text: 'right',
+                        value: 'right',
+                        active: true
+                    }
+                ],
+                meta: {
+                    label: 'position'
+                }
+            }
+        };
+
+        form = new croc.ui.form.Form({
+            instancextype: 'test',
+            renderTo: '#form',
+            itemDefaults: {
+                fields: {
+                    size: '1'
+                }
+            },
+            labelsConf: {
+                pos: 'left'
+            },
+            stateManager: {
+                removeEmptyValue: false
+            },
+            items: {
+                fields: [
+                    {
+                        xtype: croc.ui.form.field.RadioButtonsGroup,
+                        identifier: 'class',
+                        items: [
+                            {
+                                permanentValue: 'croc.ui.tooltip.Tooltip',
+                                checked: true,
+                                meta: {
+                                    label: 'croc.ui.tooltip.Tooltip'
+                                }
+                            },
+                            {
+                                permanentValue: 'croc.ui.tooltip.Pointer',
+                                meta: {
+                                    label: 'croc.ui.tooltip.Pointer'
+                                }
+                            }
+                        ],
+                        meta: {
+                            label: 'class'
+                        }
+                    },
+                    {
+                        xtype: croc.ui.form.field.TextArea,
+                        identifier: 'content',
+                        value: ' тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип',
+                        meta: {
+                            label: 'content'
+                        }
+                    },
+                    positions['croc.ui.tooltip.Tooltip'],
+                    {
+                        xtype: croc.ui.form.field.RadioButtonsGroup,
+                        extraCls: 'is_columns',
+                        identifier: 'hAlign',
+                        items: ['left', 'centerLeft', 'center', 'centerRight', 'right'].map(function(side) {
+                            return {
+                                permanentValue: side,
+                                checked: side === 'center',
+                                meta: {
+                                    label: side
+                                }
+                            };
+                        }),
+                        meta: {
+                            label: 'hAlign'
+                        }
+                    },
+                    {
+                        xtype: croc.ui.form.field.RadioButtonsGroup,
+                        extraCls: 'is_columns',
+                        identifier: 'vAlign',
+                        items: ['top', 'middleTop', 'middle', 'middleBottom', 'bottom'].map(function(side) {
+                            return {
+                                permanentValue: side,
+                                checked: side === 'middle',
+                                meta: {
+                                    label: side
+                                }
+                            };
+                        }),
+                        meta: {
+                            label: 'vAlign'
+                        }
+                    },
+                    schemes['croc.ui.tooltip.Tooltip'],
+                    {
+                        xtype: croc.ui.form.field.TextField,
+                        identifier: 'offset',
+                        meta: {
+                            label: 'offset'
+                        }
+                    },
+                    {
+                        xtype: croc.ui.form.field.TextField,
+                        identifier: 'target',
+                        meta: {
+                            label: 'target'
+                        }
+                    },
+                    sequences['croc.ui.tooltip.Tooltip'],
+                    {
+                        xtype: croc.ui.form.field.TextField,
+                        identifier: 'autoSizeGap',
+                        meta: {
+                            label: 'autoSizeGap'
+                        }
+                    },
+                    {
+                        xtype: croc.ui.form.field.TextField,
+                        identifier: 'openDelay',
+                        meta: {
+                            label: 'openDelay'
+                        }
+                    },
+                    {
+                        xtype: croc.ui.form.field.RadioButtonsSet,
+                        identifier: 'showAnimation',
+                        items: [
+                            {
+                                value: null,
+                                text: 'none',
+                                active: true
+                            },
+                            {
+                                text: 'fade',
+                                value: 'fade'
+                            },
+                            {
+                                text: 'fly',
+                                value: 'fly'
+                            }
+                        ],
+                        meta: {
+                            label: 'showAnimation'
+                        }
+                    },
+                    {
+                        xtype: croc.ui.form.field.RadioButtonsSet,
+                        identifier: 'hideAnimation',
+                        items: [
+                            {
+                                value: null,
+                                text: 'none'
+                            },
+                            {
+                                text: 'fade',
+                                value: 'fade',
+                                active: true
+                            },
+                            {
+                                text: 'fly',
+                                value: 'fly'
+                            }
+                        ],
+                        meta: {
+                            label: 'hideAnimation'
+                        }
+                    },
+                    {
+                        xtype: croc.ui.form.field.CheckBoxesGroup,
+                        identifier: 'triggerOptions',
+                        exportsValues: false,
+                        removeUnchecked: false,
+                        items: [
+                            'openOnMouseenter', 'closeOnMouseleave', 'openOnClick', 'openOnClickImmediately',
+                            'closeOnClick'
+                        ]
+                            .map(function(id) {
+                                return {
+                                    identifier: id,
+                                    checked: ['openOnMouseenter', 'openOnClickImmediately'].indexOf(id) !== -1,
+                                    meta: {
+                                        label: id
+                                    }
+                                };
+                            }),
+                        meta: {
+                            label: 'triggerOptions'
+                        }
+                    },
+                    {
+                        xtype: croc.ui.form.field.CheckBoxesGroup,
+                        identifier: 'options',
+                        removeUnchecked: false,
+                        items: [
+                            'autoClose', 'autoPositioning', 'autoShift', 'autoSize', 'closeOnHtmlClick',
+                            'closeOnResize', 'closeOnScroll', 'dynamicPositioning', 'triggerSelector',
+                            'keepActualPosition', 'positionInset'
+                        ]
+                            .map(function(id) {
+                                return {
+                                    identifier: id,
+                                    checked: [
+                                        'autoPositioning', 'autoShift', 'closeOnHtmlClick',
+                                        'dynamicPositioning', 'keepActualPosition'
+                                    ].indexOf(id) !== -1,
+                                    meta: {
+                                        label: id === 'keepActualPosition' ? '<b>' + id + '</b>' : id
+                                    }
+                                };
+                            })
+                    }
+                ],
+                buttons: [
+                    {
+                        text: 'Show',
+                        listeners: {
+                            execute: showTooltip
+                        }
+                    },
+                    {
+                        text: 'Destroy',
+                        listeners: {
+                            execute: function() {
+                                if (tooltip) {
+                                    tooltip.destroy();
+                                    tooltip = null;
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        });
+
+        form.getItem('class').on('changeValue', function(value) {
+            var form = this.getParentWidget();
+
+            var schemesIndex = form.getItem('scheme').getParentIndex();
+            form.getItem('scheme').destroy();
+            form.add(schemes[value], schemesIndex);
+
+            var sequenceIndex = form.getItem('autoPositioningSequence').getParentIndex();
+            form.getItem('autoPositioningSequence').destroy();
+            form.add(sequences[value], sequenceIndex);
+
+            var posIndex = form.getItem('position').getParentIndex();
+            form.getItem('position').destroy();
+            form.add(positions[value], posIndex);
+
+            if (value === 'croc.ui.tooltip.Pointer') {
+                form.getItem('content').setValue('тултип тултип тултип тултип тултип');
+            }
+        });
+
+        //        form.getItem('class').setValue('croc.ui.tooltip.Pointer');
+        //        form.getItem('options').getItem('keepActualPosition').setChecked(false);
+
+        form.getStateManager().on('changeState', _.debounce(showTooltip, 0));
+        showTooltip();
+    </script>
+</body>
+</html>

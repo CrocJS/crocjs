@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html id="nojs" class="l-html " lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script>
+        "use strict";
+        document.documentElement.id = 'js';
+    </script>
+    <script src="../resources/preinit.js"></script>
+
+    <title>Notifications</title>
+
+    <link rel="stylesheet" href="/croc/css/main.css">
+    <style>
+        #page {
+            padding: 20px 50px 0;
+            }
+    </style>
+</head>
+
+<body class="l-body">
+
+    <div id="page">
+        <div class="b-sbutton-set spacing_1" style="margin-bottom: 10px">
+            <span class="b-sbutton set_system scheme_gray size_5 js-notify" data-type="info">
+                <span class="b-sbutton-input"></span>
+                <span class="b-sbutton-text">Info</span>
+            </span>
+            <span class="b-sbutton set_system scheme_yellow size_5 js-notify" data-type="warning">
+                <span class="b-sbutton-input"></span>
+                <span class="b-sbutton-text">Warning (looong)</span>
+            </span>
+            <span class="b-sbutton set_system scheme_red size_5 js-notify" data-type="error">
+                <span class="b-sbutton-input"></span>
+                <span class="b-sbutton-text">Error</span>
+            </span>
+        </div>
+
+        <div class="b-sbutton-set spacing_1" style="margin-bottom: 10px">
+            <span class="b-sbutton set_system scheme_red size_5 js-ajax-notify" data-error="1">
+                <span class="b-sbutton-input"></span>
+                <span class="b-sbutton-text">Error 1</span>
+            </span>
+            <span class="b-sbutton set_system scheme_red size_5 js-ajax-notify" data-error="2">
+                <span class="b-sbutton-input"></span>
+                <span class="b-sbutton-text">Error 2</span>
+            </span>
+            <span class="b-sbutton set_system scheme_red size_5 js-ajax-notify" data-error="3">
+                <span class="b-sbutton-input"></span>
+                <span class="b-sbutton-text">Not connected</span>
+            </span>
+            <span class="b-sbutton set_system scheme_red size_5 js-ajax-notify" data-error="4">
+                <span class="b-sbutton-input"></span>
+                <span class="b-sbutton-text">No response</span>
+            </span>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+
+    <script type="text/javascript">
+        croc.initialize();
+
+        croc.subscribe('system.application.ready', function() {
+            var i = 0;
+            $('.js-notify').click(function() {
+                var type = $(this).data('type');
+                croc.ui.notifications.Manager.showNotification(type + ' ' + (++i), type, type === 'warning' && 10000);
+            });
+
+            $('.js-ajax-notify').click(function() {
+                var error = $(this).data('error');
+                if (error === 4) {
+                    croc.ajax({url: '/prototypes/gui/system/norificationText.php'});
+                }
+                else {
+                    croc.ajax({url: 'notifiersTest' + error + '.php'});
+                }
+            });
+
+            croc.ajax.substituteResponse({url: 'notifiersTest1.php'}, {errcode: 1});
+            croc.ajax.substituteResponse({url: 'notifiersTest2.php'}, {errcode: 2});
+        });
+    </script>
+</body>
+</html>

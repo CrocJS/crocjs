@@ -1,0 +1,97 @@
+
+/* b-social-button */
+.b-social-button {
+    display: inline-block !important;
+    vertical-align: top !important;
+    }
+
+/* action: like */
+.b-social-button.action_like {
+    height: 20px !important;
+    }
+    /* service: fb */
+    .b-social-button.action_like.service_fb {
+        width: 90px !important;
+        }
+        .b-social-button.action_like.service_fb .fb_iframe_widget_lift,
+        iframe[src^="http://vk.com/widget_like.php"][src*="act=a_share_tooltip"] {
+            z-index: 2000000000 !important;
+            }
+        .b-social-button.action_like.service_fb .fb_iframe_widget>span {
+            vertical-align: top !important;
+            }
+    
+    /* service: gplus */
+    .b-social-button.action_like.service_gplus {
+        width: 77px !important;
+        }
+    
+    /* service: twitter */
+    .b-social-button.action_like.service_twitter iframe {
+        width: 119px !important;
+        height: 20px !important;
+        }
+    
+/* action: share, skin: default */
+.b-social-button.action_share.skin_default {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid #6eb206;
+    background: url(/croc/images/blocks/b-social-button/action_share/skin_default.png);
+    }
+    /* service: vk */
+    .b-social-button.action_share.skin_default.service_vk {
+        background-position: 0 0;
+        }
+    /* service: fb */
+    .b-social-button.action_share.skin_default.service_fb {
+        background-position: -20px 0;
+        }
+    /* service: gplus */
+    .b-social-button.action_share.skin_default.service_gplus {
+        background-position: -40px 0;
+        }
+    /* service: twitter */
+    .b-social-button.action_share.skin_default.service_twitter {
+        background-position: -60px 0;
+        }
+    /* service: odnoklassniki */
+    .b-social-button.action_share.skin_default.service_odnoklassniki {
+        background-position: -80px 0;
+        }
+    
+    /* event: hover */
+    .b-social-button.action_share.skin_default:hover {
+        border-color: #ff484d;
+        }
+        /* service: vk */
+        .b-social-button.action_share.skin_default.service_vk:hover {
+            background-position: 0 -20px;
+            }
+        /* service: fb */
+        .b-social-button.action_share.skin_default.service_fb:hover {
+            background-position: -20px -20px;
+            }
+        /* service: gplus */
+        .b-social-button.action_share.skin_default.service_gplus:hover {
+            background-position: -40px -20px;
+            }
+        /* service: twitter */
+        .b-social-button.action_share.skin_default.service_twitter:hover {
+            background-position: -60px -20px;
+            }
+        /* service: odnoklassniki */
+        .b-social-button.action_share.skin_default.service_odnoklassniki:hover {
+            background-position: -80px -20px;
+            }
+        
+    /* event: active */
+    .b-social-button.action_share.skin_default:active {
+        box-shadow: 0 1px 4px #6eb206 inset, 0 1px 0 rgba(255, 255, 255, .35);
+        }
+    /* event: hover, active */
+    .b-social-button.action_share.skin_default:hover:active {
+        box-shadow: 0 1px 4px #ff484d inset, 0 1px 0 rgba(255, 255, 255, .35);
+        }

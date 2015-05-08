@@ -1,0 +1,180 @@
+
+/* Set default */
+.b-tooltip.set_default {
+    border-radius: 4px;
+    box-shadow: 0 2px 5px 0 rgba(25, 26, 27, .15);
+    }
+    .b-tooltip.set_default .b-tooltip-close {
+        right: 8px;
+        top: 8px;
+        position: absolute;
+        font-size: 0;
+        line-height: 0;
+        text-indent: -9999px;
+        cursor: pointer;
+        border-radius: 50%;
+        background: url(about:blank);
+        z-index: 1;
+        transition: background-color 0.1s ease, border-color 0.1s ease;
+        }
+    .b-tooltip.set_default .b-tooltip-tri {
+        background-color: transparent;
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        }
+    .b-tooltip.set_default .b-tooltip-body {
+        padding: 9px 18px;
+        border: none;
+        }
+    /* footbutton */
+    .b-tooltip.set_default .b-tooltip-footbutton {
+        padding-top: 9px;
+        }
+
+/* Scheme white */
+.b-tooltip.set_default.scheme_white {
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #dadbdc;
+    }
+    .b-tooltip.set_default.scheme_white .b-tooltip-tri {
+        width: 15px;
+        height: 15px;
+        background-image: url(/croc/images/blocks/b-tooltip/set_default/scheme_white_tri.png);
+        }
+        /* Dir top-to-bottom */
+        .b-tooltip.set_default.scheme_white.dir_ttb .b-tooltip-tri {
+            display: block;
+            height: 8px;
+            left: 50%;
+            bottom: 100%;
+            margin: 0 0 0 -8px;
+            background-position: 0 0;
+            }
+        /* Dir bottom-to-top */
+        .b-tooltip.set_default.scheme_white.dir_btt .b-tooltip-tri {
+            display: block;
+            height: 8px;
+            left: 50%;
+            top: 100%;
+            margin: 0 0 0 -8px;
+            background-position: 0 100%;
+            }
+        /* Dir left-to-right */
+        .b-tooltip.set_default.scheme_white.dir_ltr .b-tooltip-tri {
+            display: block;
+            width: 8px;
+            right: 100%;
+            top: 50%;
+            margin: -8px 0 0 0;
+            background-position: 0 0;
+            }
+        /* Dir right-to-left */
+        .b-tooltip.set_default.scheme_white.dir_rtl .b-tooltip-tri {
+            display: block;
+            width: 8px;
+            left: 100%;
+            top: 50%;
+            margin: -8px 0 0 0;
+            background-position: 100% 0;
+            }
+
+/* Scheme black */
+.b-tooltip.set_default.scheme_black {
+    color: #fff;
+    background-color: rgba(0, 0, 0, .85);
+    border: none;
+    }
+    .b-tooltip.set_default.scheme_black .b-tooltip-close {
+        width: 15px;
+        height: 15px;
+        border: 1px solid #999;
+        }
+        .b-tooltip.set_default.scheme_black .b-tooltip-close:after {
+            content: '';
+            display: block;
+            left: 0;
+            top: 0;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            /* background: url(/croc/images/blocks/b-tooltip/set_default/scheme_black.close.png) 0 0 no-repeat; */
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAMElEQVQoz2NgGAUM/yHACU3MCSRIjGYnZAPQ+SQZQJJGXC4gSyPZTibZBRSF9ggAALy9dLlcIm/hAAAAAElFTkSuQmCC) 0 0 no-repeat;
+            }
+        .b-tooltip.set_default.scheme_black .b-tooltip-close:hover {
+            background-color: #444;
+            border: 1px solid #fff;
+            }
+        .b-tooltip.set_default.scheme_black .b-tooltip-close:active {
+            background-color: #000;
+            border: 1px solid #fff;
+            }
+            .b-tooltip.set_default.scheme_black .b-tooltip-close:active:after {
+                background-position: 0 1px;
+                }
+    .b-tooltip.set_default.scheme_black .b-tooltip-tri {
+        width: 15px;
+        height: 15px;
+        /* background-image: url(/croc/images/blocks/b-tooltip/set_default/scheme_black_tri.png); */
+        }
+        /* Dir top-to-bottom */
+        .b-tooltip.set_default.scheme_black.dir_ttb .b-tooltip-tri {
+            display: block;
+            height: 8px;
+            left: 50%;
+            bottom: 100%;
+            margin: 0 0 0 -8px;
+            background-position: 0 0;
+            }
+        /* Dir bottom-to-top */
+        .b-tooltip.set_default.scheme_black.dir_btt .b-tooltip-tri {
+            display: block;
+            height: 8px;
+            left: 50%;
+            top: 100%;
+            margin: 0 0 0 -8px;
+            background-position: 0 100%;
+            }
+        /* Dir left-to-right */
+        .b-tooltip.set_default.scheme_black.dir_ltr .b-tooltip-tri {
+            display: block;
+            width: 8px;
+            right: 100%;
+            top: 50%;
+            margin: -8px 0 0 0;
+            background-position: 0 0;
+            }
+        /* Dir right-to-left */
+        .b-tooltip.set_default.scheme_black.dir_rtl .b-tooltip-tri {
+            display: block;
+            width: 8px;
+            left: 100%;
+            top: 50%;
+            margin: -8px 0 0 0;
+            background-position: 100% 0;
+            }
+    .b-tooltip.set_default.scheme_black a,
+    .b-tooltip.set_default.scheme_black .g-link,
+    .b-tooltip.set_default.scheme_black .g-pseudo {
+        color: #fff;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+{
+  "name": "crocjs",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "jquery-mousewheel": "~3.1.12",
+    "jquery-cookie": "~1.4.1",
+    "jquery-autosize": "./bower_local/jquery-autosize"
+  },
+  "exportsOverride": {}
+}

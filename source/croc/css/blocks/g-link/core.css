@@ -1,0 +1,25 @@
+
+/* link */
+a,
+.g-link {
+    cursor: pointer;
+    color: #0073b8;
+    text-decoration: underline;
+    }
+    a:hover,
+    a.state_hover,
+    a:active,
+    a:visited:hover,
+    .g-link:hover {
+        color: #ff6500 !important;
+        }
+/* link like text */
+.g-text {
+    color: #000;
+    }
+
+
+
+
+
+

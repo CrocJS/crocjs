@@ -1,0 +1,24 @@
+<items:>
+    {{if shown}}
+        <!-- todo двойной рендеринг -->
+        {{on searchString}}
+            {{each items as #item}}
+                {{if #item}}
+                    <virtualView is="item" item="{{#item}}" normalized="{{normalizeItem(#item)}}" label="{{labelItem}}"/>
+                {{/if}}
+            {{else}}
+                <virtualView is="noItems" optional/>
+            {{/each}}
+        {{/on}}
+    {{/if}}
+</items:>
+
+<item:>
+    <tag is="{{@label ? 'label' : 'div'}}" class="b-suggestion-item{{if @item.$$selected}} state_active{{/if}}" on-click="v.onClick(@item)">
+        <virtualView is="itemContent" item="{{@item}}" normalized="{{@normalized}}"/>
+    </tag>
+</item:>
+
+<itemContent:>
+    {{*v.higlightLabel(@normalized.text, @normalized)}}
+</itemContent:>

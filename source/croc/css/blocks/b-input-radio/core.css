@@ -1,0 +1,125 @@
+
+/* JS */
+/* b-input-radio */
+#js .b-input-radio {
+    text-align: left;
+    cursor: pointer;
+    position: absolute;
+    }
+    /* input */
+    #js .b-input-radio input[type=radio] {
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        opacity: 0;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        z-index: 2;
+        }
+        #js.ie8 .b-input-radio input[type=radio] {
+            -ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+            }
+    #js .b-input-radio-h {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 0;
+        line-height: 0;
+        overflow: hidden;
+        }
+/* NOJS */
+#nojs .b-input-radio {
+    
+    }
+    #nojs .b-input-radio input {
+        
+        }
+
+/* Scheme system */
+.b-input-radio.scheme_system {
+    
+    }
+    .b-input-radio.scheme_system .b-input-radio-h {
+        background: url(/croc/images/blocks/b-input-radio/b-input-radio.scheme_system.png) 0 0 no-repeat;
+        border-radius: 49%;
+        }
+    .b-input-radioradio.scheme_system.state_hover .b-input-radio-h,
+    .b-input-radioradio.scheme_system:hover .b-input-radio-h,
+    :hover > .b-input-radioradio.scheme_system .b-input-radio-h {
+        box-shadow: 0 1px 2px -2px rgba(0, 0, 0, .75);
+        }
+        .b-input-radioradio.scheme_system:active .b-input-radio-h,
+        :active > .b-input-radioradio.scheme_system .b-input-radio-h {
+            box-shadow: none;
+            }
+    /* Size 1 */
+    .b-input-radio.scheme_system.size_1 {
+        
+        }
+        .b-input-radio.scheme_system.size_1 .b-input-radio-h {
+            width: 16px;
+            height: 16px;
+            background-position: 0 0;
+            }
+        .b-input-radio.scheme_system.size_1.state_hover .b-input-radio-h {
+            background-position: -32px 0;
+            }
+        .b-input-radio.scheme_system.size_1.state_focus .b-input-radio-h {
+            background-position: -32px 0;
+            }
+        .b-input-radio.scheme_system.size_1.state_active .b-input-radio-h {
+            background-position: -64px 0;
+            }
+        .b-input-radio.scheme_system.size_1.state_checked.state_active .b-input-radio-h {
+            background-position: -96px 0;
+            }
+        .b-input-radio.scheme_system.size_1.state_checked .b-input-radio-h {
+            background-position: -160px 0;
+            }
+        .b-input-radio.scheme_system.size_1.state_checked.state_focus .b-input-radio-h {
+            background-position: -128px 0;
+            }
+        .b-input-radio.scheme_system.size_1.state_disabled .b-input-radio-h {
+            background-position: -192px 0;
+            }
+        .b-input-radio.scheme_system.size_1.state_checked.state_disabled .b-input-radio-h {
+            background-position: -224px 0;
+            }
+    /* Size 2 */
+    .b-input-radio.scheme_system.size_2 {
+        
+        }
+        .b-input-radio.scheme_system.size_2 .b-input-radio-h {
+            width: 20px;
+            height: 20px;
+            background-position: 0 -32px;
+            }
+        .b-input-radio.scheme_system.size_2.state_hover .b-input-radio-h {
+            background-position: -32px -32px;
+            }
+        .b-input-radio.scheme_system.size_2.state_focus .b-input-radio-h {
+            background-position: -32px -32px;
+            }
+        .b-input-radio.scheme_system.size_2.state_active .b-input-radio-h {
+            background-position: -64px -32px;
+            }
+        .b-input-radio.scheme_system.size_2.state_checked.state_active .b-input-radio-h {
+            background-position: -96px -32px;
+            }
+        .b-input-radio.scheme_system.size_2.state_checked .b-input-radio-h {
+            background-position: -160px -32px;
+            }
+        .b-input-radio.scheme_system.size_2.state_checked.state_focus .b-input-radio-h {
+            background-position: -128px -32px;
+            }
+        .b-input-radio.scheme_system.size_2.state_disabled .b-input-radio-h {
+            background-position: -192px -32px;
+            }
+        .b-input-radio.scheme_system.size_2.state_checked.state_disabled .b-input-radio-h {
+            background-position: -224px -32px;
+            }
+
+

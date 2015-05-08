@@ -1,0 +1,111 @@
+
+/* b-suggestion */
+.b-suggestion {
+    position: absolute;
+    top: 15px; /* should be replace with real height */
+    padding: 0;
+    margin: 0;
+    z-index: 10000;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    max-width: 700px;
+    border-radius: 3px;
+    box-shadow: 0 0 7px rgba(0, 0, 0, .3);
+    box-sizing: border-box;
+    }
+    .b-suggestion-container {
+        overflow: hidden;
+        }
+    .b-suggestion-list {
+        position: relative;
+        }
+        .b-suggestion-item {
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.25s ease-out;
+            display: block;
+            }
+        .b-suggestion-item.state_active {
+            background-color: #ffea60;
+            }
+            .b-suggestion-item:hover {
+                transition: background-color 0s ease;
+                }
+        .b-suggestion-more,
+        .b-suggestion-item:last-child,
+        .b-suggestion.state_has-prev-items .b-suggestion-item._last-visible-item,
+        .b-suggestion.state_has-prev-items .b-suggestion-item._last-visible-item:after {
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            }
+        .b-suggestion-item,
+        .b-suggestion-error,
+        .b-suggestion-more {
+            padding: 4px 4px 4px 8px;
+            }
+
+        .b-suggestion .g-scrollable-prev-marker,
+        .b-suggestion .g-scrollable-next-marker {
+            height: 26px;
+            }
+            
+    /* size: 1 */
+    .b-suggestion.size_1 {
+        font-size: 13px;
+        line-height: 18px;
+        }
+        .b-suggestion.size_1 .g-scrollable-prev-marker,
+        .b-suggestion.size_1 .g-scrollable-next-marker {
+            height: 26px;
+            }
+    
+    /* size: 2 */
+    .b-suggestion.size_2 {
+        font-size: 16px;
+        line-height: 21px;
+        }
+        .b-suggestion.size_1 .g-scrollable-prev-marker,
+        .b-suggestion.size_1 .g-scrollable-next-marker {
+            height: 29px;
+            }
+    
+    /* size: 3 */
+    .b-suggestion.size_3 {
+        font-size: 16px;
+        line-height: 21px;
+        }
+        .b-suggestion.size_1 .g-scrollable-prev-marker,
+        .b-suggestion.size_1 .g-scrollable-next-marker {
+            height: 29px;
+            }
+    
+    /* size: 4 */
+    .b-suggestion.size_4 {
+        font-size: 18px;
+        line-height: 23px;
+        }
+        .b-suggestion.size_1 .g-scrollable-prev-marker,
+        .b-suggestion.size_1 .g-scrollable-next-marker {
+            height: 31px;
+            }
+    
+    /* size: 5 */
+    .b-suggestion.size_5 {
+        font-size: 21px;
+        line-height: 25px;
+        }
+        .b-suggestion.size_1 .g-scrollable-prev-marker,
+        .b-suggestion.size_1 .g-scrollable-next-marker {
+            height: 33px;
+            }
+
+    /* SCHEME blue */
+    .b-suggestion.scheme_blue .b-suggestion-item.state_active {
+        background-color: #0073b8;
+        color: #fff;
+        }
+        .b-suggestion.size_1 .g-scrollable-prev-marker,
+        .b-suggestion.size_1 .g-scrollable-next-marker {
+            height: 26px;
+            }

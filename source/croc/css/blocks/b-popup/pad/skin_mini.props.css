@@ -1,0 +1,38 @@
+
+/* b-popup */
+
+
+
+/* SCHEME: default */
+.b-popup.skin_mini.scheme_default {
+    
+    }
+    .b-popup.skin_mini.scheme_default .b-popup-h {
+        background-color: #f3f0eb;
+        }
+/* SCHEME: light green */
+.b-popup.skin_mini.scheme_light-green {
+    
+    }
+    .b-popup.skin_mini.scheme_light-green .b-popup-h {
+        background-color: #eef3eb;
+        }
+/* SCHEME: whiteblue */
+.b-popup.skin_mini.scheme_whiteblue {
+    
+    }
+    .b-popup.skin_mini.scheme_whiteblue .b-popup-h {
+        background-color: #fff;
+        }
+        .b-popup.skin_mini.scheme_whiteblue .b-popup-head-h {
+            background: #c9dae6;
+            }
+        .b-popup.skin_mini.scheme_whiteblue .b-popup-head-title {
+            font-size: 16px;
+            line-height: 20px;
+            color: #447295;
+            text-align: center;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, .25);
+            }
+
+

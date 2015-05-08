@@ -1,0 +1,175 @@
+
+/* b-font */
+.b-font {
+    line-height: 1.2em;
+    }
+
+/* Line-height normal */
+.b-font.lineheight_normal {
+    line-height: 1.2em;
+    }
+/* Line-height lengthy */
+.b-font.lineheight_lengthy {
+    line-height: 1.42em;
+    }
+/* Line-height super lengthy */
+.b-font.lineheight_suplengthy {
+    line-height: 1.75em;
+    }
+
+/* Size 9 */
+.b-font.size_9 {
+    font-size: 9px;
+    }
+/* Size 10 */
+.b-font.size_10 {
+    font-size: 10px;
+    }
+/* Size 11 */
+.b-font.size_11 {
+    font-size: 11px;
+    }
+/* Size 12 */
+.b-font.size_12 {
+    font-size: 12px;
+    }
+/* Size 13 */
+.b-font.size_13 {
+    font-size: 13px;
+    }
+/* Size 14 */
+.b-font.size_14 {
+    font-size: 14px;
+    }
+/* Size 16 */
+.b-font.size_16 {
+    font-size: 16px;
+    }
+/* Size 18 */
+.b-font.size_18 {
+    font-size: 18px;
+    }
+/* Size 21 */
+.b-font.size_21 {
+    font-size: 21px;
+    }
+/* Size 25 */
+.b-font.size_25 {
+    font-size: 25px;
+    }
+/* Size 27 */
+.b-font.size_27 {
+    font-size: 27px;
+    }
+/* Size 30 */
+.b-font.size_30 {
+    font-size: 30px;
+    }
+/* Size 32 */
+.b-font.size_32 {
+    font-size: 32px;
+    }
+/* Size 35 */
+.b-font.size_35 {
+    font-size: 35px;
+    }
+/* Size 37 */
+.b-font.size_37 {
+    font-size: 37px;
+    }
+/* Size 40 */
+.b-font.size_40 {
+    font-size: 40px;
+    }
+/* Size 48 */
+.b-font.size_48 {
+    font-size: 48px;
+    }
+/* Size 52 */
+.b-font.size_52 {
+    font-size: 52px;
+    }
+/* Size 54 */
+.b-font.size_54 {
+    font-size: 54px;
+    }
+/* Size 60 */
+.b-font.size_60 {
+    font-size: 60px;
+    }
+
+/* Color black */
+.b-font.color_black {
+    color: #000;
+    }
+    /* Shade 100 */
+    .b-font.color_black.shade_100 {
+        color: #333;
+        }
+    /* Shade 200 */
+    .b-font.color_black.shade_200 {
+        color: #444;
+        }
+    /* Shade 300 */
+    .b-font.color_black.shade_300 {
+        color: #555;
+        }
+/* Color gray */
+.b-font.color_gray {
+    color: #666;
+    }
+    /* Shade 100 */
+    .b-font.color_gray.shade_100 {
+        color: #777;
+        }
+    /* Shade 200 */
+    .b-font.color_gray.shade_200 {
+        color: #888;
+        }
+    /* Shade 300 */
+    .b-font.color_gray.shade_300 {
+        color: #999;
+        }
+    /* Shade 400 */
+    .b-font.color_gray.shade_400 {
+        color: #aaa;
+        }
+    /* Shade 500 */
+    .b-font.color_gray.shade_500 {
+        color: #bbb;
+        }
+/* Color white */
+.b-font.color_white {
+    color: #fff;
+    }
+
+/* Case upper */
+.b-font.case_upper {
+    text-transform: uppercase;
+    }
+/* Case lower */
+.b-font.case_lower {
+    text-transform: lowercase;
+    }
+
+/* Weight light */
+.b-font.weight_light {
+    font-weight: 200;
+    font-weight: 300;
+    }
+/* Weight normal */
+.b-font.weight_normal {
+    font-weight: 400;
+    }
+/* Weight semibold */
+.b-font.weight_semibold {
+    font-weight: 500;
+    font-weight: 600;
+    }
+/* Weight bold */
+.b-font.weight_bold {
+    font-weight: 700;
+    }
+
+
+
