@@ -1,6 +1,6 @@
 {
   "name": "crocodile-js",
-  "version": "0.0.2-alpha0087",
+  "version": "0.0.2-alpha0088",
   "description": "Crocodile js web-framework",
   "dependencies": {
     "autoprefixer-core": "^5.1.7",
@@ -11,7 +11,7 @@
     "express": "^4.10.4",
     "fs-extra": "^0.18.0",
     "graceful-fs": "^3.0.5",
-    "jsDependencyAnalizer": "git+ssh://git@bitbucket.org:pkornev/jsdependencyanalyzer.git",
+    "jsDependencyAnalizer": "git+https://github.com/CrocJS/jsdependencyanalyzer.git",
     "lodash": "^3.3.0",
     "postcss": "^4.1.4",
     "postcss-assets": "^2.1.0",
@@ -29,7 +29,7 @@
     "body-parser": "^1.10.1",
     "compression": "^1.3.0",
     "cookie-parser": "^1.3.3",
-    "derby": "git+https://github.com/mrThomasTeller/derby.git",
+    "derby": "git+https://github.com/CrocJS/derby.git",
     "express-session": "^1.9.3",
     "livedb-mingo": "^1.0.1",
     "racer-highway": "^2.0.1",
