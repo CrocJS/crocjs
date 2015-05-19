@@ -5,24 +5,6 @@ var Derby = require('derby/lib/Derby');
 var derbyTemplates = require('derby/node_modules/derby-templates');
 var derby = module.exports = require('derby');
 
-/**
- * @param options
- * @param options.name
- * @param options.entry
- * @param [options.callback]
- * @param [options.meta]
- * @returns {Function}
- */
-Derby.prototype.appFactory = function(options) {
-    var app = this.createApp(options.name, options.entry);
-    app.meta = options.meta || {};
-    if (options.callback) options.callback(app);
-    app.factory = function() {
-        return app;
-    };
-    return app;
-};
-
 var stubWidget;
 var getStubWidget = function() {
     return stubWidget ||
@@ -93,7 +75,7 @@ function checkInheritedTemplate(views, name, namespace) {
         }
     }
     if (Cls && Cls.$$widgetClass) {
-        if (Cls.config.type === 'abstract') {
+        if (!name && Cls.config.type === 'abstract') {
             return derbyTemplates.templates.emptyTemplate;
         }
         var baseCls = Cls;
@@ -134,7 +116,20 @@ var View = derbyTemplates.templates.View;
 var MarkupHook = derbyTemplates.templates.MarkupHook;
 var oldViewsFind = Views.prototype.find;
 Views.prototype.find = function(name, namespace) {
-    var match = oldViewsFind.apply(this, arguments);
+    var match;
+    
+    if (name.indexOf(':') !== -1) {
+        match = oldViewsFind.call(this, name);
+        if (!match) {
+            match = checkInheritedTemplate(this, name, namespace);
+            if (match) {
+                return match;
+            }
+        }
+        return oldViewsFind.apply(this, arguments);
+    }
+    
+    match = oldViewsFind.apply(this, arguments);
     if (!match) {
         match = checkInheritedTemplate(this, name, namespace);
     }

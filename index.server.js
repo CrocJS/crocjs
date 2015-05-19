@@ -6,38 +6,6 @@ var Derby = require('derby/lib/Derby');
 var derby = require('derby');
 var hooks = require('./hooks');
 
-var coreApps = {};
-Derby.prototype.appFactory = function(options) {
-    var derby = this;
-    
-    function factory(packageName, packageEntryPoint) {
-        if (!packageName && coreApps[options.name]) {
-            return coreApps[options.name];
-        }
-        var app = derby.createApp(options.name + (packageName ? ':' + packageName : ''),
-            packageEntryPoint || options.entry);
-        app.meta = options.meta || {};
-        if (packageName) {
-            app.isPackage = true;
-            app.coreApp = coreApps[options.name];
-            app.Page.prototype = app.coreApp.Page.prototype;
-            app.proto = app.coreApp.proto;
-            app.packageName = packageName;
-        }
-        else {
-            coreApps[options.name] = app.coreApp = app;
-        }
-        if (options.callback) {
-            options.callback(app);
-        }
-        return app;
-    }
-    
-    var app = factory();
-    app.factory = factory;
-    return app;
-};
-
 App.prototype._viewsSource = function(options) {
     var result = '/*DERBY_SERIALIZED_VIEWS*/';
     if (this.isPackage) {
@@ -78,10 +46,10 @@ App.prototype._init = function() {
             }
             scripts += '<script>Stm = {env: {device: "' + Stm.env.device + '", ldevice: "' + Stm.env.ldevice +
             '", resourcePath: "' + this.app.resourcePath + '"}}</script>';
-            scripts += this.app.scriptUrl ? '<script src="' + this.app.scriptUrl + '"></script>' : '';
             if (this.app.isPackage && this.app.coreApp.scriptUrl) {
-                scripts = '<script src="' + this.app.coreApp.scriptUrl + '"></script>' + scripts;
+                scripts += '<script src="' + this.app.coreApp.scriptUrl + '"></script>';
             }
+            scripts += this.app.scriptUrl ? '<script src="' + this.app.scriptUrl + '"></script>' : '';
             scripts += '<script>crocApp = require("crocodile-js").createApp("' + this.app.name + '");';
             if (this.app.isPackage) {
                 scripts += 'crocApp.packageName = "' + this.app.packageName + '";crocApp.isPackage=true;';
@@ -103,4 +71,7 @@ App.prototype._init = function() {
     };
 });
 
-App.prototype._watchViews = App.prototype._watchStyles = App.prototype._watchBundle = _.noop;
+App.prototype._watchViews = App.prototype._watchStyles = App.prototype._watchBundle;
+if (process.env.DERBY_RENDERER) {
+    App.prototype._watchBundle = _.noop;
+}

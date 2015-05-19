@@ -1,0 +1,3 @@
+<index:>
+    <input type="hidden" class="{{if disabled}}state_disabled{{/if}}" value="{{value}}">
+</index:>

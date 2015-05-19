@@ -14,6 +14,14 @@ croc.Class.define('croc.cmp.Widget.View', {
 
     members: {
         /**
+         * get widget dom-element
+         * @returns {jQuery}
+         */
+        getElement: function() {
+            return this._widget.getElement();
+        },
+        
+        /**
          * After widget creating
          */
         onCreate: function() {}

@@ -240,7 +240,7 @@ function createJsBundle(options) {
                 bundle.transform(function(filename) {
                     var content;
                     if (filename === viewsFilename) {
-                        content = app._viewsSource({minify: true});
+                        content = app._viewsSource({minify: derby.util.isProduction});
                     }
                     return !content ? through() : through(
                         function write(curData) {},
@@ -271,7 +271,8 @@ function compileApp(options) {
     var widgetClasses = options.coreWidgetClasses ? options.coreWidgetClasses.concat() : [];
     var controllers = options.controllers ? options.controllers.concat() : [];
     var widgetCls;
-    (options.files || target.files).forEach(function(file) {
+    var files = options.files || target.files;
+    files.forEach(function(file) {
         var ext = path.extname(file);
         var fileDesc = target.filesHash[file];
         var symbol = fileDesc.symbols[0];
@@ -301,6 +302,8 @@ function compileApp(options) {
             css.push(file);
         }
     });
+    
+    app._watchBundle(files);
     
     function addView(file, serverOnly) {
         var symbol = target.filesHash[file].symbols[0];

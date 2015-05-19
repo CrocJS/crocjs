@@ -4,7 +4,6 @@ module.exports = {
         site: './public',
         compiled: './public'
     },
-    type: ['js', 'wtpl'],
     bower: '/bower_components',
     apps: [
         {

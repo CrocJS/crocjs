@@ -1,8 +1,9 @@
 //noinspection JSHint,JSUnusedGlobalSymbols
 /**
  * Функции для валидации полей
+ * todo translate messages
  */
-croc.define('croc.ui.form.validation.Functions', {
+croc.define('croc.cmp.form.validation.Functions', {
     
     /**
      * Эти правила проверяются даже если поле пустое
@@ -11,8 +12,8 @@ croc.define('croc.ui.form.validation.Functions', {
         always: true,
         required: true,
         consistentDate: true,
-        requiredIf: true,
-        requiredSubwayForBigCity: true
+        requiredIf: true//,
+        //requiredSubwayForBigCity: true //todo implement or remove
     },
     
     /**
@@ -22,12 +23,15 @@ croc.define('croc.ui.form.validation.Functions', {
         ownFirst: 0,
         required: 1,
         requiredIf: 1,
-        requiredSubwayForBigCity: 1,
+        //requiredSubwayForBigCity: 1,
         consistentDate: 2,
         
         integer: 10
     },
     
+    /**
+     * @private
+     */
     __EMAIL_REGEX: /^(?:(?:(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*")(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]+(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*"))*@(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\])(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\]))+|(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*")*\<(?:@(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\])(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\]))+(?:,@(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\])(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\]))+)*:)?(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*")(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]+(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*"))*@(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\])(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\]))+\>)|(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*")*:(?:(?:(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*")(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]+(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*"))*@(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\])(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\]))+|(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*")*\<(?:@(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\])(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\]))+(?:,@(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\])(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\]))+)*:)?(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*")(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]+(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*"))*@(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\])(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\]))+\>)(?:,\s*(?:(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*")(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]+(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*"))*@(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\])(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\]))+|(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*")*\<(?:@(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\])(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\]))+(?:,@(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\])(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\]))+)*:)?(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*")(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]+(?:$|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.)*"))*@(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\])(?:\.(?:[^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031-][^()<>@,;:\\".\[\]!~*'&=$?\/ \000-\031]*(?:$|(?=[\["()<>@,;:\\".\[\]]))|\[(?:[^\[\]\r\\]|\\.)*\]))+\>))*)?;\s*)$/i,
     
     /**
@@ -38,7 +42,7 @@ croc.define('croc.ui.form.validation.Functions', {
      * @returns {Function}
      */
     consistentDate: function(dayIdentifier, monthIdentifier, yearIdentifier) {
-        var requiredFunc = croc.ui.form.validation.Functions.required();
+        var requiredFunc = croc.cmp.form.validation.Functions.required();
         return function(value, item, items) {
             if (!items[dayIdentifier].isEmptyState() || !items[yearIdentifier].isEmptyState() || !items[monthIdentifier].isEmptyState()) {
                 requiredFunc.apply(this, arguments);
@@ -53,7 +57,7 @@ croc.define('croc.ui.form.validation.Functions', {
      * На основе переданных правил валидации составляет валидационную функцию. При этом если правила переданы в виде
      * объекта и среди правил нет required, то ни одно правило не проверяется при отсутствии значиня у поля и поле
      * считается валидным. Однако если указано правило always, то все правила проверяются в любом случае.
-     * @param {object|function|string} validation см. {@link croc.ui.form.validation.IValidatable#getValidation}
+     * @param {object|function|string} validation см. {@link croc.cmp.form.validation.IValidatable#getValidation}
      * @returns {function(value:*)}
      */
     createValidationFunction: function(validation) {
@@ -61,7 +65,7 @@ croc.define('croc.ui.form.validation.Functions', {
             return validation;
         }
         
-        var self = croc.ui.form.validation.Functions;
+        var self = croc.cmp.form.validation.Functions;
         
         if (typeof validation === 'string') {
             validation = JSON.parse(validation);
@@ -115,7 +119,7 @@ croc.define('croc.ui.form.validation.Functions', {
                         validator.func.apply(thisObj, arguments);
                     }
                     catch (e) {
-                        if (validator.id && e instanceof croc.ui.form.validation.Error && !e.getValidatorId()) {
+                        if (validator.id && e instanceof croc.cmp.form.validation.Error && !e.getValidatorId()) {
                             e.setValidatorId(validator.id);
                         }
                         throw e;
@@ -135,8 +139,8 @@ croc.define('croc.ui.form.validation.Functions', {
      */
     email: function() {
         return function(value, item) {
-            if (!croc.ui.form.validation.Functions.__EMAIL_REGEX.test(value)) {
-                throw new croc.ui.form.validation.Error('Неверно указан адрес электронной почты');
+            if (!croc.cmp.form.validation.Functions.__EMAIL_REGEX.test(value)) {
+                throw new croc.cmp.form.validation.Error('Неверно указан адрес электронной почты');
             }
         };
     },
@@ -150,7 +154,7 @@ croc.define('croc.ui.form.validation.Functions', {
         return function(value, item, items) {
             //noinspection JSHint
             if (value != items[identifier].getValue()) {
-                throw new croc.ui.form.validation.Error('Значения полей не совпадают');
+                throw new croc.cmp.form.validation.Error('Значения полей не совпадают');
             }
         };
     },
@@ -162,7 +166,7 @@ croc.define('croc.ui.form.validation.Functions', {
     icq: function() {
         return function(value) {
             if (!value.toString().match(/^(\d\-?){5,8}\d$/)) {
-                throw new croc.ui.form.validation.Error('Неверно указан номер ICQ');
+                throw new croc.cmp.form.validation.Error('Неверно указан номер ICQ');
             }
         };
     },
@@ -174,7 +178,7 @@ croc.define('croc.ui.form.validation.Functions', {
     integer: function() {
         return function(value, item) {
             if (!value.toString().match(/^\d+$/)) {
-                throw new croc.ui.form.validation.Error('Введите целое число');
+                throw new croc.cmp.form.validation.Error('Введите целое число');
             }
         };
     },
@@ -193,12 +197,12 @@ croc.define('croc.ui.form.validation.Functions', {
      * @returns {Function}
      */
     loyaltyProgram: function() {
-        var lengthFunc = croc.ui.form.validation.Functions.length;
+        var lengthFunc = croc.cmp.form.validation.Functions.length;
         return function(value) {
             switch (value.service) {
                 case 'malina':
                     if (value.value.substring(0, 6) !== '639300') {
-                        throw new croc.ui.form.validation.Error('Код введён неверно');
+                        throw new croc.cmp.form.validation.Error('Код введён неверно');
                     }
                     else {
                         lengthFunc(16)(value.value);
@@ -217,7 +221,7 @@ croc.define('croc.ui.form.validation.Functions', {
      * @returns {Function}
      */
     length: function(count) {
-        return croc.ui.form.validation.Functions.lengthRange(count, count);
+        return croc.cmp.form.validation.Functions.lengthRange(count, count);
     },
     
     /**
@@ -249,7 +253,7 @@ croc.define('croc.ui.form.validation.Functions', {
                     main = max;
                 }
                 msg += ' ' + croc.utils.strInflect(main, 'символа', 'символов', 'символов');
-                throw new croc.ui.form.validation.Error(msg);
+                throw new croc.cmp.form.validation.Error(msg);
             }
         };
     },
@@ -263,12 +267,12 @@ croc.define('croc.ui.form.validation.Functions', {
         codes = typeof codes === 'number' ? _.toArray(arguments) : [];
         return function(value, item) {
             if (!/^[0-9]{11,12}$/.test(value.replace(/[^0-9]/g, ''))) {
-                throw new croc.ui.form.validation.Error('Неверно указан номер');
+                throw new croc.cmp.form.validation.Error('Неверно указан номер');
             }
             if (codes.length) {
                 var number = value.replace(/[^\d\(]/g, '').match(/\((\d+)/);
                 if (!number || !number[1].match(new RegExp('^(' + codes.join('|') + ')'))) {
-                    throw new croc.ui.form.validation.Error(codes.length === 1 ?
+                    throw new croc.cmp.form.validation.Error(codes.length === 1 ?
                         'Допускается только код города ' + codes[0] :
                         'Допускаются только следующие коды города: ' + codes.join(', '),
                         'phone');
@@ -297,7 +301,7 @@ croc.define('croc.ui.form.validation.Functions', {
                 else {
                     msg += 'не больше ' + max;
                 }
-                throw new croc.ui.form.validation.Error(msg);
+                throw new croc.cmp.form.validation.Error(msg);
             }
         };
     },
@@ -312,7 +316,7 @@ croc.define('croc.ui.form.validation.Functions', {
         var regExp = new RegExp(expression, options);
         return function(value, item) {
             if (!regExp.test(value)) {
-                throw new croc.ui.form.validation.Error('Неправильный формат');
+                throw new croc.cmp.form.validation.Error('Неправильный формат');
             }
         };
     },
@@ -324,7 +328,7 @@ croc.define('croc.ui.form.validation.Functions', {
     required: function() {
         return function(value, item) {
             if (item.isEmpty()) {
-                throw new croc.ui.form.validation.Error('Поле не может быть пустым');
+                throw new croc.cmp.form.validation.Error('Поле не может быть пустым');
             }
         };
     },
@@ -335,7 +339,7 @@ croc.define('croc.ui.form.validation.Functions', {
      * @returns {Function}
      */
     requiredIf: function(identifiers) {
-        var requiredFunc = croc.ui.form.validation.Functions.required();
+        var requiredFunc = croc.cmp.form.validation.Functions.required();
         var ids = Array.prototype.slice.call(arguments, 0);
         return function(value, item, items) {
             if (item.isEmpty()) {
@@ -350,20 +354,20 @@ croc.define('croc.ui.form.validation.Functions', {
         };
     },
     
-    /**
-     * Станция метро необходима только в крупном городе (Москва, Санкт-Петербург)
-     * @returns {Function}
-     */
-    requiredSubwayForBigCity: function() {
-        return function(value, item) {
-            if (item.isEmpty()) {
-                if (['1-77-0-0-0', '1-78-0-0-0'].indexOf(item.getCityCode()) !== -1) {
-                    throw new croc.ui.form.validation.Error('Выберите станцию');
-                }
-                this.skipValidation();
-            }
-        };
-    },
+    ///**
+    // * Станция метро необходима только в крупном городе (Москва, Санкт-Петербург)
+    // * @returns {Function}
+    // */
+    //requiredSubwayForBigCity: function() {
+    //    return function(value, item) {
+    //        if (item.isEmpty()) {
+    //            if (['1-77-0-0-0', '1-78-0-0-0'].indexOf(item.getCityCode()) !== -1) {
+    //                throw new croc.cmp.form.validation.Error('Выберите станцию');
+    //            }
+    //            this.skipValidation();
+    //        }
+    //    };
+    //},
     
     /**
      * Поверяет, что поле "день" валидно (согласно полям "месяц" и "год")
@@ -382,14 +386,14 @@ croc.define('croc.ui.form.validation.Functions', {
             
             if (isNaN(day) || !monthIdentifier || isNaN(month)) {
                 if (isNaN(day) || (day < 1 || day > 31)) {
-                    throw new croc.ui.form.validation.Error('Неправильно задан день');
+                    throw new croc.cmp.form.validation.Error('Неправильно задан день');
                 }
                 return;
             }
             
             var date = new Date(year, month - 1, day);
             if (!(date && (date.getMonth() + 1) === month && date.getDate() === day && date.getFullYear() === year)) {
-                throw new croc.ui.form.validation.Error('Неправильно задан день');
+                throw new croc.cmp.form.validation.Error('Неправильно задан день');
             }
         };
     },
@@ -404,12 +408,7 @@ croc.define('croc.ui.form.validation.Functions', {
         return function(value) {
             value = value.toString();
             
-            var count = 0;
-            $.each(value.split(' '), function(i, chunk) {
-                if (chunk.length) {
-                    count += 1;
-                }
-            });
+            var count = value.split(' ').filter(function(x) { return x.length; }).length;
             
             if ((min && count < min) || (max && count > max)) {
                 var msg = 'Введите ';
@@ -423,7 +422,7 @@ croc.define('croc.ui.form.validation.Functions', {
                     msg += 'не больше ' + max;
                 }
                 msg += ' слов';
-                throw new croc.ui.form.validation.Error(msg);
+                throw new croc.cmp.form.validation.Error(msg);
             }
         };
     }

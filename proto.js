@@ -11,6 +11,9 @@ module.exports = function(configPath, protoPath, cssOnly) {
     var port = _.contains(process.argv, '-p') ? 80 : 9009;
     
     var exprApp = express();
+    if (!config.apps) {
+        config.apps = [{path: '!!' + path.join(__dirname, 'source/croc')}];
+    }
     require('./apps').resolveApps({config: config, path: configPath}, function(err, apps) {
         if (err) {
             throw err;

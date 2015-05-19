@@ -12,7 +12,7 @@ Component.config = croc.Object.config;
  */
 croc.Class.define('croc.cmp.Widget', {
     extend: Component,
-    implement: croc.ui.IWidget,
+    implement: croc.cmp.IWidget,
     
     statics: {
         CLASSES: [],
@@ -42,7 +42,7 @@ croc.Class.define('croc.cmp.Widget', {
         getByElement: function(el) {
             el = $(el);
             var cmps = croc.app.model.data.$components;
-            var cmp = cmps && cmps[el.attr('id')];
+            var cmp = cmps && cmps[el.data('cmpid')];
             return cmp && cmp.$controller;
         },
         
@@ -84,6 +84,12 @@ croc.Class.define('croc.cmp.Widget', {
         model: null,
         
         /**
+         * A child widget was removed
+         * @param {croc.cmp.Widget} widget
+         */
+        removeChild: null,
+        
+        /**
          * @param {string} reason
          */
         resize: null
@@ -123,6 +129,7 @@ croc.Class.define('croc.cmp.Widget', {
     
     options: {
         content: {},
+        elid: {},
         id: {},
         $controller: {},
         
@@ -146,6 +153,16 @@ croc.Class.define('croc.cmp.Widget', {
          * @type {string}
          */
         identifier: {},
+        
+        /**
+         * Meta-data
+         * @type {object}
+         */
+        meta: {
+            type: 'object',
+            value: {},
+            deepExtend: true
+        },
         
         /**
          * Секция, родительского виджета, в которой будет содержаться данный
@@ -246,6 +263,40 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
+         * Мета-данные виджета
+         * @returns {Object}
+         */
+        getMeta: function() {
+            return this._options.meta;
+        },
+        
+        /**
+         * Generate unique id which can be used in templates
+         * todo move to service
+         */
+        generateUniqueId: function(prefix, context) {
+            if (this.__parent) {
+                return this.__parent.generateUniqueId(prefix, context);
+            }
+            else {
+                if (context && context.alias !== '#helper') {
+                    context = context.parent;
+                }
+                if (context && context.$$generatedId) {
+                    return context.$$generatedId;
+                }
+                if (!this.__lastUniqueId) {
+                    this.__lastUniqueId = 0;
+                }
+                var id = (prefix || '') + ++this.__lastUniqueId;
+                if (context) {
+                    context.$$generatedId = id;
+                }
+                return id;
+            }
+        },
+        
+        /**
          * Секция дочерних элементов по-умолчанию
          * @return {String}
          * @protected
@@ -262,7 +313,7 @@ croc.Class.define('croc.cmp.Widget', {
             if (this.__el) {
                 return this.__el;
             }
-            var el = document.getElementById(this._options.id);
+            var el = document.getElementById(this._options.elid);
             return el && (this.__el = $(el));
         },
         
@@ -314,6 +365,29 @@ croc.Class.define('croc.cmp.Widget', {
          */
         getSubElement: function(id) {
             return this.getElement().find('.' + this.subElement(id));
+        },
+        
+        /**
+         * Get selector for the subelement
+         * @param {string} id
+         * @returns {string}
+         */
+        getSubElementSelector: function(id) {
+            return '.' + this.subElement(id);
+        },
+        
+        /**
+         * Get value of parent context expression with passed alias
+         */
+        getValueByAlias: function(alias) {
+            var context = croc.utils.forChain(this.context, 'parent', function(context) {
+                if (context.alias === alias) {
+                    return context;
+                }
+            });
+            if (context) {
+                return context.get();
+            }
         },
         
         /**
@@ -423,7 +497,6 @@ croc.Class.define('croc.cmp.Widget', {
             }, this);
             
             this._initWidget();
-            this.__setRendered(true);
             this.v.onCreate();
             
             //autoresize
@@ -435,6 +508,8 @@ croc.Class.define('croc.cmp.Widget', {
                     this.checkResize('render');
                 }, this);
             }
+            
+            this.__setRendered(true);
         },
         
         /**
@@ -448,6 +523,7 @@ croc.Class.define('croc.cmp.Widget', {
             if (parent && parent instanceof croc.cmp.Widget) {
                 delete parent.__itemsHash[this._options.identifier];
                 croc.utils.arrRemove(parent.__sections[this._options.section], this);
+                parent.fireEvent('removeChild', this);
             }
         },
         
@@ -466,19 +542,24 @@ croc.Class.define('croc.cmp.Widget', {
                 }
             }
             
-            if (!options.identifier) {
-                model.set('identifier', this.getUniqueId().toString());
-            }
-            model.set('self', this.constructor.classname);
-            
             var parent = this.parent;
             if (parent && parent instanceof croc.cmp.Widget) {
                 this.__parent = parent;
                 if (!options.section) {
-                    model.set('section', this.getDefaultItemsSection());
+                    model.set('section', this.getValueByAlias('#section') || parent.getDefaultItemsSection());
                 }
-                parent.__addChild(this);
+                parent.__itemsHash[this.getIdentifier()] = this;
+                (parent.__sections[this.getSection()] || (parent.__sections[this.getSection()] = [])).push(this);
             }
+            
+            var uniqueId = this.generateUniqueId();
+            if (!options.elid) {
+                options.elid = 'widget-' + uniqueId;
+            }
+            if (!options.identifier) {
+                model.set('identifier', uniqueId);
+            }
+            model.set('self', this.constructor.classname);
             
             this._initModel();
             this.fireEvent('model', this._model);
@@ -496,6 +577,17 @@ croc.Class.define('croc.cmp.Widget', {
             if (this.parent && this.parent._model) {
                 //this._model.root.ref(this._model._at + '.pm', this.parent._model._at);
                 this.pm = this.parent._options;
+            }
+            
+            if (croc.isClient && this.__parent) {
+                if (this.__parent.getRendered()) {
+                    this.__parent.fireEvent('addChild', this);
+                }
+                else {
+                    this.__parent.once('changeRendered', function() {
+                        this.__parent.fireEvent('addChild', this);
+                    }, this);
+                }
             }
         },
         
@@ -521,16 +613,6 @@ croc.Class.define('croc.cmp.Widget', {
                 return true;
             }
             return false;
-        },
-        
-        /**
-         * @param {croc.cmp.Widget} widget
-         * @private
-         */
-        __addChild: function(widget) {
-            this.__itemsHash[widget.getIdentifier()] = widget;
-            (this.__sections[widget.getSection()] || (this.__sections[widget.getSection()] = [])).push(widget);
-            this.fireEvent('addChild', widget);
         }
     },
     

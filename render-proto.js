@@ -23,7 +23,7 @@ if (cache && fs.existsSync(htmlFile)) {
     console.log(fs.readFileSync(htmlFile).toString());
 }
 else {
-    config.use = (config.use || []).concat(config.apps.map(function(x) { return x.path; }));
+    config.use = (config.use || []).concat((config.apps || []).map(function(x) { return x.path; }));
     config.apps = [
         {
             path: '/' + path.join(path.relative(rootDir, protoPath), proto)

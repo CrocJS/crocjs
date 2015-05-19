@@ -1,10 +1,16 @@
 <index:>
-    <form action="{{action || '#'}}" class="b-form" method="post">
-        {{if @content}}
-            {{@content}}
-        {{else}}
-            <virtualView is="body" optional/>
-        {{/if}}
+    <form action="{{action || '#'}}" class="b-form{{if disabled}} state_disabled{{/if}}" method="post">
+        <virtualView is="body" optional/>
+        {{with 'buttons' as #section}}
+            <fieldset class="b-form-fset">
+                <div class="b-form-row">
+                    <div class="b-sbutton-set spacing_1">
+                        <virtualView is="buttons" optional/>
+                    </div>
+                </div>
+            </fieldset>
+        {{/with}}
+        <div class="b-form-overlay g-hidden"></div>
     </form>
 </index:>
 
@@ -15,19 +21,21 @@
 </fieldset:>
 
 <row:>
-    <div class="b-form-row pos_{{@position || 'left'}}{{if @margin}} margin_{{@margin}}{{/if}} js-wrapper">
-        {{if @label}}
-            <div class="b-form-label for_input pos_{{@label.position || 'left'}} size_{{@label.size || '1'}}">
-                <label class="g-font size_{{@label.fontSize || v.getLabelFontSize(@label.size)}}">{{@label.text || @label}}</label>
-            </div>
-        {{/if}}
-        <div class="b-form-input pos_{{@position || 'left'}}">
-            <div class="b-form-input-h">{{@content}}</div>
-            {{if @hint}}
-                <div class="b-form-hint pos_bot g-font size_{{@hint.size || '12'}}{{if @hint.state}} state_{{@hint.state}}{{/if}}">
-                    {{@hint.text || @hint}}
+    <div class="b-form-row pos_{{@position || 'left'}}{{if @margin}} margin_{{@margin}}{{/if}} js-wrapper {{subElement('fieldWrapper')}}">
+        {{with 1 as #helper}}{{with generateUniqueId('field-', $context) as #fieldId}}
+            {{if @label}}
+                <div class="b-form-label for_input pos_{{@label.position || 'left'}} size_{{@label.size || '1'}}">
+                    <label class="g-font size_{{@label.fontSize || v.getLabelFontSize(@label.size)}}" for="{{#fieldId}}">{{*@label.text || @label}}</label>
                 </div>
             {{/if}}
-        </div>
+            <div class="b-form-input pos_{{@position || 'left'}}">
+                <div class="b-form-input-h">{{@content}}</div>
+                {{if @hint}}
+                    <div class="b-form-hint pos_bot g-font size_{{@hint.size || '12'}}{{if @hint.state}} state_{{@hint.state}}{{/if}}">
+                        {{*@hint.text || @hint}}
+                    </div>
+                {{/if}}
+            </div>
+        {{/with}}{{/with}}
     </div>
 </row:>

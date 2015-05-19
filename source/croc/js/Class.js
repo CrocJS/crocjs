@@ -214,6 +214,10 @@ croc.define('croc.Class', {
             return this.classes[name];
         }
         
+        if (!compatibilityMode && config.type === 'native') {
+            return this.__createNativeClass(name, config);
+        }
+        
         this.__callPreClassCreate(name, config);
         
         var Cls;
@@ -475,6 +479,21 @@ croc.define('croc.Class', {
         if (config && config.onClassCreate) {
             config.onClassCreate(targetCls || Cls);
         }
+    },
+    
+    /**
+     * @param {string} name
+     * @param {Object} config
+     * @private
+     */
+    __createNativeClass: function(name, config) {
+        var Cls = config.construct || function() {};
+        this.inherit(Cls, config.extend);
+        if (config.members) {
+            Cls.prototype = config.members;
+        }
+        this.__saveClass(name, Cls);
+        return Cls;
     },
     
     /**

@@ -1,10 +1,8 @@
-croc.ns('croc.ui.form.validation');
-
 /**
  * Реализация стандартных методов валидации
  * todo назначать класс valid/error после создания виджета
  */
-croc.Mixin.define('croc.ui.form.validation.MStandardValidatable', {
+croc.Mixin.define('croc.cmp.form.validation.MStandardValidatable', {
     events: {
         /**
          * Класс state_valid/state_error был изменён
@@ -60,7 +58,7 @@ croc.Mixin.define('croc.ui.form.validation.MStandardValidatable', {
     members: {
         /**
          * Сообщение об ошибке
-         * @return {String}
+         * @returns {String}
          */
         getInvalidMessage: function() {
             return this._options.invalidMessage;
@@ -69,7 +67,7 @@ croc.Mixin.define('croc.ui.form.validation.MStandardValidatable', {
         /**
          * Значение поля в виде строки либо массива, которое однозначно идентифицурет состояние поля и может быть отправлено
          * аякс-запросом на сервер
-         * @type {string|Array}
+         * @returns {string|Array}
          */
         getPlainValue: function() {
             return this.getValue();
@@ -85,8 +83,8 @@ croc.Mixin.define('croc.ui.form.validation.MStandardValidatable', {
         
         /**
          * Правила валидации поля (заданные в виде объекта или json), либо функция валидации (бросает
-         * {@link croc.ui.form.validation.Error} при ошибке валидации)
-         * @return {function(*, croc.ui.form.validation.IValidatable, Object.<string, croc.ui.form.validation.IValidatable>)|object|string}
+         * {@link croc.cmp.form.validation.Error} при ошибке валидации)
+         * @returns {function(*, croc.cmp.form.validation.IValidatable, Object.<string, croc.cmp.form.validation.IValidatable>)|object|string}
          */
         getValidation: function() {
             return this._options.validation;

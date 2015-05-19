@@ -6,7 +6,7 @@
                     {{if placeholder && !instantValue}}
                         <div class="b-input-field-placeholder">{{placeholder}}</div>
                     {{/if}}
-                    <input type="text" value="{{instantValue}}" class="b-input-field-h"
+                    <input type="text" id="{{#fieldId}}" value="{{instantValue}}" class="b-input-field-h"
                         on-bind="[bFocus($at(focused)), bSelect($at(selectField))]"
                         on-blur="setValue(instantValue)"
                         on-create="saveEl($at(_fieldElement), $element)">
@@ -20,12 +20,10 @@
             <div class="b-input-cell cell_validation">
                 <div class="b-input-validation"></div>
             </div>
-            <virtualView is="cellsAfter"/>
+            <virtualView is="cellsAfter" optional/>
         </div>
     </label>
 </index:>
-
-<cellsAfter:></cellsAfter:>
 
 <cell:>
     <div class="b-input-cell{{if cls}} {{cls}}{{/if}}">

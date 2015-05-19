@@ -1,7 +1,7 @@
 /**
  * Поле подлежащее валидации
  */
-croc.Interface.define('croc.ui.form.validation.IValidatable', {
+croc.Interface.define('croc.cmp.form.validation.IValidatable', {
     extend: croc.IObject,
     
     members: {
@@ -32,8 +32,8 @@ croc.Interface.define('croc.ui.form.validation.IValidatable', {
         
         /**
          * Правила валидации поля (заданные в виде объекта или json), либо функция валидации (бросает
-         * {@link croc.ui.form.validation.Error} при ошибке валидации)
-         * @return {function(*, croc.ui.form.validation.IValidatable, Object.<string, croc.ui.form.validation.IValidatable>)|object|string}
+         * {@link croc.cmp.form.validation.Error} при ошибке валидации)
+         * @return {function(*, croc.cmp.form.validation.IValidatable, Object.<string, croc.cmp.form.validation.IValidatable>)|object|string}
          */
         getValidation: function() {},
         

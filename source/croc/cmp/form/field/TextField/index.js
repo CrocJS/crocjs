@@ -2,48 +2,11 @@
  * Абстракция над полем ввода
  */
 croc.Class.define('croc.cmp.form.field.TextField', {
-    extend: croc.cmp.Widget,
+    extend: croc.cmp.form.field.AbstractTextField,
     
     properties: {
         action: {
             check: ['loader', 'unfold'],
-            model: true
-        },
-        
-        /**
-         * @type {boolean}
-         */
-        focused: {
-            type: 'boolean',
-            model: true
-        },
-        
-        /**
-         * Мгновенное значение текстового поля
-         * @type {string}
-         */
-        instantValue: {
-            type: 'string',
-            model: true
-        },
-        
-        /**
-         * плэйсхолдер для поля
-         * @type {string}
-         */
-        placeholder: {
-            type: 'string',
-            model: true
-        },
-        
-        /**
-         * Размер поля
-         * @type {string}
-         */
-        size: {
-            type: 'string',
-            __setter: null,
-            value: '1',
             model: true
         },
         
@@ -60,14 +23,6 @@ croc.Class.define('croc.cmp.form.field.TextField', {
     options: {},
     
     members: {
-        blur: function() {
-            this.setFocused(false);
-        },
-        
-        focus: function() {
-            this.setFocused(true);
-        },
-        
         /**
          * @returns {jQuery}
          */

@@ -1,8 +1,50 @@
 /**
- * Форма
+ * Form widget which contains fields (section 'fields', by default) and buttons (section 'buttons').
  */
 croc.Class.define('croc.cmp.form.Form', {
     extend: croc.cmp.Widget,
+    implement: croc.cmp.form.validation.IValidatable,
+    include: croc.cmp.form.validation.MStandardValidatable,
+    
+    events: {
+        /**
+         * валидация была пройдена, чтобы отменить стандартный сабмит формы, вызовите e.preventDefault()
+         * @param {Event} e
+         * @param {Object.<string, *>} value
+         */
+        submit: null,
+        
+        /**
+         * @param {string} error
+         */
+        submitServerError: null,
+        
+        /**
+         * активация формы (первое взаимодействие с одним из полей формы)
+         * @param {croc.cmp.form.field.IField} field
+         */
+        activate: null,
+        
+        /**
+         * возбуждается после инициализации состояния (_initSate), а также после каждого ресета
+         */
+        initState: null,
+        
+        /**
+         * @param {Object} response
+         * @param {boolean} staticSubmit
+         */
+        submitSuccessful: null,
+        
+        submitValidationFail: null,
+        
+        /**
+         * @param {function} prevent
+         */
+        presubmit: null,
+        
+        postsubmit: null
+    },
     
     properties: {
         /**
@@ -10,7 +52,7 @@ croc.Class.define('croc.cmp.form.Form', {
          */
         disabled: {
             value: false,
-            apply: '__applyDisabled'
+            model: true
         },
         
         status: {
@@ -45,6 +87,12 @@ croc.Class.define('croc.cmp.form.Form', {
          * @type {string}
          */
         action: {},
+        
+        /**
+         * Значения, которые следует установить полям при их добавлении
+         * @type {Object.<string, *>}
+         */
+        fieldsValues: null,
         
         /**
          * Предотвратить отправку формы на сервер
@@ -85,6 +133,31 @@ croc.Class.define('croc.cmp.form.Form', {
     
     construct: function() {
         this.__activateDisposer = new croc.util.Disposer();
+        this.__alreadyDisabled = {};
+        
+        this.on('addChild', function(widget) {
+            if (widget.getSection() === 'buttons') {
+                if (!this.__submitButton && widget.getType() === 'submit') {
+                    this.__submitButton = widget;
+                }
+            }
+            else if (widget.getSection() === 'fields') {
+                this.__onAddField(widget);
+            }
+        }, this);
+        
+        this.on('removeChild', function(widget) {
+            if (this.__submitButton === widget) {
+                this.__submitButton = null;
+            }
+            if (widget.getSection() === 'fields') {
+                this.__stateManager.removeItem(widget);
+                if (this.__activateDisposer) {
+                    this.__activateDisposer.removeObject(widget);
+                }
+            }
+        }, this);
+        
         croc.cmp.form.Form.superclass.construct.apply(this, arguments);
     },
     
@@ -110,6 +183,15 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
+         * Секция дочерних элементов по-умолчанию
+         * @return {String}
+         * @protected
+         */
+        getDefaultItemsSection: function() {
+            return 'fields';
+        },
+        
+        /**
          * Объект уведомлений
          * @return {croc.cmp.form.validation.Notifier}
          */
@@ -129,7 +211,7 @@ croc.Class.define('croc.cmp.form.Form', {
          * @return {croc.cmp.form.Button}
          */
         getSubmitButton: function() {
-            return this.__sumbitButton;
+            return this.__submitButton;
         },
         
         /**
@@ -169,6 +251,17 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
+         * Passed element will be hidden on the first form update
+         * @param {Element|jQuery} el
+         * @param {string} [method='hide'] jquery hide method
+         */
+        hideElementOnUpdate: function(el, method) {
+            this.__stateManager.once('updateStateChanged', function() {
+                $(el)[method || 'hide']();
+            });
+        },
+        
+        /**
          * Отключить повторную валидацию поля при потере фокуса
          * @param {croc.cmp.form.field.IField} field
          */
@@ -198,10 +291,23 @@ croc.Class.define('croc.cmp.form.Form', {
          * @param {croc.cmp.form.Button} button
          */
         setSubmitButton: function(button) {
-            this.__sumbitButton = button;
-            button.on('execute', function() {
-                this.submit();
-            }, this);
+            this.__submitButton = button;
+            if (button.getType() !== 'submit') {
+                button.on('click', function() {
+                    this.submit();
+                }, this);
+            }
+        },
+        
+        /**
+         * Passed element will be shown when form state changes and hidden when form state returns back
+         * @param {Element|jQuery} el
+         * @param {string} [method='toggle'] jquery toggle method
+         */
+        showElementIfChanged: function(el, method) {
+            this.__stateManager.on('updateStateChanged', function(value) {
+                $(el)[method || 'toggle'](value);
+            });
         },
         
         /**
@@ -216,20 +322,18 @@ croc.Class.define('croc.cmp.form.Form', {
          * Изменить доступность поля (видимость/disable и необходимость валидации)
          * @param {string|croc.cmp.form.field.IField} field
          * @param {boolean} available
-         * @param {boolean|string} [setDisableOrSelector=false] если true, то делает поле недоступным не скрывая его,
-         * если строка, то скрывает поле вплоть до родителя подходящего под переданный селектор
+         * @param {boolean|string} [disable=false] делает поле недоступным не скрывая его
          * @param {string|function(jQuery, boolean)} [toggleMethod=null] null|fade|slide - метод анимации появления/скрытия поля
          */
-        toggleField: function(field, available, setDisableOrSelector, toggleMethod) {
+        toggleField: function(field, available, disable, toggleMethod) {
             if (typeof field === 'string') {
                 field = /** @type {croc.cmp.form.field.IField} */(this.getItem(field));
             }
-            if (setDisableOrSelector && typeof setDisableOrSelector !== 'string') {
+            if (disable) {
                 field.setDisabled(!available);
             }
             else {
-                
-                this.__toggleFieldVisibility(field, available, setDisableOrSelector, toggleMethod);
+                this.__toggleFieldVisibility(field, available, toggleMethod);
                 
                 if (available) {
                     this.__stateManager.addItem(field, {dontReset: field.getMeta().dontReset});
@@ -254,7 +358,25 @@ croc.Class.define('croc.cmp.form.Form', {
         validate: function() {
             return this.__validationController.validate();
         },
+        
+        /**
+         * Значения для отправки на сервер аяксом
+         * @returns {Object}
+         * @protected
+         */
+        _getSubmitValues: function() {
+            return this.getValues();
+        },
     
+        /**
+         * Инициализация модели виджета
+         * @protected
+         */
+        _initModel: function() {
+            croc.cmp.form.Form.superclass._initModel.apply(this, arguments);
+            this.__stateManager = new croc.cmp.form.StateManager(this._options.stateManager || {});
+        },
+        
         /**
          * После вызова состояние формы считается начальным
          * @protected
@@ -264,19 +386,18 @@ croc.Class.define('croc.cmp.form.Form', {
                 return;
             }
             this.__stateInited = true;
-        
+            
             this.__stateManager.saveState();
-            this.__setUpJsMarkers();
-        
+            
             //before unload
             if (this.getWarnUnsavedChanges()) {
                 this._getDisposer().addListener(croc, 'system.page.beforeUnload', function(preventUnload) {
                     if (!this.getWarnUnsavedChanges() || this.__submitController.isSubmitPerformed()) {
                         return;
                     }
-                
+                    
                     this.commitChanges();
-                
+                    
                     var ignoreFields;
                     if (this.warnUnsavedChangesIgnoreFields) {
                         ignoreFields = [];
@@ -284,18 +405,18 @@ croc.Class.define('croc.cmp.form.Form', {
                             ignoreFields.push(this.getItem(identifier));
                         }, this);
                     }
-                
+                    
                     if (this.__stateManager.getStateChanged(ignoreFields) || this.status === 'sentFailure') {
                         preventUnload('На странице есть несохраненные данные.');
                     }
                 }, this);
             }
-        
+            
             this.__notifier.setTooltipAutoOpen(true);
-        
+            
             this.fireEvent('initState');
         },
-    
+        
         /**
          * Инициализация виджета после его отрисовки в DOM
          * @return {$.Deferred|undefined}
@@ -303,64 +424,59 @@ croc.Class.define('croc.cmp.form.Form', {
          */
         _initWidget: function() {
             //init members
-            this.__stateManager = new croc.ui.form.StateManager(this.stateManager || {});
-            this.__validationController = new croc.ui.form.validation.Controller({
+            var options = this._options;
+            this.__validationController = new croc.cmp.form.validation.Controller({
                 form: this,
-                notifierConf: this.notifier,
-                validationBehavior: this.validationBehavior,
-                validateForm: this.validateForm,
-                fieldsInvalidMessages: this.fieldsInvalidMessages
+                notifierConf: options.notifier,
+                validationBehavior: options.validationBehavior,
+                validateForm: options.validateForm,
+                fieldsInvalidMessages: options.fieldsInvalidMessages
             });
             this.__validationManager = this.__validationController.getManager();
             this.__notifier = this.__validationController.getNotifier();
-            this.__submitController = new croc.ui.form.internal.SubmitController({
+            this.__submitController = new croc.cmp.form.internal.SubmitController({
                 form: this,
-                action: this.action,
-                ajaxAction: this.ajaxAction,
-                ajaxSubmitDelay: this.ajaxSubmitDelay,
-                ajaxSubmitFn: this.ajaxSubmitFn,
-                autoAjaxSubmit: this.autoAjaxSubmit,
-                errorCodes: this.errorCodes,
-                preventSubmit: this.preventSubmit,
+                action: options.action,
+                ajaxAction: options.ajaxAction,
+                ajaxSubmitDelay: options.ajaxSubmitDelay,
+                ajaxSubmitFn: options.ajaxSubmitFn,
+                autoAjaxSubmit: options.autoAjaxSubmit,
+                errorCodes: options.errorCodes,
+                preventSubmit: options.preventSubmit,
                 submitFailFunc: this._onSubmitFail.bind(this),
                 submitSuccessFunc: this._onSubmitSuccess.bind(this),
                 trimAllBeforeSubmit: this.trimAllBeforeSubmit,
-                valuesFunc: (this.submitValuesFn || this._getAjaxSubmitValues).bind(this)
+                valuesFunc: (options.submitValuesFn || this._getSubmitValues).bind(this)
             });
-        
+            
             this.__submitController.bind(':changeSubmitting', this, '__submitting');
-        
+            
             //call parent
-            croc.ui.form.Form.superclass._initWidget.call(this);
-        
-            this.__buttonsRow = this.getElement().find('.b-form-row:has(.b-sbutton-set)');
-            this.__buttonsContainer = this.__buttonsRow.find('.b-sbutton-set');
-            if (!this.__buttonsContainer.length) {
-                this.__buttonsContainer = this.__buttonsRow;
-            }
-        
-            this.__fieldSet = this.getElement().find('.b-form-fset').filter(':not(.js-form-ignore)');
-            this.__messageEl = this.getElement().find('.b-form-replacing-message');
-        
-            //show buttons row
-            if (this.getItems('buttons').length > 0) {
-                this.__buttonsRow.removeClass('g-hidden');
-            }
-        
-            if (!this.isHtmlGenerated()) {
-                this.__idFieldsLabels();
-            }
-        
-            //overlay
-            $('<div class="b-form-overlay" style="display: none"></div>').appendTo(this.getElement());
-        
+            croc.cmp.form.Form.superclass._initWidget.call(this);
+            
+            this.listenProperty('disabled', this.__applyDisabled, this);
+            
             if (!this._partialInitialState) {
                 this._initState();
             }
         },
-    
+        
         /**
-         * @param {croc.ui.form.field.IField} field
+         * ajax-запрос был выполнен неудачно
+         * @protected
+         */
+        _onSubmitFail: function(response) {},
+        
+        /**
+         * ajax-запрос был выполнен удачно
+         * @param response
+         * @param values
+         * @protected
+         */
+        _onSubmitSuccess: function(response, values) {},
+        
+        /**
+         * @param {croc.cmp.form.field.IField} field
          * @private
          */
         __activateForm: function(field) {
@@ -373,51 +489,109 @@ croc.Class.define('croc.cmp.form.Form', {
         
         /**
          * @private
-         * todo simplify
          */
         __applyDisabled: function(value) {
             if (value) {
                 this.__alreadyDisabled = {};
-                this.getItems().concat(this.getItems('buttons')).forEach(function(widget) {
-                    if (croc.Interface.check(widget, 'croc.cmp.form.field.IDisable') ||
-                        croc.Class.check(widget, 'croc.cmp.form.Button')) {
-                        if (widget.getDisabled()) {
-                            this.__alreadyDisabled[widget.getUniqueId()] = true;
-                        }
-                        else {
-                            widget.setDisabled(true);
-                        }
-                    }
-                }, this);
-                
-                this.__disabledLinks = this.getElement().find('.g-pseudo:not(.state_disabled)');
-                this.getElement().add(this.__disabledLinks).addClass('state_disabled');
             }
-            else {
-                this.getItems().concat(this.getItems('buttons')).forEach(function(widget) {
-                    if (croc.Interface.check(widget, 'croc.cmp.form.field.IDisable') ||
-                        croc.Class.check(widget, 'croc.cmp.form.Button')) {
+            
+            this.getItems().concat(this.getItems('buttons')).forEach(function(widget) {
+                if (croc.Interface.check(widget, 'croc.cmp.form.field.IDisable') ||
+                    croc.Class.check(widget, 'croc.cmp.form.Button')) {
+                    if (!value) {
                         if (!this.__alreadyDisabled[widget.getUniqueId()]) {
                             widget.setDisabled(false);
                         }
                     }
-                }, this);
-                
-                this.getElement().add(this.__disabledLinks).removeClass('state_disabled');
-            }
+                    else if (widget.getDisabled()) {
+                        this.__alreadyDisabled[widget.getUniqueId()] = true;
+                    }
+                    else {
+                        widget.setDisabled(true);
+                    }
+                }
+            }, this);
         },
         
         /**
-         * @param {croc.ui.form.field.IField} field
+         * @private
+         */
+        __onAddField: function(item) {
+            var field = /** @type {croc.cmp.form.field.IField} */(item);
+            var meta = item.getMeta();
+            
+            this.__stateManager.addItem(field, {dontReset: field.getMeta().dontReset});
+            
+            //activation
+            this.__setUpFieldActivation(field);
+            
+            //initial value
+            var initialValue = this._options.fieldsValues && this._options.fieldsValues[field.getIdentifier()];
+            if (initialValue) {
+                var initValue = function() {
+                    field.setValue(initialValue);
+                    delete this._options.fieldsValues[field.getIdentifier()];
+                }.bind(this);
+                initValue();
+                
+                if (croc.isClient) {
+                    //если значения будут перекрыты браузером
+                    this._getDisposer().setTimeout(initValue, 100);
+                }
+            }
+            
+            //todo field defaults
+            //if (meta.setDefaults) {
+            //    (Array.isArray(meta.setDefaults) ? meta.setDefaults : [meta.setDefaults])
+            //        .forEach(function(type) {
+            //            croc.cmp.form.Form.setFieldDefaults(type, field);
+            //        });
+            //}
+        },
+        
+        /**
+         * @param {croc.cmp.form.field.IField} field
          * @private
          */
         __setUpFieldActivation: function(field) {
             if (this.__activateDisposer) {
-                if (croc.Interface.check(field, 'croc.ui.form.field.IHtmlControl')) {
-                    this.__activateDisposer.addListener(field, 'focus', this.__activateForm.bind(this, field));
+                if (croc.Interface.check(field, 'croc.cmp.form.field.IHtmlControl')) {
+                    this.__activateDisposer.addListener(field, 'changeFocused', function(value) {
+                        if (value) {
+                            this.__activateForm(field);
+                        }
+                    }, this);
                 }
                 this.__activateDisposer.addListener(field.getElement(), 'mousedown',
                     this.__activateForm.bind(this, field));
+            }
+        },
+        
+        /**
+         * @param {string|croc.cmp.form.field.IField} field
+         * @param {boolean} available
+         * @param {string|Function} [toggleMethod=null] null|fade|slide - метод анимации появления/скрытия поля
+         * @private
+         */
+        __toggleFieldVisibility: function(field, available, toggleMethod) {
+            var el = field.getElement().closest(this.getSubElementSelector('fieldWrapper'));
+            if (!el.length) {
+                el = field.getElement();
+            }
+            
+            if (typeof toggleMethod === 'function') {
+                toggleMethod(el, available);
+            }
+            else {
+                if (!toggleMethod) {
+                    el.toggle(available);
+                }
+                else {
+                    var method = available ?
+                        {fade: 'fadeIn', slide: 'slideDown'}[toggleMethod] :
+                        {fade: 'fadeOut', slide: 'slideUp'}[toggleMethod];
+                    el[method]();
+                }
             }
         }
     }
