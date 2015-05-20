@@ -4,12 +4,14 @@
 
 <Body:>
     <div class="b-page">
-        {{client}}
             <widget is="croc.cmp.form.Form">
                 <passView is="body">
                     <view is=":fieldset">
-                        <view is=":row" label="{{{size: '3', text: 'first'}}}" hint="field hint">
-                            <widget is="croc.cmp.form.field.TextField" identifier="first" size="3"></widget>
+                        <view is=":row" size="3" label="first" hint="field hint">
+                            <widget is="croc.cmp.form.field.TextField" identifier="first"></widget>
+                        </view>
+                        <view is=":row" size="2" label="second">
+                            <widget is="croc.cmp.form.field.TextField" identifier="second"></widget>
                         </view>
                     </view>
                 </passView>
@@ -17,6 +19,5 @@
                     <widget is="croc.cmp.form.Button" text="Form submit button" type="submit"></widget>
                 </passView>
             </widget>
-        {{/client}}
     </div>
 </Body:>

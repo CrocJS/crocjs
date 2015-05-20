@@ -1,5 +1,10 @@
 croc.View.define('croc.cmp.form.Form.View', {
     members: {
+        extractFieldId: function(html) {
+            var match = html.match(new RegExp(croc.cmp.form.Form.FIELD_ID_PREFIX + '\\d+'));
+            return match ? match[0] : '';
+        },
+        
         getLabelFontSize: function(size) {
             return {
                     1: '10',

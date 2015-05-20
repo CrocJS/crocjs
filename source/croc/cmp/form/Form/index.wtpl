@@ -22,20 +22,18 @@
 
 <row:>
     <div class="b-form-row pos_{{@position || 'left'}}{{if @margin}} margin_{{@margin}}{{/if}} js-wrapper {{subElement('fieldWrapper')}}">
-        {{with 1 as #helper}}{{with generateUniqueId('field-', $context) as #fieldId}}
-            {{if @label}}
-                <div class="b-form-label for_input pos_{{@label.position || 'left'}} size_{{@label.size || '1'}}">
-                    <label class="g-font size_{{@label.fontSize || v.getLabelFontSize(@label.size)}}" for="{{#fieldId}}">{{*@label.text || @label}}</label>
+        {{if @label}}
+            <div class="b-form-label for_input pos_{{@position || 'left'}} size_{{=nextFieldSize(@size) || @labelSize || '1'}}">
+                <label class="g-font size_{{@labelFontSize || v.getLabelFontSize(@size)}}" for="{{=nextAddedFieldId}}">{{*@label}}</label>
+            </div>
+        {{/if}}
+        <div class="b-form-input pos_{{@position || 'left'}}">
+            <div class="b-form-input-h">{{@content}}</div>
+            {{if @hint}}
+                <div class="b-form-hint pos_bot g-font size_{{@hintSize || '12'}}{{if @hintState}} state_{{@hintState}}{{/if}}">
+                    {{*@hint}}
                 </div>
             {{/if}}
-            <div class="b-form-input pos_{{@position || 'left'}}">
-                <div class="b-form-input-h">{{@content}}</div>
-                {{if @hint}}
-                    <div class="b-form-hint pos_bot g-font size_{{@hint.size || '12'}}{{if @hint.state}} state_{{@hint.state}}{{/if}}">
-                        {{*@hint.text || @hint}}
-                    </div>
-                {{/if}}
-            </div>
-        {{/with}}{{/with}}
+        </div>
     </div>
 </row:>

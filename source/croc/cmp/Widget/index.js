@@ -79,6 +79,11 @@ croc.Class.define('croc.cmp.Widget', {
         init: null,
         
         /**
+         * @param {croc.cmp.Widget} widget
+         */
+        initChild: null,
+        
+        /**
          * @param model
          */
         model: null,
@@ -310,11 +315,7 @@ croc.Class.define('croc.cmp.Widget', {
          * @returns {jQuery}
          */
         getElement: function() {
-            if (this.__el) {
-                return this.__el;
-            }
-            var el = document.getElementById(this._options.elid);
-            return el && (this.__el = $(el));
+            return this.__elementRaw && (this.__el || (this.__el = $(this.__elementRaw)));
         },
         
         /**
@@ -552,12 +553,8 @@ croc.Class.define('croc.cmp.Widget', {
                 (parent.__sections[this.getSection()] || (parent.__sections[this.getSection()] = [])).push(this);
             }
             
-            var uniqueId = this.generateUniqueId();
-            if (!options.elid) {
-                options.elid = 'widget-' + uniqueId;
-            }
             if (!options.identifier) {
-                model.set('identifier', uniqueId);
+                model.set('identifier', this.generateUniqueId());
             }
             model.set('self', this.constructor.classname);
             
@@ -578,15 +575,18 @@ croc.Class.define('croc.cmp.Widget', {
                 //this._model.root.ref(this._model._at + '.pm', this.parent._model._at);
                 this.pm = this.parent._options;
             }
-            
-            if (croc.isClient && this.__parent) {
-                if (this.__parent.getRendered()) {
-                    this.__parent.fireEvent('addChild', this);
-                }
-                else {
-                    this.__parent.once('changeRendered', function() {
+    
+            if (this.__parent) {
+                this.__parent.fireEvent('initChild', this);
+                if (croc.isClient) {
+                    if (this.__parent.getRendered()) {
                         this.__parent.fireEvent('addChild', this);
-                    }, this);
+                    }
+                    else {
+                        this.__parent.once('changeRendered', function() {
+                            this.__parent.fireEvent('addChild', this);
+                        }, this);
+                    }
                 }
             }
         },

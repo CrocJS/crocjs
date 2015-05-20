@@ -6,7 +6,7 @@ var derbyTemplates = require('derby/node_modules/derby-templates');
 var derby = module.exports = require('derby');
 
 var stubWidget;
-var getStubWidget = function() {
+derby.getStubWidget = function() {
     return stubWidget ||
         (stubWidget = croc.Class.define('croc.cmp.StubWidget', {
             extend: croc.cmp.Widget,
@@ -17,19 +17,7 @@ var getStubWidget = function() {
         }));
 };
 
-App.prototype._initCroc = function(controllers, widgetClasses) {
-    this.views.app = this;
-    
-    (widgetClasses || croc.cmp.Widget.CLASSES).forEach(function(Cls) {
-        this.component(Cls.classname, Cls);
-    }, this);
-    for (var name in this.views.nameMap) {
-        var view = this.views.nameMap[name];
-        if (!view.componentFactory && view.options && view.options.widgetTemplate && name.indexOf(':') === -1) {
-            this.component(name, getStubWidget());
-        }
-    }
-    
+App.prototype._initCroc = function(controllers) {
     croc.initialize(this, controllers);
     if (croc.isServer) {
         croc.Controller.classes = [];
@@ -71,7 +59,7 @@ function checkInheritedTemplate(views, name, namespace) {
     if (!Cls) {
         var indexView = map[ns];
         if (indexView && indexView.options && indexView.options.widgetTemplate) {
-            Cls = getStubWidget();
+            Cls = derby.getStubWidget();
         }
     }
     if (Cls && Cls.$$widgetClass) {
@@ -143,6 +131,18 @@ if (!derby.util.isServer) {
     var oldAppInit = App.prototype._finishInit;
     App.prototype._finishInit = function() {
         this.on('ready', function() {
+            
+            this.views.app = this;
+            croc.cmp.Widget.CLASSES.forEach(function(Cls) {
+                this.component(Cls.classname, Cls);
+            }, this);
+            for (var name in this.views.nameMap) {
+                var view = this.views.nameMap[name];
+                if (!view.componentFactory && view.options && view.options.widgetTemplate && name.indexOf(':') === -1) {
+                    this.component(name, derby.getStubWidget());
+                }
+            }
+            
             this._initCroc();
         }.bind(this));
         

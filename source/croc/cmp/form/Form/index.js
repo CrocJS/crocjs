@@ -6,6 +6,10 @@ croc.Class.define('croc.cmp.form.Form', {
     implement: croc.cmp.form.validation.IValidatable,
     include: croc.cmp.form.validation.MStandardValidatable,
     
+    statics: {
+        FIELD_ID_PREFIX: 'croc-form-field-'
+    },
+    
     events: {
         /**
          * валидация была пройдена, чтобы отменить стандартный сабмит формы, вызовите e.preventDefault()
@@ -135,6 +139,18 @@ croc.Class.define('croc.cmp.form.Form', {
         this.__activateDisposer = new croc.util.Disposer();
         this.__alreadyDisabled = {};
         
+        this._options.nextAddedFieldId = this.generateFieldId();
+        this.on('initChild', function(widget) {
+            if (widget.getSection() === 'fields') {
+                widget.getMeta().formFieldId = this._options.nextAddedFieldId;
+                this._options.nextAddedFieldId = this.generateFieldId();
+                if (this.__nextFieldSize && croc.Interface.check(widget, 'croc.cmp.form.field.ISizable')) {
+                    widget._model.set('size', this.__nextFieldSize);
+                }
+                this.__nextFieldSize = null;
+            }
+        }, this);
+        
         this.on('addChild', function(widget) {
             if (widget.getSection() === 'buttons') {
                 if (!this.__submitButton && widget.getType() === 'submit') {
@@ -180,6 +196,13 @@ croc.Class.define('croc.cmp.form.Form', {
             this.getElement()
                 .find('input[type=text], input[type=textarea], input[type=password]')
                 .blur();
+        },
+        
+        /**
+         * @returns {string}
+         */
+        generateFieldId: function() {
+            return this.generateUniqueId(croc.cmp.form.Form.FIELD_ID_PREFIX);
         },
         
         /**
@@ -259,6 +282,15 @@ croc.Class.define('croc.cmp.form.Form', {
             this.__stateManager.once('updateStateChanged', function() {
                 $(el)[method || 'hide']();
             });
+        },
+        
+        /**
+         * @param size
+         * @returns {string}
+         */
+        nextFieldSize: function(size) {
+            this.__nextFieldSize = size;
+            return size;
         },
         
         /**
@@ -367,7 +399,7 @@ croc.Class.define('croc.cmp.form.Form', {
         _getSubmitValues: function() {
             return this.getValues();
         },
-    
+        
         /**
          * Инициализация модели виджета
          * @protected

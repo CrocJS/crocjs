@@ -268,9 +268,7 @@ function compileApp(options) {
     var js = [];
     var views = [];
     var css = [];
-    var widgetClasses = options.coreWidgetClasses ? options.coreWidgetClasses.concat() : [];
     var controllers = options.controllers ? options.controllers.concat() : [];
-    var widgetCls;
     var files = options.files || target.files;
     files.forEach(function(file) {
         var ext = path.extname(file);
@@ -282,10 +280,6 @@ function compileApp(options) {
                 if (global.croc && croc.Class) {
                     var cls = croc.Class.getClass(symbol);
                     if (cls) {
-                        widgetCls = widgetCls || croc.Class.getClass('croc.cmp.Widget');
-                        if (widgetCls && (cls === widgetCls || croc.Class.isSubClass(cls, widgetCls))) {
-                            widgetClasses.push(cls);
-                        }
                         if (!target.targetObj.rendererMode && croc.Controller &&
                             croc.Class.isSubClass(cls, croc.Controller) && !cls.CLIENT_ONLY) {
                             controllers.push(cls);
@@ -305,10 +299,12 @@ function compileApp(options) {
     
     app._watchBundle(files);
     
+    app.views.app = app;
     function addView(file, serverOnly) {
+        var cls;
         var symbol = target.filesHash[file].symbols[0];
         if (global.croc && croc.Class) {
-            var cls = croc.Class.getClass(symbol);
+            cls = croc.Class.getClass(symbol);
             app._widgetBase = cls ? cls.baseclass.classname : 'croc.cmp.Widget';
         }
         app._widgetCls = symbol;
@@ -317,6 +313,7 @@ function compileApp(options) {
             options.serverOnly = true;
         }
         app.loadViews(path.normalize(file), symbol, options);
+        app.component(symbol, cls || derby.getStubWidget());
         delete app._widgetCls;
         delete app._widgetBase;
     }
@@ -348,7 +345,6 @@ function compileApp(options) {
                     files: files,
                     coreJs: coreFiles,
                     coreViews: views,
-                    coreWidgetClasses: widgetClasses,
                     controllers: controllers
                 });
             }).compact().value().concat(coreJsPromise);
@@ -363,7 +359,7 @@ function compileApp(options) {
     }
     
     return (app.isPackage ? coreJsPromise : deferred.promise).then(function() {
-        app._initCroc(controllers, widgetClasses);
+        app._initCroc(controllers);
         function onModel(model) {
             app.model = model;
             if (app.isPackage && app.coreApp.entry) {
