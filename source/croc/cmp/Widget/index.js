@@ -267,12 +267,20 @@ croc.Class.define('croc.cmp.Widget', {
             return false;
         },
         
+        clearVar: function(name) {
+            delete vars[name];
+        },
+        
         /**
          * Мета-данные виджета
          * @returns {Object}
          */
         getMeta: function() {
             return this._options.meta;
+        },
+        
+        getVar: function(name) {
+            return vars[name];
         },
         
         /**
@@ -441,6 +449,10 @@ croc.Class.define('croc.cmp.Widget', {
             return this._options['_pass_view_' + name] || (this.constructor.classname + ':' + name);
         },
         
+        setVar: function(name, value) {
+            vars[name] = value;
+        },
+        
         /**
          * Css class for subelement
          * @param {string} id
@@ -575,7 +587,7 @@ croc.Class.define('croc.cmp.Widget', {
                 //this._model.root.ref(this._model._at + '.pm', this.parent._model._at);
                 this.pm = this.parent._options;
             }
-    
+            
             if (this.__parent) {
                 this.__parent.fireEvent('initChild', this);
                 if (croc.isClient) {
@@ -682,3 +694,5 @@ croc.Class.define('croc.cmp.Widget', {
         croc.cmp.Widget.CLASSES.push(Cls);
     }
 });
+
+var vars = {};

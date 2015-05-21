@@ -156,7 +156,8 @@ function resolveApp(target) {
             coreApp: app,
             proto: app.proto,
             packageName: pack,
-            path: packPath
+            path: packPath,
+            resourcePath: app.resourcePath
         });
         packApp.Page.prototype = app.Page.prototype;
         //todo лишний парсинг представлений ядра

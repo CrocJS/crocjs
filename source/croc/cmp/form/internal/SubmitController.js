@@ -335,7 +335,7 @@ croc.Class.define('croc.cmp.form.internal.SubmitController', {
         __submitBlock: function() {
             this.setSubmitting(true);
             this.__submitBlocked = true;
-            this.__form.disable();
+            this.__form.setDisabled(true);
             var submitButton = this.__form.getSubmitButton();
             if (submitButton) {
                 this.__loadingButtonDescriptor = this._getDisposer().setTimeout(function() {
@@ -359,7 +359,7 @@ croc.Class.define('croc.cmp.form.internal.SubmitController', {
         __submitUnblock: function() {
             this.setSubmitting(false);
             this.__submitBlocked = false;
-            this.__form.enable();
+            this.__form.setDisabled(false);
             if (this.__form.getSubmitButton()) {
                 this.__form.getSubmitButton().setLoading(false);
                 this.__loadingButtonDescriptor.remove();

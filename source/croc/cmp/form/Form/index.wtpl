@@ -22,9 +22,10 @@
 
 <row:>
     <div class="b-form-row pos_{{@position || 'left'}}{{if @margin}} margin_{{@margin}}{{/if}} js-wrapper {{subElement('fieldWrapper')}}">
+        {{=setVar('fieldSize', @size),setVar('fieldId', generateUniqueId('field-'))}}
         {{if @label}}
-            <div class="b-form-label for_input pos_{{@position || 'left'}} size_{{=nextFieldSize(@size) || @labelSize || '1'}}">
-                <label class="g-font size_{{@labelFontSize || v.getLabelFontSize(@size)}}" for="{{=nextAddedFieldId}}">{{*@label}}</label>
+            <div class="b-form-label for_input pos_{{@position || 'left'}} size_{{=@size || @labelSize || '1'}}">
+                <label class="g-font size_{{@labelFontSize || v.getLabelFontSize(@size)}}" for="{{=getVar('fieldId')}}">{{*@label}}</label>
             </div>
         {{/if}}
         <div class="b-form-input pos_{{@position || 'left'}}">
@@ -35,5 +36,6 @@
                 </div>
             {{/if}}
         </div>
+        {{=clearVar('fieldSize'),clearVar('fieldId')}}
     </div>
 </row:>

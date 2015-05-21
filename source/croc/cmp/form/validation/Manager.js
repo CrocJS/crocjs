@@ -239,7 +239,7 @@ croc.Class.define('croc.cmp.form.validation.Manager', {
             
             this.__items = this.__items.sort(function(a, b) {
                 return this.__itemsWeights[croc.utils.objUniqueId(a)] - this.__itemsWeights[croc.utils.objUniqueId(b)];
-            }, this);
+            }.bind(this));
             
             this.__items.forEach(function(item) {
                 this.__validateOneItem(item);

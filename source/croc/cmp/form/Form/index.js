@@ -139,15 +139,12 @@ croc.Class.define('croc.cmp.form.Form', {
         this.__activateDisposer = new croc.util.Disposer();
         this.__alreadyDisabled = {};
         
-        this._options.nextAddedFieldId = this.generateFieldId();
         this.on('initChild', function(widget) {
             if (widget.getSection() === 'fields') {
-                widget.getMeta().formFieldId = this._options.nextAddedFieldId;
-                this._options.nextAddedFieldId = this.generateFieldId();
-                if (this.__nextFieldSize && croc.Interface.check(widget, 'croc.cmp.form.field.ISizable')) {
-                    widget._model.set('size', this.__nextFieldSize);
+                var size = this.getVar('fieldSize');
+                if (size && croc.Interface.check(widget, 'croc.cmp.form.field.ISizable')) {
+                    widget._model.set('size', size);
                 }
-                this.__nextFieldSize = null;
             }
         }, this);
         
@@ -282,15 +279,6 @@ croc.Class.define('croc.cmp.form.Form', {
             this.__stateManager.once('updateStateChanged', function() {
                 $(el)[method || 'hide']();
             });
-        },
-        
-        /**
-         * @param size
-         * @returns {string}
-         */
-        nextFieldSize: function(size) {
-            this.__nextFieldSize = size;
-            return size;
         },
         
         /**

@@ -11,8 +11,6 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         croc.cmp.form.field.ITextField
     ],
     
-    include: croc.cmp.form.field.MStandardSizable,
-    
     properties: {
         /**
          * Мгновенное значение текстового поля
@@ -41,6 +39,16 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
             __setter: null,
             value: '1',
             model: true
+        }
+    },
+    
+    members: {
+        /**
+         * Пробелы на концах значения являются важными и их нельзя обрезать
+         * @returns {boolean}
+         */
+        keepWhiteSpace: function() {
+            return false;
         }
     }
 });

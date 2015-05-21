@@ -48,7 +48,7 @@ croc.Class.define('croc.cmp.form.validation.Notifier', {
         croc.cmp.form.validation.Notifier.superclass.construct.apply(this, arguments);
         
         this.__tooltipAutoOpen = true;
-        this.__bubbleManager = new croc.cmp.common.bubble.Manager({
+        this.__bubbleManager = new croc.ui.common.bubble.Manager({
             closeBehavior: 'permanent'
         });
     
@@ -259,7 +259,7 @@ croc.Class.define('croc.cmp.form.validation.Notifier', {
             var conf = _.assign({}, croc.cmp.form.validation.Notifier.TOOLTIP_CONFIG, {
                 content: item.getInvalidMessage(),
                 position: this._options.tooltipPosition,
-                controlWidget: croc.cmp.WidgetsManager.getPageWidget(),
+                controlWidget: croc.ui.WidgetsManager.getPageWidget(),
                 opener: item.getElement(),
                 manager: this.__bubbleManager,
                 newDesign: false
