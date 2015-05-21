@@ -6,7 +6,7 @@
                     {{if placeholder && !instantValue}}
                         <div class="b-input-field-placeholder">{{placeholder}}</div>
                     {{/if}}
-                    <input type="text" id="{{=getVar('fieldId')}}" value="{{instantValue}}" class="b-input-field-h"
+                    <input type="text" id="{{=getVar('fieldId')}}" name="{{identifier}}" value="{{instantValue}}" class="b-input-field-h"
                         on-bind="[bFocus($at(focused)), bSelect($at(selectField))]"
                         on-blur="setValue(instantValue)"
                         on-create="saveEl($at(_fieldElement), $element)">
