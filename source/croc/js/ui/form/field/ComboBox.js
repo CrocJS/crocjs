@@ -622,6 +622,12 @@ croc.Class.define('croc.ui.form.field.ComboBox', {
             this.__suggestion.on('select', function(item) {
                 this.__itemsArray.push(this.__suggestion.getNormalizedItem(item));
                 this.__textField.setValue('');
+                
+                //todo исправить это в новых компонентах
+                this.__suggestion.close();
+                this._getDisposer().defer(function() {
+                    this.__suggestion.close();
+                }, this);
             }, this);
             
             //remove
