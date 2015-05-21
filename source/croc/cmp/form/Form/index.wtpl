@@ -1,15 +1,17 @@
 <index:>
     <form action="{{action || '#'}}" class="b-form{{if disabled}} state_disabled{{/if}}" method="post">
         <virtualView is="body" optional/>
-        {{with 'buttons' as #section}}
-            <fieldset class="b-form-fset">
-                <div class="b-form-row">
-                    <div class="b-sbutton-set spacing_1">
-                        <virtualView is="buttons" optional/>
+        {{if viewPassed('buttons')}}
+            {{with 'buttons' as #section}}
+                <fieldset class="b-form-fset margin_normal">
+                    <div class="b-form-row">
+                        <div class="b-sbutton-set spacing_1">
+                            <virtualView is="buttons" optional/>
+                        </div>
                     </div>
-                </div>
-            </fieldset>
-        {{/with}}
+                </fieldset>
+            {{/with}}
+        {{/if}}
         <div class="b-form-overlay g-hidden"></div>
     </form>
 </index:>
@@ -21,17 +23,20 @@
 </fieldset:>
 
 <row:>
-    <div class="b-form-row pos_{{@position || 'left'}}{{if @margin}} margin_{{@margin}}{{/if}} js-wrapper {{subElement('fieldWrapper')}}">
+    <div class="b-form-row pos_{{@position || labels.position}}{{if @margin}} margin_{{@margin}}{{/if}} js-wrapper {{subElement('fieldWrapper')}}">
         {{=setVar('fieldSize', @size),setVar('fieldId', generateUniqueId('field-'))}}
         {{if @label}}
-            <div class="b-form-label for_input pos_{{@position || 'left'}} size_{{=@size || @labelSize || '1'}}">
-                <label class="g-font size_{{@labelFontSize || v.getLabelFontSize(@size)}}" for="{{=getVar('fieldId')}}">{{*@label}}</label>
+            <div class="b-form-label for_input pos_{{@position || 'left'}} size_{{=@size || @labelSize || labels.size}}">
+                <label class="g-font size_{{@labelFontSize || v.getLabelFontSize(@size || @labelSize || labels.size)}}" for="{{=getVar('fieldId')}}">{{*@label}}</label>
+                {{if @labelHint}}
+                    <div class="b-form-hint pos_bot g-font size_{{@labelHintSize || labels.hintSize}}{{if @labelHintState}} state_{{@labelHintState}}{{/if}}">{{@labelHint}}</div>
+                {{/if}}
             </div>
         {{/if}}
-        <div class="b-form-input pos_{{@position || 'left'}}">
+        <div class="b-form-input pos_{{@position || labels.position}}">
             <div class="b-form-input-h">{{@content}}</div>
             {{if @hint}}
-                <div class="b-form-hint pos_bot g-font size_{{@hintSize || '12'}}{{if @hintState}} state_{{@hintState}}{{/if}}">
+                <div class="b-form-hint pos_bot g-font size_{{@hintSize || labels.hintSize}}{{if @hintState}} state_{{@hintState}}{{/if}}">
                     {{*@hint}}
                 </div>
             {{/if}}

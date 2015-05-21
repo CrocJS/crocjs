@@ -19,6 +19,9 @@ input, button, select, textarea {
     .b-form-fset {
         position: relative;
         }
+        .b-form-fset.margin_normal {
+            margin-top: 10px;
+            }
 
 
 /* State disabled */

@@ -105,6 +105,33 @@ croc.Class.define('croc.cmp.form.Form', {
         preventSubmit: false,
         
         /**
+         * Конфигурация добавляемых лэйблов
+         * @type {object}
+         */
+        labels: {
+            extend: true,
+            value: {
+                /**
+                 * размер подсказки
+                 * @type {number}
+                 */
+                hintSize: 12,
+                
+                /**
+                 * размер лэйблов (1-5)
+                 * @type {string}
+                 */
+                size: '1',
+                
+                /**
+                 * положение лэйблов
+                 * @type {string}
+                 */
+                position: 'top'
+            }
+        },
+        
+        /**
          * Функция получения значений перед отправкой данных на сервер
          * @type {function():Object}
          */

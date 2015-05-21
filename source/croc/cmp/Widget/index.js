@@ -462,6 +462,10 @@ croc.Class.define('croc.cmp.Widget', {
             return 'js-widget' + this._options.id + '-' + id;
         },
         
+        viewPassed: function(name) {
+            return !!this.app.views.find(this.resolveVirtualView(name));
+        },
+        
         /**
          * Инициализация модели виджета
          * @protected
