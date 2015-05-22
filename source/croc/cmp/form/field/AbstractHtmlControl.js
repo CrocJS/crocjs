@@ -67,8 +67,79 @@ croc.Class.define('croc.cmp.form.field.AbstractHtmlControl', {
         
         /**
          * Html-элемент поля
-         * @return {jQuery}
+         * @returns {jQuery}
          */
-        getFieldElement: function() { throw 'abstract!'; }
+        getFieldElement: function() {
+            return this.__fieldElement || (this.__fieldElement = this.fieldElement && $(this.fieldElement));
+        },
+        
+        /**
+         * Управляет ли компонент фокусом поля
+         * @returns {boolean}
+         */
+        managesFocus: function() {
+            return this._options.manageFocus;
+        },
+        
+        /**
+         * Возвращает внутреннее (сырое) значение поля
+         * @protected
+         */
+        _getFieldValue: function() {
+            return this.getFieldElement() && this.getFieldElement().val();
+        },
+        
+        /**
+         * Инициализация виджета после его отрисовки в DOM
+         * @protected
+         */
+        _initWidget: function() {
+            croc.cmp.form.field.AbstractHtmlControl.superclass._initWidget.apply(this, arguments);
+            
+            var fieldEl = this.getFieldElement();
+            
+            fieldEl.on(this._options._checkValueOnBlur ? 'blur' : 'change', function() {
+                this.setValue(this._getFieldValue(), true);
+            }.bind(this));
+            
+            var internalFocus = false;
+            if (this._options.manageFocus) {
+                fieldEl.on({
+                    focus: function() {
+                        if (!internalFocus) {
+                            internalFocus = true;
+                            this.focus();
+                            internalFocus = false;
+                        }
+                    }.bind(this),
+                    blur: function() {
+                        if (!internalFocus) {
+                            internalFocus = true;
+                            this.blur();
+                            internalFocus = false;
+                        }
+                    }.bind(this)
+                });
+                
+                if (fieldEl.is(':focus')) {
+                    internalFocus = true;
+                    this.focus();
+                    internalFocus = false;
+                }
+                
+                this.listenProperty('focused', function(value) {
+                    if (!internalFocus) {
+                        internalFocus = true;
+                        if (value && !fieldEl.is(':focus')) {
+                            fieldEl.focus();
+                        }
+                        else if (!value && fieldEl.is(':focus')) {
+                            fieldEl.blur();
+                        }
+                        internalFocus = false;
+                    }
+                }, this);
+            }
+        }
     }
 });

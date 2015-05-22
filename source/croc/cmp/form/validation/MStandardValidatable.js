@@ -3,12 +3,25 @@
  * todo назначать класс valid/error после создания виджета
  */
 croc.Mixin.define('croc.cmp.form.validation.MStandardValidatable', {
+    statics: {
+        classByValid: function(valid) {
+            return valid ? ' state_valid' : valid === false ? ' state_error' : '';
+        }
+    },
+    
     events: {
         /**
          * Класс state_valid/state_error был изменён
          * @param {boolean} valid
          */
         validClassChanged: null
+    },
+    
+    properties: {
+        valid: {
+            value: null,
+            model: true
+        }
     },
     
     options: {
@@ -24,6 +37,8 @@ croc.Mixin.define('croc.cmp.form.validation.MStandardValidatable', {
          */
         validation: null,
         
+        valid_throttled: null,
+        
         /**
          * Сообщения об ошибках валидации (validatorId => message)
          * @type {Object.<string, string>}
@@ -37,22 +52,20 @@ croc.Mixin.define('croc.cmp.form.validation.MStandardValidatable', {
          * Таймаут перед назначением классов state_valid/state_error
          * @type {number}
          */
-        _changeValidClassTimeout: null,
-        
-        _valid: null
+        _changeValidClassTimeout: null
     },
     
     preConstruct: function(options) {
-        if (options._changeValidClassTimeout) {
-            this.__standardValidatableValidTimeout = _.debounce(
+        if (options._changeValidClassTimeout && croc.isClient) {
+            this.__standardValidatableSetClass = _.debounce(
                 this.disposableFunc(this.__standardValidatableSetClass),
                 options._changeValidClassTimeout
             );
         }
-    },
-    
-    construct: function(options) {
-        this.__valid = options._valid;
+        
+        this.listenProperty('valid', function() {
+            this.__standardValidatableSetClass();
+        }, this);
     },
     
     members: {
@@ -71,14 +84,6 @@ croc.Mixin.define('croc.cmp.form.validation.MStandardValidatable', {
          */
         getPlainValue: function() {
             return this.getValue();
-        },
-        
-        /**
-         * Находится ли поле в валидном состоянии
-         * @return {boolean|null}
-         */
-        getValid: function() {
-            return this.__valid;
         },
         
         /**
@@ -125,15 +130,6 @@ croc.Mixin.define('croc.cmp.form.validation.MStandardValidatable', {
         },
         
         /**
-         * Изменить состояние валидности поля
-         * @param {boolean|null} valid
-         */
-        setValid: function(valid) {
-            this.__valid = valid;
-            this.__standardValidatableSetClass();
-        },
-        
-        /**
          * Обработать смену состояния валидации поля
          * @param {boolean} valid
          * @protected
@@ -144,13 +140,9 @@ croc.Mixin.define('croc.cmp.form.validation.MStandardValidatable', {
          * @private
          */
         __standardValidatableSetClass: function() {
-            if (this.getElement()) {
-                this.getElement()
-                    .toggleClass('state_valid', this.__valid === true)
-                    .toggleClass('state_error', this.__valid === false);
-            }
-            this._onValidClassChanged(this.__valid);
-            this.fireEvent('validClassChanged', this.__valid);
+            this._model.set('valid_throttled', this._options.valid);
+            this._onValidClassChanged(this._options.valid);
+            this.fireEvent('validClassChanged', this._options.valid);
         }
     }
 });

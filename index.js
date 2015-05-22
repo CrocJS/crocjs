@@ -71,7 +71,7 @@ function checkInheritedTemplate(views, name, namespace) {
             var curView = map[baseCls.classname + name];
             if (curView) {
                 var match = map[ns + name] = Object.create(curView);
-                match.registeredName = ns;
+                match.registeredName = ns + name;
                 match.name = ns + (name || ':index');
                 match.namespace = ns;
                 match.options = {serverOnly: true};

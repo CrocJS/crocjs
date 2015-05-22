@@ -5,54 +5,46 @@ croc.Class.define('croc.cmp.form.field.TextField', {
     extend: croc.cmp.form.field.AbstractTextField,
     
     properties: {
-        action: {
-            check: ['loader', 'unfold'],
+        /**
+         * Предназначено ли поле для ввода пароля
+         * @type {boolean}
+         */
+        masked: {
+            value: true,
             model: true
         },
         
         /**
-         * @type {string}
+         * Пометить поле как "только для чтения"
+         * @type {boolean}
          */
-        value: {
-            value: '',
-            __setter: null,
+        readOnly: {
             model: true
         }
     },
     
-    options: {},
+    options: {
+        /**
+         * Отключить собственный автокомплит поля. true - при suggestion !== null
+         * @type {boolean}
+         */
+        disableAutocomplete: {},
+        
+        /**
+         * Максимальное кол-во знаков (аттрибут maxlength)
+         * Если указаны правила валидации length или lengthRange, то определяется автоматически
+         * @type {number}
+         */
+        maxLength: {
+            type: 'number'
+        },
+        
+        /**
+         * Предназначено ли поле для ввода пароля
+         * @type {boolean}
+         */
+        password: {}
+    },
     
-    members: {
-        /**
-         * @returns {jQuery}
-         */
-        getFieldElement: function() {
-            return this._options._fieldElement;
-        },
-        
-        select: function() {
-            this._model.increment('selectField');
-        },
-        
-        setValue: function(value) {
-            if (value === this.getValue()) {
-                this.setInstantValue(value);
-            }
-            else {
-                this.__setValue(value);
-            }
-        },
-        
-        /**
-         * Инициализация модели виджета
-         * @protected
-         */
-        _initModel: function() {
-            croc.cmp.form.field.TextField.superclass._initModel.apply(this, arguments);
-            if (this.getInstantValue()) {
-                this.setValue(this.getInstantValue());
-            }
-            croc.data.Helper.bind(this, 'value', this._model, 'instantValue');
-        }
-    }
+    members: {}
 });

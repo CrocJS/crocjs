@@ -1,0 +1,58 @@
+<index: arrays="cell/cells">
+    <tag is="{{desktop}}label{{else}}div{{/desktop}}" class="b-input set_default size_{{=size}}{{if focused}} state_focus{{/if}}{{if disabled}} state_disabled{{/if}}{{if align}} align_{{align}}{{/if}}{{croc.cmp.form.validation.MStandardValidatable.classByValid(valid_throttled)}}">
+        <div class="b-input-h">
+            <virtualView is="cellsBefore"/>
+            <div class="b-input-cell cell_field">
+                <div class="b-input-field">
+                    {{if placeholder && !instantValue}}
+                        <div class="b-input-field-placeholder">{{placeholder}}</div>
+                    {{/if}}
+                    <virtualView is="input"/>
+                </div>
+            </div>
+            <virtualView is="cellsAfterInput"/>
+            {{if showAction}}
+                <div class="b-input-cell cell_action role_{{action || 'reset'}}{{if action || (showReset && instantValue)}} state_active{{/if}}"
+                    as="v.actionCellElement">
+                    <div class="b-input-action role_reset" on-click="reset(), focus()"></div>
+                    <div class="b-input-action role_loader"></div>
+                    <div class="b-input-action role_unfold"></div>
+                </div>
+            {{/if}}
+            <div class="b-input-cell cell_validation">
+                <div class="b-input-validation"></div>
+            </div>
+            <virtualView is="cellsAfter"/>
+        </div>
+    </tag>
+</index:>
+
+<cell:>
+    <div class="b-input-cell{{if @cls}} {{@cls}}{{/if}}">
+        {{@content}}
+    </div>
+</cell:>
+
+<cellsBefore:>
+    {{each cells as #cell}}
+        {{if #cell.place === 'before'}}
+            <view is="cell" cls="{{#cell.cls}}">{{#cell.content}}</view>
+        {{/if}}
+    {{/each}}
+</cellsBefore:>
+
+<cellsAfterInput:>
+    {{each cells as #cell}}
+        {{if #cell.place === 'afterInput'}}
+            <view is="cell" cls="{{#cell.cls}}">{{#cell.content}}</view>
+        {{/if}}
+    {{/each}}
+</cellsAfterInput:>
+
+<cellsAfter:>
+    {{each cells as #cell}}
+        {{if #cell.place === 'after'}}
+            <view is="cell" cls="{{#cell.cls}}">{{#cell.content}}</view>
+        {{/if}}
+    {{/each}}
+</cellsAfter:>
