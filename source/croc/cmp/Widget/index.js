@@ -144,6 +144,9 @@ croc.Class.define('croc.cmp.Widget', {
          */
         'class': {},
         
+        defaults: {},
+        ddefaults: {},
+        
         /**
          * Метод сокрытия виджета при изменении свойства {@link #shown}.
          * @type {string}
@@ -565,8 +568,16 @@ croc.Class.define('croc.cmp.Widget', {
                 if (!options.section) {
                     model.set('section', this.getValueByAlias('#section') || parent.getDefaultItemsSection());
                 }
-                parent.__itemsHash[this.getIdentifier()] = this;
-                (parent.__sections[this.getSection()] || (parent.__sections[this.getSection()] = [])).push(this);
+                var section = options.section;
+                parent.__itemsHash[options.identifier] = this;
+                (parent.__sections[options.section] || (parent.__sections[options.section] = [])).push(this);
+                var defaults = parent._options.defaults && parent._options.defaults[options.section];
+                if (defaults) {
+                    _.merge(options, defaults);
+                }
+                if (parent._options.ddefaults && options.section === parent.getDefaultItemsSection()) {
+                    _.merge(options, parent._options.ddefaults);
+                }
             }
             
             if (!options.identifier) {
