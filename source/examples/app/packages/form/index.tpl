@@ -7,18 +7,18 @@
         {{client}}
         <widget is="croc.cmp.form.Form" labels="{{{position: 'left', size: '2'}}}" ddefaults="{{{size: '2'}}}">
             <passView is="body">
-                <view is="croc.cmp.form.Form:fieldset">
-                    <view is="croc.cmp.form.Form:row" size="3" label="first" hint="field hint">
+                <view is=":fieldset">
+                    <view is=":row" size="3" label="first" hint="field hint">
                         <widget is="croc.cmp.form.field.TextField" identifier="first"
                             validation="{{{required: true, integer: true}}}"></widget>
                     </view>
                     
-                    <view is="croc.cmp.form.Form:row" label="second" labelHint="label hint">
+                    <view is=":row" label="second" labelHint="label hint">
                         <widget is="croc.cmp.form.field.TextField" identifier="second" transformOnUpdate="digitsOnly"
-                            validation="{{{length: 4}}}" instantValue="{{_myValue}}"></widget>
+                            validation="{{{length: 4}}}" instantValue="{{_myValue}}"/>
                     </view>
                     
-                    <view is="croc.cmp.form.Form:row" label="third">
+                    <view is=":row" label="third">
                         <widget is="croc.cmp.form.field.TextField" identifier="third" password="{{true}}" masked="{{passField}}"
                             instantValue="{{_myValue}}"></widget>
                         <labelHint>
