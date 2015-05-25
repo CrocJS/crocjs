@@ -1,0 +1,6 @@
+<cls:><super/> type_area</cls:>
+
+<input:>
+    <textarea id="{{=getVar('fieldId')}}" name="{{identifier}}" readonly="{{readOnly}}" maxlength="{{maxLength}}"
+        class="b-input-field-h" disabled="{{disabled}}" tabindex="{{tabIndex}}" as="fieldElement">{{instantValue}}</textarea>
+</input:>

@@ -13,7 +13,7 @@
                             validation="{{{required: true, integer: true}}}"></widget>
                     </view>
                     
-                    <view is=":row" label="second" labelHint="label hint">
+                    <view is=":row" label="second" labelHint="digits only">
                         <widget is="croc.cmp.form.field.TextField" identifier="second" transformOnUpdate="digitsOnly"
                             validation="{{{length: 4}}}" instantValue="{{_myValue}}"/>
                     </view>
@@ -24,6 +24,17 @@
                         <labelHint>
                             <span class="g-pseudo" on-click="toggle($at(passField))"><span class="g-pseudo-h">password: {{if passField}}on{{else}}off{{/if}}</span></span>
                         </labelHint>
+                    </view>
+    
+                    <view is=":row" label="Password">
+                        <widget is="croc.cmp.form.field.PasswordField"/>
+                    </view>
+    
+                    <view is=":row" label="TextArea">
+                        <widget is="croc.cmp.form.field.TextArea" instantValue="{{textAreaContent}}"/>
+                        <hint>
+                            length is {{textAreaContent.length}}
+                        </hint>
                     </view>
                 </view>
             </passView>

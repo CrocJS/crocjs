@@ -1,5 +1,6 @@
 <index: arrays="cell/cells">
-    <tag is="{{desktop}}label{{else}}div{{/desktop}}" class="b-input set_default size_{{=size}}{{if focused}} state_focus{{/if}}{{if disabled}} state_disabled{{/if}}{{if align}} align_{{align}}{{/if}}{{croc.cmp.form.validation.MStandardValidatable.classByValid(valid_throttled)}}">
+    <tag is="{{desktop}}label{{else}}div{{/desktop}}"
+        class="b-input set_default size_{{=size}}{{if focused}} state_focus{{/if}}{{if disabled}} state_disabled{{/if}}{{if align}} align_{{align}}{{/if}}{{croc.cmp.form.validation.MStandardValidatable.classByValid(valid_throttled)}}">
         <div class="b-input-h">
             <virtualView is="cellsBefore"/>
             <div class="b-input-cell cell_field">
@@ -32,27 +33,3 @@
         {{@content}}
     </div>
 </cell:>
-
-<cellsBefore:>
-    {{each cells as #cell}}
-        {{if #cell.place === 'before'}}
-            <view is="cell" cls="{{#cell.cls}}">{{#cell.content}}</view>
-        {{/if}}
-    {{/each}}
-</cellsBefore:>
-
-<cellsAfterInput:>
-    {{each cells as #cell}}
-        {{if #cell.place === 'afterInput'}}
-            <view is="cell" cls="{{#cell.cls}}">{{#cell.content}}</view>
-        {{/if}}
-    {{/each}}
-</cellsAfterInput:>
-
-<cellsAfter:>
-    {{each cells as #cell}}
-        {{if #cell.place === 'after'}}
-            <view is="cell" cls="{{#cell.cls}}">{{#cell.content}}</view>
-        {{/if}}
-    {{/each}}
-</cellsAfter:>

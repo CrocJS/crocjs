@@ -1,7 +1,7 @@
-<cls:>{{super cls}} type_text</cls:>
+<cls:><super/> type_text</cls:>
 
 <input:>
-    <input type="{{if password && masked}}password{{else}}text{{/if}}" id="{{=getVar('fieldId')}}" name="{{identifier}}" value="{{instantValue}}"
+    <input id="{{=getVar('fieldId')}}" name="{{identifier}}" readonly="{{readOnly}}" maxlength="{{maxLength}}"
         class="b-input-field-h" disabled="{{disabled}}" tabindex="{{tabIndex}}" as="fieldElement"
-        maxlength="{{maxLength}}" readonly="{{readOnly}}">
+        type="{{if password && masked}}password{{else}}text{{/if}}" value="{{instantValue}}">
 </input:>

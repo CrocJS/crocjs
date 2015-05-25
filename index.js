@@ -74,7 +74,7 @@ function checkInheritedTemplate(views, name, namespace) {
                 match.registeredName = ns + name;
                 match.name = ns + (name || ':index');
                 match.namespace = ns;
-                match.options = {serverOnly: true};
+                match.options = _.defaults({serverOnly: true}, curView.options);
                 
                 if (!name) {
                     if (curView.template) {
@@ -107,6 +107,10 @@ Views.prototype.find = function(name, namespace) {
     var match;
     
     if (name.indexOf(':') !== -1) {
+        var symbolView = this.find(name.split(':')[0]);
+        if (symbolView && symbolView.options.widgetTemplate) {
+            namespace = null;
+        }
         match = oldViewsFind.call(this, name);
         if (!match) {
             match = checkInheritedTemplate(this, name, namespace);

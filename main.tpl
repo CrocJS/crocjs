@@ -7,12 +7,12 @@
             <meta name="viewport" content="width = device-width, initial-scale = 1.0">
             <script>document.documentElement.id = 'js';</script>
             
-            <view name="{{$render.prefix}}TitleElement"></view>
-            <view name="{{$render.prefix}}StylesLinks" optional></view>
-            <view name="{{$render.prefix}}Styles"></view>
-            <view name="{{$render.prefix}}Head" optional></view>
+            <view is="{{$render.prefix}}TitleElement"></view>
+            <view is="{{$render.prefix}}StylesLinks" optional></view>
+            <view is="{{$render.prefix}}Styles"></view>
+            <view is="{{$render.prefix}}Head" optional></view>
         </head>
-        <view name="{{$render.prefix}}BodyElement"></view>
+        <view is="{{$render.prefix}}BodyElement"></view>
     </html>
 </Page:>
 
@@ -21,6 +21,6 @@
         <script src="/d/js/hammer/hammer.js"></script>
     {{/!desktop}}-->
     __DERBY_BUNDLE__
-    <view name="{{$render.prefix}}AppScript"></view>
-    <view name="{{$render.prefix}}Tail"></view>
+    <view is="{{$render.prefix}}AppScript"></view>
+    <view is="{{$render.prefix}}Tail"></view>
 </BodyServer:>

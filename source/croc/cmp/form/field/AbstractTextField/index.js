@@ -54,6 +54,14 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
+         * Пометить поле как "только для чтения"
+         * @type {boolean}
+         */
+        readOnly: {
+            model: true
+        },
+        
+        /**
          * Размер поля
          * @type {string}
          */
@@ -100,6 +108,15 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
          */
         externalChangeReaction: {
             check: ['change', 'update']
+        },
+        
+        /**
+         * Максимальное кол-во знаков (аттрибут maxlength)
+         * Если указаны правила валидации length или lengthRange, то определяется автоматически
+         * @type {number}
+         */
+        maxLength: {
+            type: 'number'
         },
         
         /**
@@ -196,6 +213,14 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
                 this.setValue(this.getInstantValue());
             }
             croc.data.Helper.bind(this, 'value', this._model, 'instantValue');
+            
+            var validation = this._options.validation;
+            if (!this._options.maxLength && validation) {
+                var length = validation.length || (validation.lengthRange && validation.lengthRange[1]);
+                if (length) {
+                    this._options.maxLength = length;
+                }
+            }
         },
         
         /**

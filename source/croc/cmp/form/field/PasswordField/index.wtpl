@@ -1,0 +1,12 @@
+<cellsAfterInput:>
+    <super/>
+    <view is="cell">
+        <widget is="croc.cmp.form.Button" scheme="{{null}}" active="{{masked}}" style="cursor: pointer;"
+            title="{{if masked}}Показать пароль{{else}}Скрыть пароль{{/if}}"
+            on-click="toggle($at(masked))">
+            <span class="g-icon set_lock size_{{size === '1' || size === '2' ? 'small' : 'big'}} {{if masked}}mod_locked{{else}}mod_unlocked{{/if}}">
+                <span class="g-icon-h"><span class="g-icon-item"></span></span>
+            </span>
+        </widget>
+    </view>
+</cellsAfterInput:>

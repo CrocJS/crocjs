@@ -671,11 +671,15 @@ croc.define('croc.Class', {
         
         //mixins
         if (config.mixins) {
-            config.mixins.forEach(function(mixin) {
+            var callPreConstruct = function(mixin) {
+                if (mixin.baseclass && mixin.baseclass.config) {
+                    callPreConstruct(mixin.baseclass);
+                }
                 if (mixin.config.preConstruct) {
                     mixin.config.preConstruct.call(this, passedOptions);
                 }
-            }, this);
+            }.bind(this);
+            config.mixins.forEach(callPreConstruct);
         }
         
         //process options

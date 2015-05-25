@@ -12,14 +12,6 @@ croc.Class.define('croc.cmp.form.field.TextField', {
         masked: {
             value: true,
             model: true
-        },
-        
-        /**
-         * Пометить поле как "только для чтения"
-         * @type {boolean}
-         */
-        readOnly: {
-            model: true
         }
     },
     
@@ -31,20 +23,9 @@ croc.Class.define('croc.cmp.form.field.TextField', {
         disableAutocomplete: {},
         
         /**
-         * Максимальное кол-во знаков (аттрибут maxlength)
-         * Если указаны правила валидации length или lengthRange, то определяется автоматически
-         * @type {number}
-         */
-        maxLength: {
-            type: 'number'
-        },
-        
-        /**
          * Предназначено ли поле для ввода пароля
          * @type {boolean}
          */
         password: {}
-    },
-    
-    members: {}
+    }
 });

@@ -186,6 +186,8 @@ croc.Class.define('croc.cmp.Widget', {
             type: 'string'
         },
         
+        title: {},
+        
         /**
          * Дополнительные классы для корневого элемента
          * @type {Array.<string>}

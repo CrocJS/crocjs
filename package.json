@@ -1,11 +1,12 @@
 {
   "name": "crocodile-js",
-  "version": "0.0.2-alpha0090",
+  "version": "0.0.2-alpha0091",
   "description": "Crocodile js web-framework",
   "dependencies": {
     "autoprefixer-core": "^5.1.7",
     "bless": "^3.0.3",
     "browserify": "4.2.3",
+    "cheerio": "^0.19.0",
     "chmodr": "^0.1.0",
     "csswring": "^3.0.1",
     "express": "^4.10.4",
@@ -17,8 +18,8 @@
     "postcss-assets": "^2.1.0",
     "postcss-import": "^5.0.3",
     "postcss-url": "^3.0.0",
-    "serve-static": "^1.7.2",
     "q": "^1.1.2",
+    "serve-static": "^1.7.2",
     "source-map-concat": "^1.0.0",
     "source-map-dummy": "^1.0.0",
     "source-map-resolve": "^0.3.1",

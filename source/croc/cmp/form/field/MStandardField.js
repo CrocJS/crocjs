@@ -2,7 +2,7 @@
  * Реализация стандартных методов поля формы {@see croc.cmp.form.field.IField}
  */
 croc.Mixin.define('croc.cmp.form.field.MStandardField', {
-    include: croc.cmp.form.validation.MStandardValidatable,
+    extend: croc.cmp.form.validation.MStandardValidatable,
     
     events: {
         /**
