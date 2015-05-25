@@ -1,19 +1,20 @@
 
 /* b-font */
 .b-font {
-    line-height: 1.2em;
+    
     }
 
-/* Line-height normal */
-.b-font.lineheight_normal {
+
+/* Line-height decrease */
+.b-font.lineheight_decrease {
     line-height: 1.2em;
     }
-/* Line-height lengthy */
-.b-font.lineheight_lengthy {
-    line-height: 1.42em;
+/* Line-height normal */
+.b-font.lineheight_normal {
+    line-height: 1.4em;
     }
-/* Line-height super lengthy */
-.b-font.lineheight_suplengthy {
+/* Line-height increase */
+.b-font.lineheight_increase {
     line-height: 1.75em;
     }
 
