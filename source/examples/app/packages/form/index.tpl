@@ -10,7 +10,14 @@
                     <view is=":fieldset">
                         <view is=":row" size="3" label="first" hint="field hint">
                             <widget is="croc.cmp.form.field.TextField" identifier="first"
-                                validation="{{{required: true, integer: true}}}"></widget>
+                                validation="{{{required: true, integer: true}}}">
+                                <passView is="cellsBefore">
+                                    <view is=":cell" cls="cell_button">
+                                        <widget is="croc.cmp.form.Button" class="round_left place_input size_3" text="random"
+                                            on-click="setValue(_.sample(['123', '456', '789', '000']))"></widget>
+                                    </view>
+                                </passView>
+                            </widget>
                         </view>
                         
                         <view is=":row" label="second" labelHint="digits only">
@@ -36,7 +43,7 @@
                         
                         <view is=":row" label="&nbsp;" hint="{{if accepted}}ok!{{else}}put the tick{{/if}}" hintState="{{accepted}}">
                             <view is="croc.cmp.form.field.CheckBox:wrapper" text="Accept!">
-                                <widget is="croc.cmp.form.field.CheckBox" value="{{accepted}}"/>
+                                <widget is="croc.cmp.form.field.CheckBox" value="{{accepted}}" validation="{{{required: true}}}"/>
                             </view>
                         </view>
                     </view>
