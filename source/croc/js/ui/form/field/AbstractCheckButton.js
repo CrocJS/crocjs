@@ -2,6 +2,7 @@
  * Базовый класс для чекбокса и радиокнопки
  */
 croc.Class.define('croc.ui.form.field.AbstractCheckButton', {
+    type: 'abstract',
     extend: croc.ui.form.field.AbstractHtmlControl,
     implement: croc.ui.form.field.ISizable,
     include: croc.ui.form.field.MStandardSizable,
@@ -144,7 +145,7 @@ croc.Class.define('croc.ui.form.field.AbstractCheckButton', {
         _initWidget: function() {
             croc.ui.form.field.AbstractCheckButton.superclass._initWidget.call(this);
             
-            this.__setUpAbstractHtmlControlBehavior();
+            this.__setUpAbstractCheckButtonBehavior();
             
             //IE bug fix
             if (croc.util.Browser.isIE('<=10')) {
@@ -192,7 +193,7 @@ croc.Class.define('croc.ui.form.field.AbstractCheckButton', {
         /**
          * @private
          */
-        __setUpAbstractHtmlControlBehavior: function() {
+        __setUpAbstractCheckButtonBehavior: function() {
             var container = this.getElement().parents('label:last');
             if (!container.length) {
                 container = this.getElement();

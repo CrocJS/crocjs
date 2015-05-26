@@ -66,7 +66,7 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
          * @type {string}
          */
         size: {
-            type: 'string',
+            check: ['1', '2', '3','4', '5'],
             __setter: null,
             value: '1',
             model: true

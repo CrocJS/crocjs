@@ -36,7 +36,7 @@
         <div class="b-form-input pos_{{@position || labels.position}}">
             <div class="b-form-input-h">{{@content}}</div>
             {{if @hint}}
-                <div class="b-form-hint pos_bot g-font size_{{@hintSize || labels.hintSize}}{{if @hintState}} state_{{@hintState}}{{/if}}">{{@hint}}</div>
+                <div class="b-form-hint pos_bot g-font size_{{@hintSize || labels.hintSize}}{{if @hintState}} state_valid{{else if @hintState === false}} state_error{{/if}}">{{@hint}}</div>
             {{/if}}
         </div>
         {{=clearVar('fieldSize'),clearVar('fieldId')}}

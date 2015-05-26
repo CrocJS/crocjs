@@ -1,0 +1,16 @@
+<index:>
+    <label class="b-input-{{=getButtonType()}} size_{{view 'size', {size: size}}} scheme_{{scheme}}{{if value}} state_checked{{/if}}{{if active}} state_active{{/if}}{{if hover}} state_hover{{/if}}">
+        <input id="{{=getVar('fieldId')}}" name="{{identifier}}" disabled="{{disabled}}" tabindex="{{tabIndex}}" as="fieldElement"
+            type="{{=getButtonType()}}" value="{{permanentValue}}" checked="{{value}}"><span class="b-input-{{=getButtonType()}}-h"></span>
+    </label>
+</index:>
+
+<wrapper:>
+    <div class="b-form-check size_{{view 'size', {size: @size || getVar('fieldSize') || '1'}}} js-wrapper">
+        <label class="g-ui cursor_pointer">
+            {{@content}} {{@text}}
+        </label>
+    </div>
+</wrapper:>
+
+<size:>{{@size === '1' || @size === '2' ? '1' : '2'}}</size:>

@@ -2,6 +2,7 @@
  * Абстракция над html полем (select, textarea, input)
  */
 croc.Class.define('croc.cmp.form.field.AbstractHtmlControl', {
+    type: 'abstract',
     extend: croc.cmp.Widget,
     
     implement: [

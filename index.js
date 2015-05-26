@@ -108,7 +108,7 @@ Views.prototype.find = function(name, namespace) {
     
     if (name.indexOf(':') !== -1) {
         var symbolView = this.find(name.split(':')[0]);
-        if (symbolView && symbolView.options.widgetTemplate) {
+        if (symbolView && symbolView.options && symbolView.options.widgetTemplate) {
             namespace = null;
         }
         match = oldViewsFind.call(this, name);
