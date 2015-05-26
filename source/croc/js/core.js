@@ -94,13 +94,6 @@ croc.define('croc', {
         return this.__services;
     },
     
-    jqPlugin: function(plugin) {
-        if (!plugin.$$crocProcessed) {
-            plugin($);
-            plugin.$$crocProcessed = true;
-        }
-    },
-    
     /**
      * @param {derby.Application} app
      * @param controllers
@@ -178,15 +171,6 @@ croc.define('croc', {
                 this.publishOnDemandOnce('system.application.load');
             }.bind(this));
         }
-    },
-    
-    /**
-     * Лежит ли данная страница на active/dev/production (в следствии у неё есть доступ к контроллерам)
-     * If current page on remote server (then page has access to controllers)
-     * @returns {boolean}
-     */
-    isRemoteServer: function() {
-        return !!location.hostname.match(/(^|\.)sotmarket\.ru$/);
     },
     
     /**

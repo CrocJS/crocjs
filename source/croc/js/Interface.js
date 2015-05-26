@@ -2,7 +2,7 @@ croc.define('croc.Interface', {
     interfaces: {},
     
     /**
-     * Проверяет, что instance реализует интерфейс iface.
+     * Checks if the instance implements the interface
      * @param {Object} instance
      * @param {string} iface
      * @returns {boolean}
