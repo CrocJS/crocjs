@@ -62,17 +62,6 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Размер поля
-         * @type {string}
-         */
-        size: {
-            check: ['1', '2', '3','4', '5'],
-            __setter: null,
-            value: '1',
-            model: true
-        },
-        
-        /**
          * Функция трансформации значения поля после его смены
          * @type {function(*):*}
          */
@@ -157,6 +146,15 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         showReset: true,
         
         /**
+         * Field size
+         * @type {string}
+         */
+        size: {
+            check: ['1', '2', '3', '4', '5'],
+            value: '1'
+        },
+        
+        /**
          * Использовать проверку изменения значения по событию blur, вместо change
          * @type {boolean}
          */
@@ -164,6 +162,14 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
     },
     
     members: {
+        /**
+         * Field size
+         * @returns {string}
+         */
+        getSize: function() {
+            return this._options.size;
+        },
+        
         /**
          * Пробелы на концах значения являются важными и их нельзя обрезать
          * @returns {boolean}

@@ -4,14 +4,14 @@ croc.define('croc.Interface', {
     /**
      * Checks if the instance implements the interface
      * @param {Object} instance
-     * @param {string} iface
+     * @param {string|Object} iface
      * @returns {boolean}
      */
     check: function(instance, iface) {
         if (typeof instance === 'function') {
             throw new TypeError('instance должен быть инстанцией класса, но не функцией');
         }
-        return !!(instance && instance['$$iface-' + iface]);
+        return !!(instance && instance['$$iface-' + (typeof iface === 'string' ? iface : iface.name)]);
     },
     
     define: function(name, config) {

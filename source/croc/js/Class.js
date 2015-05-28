@@ -77,14 +77,11 @@ croc.define('croc.Class', {
             else {
                 if (typeof checkType === 'string' && !croc.Class.__STANDARD_TYPES[checkType]) {
                     checkType = croc.Class.getClass(checkType);
-                    if (!checkType) {
-                        checkType = {name: isOptions ? type.type : type, $$iface: true};
-                    }
                     if (isOptions) {
                         type.type = checkType;
                     }
                 }
-                if (typeof checkType === 'object' && checkType.$$iface ? !croc.Interface.check(value, checkType.name) :
+                if (checkType && checkType.$$iface ? !croc.Interface.check(value, checkType) :
                         checkType === 'integer' ? typeof value !== 'number' || value % 1 === 0 :
                             checkType === 'array' ? !Array.isArray(value) :
                                 typeof checkType === 'string' ? typeof value !== checkType :
@@ -407,13 +404,14 @@ croc.define('croc.Class', {
     
     /**
      * Returns the class by class name
-     * @param {string} name
-     * @returns {Function}
+     * @param {string|Function|Object} name
+     * @returns {Function|Object}
      */
     getClass: function(name) {
-        return (croc.Class && croc.Class.classes[name]) ||
-            (croc.Interface && croc.Interface.interfaces[name]) ||
-            croc.utils.objAccess(name);
+        return typeof name !== 'string' ? name :
+        (croc.Class && croc.Class.classes[name]) ||
+        (croc.Interface && croc.Interface.interfaces[name]) ||
+        croc.utils.objAccess(name);
     },
     
     inherit: function(Cls, baseCls) {

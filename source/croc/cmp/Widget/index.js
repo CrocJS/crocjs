@@ -139,6 +139,20 @@ croc.Class.define('croc.cmp.Widget', {
         $controller: {},
         
         /**
+         * Add widget element attributes
+         */
+        attrs: {},
+        
+        /**
+         * Expected type of child widget associated with section name
+         * @type {Object.<string, Function|Object|string|Array>}
+         */
+        checkChild: {
+            extend: true,
+            value: {}
+        },
+        
+        /**
          * Дополнительные классы для блока через пробел
          * @type {string}
          */
@@ -185,8 +199,6 @@ croc.Class.define('croc.cmp.Widget', {
         style: {
             type: 'string'
         },
-        
-        title: {},
         
         /**
          * Дополнительные классы для корневого элемента
@@ -273,19 +285,12 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         clearVar: function(name) {
-            delete vars[name];
-        },
-        
-        /**
-         * Мета-данные виджета
-         * @returns {Object}
-         */
-        getMeta: function() {
-            return this._options.meta;
-        },
-        
-        getVar: function(name) {
-            return vars[name];
+            if (vars[name]) {
+                vars[name].pop();
+                if (!vars[name].length) {
+                    delete vars[name];
+                }
+            }
         },
         
         /**
@@ -312,6 +317,18 @@ croc.Class.define('croc.cmp.Widget', {
                 }
                 return id;
             }
+        },
+        
+        /**
+         * Мета-данные виджета
+         * @returns {Object}
+         */
+        getMeta: function() {
+            return this._options.meta;
+        },
+        
+        getVar: function(name) {
+            return _.last(vars[name]);
         },
         
         /**
@@ -455,7 +472,10 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         setVar: function(name, value) {
-            vars[name] = value;
+            if (!vars[name]) {
+                vars[name] = [];
+            }
+            vars[name].push(value);
         },
         
         /**
@@ -571,6 +591,13 @@ croc.Class.define('croc.cmp.Widget', {
                     model.set('section', this.getValueByAlias('#section') || parent.getDefaultItemsSection());
                 }
                 var section = options.section;
+                
+                var check = parent._options.checkChild[section];
+                if (check && !croc.Class.checkType(check, this, false)) {
+                    throw new Error('Unexpected child ("' + this.constructor.classname + '") passed to section "' +
+                    section + '" of widget "' + parent.constructor.classname + '"');
+                }
+                
                 parent.__itemsHash[options.identifier] = this;
                 (parent.__sections[options.section] || (parent.__sections[options.section] = [])).push(this);
                 var defaults = parent._options.defaults && parent._options.defaults[options.section];

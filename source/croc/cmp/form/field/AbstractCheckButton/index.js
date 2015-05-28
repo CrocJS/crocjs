@@ -18,18 +18,6 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckButton', {
         },
         
         /**
-         * Field size
-         * '1' and '2' values map to size_1, others map to size_2
-         * @type {string}
-         */
-        size: {
-            check: ['1', '2', '3','4', '5'],
-            __setter: null,
-            value: '1',
-            model: true
-        },
-        
-        /**
          * @type {boolean}
          */
         value: {
@@ -56,10 +44,28 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckButton', {
          */
         permanentValue: {
             type: 'string'
+        },
+        
+        /**
+         * Field size
+         * '1' and '2' values map to size_1, others map to size_2
+         * @type {string}
+         */
+        size: {
+            check: ['1', '2', '3', '4', '5'],
+            value: '1'
         }
     },
     
     members: {
+        /**
+         * Field size
+         * @returns {string}
+         */
+        getSize: function() {
+            return this._options.size;
+        },
+        
         /**
          * type of check button
          * @returns {string}

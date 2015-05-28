@@ -93,6 +93,17 @@ croc.Class.define('croc.cmp.form.Form', {
         action: {},
         
         /**
+         * Expected type of child widget associated with section name
+         * @type {Object.<string, Function|Object|string|Array>}
+         */
+        checkChild: {
+            value: {
+                fields: 'croc.cmp.form.field.IField',
+                buttons: 'croc.cmp.form.Button'
+            }
+        },
+        
+        /**
          * Значения, которые следует установить полям при их добавлении
          * @type {Object.<string, *>}
          */
