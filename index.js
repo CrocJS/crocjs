@@ -4,6 +4,7 @@ var App = require('derby/lib/App');
 var Derby = require('derby/lib/Derby');
 var derbyTemplates = require('derby/node_modules/derby-templates');
 var derby = module.exports = require('derby');
+var createFactory = require('derby/lib/components').createFactory;
 
 var stubWidget;
 derby.getStubWidget = function() {
@@ -75,6 +76,9 @@ function checkInheritedTemplate(views, name, namespace) {
                 match.name = ns + (name || ':index');
                 match.namespace = ns;
                 match.options = _.defaults({serverOnly: true}, curView.options);
+                if (!name) {
+                    match.componentFactory = createFactory(Cls);
+                }
                 
                 if (!name) {
                     if (curView.template) {

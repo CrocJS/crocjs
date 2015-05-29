@@ -85,7 +85,7 @@ croc.define('croc.Class', {
                         checkType === 'integer' ? typeof value !== 'number' || value % 1 === 0 :
                             checkType === 'array' ? !Array.isArray(value) :
                                 typeof checkType === 'string' ? typeof value !== checkType :
-                                    !(checkType === Element ? _.isElement(value) : value instanceof checkType)) {
+                                    !(croc.isClient && checkType === Element ? _.isElement(value) : value instanceof checkType)) {
                     return throwErrorFn('Требуемый тип: ' + (checkType.classname || checkType.name || checkType));
                 }
             }

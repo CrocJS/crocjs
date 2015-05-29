@@ -180,7 +180,8 @@ croc.Class.define('croc.cmp.form.Form', {
         this.on('initChild', function(widget) {
             if (widget.getSection() === 'fields') {
                 var size = this.getVar('fieldSize');
-                if (size && croc.Interface.check(widget, 'croc.cmp.form.field.ISizable')) {
+                if (size && croc.Interface.check(widget, 'croc.cmp.form.field.ISizable') &&
+                    !_.contains(widget._passedOptions, 'size')) {
                     widget._model.set('size', size);
                 }
             }

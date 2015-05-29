@@ -311,7 +311,7 @@ croc.Class.define('croc.cmp.Widget', {
                 if (!this.__lastUniqueId) {
                     this.__lastUniqueId = 0;
                 }
-                var id = (prefix || '') + ++this.__lastUniqueId;
+                var id = (prefix || '') + (++this.__lastUniqueId);
                 if (context) {
                     context.$$generatedId = id;
                 }
@@ -575,6 +575,7 @@ croc.Class.define('croc.cmp.Widget', {
         init: function() {
             var model = this._model = this.model;
             var options = this.$$optionsSource = model.data;
+            var passedOptions = this._passedOptions = Object.keys(options);
             
             croc.Class.deferredConstruction(this, options);
             for (var key in model.$$attrsRefs) {
@@ -600,13 +601,18 @@ croc.Class.define('croc.cmp.Widget', {
                 
                 parent.__itemsHash[options.identifier] = this;
                 (parent.__sections[options.section] || (parent.__sections[options.section] = [])).push(this);
-                var defaults = parent._options.defaults && parent._options.defaults[options.section];
-                if (defaults) {
-                    _.merge(options, defaults);
-                }
-                if (parent._options.ddefaults && options.section === parent.getDefaultItemsSection()) {
-                    _.merge(options, parent._options.ddefaults);
-                }
+                
+                var assignDefaultOptions = function(defaults) {
+                    if (defaults) {
+                        _.forOwn(defaults, function(value, key) {
+                            if (passedOptions.indexOf(key) === -1) {
+                                options[key] = value;
+                            }
+                        });
+                    }
+                };
+                assignDefaultOptions(parent._options.defaults && parent._options.defaults[options.section]);
+                assignDefaultOptions(options.section === parent.getDefaultItemsSection() && parent._options.ddefaults);
             }
             
             if (!options.identifier) {

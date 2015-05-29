@@ -1,0 +1,19 @@
+<index: arrays="item/items">
+    <div class="b-form-group dir_{{inline ? 'ltr' : 'ttb'}} type_{{type}}">
+        {{=setVar('fieldSize', size),setVar('fieldId', null)}}
+        {{if viewPassed('items')}}
+            <virtualView is="items"/>
+        {{else}}
+            {{each @items as #item}}
+                <view is="item" text="{{#item.content}}">
+                    <widget is="{{getItemClass().classname}}" permanentValue="{{#item.value}}" value="{{#item.checked}}"/>
+                </view>
+            {{/each}}
+        {{/if}}
+        {{=clearVar('fieldSize'),clearVar('fieldId')}}
+    </div>
+</index:>
+
+<item:>
+    <view is="croc.cmp.form.field.AbstractCheckButton:wrapper" size="{{@size}}" text="{{@text}}">{{@content}}</view>
+</item:>
