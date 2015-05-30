@@ -584,10 +584,19 @@ croc.Class.define('croc.cmp.Widget', {
                     model.root.set(rootKey, options[key]);
                 }
             }
-            
+    
+    
             var parent = this.parent;
             if (parent && parent instanceof croc.cmp.Widget) {
                 this.__parent = parent;
+            }
+            
+            if (!options.identifier) {
+                model.set('identifier', this.generateUniqueId());
+            }
+            model.set('self', this.constructor.classname);
+            
+            if (this.__parent) {
                 if (!options.section) {
                     model.set('section', this.getValueByAlias('#section') || parent.getDefaultItemsSection());
                 }
@@ -600,6 +609,10 @@ croc.Class.define('croc.cmp.Widget', {
                 }
                 
                 parent.__itemsHash[options.identifier] = this;
+                this._model.on('change', 'identifier', function(value, old) {
+                    delete parent.__itemsHash[old];
+                    parent.__itemsHash[value] = this;
+                }.bind(this));
                 (parent.__sections[options.section] || (parent.__sections[options.section] = [])).push(this);
                 
                 var assignDefaultOptions = function(defaults) {
@@ -614,11 +627,6 @@ croc.Class.define('croc.cmp.Widget', {
                 assignDefaultOptions(parent._options.defaults && parent._options.defaults[options.section]);
                 assignDefaultOptions(options.section === parent.getDefaultItemsSection() && parent._options.ddefaults);
             }
-            
-            if (!options.identifier) {
-                model.set('identifier', this.generateUniqueId());
-            }
-            model.set('self', this.constructor.classname);
             
             this._initModel();
             this.fireEvent('model', this._model);
@@ -686,13 +694,15 @@ croc.Class.define('croc.cmp.Widget', {
      * @param [Cls]
      */
     createProperty: function(name, prop, dest, Cls) {
-        if (!prop || !prop.model) {
-            return croc.Class.createProperty.apply(croc.Class, arguments);
+        if (prop) {
+            prop.name = name;
+            if (prop.inherit) {
+                croc.Class._inheritProperty(prop, Cls);
+            }
         }
         
-        prop.name = name;
-        if (prop.inherit) {
-            croc.Class._inheritProperty(prop, Cls);
+        if (!prop || !prop.model) {
+            return croc.Class.createProperty.apply(croc.Class, arguments);
         }
         
         var ucfPropName = croc.utils.strUcFirst(name);

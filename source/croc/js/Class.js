@@ -443,6 +443,7 @@ croc.define('croc.Class', {
         if (baseProp) {
             _.defaults(prop, baseProp);
         }
+        delete prop.inherit;
     },
     
     /**

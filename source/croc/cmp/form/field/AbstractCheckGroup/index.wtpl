@@ -6,7 +6,7 @@
         {{else}}
             {{each @items as #item}}
                 <view is="item" text="{{#item.content}}">
-                    <widget is="{{getItemClass().classname}}" permanentValue="{{#item.value}}" value="{{#item.checked}}"/>
+                    <widget is="{{getItemClass().classname}}" permanentValue="{{#item.value}}" value="{{#item.checked}}" identifier="{{#item.name}}"/>
                 </view>
             {{/each}}
         {{/if}}

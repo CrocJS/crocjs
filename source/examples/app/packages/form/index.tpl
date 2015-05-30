@@ -68,6 +68,22 @@
                         <widget is="croc.cmp.form.field.RadioButtonsGroup" inline="{{true}}" value="{{radioValue}}"
                             items="{{[{value: '1', content: 'one'}, {value: '2', content: 'two'}, {value: '3', content: 'three'}]}}"/>
                     </view>
+    
+                    <view is=":row" label="CheckBoxes" hint="{{JSON.stringify(checkValue)}}">
+                        <widget is="croc.cmp.form.field.CheckBoxesGroup" value="{{checkValue}}">
+                            <item name="1">one</item>
+                            <item name="2" checked>two</item>
+                            <item name="3">three</item>
+                        </widget>
+                    </view>
+    
+                    <view is=":row" label="CheckBoxes" hint="{{JSON.stringify(checkValue2)}}">
+                        <widget is="croc.cmp.form.field.CheckBoxesGroup" value="{{checkValue2}}" arrayValues="{{true}}">
+                            <item value="1">one</item>
+                            <item value="2" checked>two</item>
+                            <item value="3">three</item>
+                        </widget>
+                    </view>
                     
                     <view is=":row" label="&nbsp;" hint="{{if accepted}}ok!{{else}}put the tick{{/if}}" hintState="{{accepted}}">
                         <view is="croc.cmp.form.field.CheckBox:wrapper" text="Accept!">
