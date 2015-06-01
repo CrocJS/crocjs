@@ -158,8 +158,14 @@ croc.Class.define('croc.cmp.Widget', {
          */
         'class': {},
         
-        defaults: {},
-        ddefaults: {},
+        defaults: {
+            deepExtend: true,
+            value: {}
+        },
+        ddefaults: {
+            deepExtend: true,
+            value: {}
+        },
         
         /**
          * Метод сокрытия виджета при изменении свойства {@link #shown}.
@@ -181,7 +187,6 @@ croc.Class.define('croc.cmp.Widget', {
          * @type {object}
          */
         meta: {
-            type: 'object',
             value: {},
             deepExtend: true
         },
@@ -207,7 +212,9 @@ croc.Class.define('croc.cmp.Widget', {
         _addClasses: {
             type: 'array',
             concat: true
-        }
+        },
+        
+        _wrapper: {}
     },
     
     construct: function(options) {
@@ -337,7 +344,7 @@ croc.Class.define('croc.cmp.Widget', {
          * @protected
          */
         getDefaultItemsSection: function() {
-            return 'items';
+            return this._options._wrapper ? 'wrapped' : 'items';
         },
         
         /**
@@ -345,7 +352,8 @@ croc.Class.define('croc.cmp.Widget', {
          * @returns {jQuery}
          */
         getElement: function() {
-            return this.__elementRaw && (this.__el || (this.__el = $(this.__elementRaw)));
+            return this._wrapped ? this._wrapped.getElement() :
+            this.__elementRaw && (this.__el || (this.__el = $(this.__elementRaw)));
         },
         
         /**
@@ -427,8 +435,8 @@ croc.Class.define('croc.cmp.Widget', {
          */
         getWrapperElement: function() {
             if (!this.__wrapperEl) {
-                this.__wrapperEl = this.getElement().parent().closest('.js-wrapper,.js-widget');
-                if (!this.__wrapperEl.hasClass('.js-wrapper')) {
+                this.__wrapperEl = this.getElement().parent().closest('.js-wrapper');
+                if (!this.__wrapperEl.length) {
                     this.__wrapperEl = this.getElement();
                 }
             }
@@ -584,8 +592,7 @@ croc.Class.define('croc.cmp.Widget', {
                     model.root.set(rootKey, options[key]);
                 }
             }
-    
-    
+            
             var parent = this.parent;
             if (parent && parent instanceof croc.cmp.Widget) {
                 this.__parent = parent;
@@ -626,6 +633,10 @@ croc.Class.define('croc.cmp.Widget', {
                 };
                 assignDefaultOptions(parent._options.defaults && parent._options.defaults[options.section]);
                 assignDefaultOptions(options.section === parent.getDefaultItemsSection() && parent._options.ddefaults);
+                
+                if (parent._options._wrapper && section === 'wrapped') {
+                    parent._wrapped = this;
+                }
             }
             
             this._initModel();

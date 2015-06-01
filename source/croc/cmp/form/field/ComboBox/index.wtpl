@@ -1,0 +1,3 @@
+<index:>
+    <widget is="croc.cmp.form.field.TextField" class="filtering_on" attrs="{{{'data-ok': 'notok'}}}"/>
+</index:>
