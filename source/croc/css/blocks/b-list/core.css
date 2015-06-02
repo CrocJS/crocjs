@@ -1,0 +1,59 @@
+
+/* list */
+.b-list {
+    list-style: none;
+    margin-bottom: 1.4em;
+    }
+    /* Spaced 1 */
+    .b-list.spaced_1 li,
+    .b-list.spaced_1 dd {
+        margin-bottom: .3em;
+        }
+    /* Spaced 2 */
+    .b-list.spaced_2 li,
+    .b-list.spaced_2 dd {
+        margin-bottom: .5em;
+        }
+
+/* Type ordered */
+.b-list.type_ordered {
+    
+    }
+    .b-list.type_ordered > li {
+        list-style: decimal;
+        margin-left: 3em;
+        }
+/* Type unordered */
+.b-list.type_unordered {
+    
+    }
+    .b-list.type_unordered > li {
+        list-style: disc;
+        margin-left: 2em;
+        }
+    /* Style mdash */
+    .b-list.type_unordered.style_mdash > li {
+        list-style: none;
+        }
+        .b-list.type_unordered.style_mdash > li:before {
+            content: '\2014';
+            position: absolute;
+            margin: -.1em 0 0 -1.6em;
+            }
+/* Type definition */
+.b-list.type_definition {
+    
+    }
+    .b-list.type_definition dt {
+        display: block;
+        font-weight: bold;
+        }
+    .b-list.type_definition dd {
+        display: block;
+        }
+
+
+
+
+
+

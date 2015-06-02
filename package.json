@@ -1,6 +1,6 @@
 {
   "name": "crocodile-js",
-  "version": "0.0.2-alpha0095",
+  "version": "0.0.2-alpha0096",
   "description": "Crocodile js web-framework",
   "dependencies": {
     "autoprefixer-core": "^5.1.7",
