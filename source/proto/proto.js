@@ -1,0 +1,1 @@
+require('../../proto')(__dirname + '/../../croc.js', __dirname);
