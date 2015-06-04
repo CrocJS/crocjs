@@ -40,6 +40,12 @@
         display: inline;
         margin-left: 8px;
         }
+    /* android fix */
+    .android-stock .b-form-group.dir_ltr .b-form-check:first-child .b-input-radio.size_1 .b-input-radio-h,
+    .android-stock .b-form-group.dir_ltr .b-form-check:first-child .b-input-check.size_1 .b-input-check-h {
+        margin-left: 28px;
+        margin-top: -2px;
+        }
 
 
 
