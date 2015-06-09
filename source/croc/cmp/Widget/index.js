@@ -8,7 +8,7 @@ _.defaults(Component.prototype, oldComponentPrototype);
 Component.config = croc.Object.config;
 
 /**
- * Базовый класс для всех виджетов, которые имеют привязку к одному единственному элементу
+ * Test Базовый класс для всех виджетов, которые имеют привязку к одному единственному элементу
  */
 croc.Class.define('croc.cmp.Widget', {
     extend: Component,
