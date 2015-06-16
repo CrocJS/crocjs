@@ -28,6 +28,7 @@ App.prototype._init = function() {
     this.use(require('./lib/compilers'));
     hooks.appPlugins.forEach(function(x) { this.use(x); }, this);
     this.loadViews(__dirname + '/main.tpl', null, {serverOnly: true});
+    this.views.register('BodyBottom', '{{if _page.client}}{{each _page.bubbles as #bubble}}<view is="{{#bubble.class}}" _instance="{{#bubble.instance}}"/>{{/each}}{{/if}}');
 };
 
 ['render', 'renderStatic'].forEach(function(method) {

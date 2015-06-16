@@ -33,7 +33,7 @@ croc.Class.define('croc.ui.form.field.TextArea', {
             }
         }, this);
         
-        croc.ui.form.field.TextArea.superclass.__construct__.apply(this, arguments);
+        croc.ui.form.field.TextArea.superclass.construct.apply(this, arguments);
     },
     
     members: {

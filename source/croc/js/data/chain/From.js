@@ -14,6 +14,9 @@ croc.Class.define('croc.data.chain.From', {
     },
     
     options: {
+        /**
+         * @type {Array|Derby.Model}
+         */
         source: {}
     },
     construct: function(options) {

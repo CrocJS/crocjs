@@ -390,7 +390,7 @@ croc.Class.define('croc.ui.Widget', {
     },
     
     construct: function(options) {
-        croc.ui.Widget.superclass.__construct__.apply(this, arguments);
+        croc.ui.Widget.superclass.construct.apply(this, arguments);
         
         if (this.getAutoResize()) {
             this.__applyAutoResize(this.getAutoResize());

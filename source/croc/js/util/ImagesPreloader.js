@@ -82,7 +82,7 @@ croc.Class.define('croc.util.ImagesPreloader', {
         this.__maxLoadTime = options.maxLoadTime;
         this.__notLoaded = {};
         
-        croc.util.ImagesPreloader.superclass.__construct__.apply(this, arguments);
+        croc.util.ImagesPreloader.superclass.construct.apply(this, arguments);
     },
     
     members: {

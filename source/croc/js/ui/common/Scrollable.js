@@ -115,7 +115,7 @@ croc.Class.define('croc.ui.common.Scrollable', {
     },
     
     construct: function(options) {
-        croc.ui.common.Scrollable.superclass.__construct__.apply(this, arguments);
+        croc.ui.common.Scrollable.superclass.construct.apply(this, arguments);
         
         this.__el = options.el;
         this.__scrollableEl = this.__el.find('.g-scrollable-h');

@@ -88,7 +88,7 @@ croc.Class.define('croc.ui.Container', {
             options.items = {};
         }
         
-        croc.ui.Container.superclass.__construct__.apply(this, arguments);
+        croc.ui.Container.superclass.construct.apply(this, arguments);
     },
     
     destruct: function() {

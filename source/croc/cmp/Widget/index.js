@@ -134,7 +134,6 @@ croc.Class.define('croc.cmp.Widget', {
     
     options: {
         content: {},
-        elid: {},
         id: {},
         $controller: {},
         
@@ -214,13 +213,16 @@ croc.Class.define('croc.cmp.Widget', {
             concat: true
         },
         
+        /**
+         * todo remove this option
+         */
         _wrapper: {}
     },
     
     construct: function(options) {
         this.__itemsHash = {};
         this.__sections = {};
-        croc.Object.prototype.__construct__.call(this, options);
+        croc.Object.prototype.construct.call(this, options);
     },
     
     destruct: function() {
@@ -475,6 +477,22 @@ croc.Class.define('croc.cmp.Widget', {
             }
         },
         
+        onWrapped: function(callback, context) {
+            if (this._wrapped) {
+                callback.call(context || global, this._wrapped);
+                return _.noop;
+            }
+            else {
+                var listener = this.on('initChild', function(item) {
+                    if (item.getSection() === 'wrapped') {
+                        callback.call(context || global, item);
+                        listener();
+                    }
+                });
+                return listener;
+            }
+        },
+        
         resolveVirtualView: function(name) {
             return this._options['_pass_view_' + name] || (this.constructor.classname + ':' + name);
         },
@@ -521,6 +539,7 @@ croc.Class.define('croc.cmp.Widget', {
             this.listenProperty('shown', function(value) {
                 if (this._options.hideMethod === 'detach') {
                     if (!value) {
+                        this.page.context.flush();
                         this.setDetachParent(el[0].parentNode);
                         this.__previousSibling = el[0].previousSibling;
                         el.detach();
@@ -581,8 +600,12 @@ croc.Class.define('croc.cmp.Widget', {
          * @private
          */
         init: function() {
+            if (this.__inited) {
+                return;
+            }
+            
             var model = this._model = this.model;
-            var options = this.$$optionsSource = model.data;
+            var options = this.$$optionsSource = _.assign(model.data, this._options);
             var passedOptions = this._passedOptions = Object.keys(options);
             
             croc.Class.deferredConstruction(this, options);
@@ -594,33 +617,13 @@ croc.Class.define('croc.cmp.Widget', {
             }
             
             var parent = this.parent;
+            var section;
             if (parent && parent instanceof croc.cmp.Widget) {
                 this.__parent = parent;
-            }
-            
-            if (!options.identifier) {
-                model.set('identifier', this.generateUniqueId());
-            }
-            model.set('self', this.constructor.classname);
-            
-            if (this.__parent) {
                 if (!options.section) {
                     model.set('section', this.getValueByAlias('#section') || parent.getDefaultItemsSection());
                 }
-                var section = options.section;
-                
-                var check = parent._options.checkChild[section];
-                if (check && !croc.Class.checkType(check, this, false)) {
-                    throw new Error('Unexpected child ("' + this.constructor.classname + '") passed to section "' +
-                    section + '" of widget "' + parent.constructor.classname + '"');
-                }
-                
-                parent.__itemsHash[options.identifier] = this;
-                this._model.on('change', 'identifier', function(value, old) {
-                    delete parent.__itemsHash[old];
-                    parent.__itemsHash[value] = this;
-                }.bind(this));
-                (parent.__sections[options.section] || (parent.__sections[options.section] = [])).push(this);
+                section = options.section;
                 
                 var assignDefaultOptions = function(defaults) {
                     if (defaults) {
@@ -633,6 +636,26 @@ croc.Class.define('croc.cmp.Widget', {
                 };
                 assignDefaultOptions(parent._options.defaults && parent._options.defaults[options.section]);
                 assignDefaultOptions(options.section === parent.getDefaultItemsSection() && parent._options.ddefaults);
+            }
+            
+            if (!options.identifier) {
+                model.set('identifier', this.generateUniqueId());
+            }
+            model.set('self', this.constructor.classname);
+            
+            if (this.__parent) {
+                var check = parent._options.checkChild[section];
+                if (check && !croc.Class.checkType(check, this, false)) {
+                    throw new Error('Unexpected child ("' + this.constructor.classname + '") passed to section "' +
+                    section + '" of widget "' + parent.constructor.classname + '"');
+                }
+                
+                parent.__itemsHash[options.identifier] = this;
+                this._model.on('change', 'identifier', function(value, old) {
+                    delete parent.__itemsHash[old];
+                    parent.__itemsHash[value] = this;
+                }.bind(this));
+                (parent.__sections[options.section] || (parent.__sections[options.section] = [])).push(this);
                 
                 if (parent._options._wrapper && section === 'wrapped') {
                     parent._wrapped = this;
@@ -670,6 +693,8 @@ croc.Class.define('croc.cmp.Widget', {
                     }
                 }
             }
+            
+            this.__inited = true;
         },
         
         /**
@@ -732,7 +757,7 @@ croc.Class.define('croc.cmp.Widget', {
         var setterPrefix = ('__setter' in prop && '__') || ('_setter' in prop && '_') || '';
         prop.setterName = setterPrefix + 'set' + ucfPropName;
         var setter = prop[setterPrefix + 'setter'];
-        dest[prop.setterName] = function(value) {
+        dest[prop.setterName] = function(value, internal) {
             var old = this._options[name];
             if (prop.transform) {
                 value = (typeof prop.transform === 'function' ? prop.transform : this[prop.transform])
@@ -744,6 +769,9 @@ croc.Class.define('croc.cmp.Widget', {
                 }
                 if (setter) {
                     setter.call(this, value, old);
+                }
+                else if (internal) {
+                    this.model.pass(internal).set(name, value);
                 }
                 else {
                     this.model.set(name, value);

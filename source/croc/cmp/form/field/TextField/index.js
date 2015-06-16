@@ -17,6 +17,12 @@ croc.Class.define('croc.cmp.form.field.TextField', {
     
     options: {
         /**
+         * css class type_... for root DOM-element
+         * @type {string}
+         */
+        cssType: 'text',
+        
+        /**
          * Отключить собственный автокомплит поля. true - при suggestion !== null
          * @type {boolean}
          */

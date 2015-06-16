@@ -8,7 +8,7 @@ croc.Class.define('croc.data.Model', {
     },
     
     construct: function(options) {
-        croc.data.Model.superclass.__construct__.apply(this, arguments);
+        croc.data.Model.superclass.construct.apply(this, arguments);
         _.assign(this, options.data);
         this._model = options.model.at(options.property);
         this._model.set(this);

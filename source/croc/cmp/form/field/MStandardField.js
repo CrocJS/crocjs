@@ -17,7 +17,7 @@ croc.Mixin.define('croc.cmp.form.field.MStandardField', {
          * значение поля
          * @type {*}
          */
-        value: null
+        value: {}
     },
     
     members: {

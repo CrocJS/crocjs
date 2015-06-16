@@ -1,3 +1,38 @@
 <index:>
-    <widget is="croc.cmp.form.field.TextField" class="filtering_on" attrs="{{{'data-ok': 'notok'}}}"/>
+    <widget is="croc.cmp.form.field.TextField"
+        class="role_{{mode}} filtering_{{enableFiltering ? 'on' : 'off'}}{{if multiselect}} addbutton_{{addButton ? 'on' : 'off'}}{{/if}}{{if !addingValues}} adding_false{{/if}}{{if rawState}} state_raw{{/if}}"
+        _identifier="{{identifier}}"
+        _plainValue="{{plainValue}}"
+        _multiselect="{{multiselect}}"
+        _select="{{select}}"
+        _addButton="{{addButton}}"
+        _showAddButton="{{showAddButton}}"
+        _enableFiltering="{{enableFiltering}}"
+        _selectedItem="{{selectedItem}}"
+        _value="{{value}}">
+        <passView is="addition">
+            <virtualView is="addition" controller="p"/>
+            {{if !_multiselect}}
+                <input type="hidden" class="b-input-combo-hidden" name="{{_identifier}}" value="{{_plainValue}}">
+            {{/if}}
+        </passView>
+        <passView is="input">
+            {{if _multiselect}}
+                {{each _value as #item}}
+                    <span class="b-input-combo-button view_added{{if #item === _selectedItem}} state_active{{/if}}"
+                        on-click="pv.selectItem($event, #item)"
+                        on-mousedown="pv.multiItemMouseDown($event)">
+                        {{#item.text}} <span class="b-input-combo-button-action" on-click="pv.removeItem(#item)"></span>{c}
+                        <input type="hidden" name="{{_identifier && (_identifier + '[]')}}" value="{{#item.value}}">
+                    </span>
+                {{/each}}
+            {{else if _select && !_enableFiltering}}
+                <div class="b-input-field-h" as="pv.fakeInputElement">{{instantValue}}</div>
+            {{/if}}
+            {{if _showAddButton}}
+                <span class="b-input-combo-button view_add" as="pv.addButtonElement"><span class="b-input-combo-button-action"></span> добавить</span>
+            {{/if}}
+            <super/>
+        </passView>
+    </widget>
 </index:>

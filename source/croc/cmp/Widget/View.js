@@ -8,9 +8,9 @@ croc.Class.define('croc.cmp.Widget.View', {
     
     construct: function(options) {
         this._model = options.model;
-        this._options = options.model.data;
+        this._data = options.model.data;
         this._widget = options.widget;
-        croc.cmp.Widget.View.superclass.__construct__.apply(this, arguments);
+        croc.cmp.Widget.View.superclass.construct.apply(this, arguments);
     },
     
     members: {

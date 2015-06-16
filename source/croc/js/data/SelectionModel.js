@@ -16,7 +16,7 @@ croc.Class.define('croc.data.SelectionModel', {
     },
     
     construct: function(options) {
-        croc.data.SelectionModel.superclass.__construct__.apply(this, arguments);
+        croc.data.SelectionModel.superclass.construct.apply(this, arguments);
         
         /**
          * @type {croc.data.IObservableList}

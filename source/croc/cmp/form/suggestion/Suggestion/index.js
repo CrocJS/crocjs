@@ -2,7 +2,7 @@
  * Подсказки для поля ввода (могут работать и без него)
  * todo сделать $$label независимым от scope
  */
-croc.Class.define('croc.cmp.form.suggestion.Default', {
+croc.Class.define('croc.cmp.form.suggestion.Suggestion', {
     extend: croc.cmp.list.Bubble,
     
     events: {
@@ -78,7 +78,13 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
          * Убрать фокус с поля после выбора
          * @type {boolean}
          */
-        blurOnChoose: false,
+        blurOnChoose: Stm.env.device !== 'desktop',
+        
+        /**
+         * Подсказки закрываются при потере фокуса полем
+         * @type {boolean}
+         */
+        closeOnBlur: true,
         
         /**
          * Запретить фильтрацию модели по значению текстового поля
@@ -146,7 +152,7 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
          * @param {boolean} [quick=false] закрыть без анимации
          */
         close: function(quick) {
-            croc.cmp.form.suggestion.Default.superclass.close.apply(this, arguments);
+            croc.cmp.form.suggestion.Suggestion.superclass.close.apply(this, arguments);
             
             if (this.__stream && !this.__searchable.getSearchString() && this.__stream.getLength() > 0) {
                 this.__stream.invalidateElements();
@@ -169,10 +175,6 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
          */
         getSearchableModel: function() {
             return this.__searchable;
-        },
-        
-        getSelection: function() {
-            return this._model.at('selection');
         },
         
         /**
@@ -212,7 +214,7 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
                     index = -1;
                 }
                 
-                this._model.set('selectedItem', model.getItems()[index]);
+                this.setSelectedItem(index === -1 ? null : index);
                 
                 //scrolling
                 if (index !== -1) {
@@ -240,10 +242,19 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
             this.__dirtyState = false;
         },
         
+        setSelectedItem: function(item, method) {
+            this._options.itemSelectingMethod = method;
+            this._model.set('selectedItem', this.getListManager().getItem(item));
+            delete this._options.itemSelectingMethod;
+        },
+        
         /**
          * Показать список элементов без фильтрации
          */
         showItemsUnfiltered: function() {
+            if (this.getDisableOpening()) {
+                return;
+            }
             if (this.__searchable) {
                 this.__searchable.setSearchString('');
             }
@@ -261,7 +272,7 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
         // * @protected
         // */
         //_getErrorHtml: function(code, message) {
-        //    var error = croc.cmp.form.suggestion.Default.__ERROR_CODES[code];
+        //    var error = croc.cmp.form.suggestion.Suggestion.__ERROR_CODES[code];
         //    return error && error.render({
         //            query: _.escape(this.getModel().getSearchString())
         //        });
@@ -289,19 +300,17 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
             
             this._options.goToSelectedItem = true;
             
-            croc.cmp.form.suggestion.Default.superclass._initModel.apply(this, arguments);
+            croc.cmp.form.suggestion.Suggestion.superclass._initModel.apply(this, arguments);
             
             this.__stream = this.getModel().lookup(croc.data.chain.IStream);
             this.__promise = this.getModel().lookup(croc.data.chain.IPromise);
             
             this.getModel().on('change', function(items) {
                 if (items.length === 1) {
-                    this._options.itemSelectingMethod = 'internal';
-                    this._model.set('selectedItem', items[0]);
-                    delete this._options.itemSelectingMethod;
+                    this.setSelectedItem(items[0], 'internal');
                 }
                 else if (this._options.selectedItem && !_.contains(items, this._options.selectedItem)) {
-                    this._model.del('selectedItem');
+                    this.setSelectedItem(null);
                 }
             }, this);
             
@@ -315,6 +324,10 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
                     this.close();
                 }
             }, this);
+            
+            if (this._options.field) {
+                this.initField(this._options.field);
+            }
         },
         
         /**
@@ -322,15 +335,15 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
          * @protected
          */
         _initWidget: function() {
-            croc.cmp.form.suggestion.Default.superclass._initWidget.apply(this, arguments);
+            croc.cmp.form.suggestion.Suggestion.superclass._initWidget.apply(this, arguments);
             
-            if (this._options.field) {
+            if (!this.__fieldInitialized && this._options.field) {
                 this.initField(this._options.field);
             }
             
             this._model.on('change', 'selectedItem', this.debounce(function(item) {
-                if (item && this._options.goToSelectedItem) {
-                    this.getListManager().showItem();
+                if (this._options.shown && item && this._options.goToSelectedItem) {
+                    this.getListManager().showItem(item);
                 }
             }, this));
             
@@ -339,7 +352,8 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
         
         _isOpenAllowed: function() {
             var cond = this._options.openCondition;
-            return (!cond.model || this.getModel().getLength() > 0) && (!cond.search || !!this.__searchable.getSearchString());
+            return this._options.fieldActive && (!cond.model || this.getModel().getLength() > 0) &&
+                (!cond.search || !!this.__searchable.getSearchString());
         },
         
         /**
@@ -381,10 +395,6 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
             }
             
             //обратный биндинг
-            if (this.__stream) {
-                this.__stream.bind('loading', this.__field, 'action', function(x) { return x ? 'loader' : null; });
-            }
-            
             var selectionListener = function() {
                 if (this._options.itemSelectingMethod === 'keydown' && this.getOpen()) {
                     if (this._options.updateInputOnSelect) {
@@ -405,6 +415,7 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
             selectionListener();
         }
         
+        //todo implement it
         ///**
         // * @private
         // */
@@ -412,34 +423,40 @@ croc.Class.define('croc.cmp.form.suggestion.Default', {
         //    if (!this.getVisibleItemsManager()) {
         //        return;
         //    }
-        //    
+        //
         //    this.on('beforePositionApply', function(css, jointCss, prevent) {
         //        var firstItem = this.getListItemElement(0);
         //        if (!firstItem) {
         //            return;
         //        }
-        //        
+        //    
         //        var manager = this.getVisibleItemsManager();
         //        var windowEl = $(window);
         //        var itemHeight = firstItem.outerHeight(true);
-        //        
+        //    
         //        if (typeof this.__screenGap === 'function') {
         //            this.__screenGap = this.__screenGap(this);
         //        }
-        //        
-        //        var visibleHeight = this.getCurrentPosition() === 'bottom' ?
-        //        windowEl.scrollTop() + windowEl.height() - css.top - this.__screenGap[2] :
-        //        css.top + this.getElement().height() - windowEl.scrollTop() - this.__screenGap[0];
-        //        
+        //    
+        //        var isBottomPosition = this.getCurrentPosition() === (this.getPositionInset() ? 'top' : 'bottom');
+        //        var visibleHeight = isBottomPosition ?
+        //        windowEl.innerHeight() - css.top - this.__screenGap[2] :
+        //        css.top + this.getElement().height() - this.__screenGap[0];
+        //        visibleHeight += (isBottomPosition ? -1 : 1) * this._adjustCoorsForScrolling(true).top;
+        //    
         //        var visibleCount = croc.utils.numToRange(Math.floor(visibleHeight / itemHeight),
-        //            croc.cmp.form.suggestion.Default.MIN_VISIBLE_ITEMS_COUNT,
-        //            croc.cmp.form.suggestion.Default.MAX_VISIBLE_ITEMS_COUNT);
+        //            croc.ui.form.suggestion.Default.MIN_VISIBLE_ITEMS_COUNT,
+        //            croc.ui.form.suggestion.Default.MAX_VISIBLE_ITEMS_COUNT);
         //        var lastVisibleCount = manager.getVisibleItemsCount();
-        //        
-        //        manager.setVisibleItemsCount(visibleCount);
+        //    
         //        if (lastVisibleCount !== visibleCount) {
+        //            this.__internalResize = true;
+        //            manager.setVisibleItemsCount(visibleCount);
+        //            this.__internalResize = false;
         //            prevent();
+        //            this.__internalItemsCountSetting = true;
         //            this.reposition();
+        //            this.__internalItemsCountSetting = false;
         //        }
         //    }, this);
         //}

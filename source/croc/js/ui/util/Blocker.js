@@ -53,7 +53,7 @@ croc.Class.define('croc.ui.util.Blocker', {
     },
     
     construct: function(options) {
-        croc.ui.util.Blocker.superclass.__construct__.apply(this, arguments);
+        croc.ui.util.Blocker.superclass.construct.apply(this, arguments);
         
         if (options.target instanceof croc.ui.Widget) {
             this.__element = options.target.getElement();

@@ -42,7 +42,7 @@
         .b-suggestion-item,
         .b-suggestion-error,
         .b-suggestion-more {
-            padding: 4px 4px 4px 8px;
+            padding: 4px 8px;
             }
 
         .b-suggestion .g-scrollable-prev-marker,

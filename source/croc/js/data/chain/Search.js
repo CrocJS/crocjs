@@ -3,6 +3,18 @@ croc.Class.define('croc.data.chain.Search', {
     implement: croc.data.chain.ISearch,
     properties: {
         /**
+         * Items to exclude from source
+         * @type {Array}
+         */
+        excludes: {
+            type: 'array',
+            apply: function() {
+                this.update();
+            },
+            event: true
+        },
+        
+        /**
          * строка поиска
          * @type {String}
          */
@@ -35,13 +47,25 @@ croc.Class.define('croc.data.chain.Search', {
     },
     construct: function(options) {
         options.mapper = function(items) {
-            return this.__searchRegexp ?
-                items.filter(function(item) {
+            if (this.__searchRegexp) {
+                items = items.filter(function(item) {
                     return options.searchableItemPartsFn(item).some(function(part) {
                         return (!!part || part === 0) && this.__searchRegexp.test(part.toString());
                     }, this);
-                }, this) :
-                options.initiallyEmpty ? [] : items;
+                }, this);
+            }
+            else if (options.initiallyEmpty) {
+                items = [];
+            }
+            
+            var excludes = this.getExcludes();
+            if (excludes && excludes.length) {
+                items = items.filter(function(item) {
+                    return !excludes.some(_.partial(croc.utils.objEqual, item));
+                });
+            }
+            
+            return items;
         }.bind(this);
         
         croc.data.chain.Search.superclass.construct.apply(this, arguments);

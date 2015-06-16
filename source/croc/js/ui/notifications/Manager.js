@@ -78,7 +78,7 @@ croc.Class.define('croc.ui.notifications.Manager', {
         this.__notificationTime = options.notificationTime;
         this.__showingTime = options.showingTime;
         
-        croc.ui.notifications.Manager.superclass.__construct__.apply(this, arguments);
+        croc.ui.notifications.Manager.superclass.construct.apply(this, arguments);
     },
     
     members: {

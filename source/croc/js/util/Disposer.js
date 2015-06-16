@@ -31,7 +31,7 @@ croc.Class.define('croc.util.Disposer', {
          */
         this.__items = [];
         
-        croc.util.Disposer.superclass.__construct__.apply(this, arguments);
+        croc.util.Disposer.superclass.construct.apply(this, arguments);
     },
     
     destruct: function() {

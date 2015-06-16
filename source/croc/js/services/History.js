@@ -67,7 +67,7 @@ croc.Class.define('croc.services.History', {
             }.bind(this));
         }
         
-        croc.services.History.superclass.__construct__.apply(this, arguments);
+        croc.services.History.superclass.construct.apply(this, arguments);
     },
     
     members: {

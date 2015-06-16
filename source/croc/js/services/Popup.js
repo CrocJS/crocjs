@@ -32,7 +32,7 @@ croc.Class.define('croc.services.Popup', {
         this.__popups = {};
         this.__popupManager = croc.ui.common.bubble.Manager.getInstance('popup');
         
-        croc.services.Popup.superclass.__construct__.apply(this, arguments);
+        croc.services.Popup.superclass.construct.apply(this, arguments);
     },
     
     members: {

@@ -4,7 +4,7 @@ var App = require('derby/lib/App');
 var Derby = require('derby/lib/Derby');
 var derbyTemplates = require('derby/node_modules/derby-templates');
 var derby = module.exports = require('derby');
-var createFactory = require('derby/lib/components').createFactory;
+var components = require('derby/lib/components');
 
 var stubWidget;
 derby.getStubWidget = function() {
@@ -77,7 +77,7 @@ function checkInheritedTemplate(views, name, namespace) {
                 match.namespace = ns;
                 match.options = _.defaults({serverOnly: true}, curView.options);
                 if (!name) {
-                    match.componentFactory = createFactory(Cls);
+                    match.componentFactory = components.createFactory(Cls);
                 }
                 
                 if (!name) {
@@ -130,6 +130,62 @@ Views.prototype.find = function(name, namespace) {
         match = checkInheritedTemplate(this, name, namespace);
     }
     return match;
+};
+
+//var oldInitComponent = components.ComponentFactory.prototype.init;
+components.ComponentFactory.prototype.init = function(context, component) {
+    var preInit = !!component;
+    var secondInit = false;
+    if (!component) {
+        if (context.attributes && context.attributes._instance) {
+            secondInit = true;
+            component = context.attributes._instance.get(context);
+        }
+        else {
+            component = new this.constructor();
+        }
+    }
+    
+    var model;
+    var scope;
+    var id;
+    var parent = context.controller;
+    if (preInit || !secondInit) {
+        id = context.id();
+        scope = ['$components', id];
+        model = parent.model.root.eventContext(component);
+        model._at = scope.join('.');
+        model.set('id', id);
+        
+        if (!preInit) {
+            components.setAttributes(context, model);
+        }
+        model.data = model.get();
+        model.data.$controller = component;
+        parent.page._components[id] = component;
+        _.assign(component, {
+            model: model,
+            id: id,
+            parent: parent,
+            app: parent.app,
+            page: parent.page,
+            _scope: scope
+        });
+    }
+    else {
+        id = component.id;
+        scope = ['$components', id];
+        model = component.model;
+    }
+    
+    if (preInit) {
+        if (component.init) {
+            component.init(model);
+        }
+    }
+    else {
+        return components.initComponent(context, component, parent, model, id, scope);
+    }
 };
 
 require('./lib/pageExtends');

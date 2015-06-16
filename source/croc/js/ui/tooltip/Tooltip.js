@@ -381,7 +381,7 @@ croc.Class.define('croc.ui.tooltip.Tooltip', {
             this.__setDir(croc.ui.tooltip.Tooltip.__POSITION_TO_DIR[this.getCurrentPosition()] || null);
         }, this);
         
-        croc.ui.tooltip.Tooltip.superclass.__construct__.apply(this, arguments);
+        croc.ui.tooltip.Tooltip.superclass.construct.apply(this, arguments);
     },
     
     destruct: function() {

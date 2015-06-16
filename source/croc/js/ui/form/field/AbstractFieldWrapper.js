@@ -24,7 +24,7 @@ croc.Class.define('croc.ui.form.field.AbstractFieldWrapper', {
     construct: function(options) {
         this.__proxyChangeValueEvent = options._proxyChangeValueEvent;
         this.__extendingWrapperOptions = ['value', 'identifier'];
-        croc.ui.form.field.AbstractFieldWrapper.superclass.__construct__.apply(this, arguments);
+        croc.ui.form.field.AbstractFieldWrapper.superclass.construct.apply(this, arguments);
     },
     
     members: {

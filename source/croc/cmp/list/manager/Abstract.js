@@ -110,7 +110,7 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
     },
     
     construct: function(options) {
-        croc.cmp.list.manager.Abstract.superclass.__construct__.apply(this, arguments);
+        croc.cmp.list.manager.Abstract.superclass.construct.apply(this, arguments);
         
         this.__hasPrevItemsClass = options.hasPrevItemsClass;
         this.__hasNextItemsClass = options.hasNextItemsClass;
@@ -197,7 +197,7 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         
         getItem: function(item) {
             if (typeof item === 'number') {
-                return this.__model.getItems()[item];
+                return this.__model.getItems()[item >= 0 ? item : this.__model.getLength() + item];
             }
             if (item instanceof jQuery) {
                 return this.__model.getItems()[this.getElements().index(item)];
@@ -207,7 +207,7 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         
         getItemIndex: function(item) {
             if (typeof item === 'number') {
-                return item;
+                return item >= 0 ? item : this.__model.getLength() + item;
             }
             if (item instanceof jQuery) {
                 item = this.getItem(item);

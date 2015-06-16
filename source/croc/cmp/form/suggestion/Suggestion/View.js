@@ -1,7 +1,7 @@
 /**
  * todo убрать упоминания b-suggestion-item
  */
-croc.View.define('croc.cmp.form.suggestion.Default.View', {
+croc.View.define('croc.cmp.form.suggestion.Suggestion.View', {
     members: {
         higlightLabel: function(label, normalized) {
             label = croc.utils.strHighlightSubstring(label, this._widget.getSearchableModel().getSearchString());
@@ -15,12 +15,12 @@ croc.View.define('croc.cmp.form.suggestion.Default.View', {
          * @returns {boolean}
          */
         isClosingOnHtmlClickAllowed: function(targetEl) {
-            return croc.cmp.form.suggestion.Default.View.superclass.isClosingOnHtmlClickAllowed.apply(this, arguments)
-                && !croc.utils.domIsElementOpenerOf(targetEl, this._widget.getElement());
+            return croc.cmp.form.suggestion.Suggestion.View.superclass.isClosingOnHtmlClickAllowed.apply(this,
+                    arguments) && !croc.utils.domIsElementOpenerOf(targetEl, this._widget.getElement());
         },
         
         onCreate: function() {
-            croc.cmp.form.suggestion.Default.View.superclass.onCreate.apply(this, arguments);
+            croc.cmp.form.suggestion.Suggestion.View.superclass.onCreate.apply(this, arguments);
             
             this._widget.listenProperty('field', function(field) {
                 if (field) {
@@ -31,6 +31,10 @@ croc.View.define('croc.cmp.form.suggestion.Default.View', {
             this.__setUpSuggestionsBehavior();
         },
         
+        /**
+         * @param field
+         * @private
+         */
         __initField: function(field) {
             this.__field = field;
             
@@ -42,22 +46,24 @@ croc.View.define('croc.cmp.form.suggestion.Default.View', {
             }
             
             //запрещаем убирать фокус с поля
-            this._widget.getElement().on('mousedown mouseup click', function(e) {
-                if (e.type === 'click' && $(e.target).closest('.b-suggestion-item').length) {
-                    return;
-                }
-                
-                if (this.__focusTimeout) {
-                    this.__focusTimeout.remove();
-                }
-                
-                this.__setInternalFocus();
-                field.focus();
-                this.__focusTimeout = this._getDisposer().setTimeout(function() {
+            if (Stm.env.device === 'desktop') {
+                this._widget.getElement().on('mousedown mouseup click', function(e) {
+                    if (e.type === 'click' && $(e.target).closest('.b-suggestion-item').length) {
+                        return;
+                    }
+                    
+                    if (this.__focusTimeout) {
+                        this.__focusTimeout.remove();
+                    }
+                    
                     this.__setInternalFocus();
                     field.focus();
-                }.bind(this), 10);
-            }.bind(this));
+                    this.__focusTimeout = this._getDisposer().setTimeout(function() {
+                        this.__setInternalFocus();
+                        field.focus();
+                    }.bind(this), 10);
+                }.bind(this));
+            }
             
             this._widget.on('choose', function(item) {
                 if (this._model.get('blurOnChoose')) {
@@ -71,6 +77,22 @@ croc.View.define('croc.cmp.form.suggestion.Default.View', {
                     this.__field.select();
                 }
             }, this);
+            
+            //action
+            var stream = this._widget.getModel().lookup(croc.data.chain.IStream);
+            if (stream) {
+                stream.listenProperty('loading', function(value) {
+                    if (value) {
+                        field.setAction({
+                            action: 'loading',
+                            html: '<div class="b-input-action role_loader"></div>'
+                        });
+                    }
+                    else {
+                        field.resetAction();
+                    }
+                });
+            }
             
             this.__setUpFieldEvents();
         },
@@ -142,18 +164,15 @@ croc.View.define('croc.cmp.form.suggestion.Default.View', {
             var blurTimeout;
             var fieldEl = this.__field.getFieldElement();
             
-            var oldDisableOpening = false;
-            
             this._getDisposer().addListeners(fieldEl, {
                 keydown: function(e) {
                     this.__onKeyNavigate(e);
                 }.bind(this),
                 
                 blur: function() {
-                    if (!this.__isMouseOverSuggestions) {
+                    if (Stm.env.device === 'desktop' && !this.__isMouseOverSuggestions) {
                         blurTimeout = this._getDisposer().setTimeout(function() {
-                            oldDisableOpening = this._widget.getDisableOpening();
-                            this._widget.setDisableOpening(true);
+                            this._data.fieldActive = false;
                             this._widget.close();
                         }.bind(this), 250);
                     }
@@ -169,15 +188,14 @@ croc.View.define('croc.cmp.form.suggestion.Default.View', {
                             if (!this._widget.getOpenOnFocus() || this._widget.getOpen() || !fieldEl.is(':focus')) {
                                 return;
                             }
-                            
+    
+                            this._data.fieldActive = true;
                             if (this._model.get('openSuggestionOnFirstFocus') && this.__dirtyState && this.__field.getValue()) {
                                 this._widget.getSearchableModel().setSearchString(this.__field.getValue());
                             }
-                            else if (!this._widget.open() && this._widget.getShowUnfilteredOnFocus() &&
-                                !this._widget.getSearchableModel().getSearchString()) {
+                            else if (!this._widget.open() && this._widget.getShowUnfilteredOnFocus() && !this._widget.getSearchableModel().getSearchString()) {
                                 this._widget.showItemsUnfiltered();
                             }
-                            this._widget.setDisableOpening(oldDisableOpening);
                         }.bind(this), 100);
                     }
                 }.bind(this)

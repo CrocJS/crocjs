@@ -13,7 +13,12 @@ croc.Interface.define('croc.data.chain.IList', {
         
         getItems: function() {},
         
-        lookup: function(iface) {},
+        /**
+         * @returns {croc.data.chain.IList}
+         */
+        getRoot: function() {},
+        
+        lookup: function(iface, skipMe) {},
         
         lookupOrChain: function(iface, Cls, options) {},
         

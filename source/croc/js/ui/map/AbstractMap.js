@@ -156,7 +156,7 @@ croc.Class.define('croc.ui.map.AbstractMap', {
             }
         }, this);
         //this.__popupBalloons = Stm.env.ldevice === 'mobile';
-        croc.ui.map.AbstractMap.superclass.__construct__.apply(this, arguments);
+        croc.ui.map.AbstractMap.superclass.construct.apply(this, arguments);
     },
     
     destruct: function() {

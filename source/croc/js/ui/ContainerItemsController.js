@@ -189,7 +189,7 @@ croc.Class.define('croc.ui.ContainerItemsController', {
             new croc.data.ObservableArray({original: options.model}) :
             options.model;
         
-        croc.ui.ContainerItemsController.superclass.__construct__.apply(this, arguments);
+        croc.ui.ContainerItemsController.superclass.construct.apply(this, arguments);
         
         if (this.__isOptimized && this.__groupCriteria) {
             throw new Error('not implemented!');

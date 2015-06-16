@@ -11,7 +11,13 @@ croc.Class.define('croc.cmp.form.field.TextArea', {
          * Enable autosize on input
          * @type {boolean}
          */
-        autosize: true
+        autosize: true,
+        
+        /**
+         * css class type_... for root DOM-element
+         * @type {string}
+         */
+        cssType: 'area'
     },
     
     members: {

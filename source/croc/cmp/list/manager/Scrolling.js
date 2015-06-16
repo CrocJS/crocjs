@@ -62,7 +62,7 @@ croc.Class.define('croc.cmp.list.manager.Scrolling', {
         this.__scrollbarSize = options.scrollbarSize;
         this.__discreteScrolling = options.discreteScrolling;
         
-        croc.cmp.list.manager.Scrolling.superclass.__construct__.apply(this, arguments);
+        croc.cmp.list.manager.Scrolling.superclass.construct.apply(this, arguments);
     },
     
     members: {
@@ -167,6 +167,8 @@ croc.Class.define('croc.cmp.list.manager.Scrolling', {
             if (this.getVisibleCount()) {
                 this.__dontUpdateIndexes = true;
             }
+            //todo fix it
+            var widget = croc.cmp.Widget.getClosestWidget(this.__container);
             var model = this.getRendererModel();
             var observable = croc.Object.createModel({empty: true});
             model.bind('length', observable, 'empty', function(x) { return x === 0; });
@@ -185,7 +187,7 @@ croc.Class.define('croc.cmp.list.manager.Scrolling', {
                     el.css('maxHeight', height);
                     this.__dontUpdateIndexes = false;
                     this.__updateIndexes();
-                    //view.onResize();
+                    widget.checkResize();
                 }
             }.bind(this);
             
@@ -193,8 +195,7 @@ croc.Class.define('croc.cmp.list.manager.Scrolling', {
             
             croc.Object.listenProperties(
                 this, 'visibleCount',
-                //todo fix it
-                croc.cmp.Widget.getClosestWidget(this.__container), 'shown',
+                widget, 'shown',
                 observable, 'empty',
                 listener);
             

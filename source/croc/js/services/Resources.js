@@ -149,7 +149,7 @@ croc.Class.define('croc.services.Resources', {
     construct: function() {
         this.__scriptsDeferreds = {};
         this.__templates = {};
-        croc.services.Resources.superclass.__construct__.apply(this, arguments);
+        croc.services.Resources.superclass.construct.apply(this, arguments);
     },
     
     members: {

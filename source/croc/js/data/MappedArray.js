@@ -179,7 +179,7 @@ croc.Class.define('croc.data.MappedArray', {
             options.original = options.original.concat();
         }
         
-        croc.data.MappedArray.superclass.__construct__.apply(this, arguments);
+        croc.data.MappedArray.superclass.construct.apply(this, arguments);
     },
     
     members: {

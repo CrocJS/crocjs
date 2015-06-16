@@ -202,7 +202,7 @@ croc.Class.define('croc.data.ObservableArray', {
         this.__length = this.__original.length;
         this.__empty = !this.__length;
         
-        croc.data.ObservableArray.superclass.__construct__.apply(this, arguments);
+        croc.data.ObservableArray.superclass.construct.apply(this, arguments);
     },
     
     members: {

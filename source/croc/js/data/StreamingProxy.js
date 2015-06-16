@@ -71,7 +71,7 @@ croc.Class.define('croc.data.StreamingProxy', {
         this.__limit = options.limit;
         options.original = this.__rawArray.getArray().slice(0, this.__limit);
         
-        croc.data.StreamingProxy.superclass.__construct__.apply(this, arguments);
+        croc.data.StreamingProxy.superclass.construct.apply(this, arguments);
         
         var isStream = croc.Interface.check(this.__rawArray, 'croc.data.IStreamList');
         var observable = croc.Object.createModel({

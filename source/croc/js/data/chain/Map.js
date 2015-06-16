@@ -26,6 +26,12 @@ croc.Class.define('croc.data.chain.Map', {
         getItems: function() {
             return this.__resultItems;
         },
+        /**
+         * @returns {croc.data.chain.IList}
+         */
+        getRoot: function() {
+            return this.__source.getRoot();
+        },
         getSource: function() {
             return this.__source;
         },

@@ -100,7 +100,7 @@ croc.Class.define('croc.cmp.form.field.AbstractHtmlControl', {
             var fieldEl = this.getFieldElement();
             
             fieldEl.on(this._options._checkValueOnBlur ? 'blur' : 'change', function() {
-                this.setValue(this._getFieldValue(), true);
+                this.setValue(this._getFieldValue(), {internal: true});
             }.bind(this));
             
             var internalFocus = false;

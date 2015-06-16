@@ -152,7 +152,7 @@ croc.Class.define('croc.ui.social.ButtonsSet', {
             this.getItems().forEach(function(item) { item.setSkin(value); });
         });
         
-        croc.ui.social.ButtonsSet.superclass.__construct__.apply(this, arguments);
+        croc.ui.social.ButtonsSet.superclass.construct.apply(this, arguments);
     },
     
     members: {

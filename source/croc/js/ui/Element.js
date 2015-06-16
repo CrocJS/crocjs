@@ -155,7 +155,7 @@ croc.Class.define('croc.ui.Element', {
     
     construct: function(options) {
         this.__el = options.el;
-        croc.ui.Element.superclass.__construct__.apply(this, arguments);
+        croc.ui.Element.superclass.construct.apply(this, arguments);
         
         if (options.props) {
             croc.ui.Element.__createProperties(this, options.props);

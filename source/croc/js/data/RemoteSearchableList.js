@@ -65,7 +65,7 @@ croc.Class.define('croc.data.RemoteSearchableList', {
     },
     
     construct: function(options) {
-        croc.data.RemoteSearchableList.superclass.__construct__.apply(this, arguments);
+        croc.data.RemoteSearchableList.superclass.construct.apply(this, arguments);
         
         this.__url = options.url;
         this.__preRequestFn = options.preRequestFn;

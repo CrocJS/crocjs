@@ -90,6 +90,22 @@
                             <widget is="croc.cmp.form.field.CheckBox" value="{{accepted}}" validation="{{{required: true}}}"/>
                         </view>
                     </view>
+                    
+                    <view is=":row" label="ComboBox">
+                        <widget is="croc.cmp.form.field.ComboBox" options="{{['one', 'two', 'three']}}"></widget>
+                    </view>
+                    <view is=":row" label="Select" hint="{{JSON.stringify(selectValue)}}">
+                        <widget is="croc.cmp.form.field.ComboBox" mode="select" options="{{['one', 'two', 'three']}}" value="{{selectValue}}"></widget>
+                    </view>
+                    <view is=":row" label="Select" labelHint="no filtering" hint="{{JSON.stringify(selectValue)}}">
+                        <widget is="croc.cmp.form.field.ComboBox" mode="select" enableFiltering="{{false}}" options="{{['one', 'two', 'three']}}" value="{{selectValue}}"></widget>
+                    </view>
+                    <view is=":row" label="MultiSelect" labelHint="add button">
+                        <widget is="croc.cmp.form.field.ComboBox" mode="multiselect" addButton="{{true}}" options="{{['one', 'two', 'three']}}"></widget>
+                    </view>
+                    <view is=":row" label="MultiSelect" labelHint="no filtering">
+                        <widget is="croc.cmp.form.field.ComboBox" mode="multiselect" enableFiltering="{{false}}" options="{{['one', 'two', 'three']}}"></widget>
+                    </view>
                 </view>
             </passView>
             

@@ -43,7 +43,7 @@ croc.mix = function(cls, mixins) {
         var prop;
         if (typeof mixin === 'function') {
             for (prop in mixin.prototype) {
-                if (!cls.prototype.hasOwnProperty(prop) && prop !== '__construct__' && prop !== 'constructor' &&
+                if (!cls.prototype.hasOwnProperty(prop) && prop !== 'construct' && prop !== 'constructor' &&
                     prop !== 'init') {
                     cls.prototype[prop] = mixin.prototype[prop];
                 }
@@ -78,7 +78,7 @@ croc.mix = function(cls, mixins) {
             if (mixin.hasOwnProperty('constructor')) {
                 cls.config.mixins.push({
                     config: {},
-                    prototype: {__construct__: mixin.constructor}
+                    prototype: {construct: mixin.constructor}
                 });
             }
         }

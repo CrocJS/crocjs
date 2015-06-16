@@ -22,7 +22,6 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
     
     properties: {
         action: {
-            check: ['loader', 'unfold'],
             model: true
         },
         
@@ -33,6 +32,19 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         align: {
             check: ['left', 'right', 'center'],
             model: true
+        },
+        
+        /**
+         * css class type_... for root DOM-element
+         * @type {string}
+         */
+        cssType: {
+            required: true
+        },
+        
+        defaultAction: {
+            value: null,
+            option: true
         },
         
         /**
@@ -163,6 +175,13 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
     
     members: {
         /**
+         * @returns {jQuery}
+         */
+        getFieldContainer: function() {
+            return $(this.fieldContainerElement);
+        },
+        
+        /**
          * Field size
          * @returns {string}
          */
@@ -189,6 +208,10 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
             this._options.resetFn(this);
         },
         
+        resetAction: function() {
+            this.setAction(this.getDefaultAction());
+        },
+        
         select: function() {
             var fieldElement = this.getFieldElement();
             if (fieldElement) {
@@ -197,15 +220,16 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
             }
         },
         
-        setValue: function(value, old, internal) {
-            if (internal && this._options.transformOnChangeFunc) {
+        setValue: function(value, internal) {
+            if (internal && internal.internal && this._options.transformOnChangeFunc) {
                 value = this._options.transformOnChangeFunc(value);
             }
+            value = value || '';
             if (value === this.getValue()) {
-                this.setInstantValue(value);
+                this.setInstantValue(value, internal);
             }
             else {
-                this.__setValue(value);
+                this.__setValue(value, internal);
             }
         },
         
@@ -218,7 +242,9 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
             if (this.getInstantValue()) {
                 this.setValue(this.getInstantValue());
             }
-            croc.data.Helper.bind(this, 'value', this._model, 'instantValue');
+            this.listenProperty('value', function(value, old, internal) {
+                this.setInstantValue(value, internal);
+            }, this);
             
             var validation = this._options.validation;
             if (!this._options.maxLength && validation) {

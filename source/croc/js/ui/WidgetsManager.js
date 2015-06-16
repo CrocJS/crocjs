@@ -44,7 +44,7 @@ croc.Class.define('croc.ui.WidgetsManager', {
         this.__typeToXtype = {};
         this.__widgets = {};
         
-        croc.ui.WidgetsManager.superclass.__construct__.apply(this, arguments);
+        croc.ui.WidgetsManager.superclass.construct.apply(this, arguments);
     },
     
     members: {

@@ -237,10 +237,18 @@ croc.Class.define('croc.Object', {
          * @param {function(*):*} [sourceToTargetMapper=undefined]
          * @param {function(*):*} [targetToSourceMapper=undefined]
          * @param {Object} [context=undefined]
+         * @param {Boolean} [reversed=false]
          * @returns {Function}
          */
         twoWaysBinding: function(source, sourceProperty, target, targetProperty, sourceToTargetMapper,
-                                 targetToSourceMapper, context) {
+                                 targetToSourceMapper, context, reversed) {
+            if (_.last(arguments) === true) {
+                return this.twoWaysBinding.apply(this, [
+                    target, targetProperty, source, sourceProperty,
+                    typeof targetToSourceMapper === 'function' && targetToSourceMapper,
+                    typeof sourceToTargetMapper === 'function' && sourceToTargetMapper,
+                    typeof context !== 'boolean' && context]);
+            }
             if (context) {
                 if (sourceToTargetMapper) {
                     sourceToTargetMapper = sourceToTargetMapper.bind(context);
@@ -387,7 +395,7 @@ croc.Class.define('croc.Object', {
             this.__checkEventExists(event);
             this.removeAllListeners(event);
         },
-    
+        
         /**
          * @param {function} func
          * @param [context]
@@ -404,7 +412,7 @@ croc.Class.define('croc.Object', {
             }
             return _.debounce(this._getDisposer().wrapFunc(func, context), wait);
         },
-    
+        
         /**
          * Создаёт функцию, вызов которой будет запрещён после разрушения объекта
          * @param {function} func
@@ -516,13 +524,13 @@ croc.Class.define('croc.Object', {
             var event = isEvent ? prop : croc.Object.getPropertyPart('change', prop);
             var curValue = isEvent ? null : this.getProperty(prop);
             
-            var handler = function(value, oldValue) {
+            var handler = function(value, oldValue, internal) {
                 if (isEvent) {
                     callback.apply(context || this, arguments);
                 }
                 else if (value !== curValue) {
                     curValue = value;
-                    callback.call(context || this, value, oldValue);
+                    callback.call(context || this, value, oldValue, internal);
                 }
             };
             this.on(event, handler, this);

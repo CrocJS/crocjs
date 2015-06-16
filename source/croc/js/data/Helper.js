@@ -17,11 +17,11 @@ croc.define('croc.data.Helper', {
             }
             var setter = target[croc.Object.getPropertyPart('set', targetProp)];
             
-            function sourceListener(value, old) {
+            var sourceListener = function(value, old) {
                 if (value !== old) {
                     setter.call(target, mapper ? mapper.call(context || global, value, old) : value);
                 }
-            }
+            };
             
             source.on('change', prop, sourceListener);
             setter.call(target, source.get(prop));

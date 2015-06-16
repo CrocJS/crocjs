@@ -192,10 +192,10 @@ croc.define('croc.Class', {
         instance._options = options = croc.Class.__preConstructor.call(instance, config, options || {});
         instance.$$preConstructed = true;
         if (instance.$$compatibilityConstructor) {
-            Cls.prototype.__construct__.apply(instance, args);
+            Cls.prototype.construct.apply(instance, args);
         }
         else {
-            Cls.prototype.__construct__.call(instance, options);
+            Cls.prototype.construct.call(instance, options);
         }
         croc.Class.__postConstructor.call(instance, config, options);
     },
@@ -288,9 +288,9 @@ croc.define('croc.Class', {
         if (compatibilityMode) {
             Cls.prototype.$$compatibilityMode = true;
             Cls.compatibilityMode = true;
-            if (baseCls && baseCls.prototype.__construct__ && !baseCls.prototype.hasOwnProperty('init')) {
+            if (baseCls && baseCls.prototype.construct && !baseCls.prototype.hasOwnProperty('init')) {
                 baseCls.prototype.init = function() {
-                    baseCls.prototype.__construct__.call(this, this);
+                    baseCls.prototype.construct.call(this, this);
                 };
             }
         }
@@ -301,8 +301,7 @@ croc.define('croc.Class', {
         }
         
         //save construct to prototype
-        Cls.prototype.construct = Cls.prototype.__construct__ =
-            config.construct || baseCls.prototype.__construct__ || baseCls;
+        Cls.prototype.construct = config.construct || baseCls.prototype.construct || baseCls;
         
         //interfaces
         if (config.implement) {
@@ -645,8 +644,8 @@ croc.define('croc.Class', {
     __postConstructor: function(config, passedOptions) {
         if (config.mixins) {
             config.mixins.forEach(function(mixin) {
-                if (mixin.prototype.__construct__) {
-                    mixin.prototype.__construct__.call(this, passedOptions);
+                if (mixin.prototype.construct) {
+                    mixin.prototype.construct.call(this, passedOptions);
                 }
             }, this);
         }

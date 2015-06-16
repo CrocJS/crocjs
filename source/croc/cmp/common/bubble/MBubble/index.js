@@ -5,6 +5,8 @@
  */
 croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
     events: {
+        beforeClose: null,
+        
         /**
          * Возбуждается перед каждым открытием bubble.
          * @param {jQuery|croc.cmp.Widget|Array|function} target целевой объект, на котором соверешена попытка открыть bubble
@@ -37,6 +39,16 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
     },
     
     properties: {
+        /**
+         * Bubble now is closing (during closing animation)
+         * @type {boolean}
+         */
+        closing: {
+            value: false,
+            __setter: null,
+            model: true
+        },
+        
         /**
          * Смещение по горизонтали относительно центра цели
          * @type {string}
@@ -89,6 +101,14 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
         },
         
         /**
+         * Позиционирование бабла внутри таргета
+         * @type {boolean}
+         */
+        positionInset: {
+            model: true
+        },
+        
+        /**
          * Объект крепления bubble. Может быть коллекцией dom-элементов, виджетом, точкой на экране (массив [x, y]),
          * прямоугольником (массив [[x1, y1], [x2, y2]]), функция - которая возвращает значение одного из предыдущих
          * типов
@@ -106,20 +126,18 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
             check: ['top', 'middleTop', 'middle', 'middleBottom', 'bottom'],
             value: 'middle',
             model: true
-        },
-        
-        /**
-         * @private
-         */
-        closing: {
-            value: false,
-            __setter: null,
-            model: true
         }
     },
     
     options: {
         /**
+         * Show/hide animation duration
+         * @type {number}
+         */
+        animationDuration: 200,
+        
+        /**
+         /**
          * Флаг, закрывать ли bubble через некоторый таймаут после открытия
          * @type {boolean}
          */
@@ -203,6 +221,15 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
         },
         
         /**
+         * Функция произвольного позиционирования бабла. Параметры:
+         * bubble
+         * bubbleCss - пустой объект, который следует заполнить css-свойствами для bubble
+         * jointCss - пустой объект, который можно заполнить css-свойствами для joint
+         * @type {function(croc.ui.common.bubble.MBubble, Object, Object)}
+         */
+        customReposition: {},
+        
+        /**
          * Разрушение после первого закрытия
          * @type {boolean}
          */
@@ -225,8 +252,14 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
          * @type {string}
          */
         hideAnimation: {
-            check: ['fade', 'fly']
+            check: ['fade', 'fly', 'slide']
         },
+        
+        /**
+         * Hide animation delay
+         * @type {number}
+         */
+        hideAnimationDelay: {},
         
         /**
          * Метод сокрытия виджета при изменении свойства {@link #shown}.
@@ -249,6 +282,12 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
         opener: {},
         
         /**
+         * Минимальное расстояние от края экрана до ближайшего края bubble при автопозиционировании
+         * @type {Array.<number>|function(croc.ui.common.bubble.MBubble):Array.<number>}
+         */
+        screenGap: [0, 0, 0, 0],
+        
+        /**
          * Расстояние от края bubble до соответствующего края target
          * @type {number}
          */
@@ -259,8 +298,14 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
          * @type {string}
          */
         showAnimation: {
-            check: ['fade', 'fly']
+            check: ['fade', 'fly', 'slide']
         },
+        
+        /**
+         * Show animation delay
+         * @type {number}
+         */
+        showAnimationDelay: {},
         
         /**
          * Виден ли виджет после его рендеринга
@@ -295,12 +340,6 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
          * При позиционировании не задавать положение верхнего края элемента
          */
         _skipElementTop: false,
-        
-        /**
-         * Минимальное расстояние от края экрана до ближайшего края bubble при автопозиционировании
-         * @type {Array.<number>|function(croc.cmp.common.bubble.MBubble):Array.<number>}
-         */
-        screenGap: [0, 0, 0, 0],
         
         /**
          * По-умолчанию ставить zIndex верхнего слоя
@@ -372,6 +411,7 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
                 return;
             }
             
+            this.fireEvent('beforeClose');
             this._model.set('onClose', {quick: quick});
             this.__openDisposer.disposeAll();
         },
@@ -385,7 +425,7 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
          * @returns {string}
          */
         getCurrentPosition: function() {
-            return this._model.get('currentPosition') || this.getPosition();
+            return this._options.currentPosition || this.getPosition();
         },
         
         /**
@@ -394,7 +434,7 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
          * @returns {jQuery|Array}
          */
         getCurrentTarget: function(elementOnly) {
-            var curTarget = this._model.get('currentTarget');
+            var curTarget = this._options.currentTarget;
             return curTarget && elementOnly && !(curTarget instanceof jQuery) ? null : curTarget;
         },
         
@@ -409,7 +449,7 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
         
         getScreenGap: function() {
             var gap = this._options.screenGap;
-            return typeof gap === 'function' ? (options.screenGap = gap(this)) : gap;
+            return typeof gap === 'function' ? (this._options.screenGap = gap(this)) : gap;
         },
         
         /**
@@ -419,6 +459,17 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
          */
         getShowDisposer: function() {
             return this.__showDisposer;
+        },
+        
+        /**
+         * Dom-element associated with bubble target (if exists)
+         * @returns {jQuery}
+         */
+        getTargetElement: function() {
+            var target = this.getTarget();
+            return !target ? null :
+                target instanceof croc.cmp.Widget ? target.getElement() :
+                    target instanceof jQuery ? target : null;
         },
         
         /**
@@ -449,8 +500,10 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
             
             var dontOpen = false;
             var preventOpen = function() {dontOpen = true;};
-            this._model.increment('onBeforeOpen');
-            this.fireEvent('beforeOpen', this.getTarget(), preventOpen);
+            this._model.set('onBeforeOpen', {prevent: preventOpen});
+            if (!dontOpen) {
+                this.fireEvent('beforeOpen', this.getTarget(), preventOpen);
+            }
             
             if (dontOpen) {
                 this.__openDisposer.disposeAll();
@@ -464,14 +517,36 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
         },
         
         /**
+         * @param {boolean} [skipError]
+         * @returns {croc.cmp.common.bubble.MBubble}
+         */
+        render: function(controller, skipError) {
+            if (this.parent) {
+                if (skipError) {
+                    return this;
+                }
+                else {
+                    throw new Error('Widget has already rendered or it\'s being prepared for rendering.');
+                }
+            }
+            
+            var view = controller.app.views.find(this.constructor.classname);
+            view.componentFactory.init(controller.page.context, this);
+            
+            if (croc.isClient) {
+                this._selfRendered = true;
+                croc.app.model.push('_page.bubbles', {'class': this.constructor.classname, instance: this});
+            }
+            return this;
+        },
+        
+        /**
          * Пересчитать позицию
          */
         reposition: function() {
-            if (!this.getShown() || this._options.forbidPositioning) {
-                return;
+            if (this.getShown()) {
+                this._model.increment('onReposition');
             }
-            
-            this._model.increment('onReposition');
         },
         
         /**
@@ -516,24 +591,12 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
         },
         
         /**
-         * @returns {jQuery}
-         * @private
-         */
-        __getTargetEl: function() {
-            var target = this.getTarget();
-            return !target ? null :
-                target instanceof croc.cmp.Widget ? target.getElement() :
-                    target instanceof jQuery ? target : null;
-        },
-        
-        /**
          * Выполняется когда свойства виджета уже инициализированы
          * @private
          */
         __onBubbleModel: function() {
             var options = this._options;
-            this.__opener = options.opener;
-            var targetEl = this.__getTargetEl();
+            var targetEl = this.getTargetElement();
             
             if (!options.controlWidget && targetEl) {
                 options.controlWidget = croc.cmp.Widget.getClosestWidget(targetEl);
@@ -551,25 +614,16 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
             //todo разобрать с этим
             if (options.controlWidget) {
                 this._getDisposer().addListener(options.controlWidget, 'dispose', function() {
-                    this.destroy();
+                    if (this._selfRendered) {
+                        this._model.root.remove('_page.bubbles',
+                            _.findIndex(this._model.root.get('_page.bubbles'), function(x) {
+                                return x.instance === this;
+                            }, this));
+                    }
+                    else {
+                        this.dispose();
+                    }
                 }, this);
-            }
-            
-            //close on parent bubble close
-            var placeEl = targetEl || (options.opener ?
-                    croc.cmp.Widget.resolveElement(options.opener) :
-                options.controlWidget && options.controlWidget.getElement());
-            
-            if (placeEl) {
-                var parentBubbleEl = placeEl.closest('.js-bubble');
-                var parentBubble = parentBubbleEl.length && croc.cmp.Widget.getByElement(parentBubbleEl);
-                if (parentBubble) {
-                    this._getDisposer().addListener(parentBubble, 'changeOpen', function(open) {
-                        if (!open) {
-                            this.close(true);
-                        }
-                    }, this);
-                }
             }
             
             if (options.manager) {

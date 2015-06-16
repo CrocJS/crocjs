@@ -23,6 +23,13 @@ croc.Class.define('croc.data.chain.Atom', {
         },
         
         getItems: function() { throw 'abstract!'; },
+    
+        /**
+         * @returns {croc.data.chain.IList}
+         */
+        getRoot: function() {
+            return this;
+        },
         
         lookup: function(iface, skipMe) {
             if (skipMe) {

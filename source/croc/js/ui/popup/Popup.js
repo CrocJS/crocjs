@@ -217,7 +217,7 @@ croc.Class.define('croc.ui.popup.Popup', {
     },
     
     construct: function(options) {
-        croc.ui.popup.Popup.superclass.__construct__.apply(this, arguments);
+        croc.ui.popup.Popup.superclass.construct.apply(this, arguments);
         
         if (Stm.env.ldevice === 'mobile') {
             options.customReposition = function($this, bubbleCss, jointCss) {

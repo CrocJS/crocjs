@@ -297,7 +297,7 @@ croc.Class.define('croc.ui.form.suggestion.Default', {
             });
         }
         
-        croc.ui.form.suggestion.Default.superclass.__construct__.apply(this, arguments);
+        croc.ui.form.suggestion.Default.superclass.construct.apply(this, arguments);
     },
     
     members: {

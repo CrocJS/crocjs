@@ -66,7 +66,7 @@ croc.Class.define('croc.ui.list.itemsManager.Paging', {
         this.__switchItemsFn = options.switchItemsFn;
         this.__goToJustLoadedPage = options.goToJustLoadedPage;
         
-        croc.ui.list.itemsManager.Paging.superclass.__construct__.apply(this, arguments);
+        croc.ui.list.itemsManager.Paging.superclass.construct.apply(this, arguments);
     },
     
     members: {

@@ -36,7 +36,7 @@ croc.Class.define('croc.data.LocalStorageArray', {
             this.__setLsArray(options.original);
         }
         
-        croc.data.LocalStorageArray.superclass.__construct__.apply(this, arguments);
+        croc.data.LocalStorageArray.superclass.construct.apply(this, arguments);
         
         this.on('change', function() {
             this.__setLsArray(this.getArray());

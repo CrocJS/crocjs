@@ -113,7 +113,7 @@ croc.Class.define('croc.ui.list.itemsManager.Abstract', {
     },
     
     construct: function(options) {
-        croc.ui.list.itemsManager.Abstract.superclass.__construct__.apply(this, arguments);
+        croc.ui.list.itemsManager.Abstract.superclass.construct.apply(this, arguments);
         
         this.__hasPrevItemsClass = options.hasPrevItemsClass;
         this.__hasNextItemsClass = options.hasNextItemsClass;

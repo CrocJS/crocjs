@@ -72,7 +72,7 @@ croc.Class.define('croc.cmp.common.bubble.Manager', {
         this.__openCollection = new croc.data.ObservableArray();
         this.__isManageable = options.isManageableFn;
         
-        croc.cmp.common.bubble.Manager.superclass.__construct__.apply(this, arguments);
+        croc.cmp.common.bubble.Manager.superclass.construct.apply(this, arguments);
         this.fireEvent('created');
     },
     

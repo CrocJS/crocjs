@@ -13,8 +13,20 @@ croc.View.define('croc.cmp.form.field.AbstractTextField.View', {
             }, this);
             
             this.__setUpAbstractTextFieldBehavior();
-            if (this._options.selectionBehavior) {
+            if (this._data.selectionBehavior) {
                 this.__setUpSelectionBehavior();
+            }
+            
+            this._widget.listenProperty('action', _.debounce(this.disposableFunc(function(action) {
+                if (action && action.callback) {
+                    action.callback($(this.actionCellElement).children());
+                }
+            }, this), 0));
+            
+            if (this._data.manageFocus) {
+                this._widget.listenProperty('focused', function(value) {
+                    this.getElement().toggleClass('state_focus', !!value);
+                }, this);
             }
             
             if (Stm.env.device === 'desktop') {
@@ -48,7 +60,7 @@ croc.View.define('croc.cmp.form.field.AbstractTextField.View', {
                 }
                 
                 var delta;
-                if (this._options.mobileScrollTop) {
+                if (this._data.mobileScrollTop) {
                     delta = el.offset().top - winEl.scrollTop() - gap;
                 }
                 else {
@@ -80,8 +92,8 @@ croc.View.define('croc.cmp.form.field.AbstractTextField.View', {
             inputEl
                 .on('input propertychange keyup focus blur', function(e) {
                     var value = inputEl.val();
-                    if (this._options.transformOnUpdateFunc) {
-                        value = this._options.transformOnUpdateFunc(value);
+                    if (this._data.transformOnUpdateFunc) {
+                        value = this._data.transformOnUpdateFunc(value);
                     }
                     if (value !== inputEl.val()) {
                         this._widget.setInstantValue(value);
@@ -103,8 +115,8 @@ croc.View.define('croc.cmp.form.field.AbstractTextField.View', {
          * @private
          */
         __setUpSelectionBehavior: function() {
-            var smartSelectOnClick = this._options.selectionBehavior === 'smartSelectOnClick';
-            var selectOnFocus = this._options.selectionBehavior === 'selectOnFocus';
+            var smartSelectOnClick = this._data.selectionBehavior === 'smartSelectOnClick';
+            var selectOnFocus = this._data.selectionBehavior === 'selectOnFocus';
             
             var prevSelection;
             var focused;

@@ -1,5 +1,3 @@
-<cls:><super/> type_text</cls:>
-
 <input:>
     <input id="{{=getVar('fieldId')}}" name="{{identifier}}" disabled="{{disabled}}" tabindex="{{tabIndex}}" as="fieldElement"
         class="b-input-field-h" readonly="{{readOnly}}" maxlength="{{maxLength}}"

@@ -12,31 +12,13 @@ croc.Class.define('croc.cmp.list.Bubble', {
          * Максимальное количество видимых одновременно элементов
          * @type {number}
          */
-        MAX_VISIBLE_ITEMS_COUNT: 10,
+        MAX_VISIBLE_ITEMS_COUNT: Stm.env.ldevice === 'mobile' ? 5 : 10,
         
         /**
          * Минимальное количество видимых одновременно элементов
          * @type {number}
          */
-        MIN_VISIBLE_ITEMS_COUNT: 3,
-        
-        /**
-         * Коды ошибки сервера и сообщения к ним
-         * @private
-         * @static
-         */
-        __ERROR_CODES: {
-            11: 'По запросу <b>{query}</b> ничего не найдено'
-        },
-        
-        /**
-         * @private
-         * @static
-         */
-        __TEMPLATE_ITEM: '' +
-        '<div class="b-suggestion-item{cls}" title="{title}">' +
-        '   {text}' +
-        '</div>'
+        MIN_VISIBLE_ITEMS_COUNT: 3
     },
     
     events: {
@@ -48,7 +30,8 @@ croc.Class.define('croc.cmp.list.Bubble', {
     
     properties: {
         disableOpening: {
-            value: false
+            value: false,
+            event: true
         },
         
         /**
@@ -239,6 +222,19 @@ croc.Class.define('croc.cmp.list.Bubble', {
                 }
                 this.reposition();
             }, this));
+        },
+        
+        /**
+         * Инициализация виджета после его отрисовки в DOM
+         * @protected
+         */
+        _initWidget: function() {
+            croc.cmp.list.Bubble.superclass._initWidget.apply(this, arguments);
+            this.on('changeDisableOpening', function(value) {
+                if (!value) {
+                    this.close();
+                }
+            }, this);
         },
         
         _isOpenAllowed: function() {

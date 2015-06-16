@@ -180,7 +180,7 @@ croc.Class.define('croc.ui.social.Button', {
          */
         this.__resources = croc.getService(croc.services.Resources);
         
-        croc.ui.social.Button.superclass.__construct__.apply(this, arguments);
+        croc.ui.social.Button.superclass.construct.apply(this, arguments);
     },
     
     members: {

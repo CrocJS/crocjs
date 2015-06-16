@@ -64,7 +64,7 @@ croc.Class.define('croc.ui.list.itemsManager.Scrolling', {
         this.__scrollbarSize = options.scrollbarSize;
         this.__discreteScrolling = options.discreteScrolling;
         
-        croc.ui.list.itemsManager.Scrolling.superclass.__construct__.apply(this, arguments);
+        croc.ui.list.itemsManager.Scrolling.superclass.construct.apply(this, arguments);
     },
     
     members: {
