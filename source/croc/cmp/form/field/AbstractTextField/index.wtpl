@@ -1,6 +1,10 @@
 <index:>
     <tag is="{{desktop}}label{{else}}div{{/desktop}}"
-        class="b-input set_default type_{{cssType}} size_{{=size}}{{if disabled}} state_disabled{{/if}}{{if align}} align_{{align}}{{/if}}{{croc.cmp.form.validation.MStandardValidatable.classByValid(valid_throttled)}}">
+        class="b-input set_default type_{{cssType}} size_{{=size}}
+        {{if disabled}}state_disabled{{/if}}
+        {{if align}}align_{{align}}{{/if}}
+        {{croc.cmp.form.validation.MStandardValidatable.classByValid(valid_throttled)}}">
+        
         <div class="b-input-h">
             <virtualView is="cellsBefore"/>
             <div class="b-input-cell cell_field">

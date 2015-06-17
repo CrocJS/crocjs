@@ -1,5 +1,10 @@
 <index:>
-    <label class="b-input-{{=getButtonType()}} size_{{view 'size', {size: size}}} scheme_{{scheme}}{{if value}} state_checked{{/if}}{{if active}} state_active{{/if}}{{if hover}} state_hover{{/if}}">
+    <label class="b-input-{{=getButtonType()}}
+    size_{{view 'size', {size: size}}}
+    scheme_{{scheme}}
+    {{if value}}state_checked{{/if}}
+    {{if active}}state_active{{/if}}
+    {{if hover}}state_hover{{/if}}">
         <input id="{{=getVar('fieldId')}}" name="{{identifier}}" disabled="{{disabled}}" tabindex="{{tabIndex}}" as="fieldElement"
             type="{{=getButtonType()}}" value="{{permanentValue}}" checked="{{value}}"><span class="b-input-{{=getButtonType()}}-h"></span>
     </label>

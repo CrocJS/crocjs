@@ -1,13 +1,19 @@
 <index:>
     <widget is="croc.cmp.form.field.TextField"
-        class="role_{{mode}} filtering_{{enableFiltering ? 'on' : 'off'}}{{if multiselect}} addbutton_{{addButton ? 'on' : 'off'}}{{/if}}{{if !addingValues}} adding_false{{/if}}{{if rawState}} state_raw{{/if}}"
+        class="role_{{mode}}
+        filtering_{{enableFiltering ? 'on' : 'off'}}
+        {{if multiselect}}addbutton_{{addButton ? 'on' : 'off'}}{{/if}}
+        {{if !addingValues}}adding_false{{/if}}
+        {{if rawState}}state_raw{{/if}}"
         instantValue="{{textFieldInstantValue}}">
+        
         <passView is="addition" outerscope>
             <virtualView is="addition"/>
             {{if !multiselect}}
                 <input type="hidden" class="b-input-combo-hidden" name="{{identifier}}" value="{{plainValue}}">
             {{/if}}
         </passView>
+        
         <passView is="input" outerscope>
             {{if multiselect}}
                 {{each value as #item}}
@@ -33,6 +39,4 @@
     </widget>
 </index:>
 
-<cell:>
-    <view is="croc.cmp.form.field.TextField:cell" cls="{{@cls}}">{{@content}}</view>
-</cell:>
+<cell:><view is="croc.cmp.form.field.TextField:cell" cls="{{@cls}}">{{@content}}</view></cell:>
