@@ -224,14 +224,19 @@ croc.Class.define('croc.cmp.form.suggestion.Suggestion', {
         },
         
         /**
-         * Предотвратить открытие подсказки при фокусе поля
+         * Закрыть и предотвратить открытие подсказки в следующий момент
          */
         preventOpening: function() {
-            this.__dirtyState = false;
-            if (this.__stream) {
-                this.__stream.invalidateElements(true);
+            if (this.getDisableOpening()) {
+                return;
             }
-            this.close(true);
+            
+            this._options.dirtyState = false;
+            this.close();
+            this.setDisableOpening(true);
+            this._getDisposer().defer(function() {
+                this.setDisableOpening(false);
+            }, this);
         },
         
         /**
@@ -239,7 +244,7 @@ croc.Class.define('croc.cmp.form.suggestion.Suggestion', {
          * копироваться в свойство searchString модели
          */
         removeDirtyState: function() {
-            this.__dirtyState = false;
+            this._options.dirtyState = false;
         },
         
         setSelectedItem: function(item, method) {
@@ -380,14 +385,14 @@ croc.Class.define('croc.cmp.form.suggestion.Suggestion', {
         __bindToField: function() {
             //прямой биндинг
             if (this.__field.getValue()) {
-                this.__dirtyState = true;
+                this._options.dirtyState = true;
             }
             
             if (!this._options.disableFiltering) {
                 this.__filteringHandler = this._getDisposer().addListener(this.__field, 'changeInstantValue',
                     function(value) {
                         if (!this.__setValueIntarnally) {
-                            this.__dirtyState = false;
+                            this._options.dirtyState = false;
                             //this.close(true);
                             this.__searchable.setSearchString(value);
                         }

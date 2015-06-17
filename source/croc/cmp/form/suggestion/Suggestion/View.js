@@ -190,7 +190,7 @@ croc.View.define('croc.cmp.form.suggestion.Suggestion.View', {
                             }
     
                             this._data.fieldActive = true;
-                            if (this._model.get('openSuggestionOnFirstFocus') && this.__dirtyState && this.__field.getValue()) {
+                            if (this._data.openSuggestionOnFirstFocus && this._data.dirtyState && this.__field.getValue()) {
                                 this._widget.getSearchableModel().setSearchString(this.__field.getValue());
                             }
                             else if (!this._widget.open() && this._widget.getShowUnfilteredOnFocus() && !this._widget.getSearchableModel().getSearchString()) {

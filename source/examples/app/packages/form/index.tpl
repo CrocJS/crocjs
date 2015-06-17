@@ -92,7 +92,14 @@
                     </view>
                     
                     <view is=":row" label="ComboBox">
-                        <widget is="croc.cmp.form.field.ComboBox" options="{{['one', 'two', 'three']}}"></widget>
+                        <widget is="croc.cmp.form.field.ComboBox" options="{{['one', 'two', 'three']}}" as="myCombo">
+                            <passView is="cellsBefore" outerscope>
+                                <view is=":cell" cls="cell_button">
+                                    <widget is="croc.cmp.form.Button" class="round_left place_input size_2" text="random"
+                                        on-click="myCombo.setValue(_.sample(['123', '456', '789', '000']))" section="items"></widget>
+                                </view>
+                            </passView>
+                        </widget>
                     </view>
                     <view is=":row" label="Select" hint="{{JSON.stringify(selectValue)}}">
                         <widget is="croc.cmp.form.field.ComboBox" mode="select" options="{{['one', 'two', 'three']}}" value="{{selectValue}}"></widget>

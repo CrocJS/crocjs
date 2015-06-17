@@ -112,9 +112,7 @@ croc.Class.define('croc.cmp.form.field.ComboBox', {
         textFieldConf: {
             extend: true,
             value: {}
-        },
-        
-        _wrapper: true
+        }
     },
     
     construct: function() {
@@ -253,9 +251,11 @@ croc.Class.define('croc.cmp.form.field.ComboBox', {
             croc.cmp.form.field.ComboBox.superclass._initWidget.apply(this, arguments);
             this.__suggestion.setTarget(this.getElement());
         },
-        
+    
         /**
          * @param value
+         * @param old
+         * @param internal
          * @private
          */
         __applyValue: function(value, old, internal) {
@@ -329,12 +329,7 @@ croc.Class.define('croc.cmp.form.field.ComboBox', {
                 this.setValue((this.getValue() || []).concat(normalized));
                 this._model.set('selectedItem', normalized);
                 this._wrapped.setValue('');
-                
-                //todo исправить это в новых компонентах
-                this.__suggestion.close();
-                this._getDisposer().defer(function() {
-                    this.__suggestion.close();
-                }, this);
+                this.__suggestion.preventOpening();
             }, this);
         },
         
@@ -366,11 +361,7 @@ croc.Class.define('croc.cmp.form.field.ComboBox', {
          * @private
          */
         __setTextFieldDefaults: function() {
-            //todo move to method
-            ['cellsBefore', 'cellsAfterInput', 'cellsAfter'].forEach(function(view) {
-                this._options.ddefaults['_pass_view_' + view] = this._options['_pass_view_' + view];
-            }, this);
-            _.assign(this._options.ddefaults, {
+            this._options.defaults.wrapped = _.assign({
                 selectionBehavior: this.__isSelect && !this.__isMultiSelect ? 'selectOnFocus' : null,
                 value: (this.__isMultiSelect || !this.getValue() ? null :
                     this.__isSelect ? this.getValue().text : this.getValue()) || '',

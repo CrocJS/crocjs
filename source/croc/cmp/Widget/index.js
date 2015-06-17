@@ -211,12 +211,7 @@ croc.Class.define('croc.cmp.Widget', {
         _addClasses: {
             type: 'array',
             concat: true
-        },
-        
-        /**
-         * todo remove this option
-         */
-        _wrapper: {}
+        }
     },
     
     construct: function(options) {
@@ -346,7 +341,7 @@ croc.Class.define('croc.cmp.Widget', {
          * @protected
          */
         getDefaultItemsSection: function() {
-            return this._options._wrapper ? 'wrapped' : 'items';
+            return 'items';
         },
         
         /**
@@ -657,7 +652,7 @@ croc.Class.define('croc.cmp.Widget', {
                 }.bind(this));
                 (parent.__sections[options.section] || (parent.__sections[options.section] = [])).push(this);
                 
-                if (parent._options._wrapper && section === 'wrapped') {
+                if (section === 'wrapped') {
                     parent._wrapped = this;
                 }
             }

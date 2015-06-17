@@ -1,38 +1,38 @@
 <index:>
     <widget is="croc.cmp.form.field.TextField"
         class="role_{{mode}} filtering_{{enableFiltering ? 'on' : 'off'}}{{if multiselect}} addbutton_{{addButton ? 'on' : 'off'}}{{/if}}{{if !addingValues}} adding_false{{/if}}{{if rawState}} state_raw{{/if}}"
-        _identifier="{{identifier}}"
-        _plainValue="{{plainValue}}"
-        _multiselect="{{multiselect}}"
-        _select="{{select}}"
-        _addButton="{{addButton}}"
-        _showAddButton="{{showAddButton}}"
-        _enableFiltering="{{enableFiltering}}"
-        _selectedItem="{{selectedItem}}"
-        _value="{{value}}">
-        <passView is="addition">
-            <virtualView is="addition" controller="p"/>
-            {{if !_multiselect}}
-                <input type="hidden" class="b-input-combo-hidden" name="{{_identifier}}" value="{{_plainValue}}">
+        instantValue="{{textFieldInstantValue}}">
+        <passView is="addition" outerscope>
+            <virtualView is="addition" origscope/>
+            {{if !multiselect}}
+                <input type="hidden" class="b-input-combo-hidden" name="{{identifier}}" value="{{plainValue}}">
             {{/if}}
         </passView>
-        <passView is="input">
-            {{if _multiselect}}
-                {{each _value as #item}}
-                    <span class="b-input-combo-button view_added{{if #item === _selectedItem}} state_active{{/if}}"
-                        on-click="pv.selectItem($event, #item)"
-                        on-mousedown="pv.multiItemMouseDown($event)">
-                        {{#item.text}} <span class="b-input-combo-button-action" on-click="pv.removeItem(#item)"></span>{c}
-                        <input type="hidden" name="{{_identifier && (_identifier + '[]')}}" value="{{#item.value}}">
+        <passView is="input" outerscope>
+            {{if multiselect}}
+                {{each value as #item}}
+                    <span class="b-input-combo-button view_added{{if #item === selectedItem}} state_active{{/if}}"
+                        on-click="v.selectItem($event, #item)"
+                        on-mousedown="v.multiItemMouseDown($event)">
+                        {{#item.text}} <span class="b-input-combo-button-action" on-click="v.removeItem(#item)"></span>{c}
+                        <input type="hidden" name="{{identifier && (identifier + '[]')}}" value="{{#item.value}}">
                     </span>
                 {{/each}}
-            {{else if _select && !_enableFiltering}}
-                <div class="b-input-field-h" as="pv.fakeInputElement">{{instantValue}}</div>
+            {{else if select && !enableFiltering}}
+                <div class="b-input-field-h" as="v.fakeInputElement">{{textFieldInstantValue}}</div>
             {{/if}}
-            {{if _showAddButton}}
-                <span class="b-input-combo-button view_add" as="pv.addButtonElement"><span class="b-input-combo-button-action"></span> добавить</span>
+            {{if showAddButton}}
+                <span class="b-input-combo-button view_add" as="v.addButtonElement"><span class="b-input-combo-button-action"></span> добавить</span>
             {{/if}}
-            <super/>
+            <super origscope/>
         </passView>
+        
+        <proxyView is="cellsBefore" outerscope/>
+        <proxyView is="cellsAfterInput" outerscope/>
+        <proxyView is="cellsAfter" outerscope/>
     </widget>
 </index:>
+
+<cell:>
+    <view is="croc.cmp.form.field.TextField:cell" cls="{{@cls}}">{{@content}}</view>
+</cell:>

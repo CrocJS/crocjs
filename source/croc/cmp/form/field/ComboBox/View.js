@@ -275,6 +275,12 @@ croc.View.define('croc.cmp.form.field.ComboBox.View', {
                     this._model.del('selectedItem');
                 }
             }, this);
+            
+            this._model.on('change', 'selectedItem', function(value) {
+                if (value || value === 0) {
+                    fieldEl.blur();
+                }
+            }, this);
         },
         
         /**
@@ -375,12 +381,7 @@ croc.View.define('croc.cmp.form.field.ComboBox.View', {
                 if (isSelect && fieldEl.is(':focus')) {
                     fieldEl.select();
                 }
-                
-                //todo исправить это в новых компонентах
-                suggestion.close();
-                this._getDisposer().defer(function() {
-                    suggestion.close();
-                }, this);
+                suggestion.preventOpening();
             }, this);
         },
         
