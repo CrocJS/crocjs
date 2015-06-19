@@ -5,5 +5,4 @@ bower_components
 public
 npm-debug.log
 
-source/proto/*
 !source/proto/proto.js
