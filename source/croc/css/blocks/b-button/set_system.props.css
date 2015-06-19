@@ -33,33 +33,38 @@
 
 /* Size 1 */
 .b-button.set_system.size_1 {
-    height: 28px;
+    /* height: 28px; */
     padding: 5px 10px;
     font-size: 13px;
+    line-height: 18px;
     }
 /* Size 2 */
 .b-button.set_system.size_2 {
-    height: 34px;
-    padding: 6px 10px;
+    /* height: 34px; */
+    padding: 7px 10px;
     font-size: 16px;
+    line-height: 20px;
     }
 /* Size 3 */
 .b-button.set_system.size_3 {
-    height: 40px;
-    padding: 7px 12px;
+    /* height: 40px; */
+    padding: 9px 12px;
     font-size: 18px;
+    line-height: 22px;
     }
 /* Size 4 */
 .b-button.set_system.size_4 {
-    height: 46px;
-    padding: 8px 12px;
+    /* height: 46px; */
+    padding: 11px 12px;
     font-size: 21px;
+    line-height: 24px;
     }
 /* Size 5 */
 .b-button.set_system.size_5 {
-    height: 52px;
-    padding: 9px 12px;
+    /* height: 52px; */
+    padding: 12px 12px;
     font-size: 24px;
+    line-height: 28px;
     }
 
 

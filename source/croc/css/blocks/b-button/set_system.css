@@ -3,10 +3,12 @@
 .b-button.set_system {
     vertical-align: top;
     overflow: visible;
+    line-height: 100%;
     cursor: pointer;
     z-index: 1;
     border: 0 solid rgba(0, 0, 0, .05);
     border-radius: 3px;
+    appearance: none;
     transition: background 0.05s ease, box-shadow 0.05s ease, border-color 0.05s, transform 0.05s ease;
     }
     /* Event hover */
