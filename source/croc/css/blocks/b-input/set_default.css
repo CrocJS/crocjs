@@ -45,14 +45,10 @@
             width: 100%;
             margin: 0;
             padding: 3px 0; /* @default */
-            font-size: 13px;
-            line-height: 18px;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #000;
+            position: relative;
+            color: #333;
             background: url(about:blank);
             border: none;
-            outline: none;
-            position: relative;
             z-index: 1;
             box-sizing: border-box;
             }
@@ -941,35 +937,3 @@
 .b-input.set_default.align_right .b-input-field-h {
     text-align: right;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

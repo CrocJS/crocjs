@@ -4,10 +4,14 @@ input, button {
     overflow: visible;
     }
 input, button, select, textarea {
-    vertical-align: middle;
-    line-height: normal;
+    font: inherit;
     outline: none;
     }
+    button::-moz-focus-inner,
+    input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+        }
 
 
 

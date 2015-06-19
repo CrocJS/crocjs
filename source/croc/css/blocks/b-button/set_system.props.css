@@ -37,45 +37,30 @@
     padding: 5px 10px;
     font-size: 13px;
     }
-    button.b-button.set_system.size_1 {
-        /* padding: 5px 5px; */
-        }
 /* Size 2 */
 .b-button.set_system.size_2 {
     height: 34px;
     padding: 6px 10px;
     font-size: 16px;
     }
-    button.b-button.set_system.size_2 {
-        /* padding: 6px 6px; */
-        }
 /* Size 3 */
 .b-button.set_system.size_3 {
     height: 40px;
     padding: 7px 12px;
     font-size: 18px;
     }
-    button.b-button.set_system.size_3 {
-        /* padding: 7px 8px; */
-        }
 /* Size 4 */
 .b-button.set_system.size_4 {
     height: 46px;
     padding: 8px 12px;
     font-size: 21px;
     }
-    button.b-button.set_system.size_4 {
-        /* padding: 8px 8px; */
-        }
 /* Size 5 */
 .b-button.set_system.size_5 {
     height: 52px;
-    padding: 10px 12px;
+    padding: 9px 12px;
     font-size: 24px;
     }
-    button.b-button.set_system.size_5 {
-        /* padding: 10px 8px; */
-        }
 
 
 

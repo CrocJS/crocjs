@@ -9,7 +9,7 @@
         }
     .b-map-balloon-content,
     .b-map-balloon-content div {
-        font: 13px/18px Arial,Helvetica,sans-serif !important;
+        font: inherit !important;
         }
     .b-map-error {
         position: absolute;

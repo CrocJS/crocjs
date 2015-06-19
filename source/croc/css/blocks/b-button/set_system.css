@@ -9,11 +9,6 @@
     border-radius: 3px;
     transition: background 0.05s ease, box-shadow 0.05s ease, border-color 0.05s, transform 0.05s ease;
     }
-    button::-moz-focus-inner,
-    input::-moz-focus-inner {
-        padding: 0;
-        border: 0;
-        }
     /* Event hover */
     .b-button.set_system:hover {
         z-index: 2;
@@ -27,13 +22,12 @@
         height: 100%;
         margin: 0;
         padding: 0;
-        outline: none;
         font: 0/0 sans-serif;
         cursor: pointer;
         border: none;
         border-radius: 0;
         background: url(about:blank);
-        box-shadow: none !important;
+        box-shadow: none;
         opacity: 0 !important;
         z-index: 2;
         }
