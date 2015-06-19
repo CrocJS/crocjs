@@ -11,10 +11,6 @@
     border-radius: 50%;
     box-shadow: 0 1px 0 0 rgba(255, 255, 255, .15), 0 -1px 0 0 rgba(0, 0, 0, .1);
     }
-    .ie8 .b-popup.skin_default.scheme_default .b-popup-close,
-    .ie8 .b-popup-close.skin_default {
-        background-image: url(/croc/images/blocks/b-popup-close/b-popup-close.png);
-        }
     .b-popup.skin_default.scheme_default .b-popup-close:after,
     .b-popup-close.skin_default:after {
         content: '';

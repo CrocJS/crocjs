@@ -14,9 +14,5 @@
         font-size: 64px;
         line-height: 75px;
         }
-        .ie8 .b-popup.skin_lite.scheme_default .b-popup-h {
-            background: #000;
-            filter:progid:DXImageTransform.Microsoft.Alpha(opacity=75);
-            }
 
 

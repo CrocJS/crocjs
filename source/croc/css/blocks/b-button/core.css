@@ -1,0 +1,59 @@
+
+/* b-button */
+.b-button {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    padding: 0;
+   letter-spacing: normal;
+    word-spacing: normal;
+    white-space: nowrap;
+    text-align: center;
+    position: relative;
+    background-clip: padding-box;
+    box-sizing: border-box;
+    user-select: none;
+    appearance: none;
+    }
+    a.b-button:active,
+    a.b-button:hover,
+    a.b-button {
+        text-decoration: none !important;
+        }
+
+/* Box block */
+.b-button.box_block {
+    display: block;
+    }
+/* Selectable true */
+.b-button.selectable_true {
+    cursor: text;
+    user-select: text;
+    }
+
+/* Type image */
+.b-button.type_image {
+    background: none;
+    z-index: 0;
+    }
+    .b-button.type_image:before,
+    .b-button.type_image:after {
+        content: '';
+        display: block;
+        left: 100%;
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        overflow: hidden;
+        font: 0/0 serif;
+        background-repeat: no-repeat;
+        z-index: -1;
+        /* width: px; */
+        /* margin-left: px; */
+        /* background-image: url(../i/); */
+        /* background-position: px px; */
+        }
+    .b-button.type_image:before {
+        left: 0;
+        }
+

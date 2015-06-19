@@ -1,0 +1,44 @@
+/* b-flexbox */
+
+/* container */
+.b-flexbox {
+    display: flex;
+    }
+    .b-flexbox.orient_ver {
+        flex-direction: column;
+        }
+    .b-flexbox.orient_hor {
+        flex-direction: row;
+        }
+    .b-flexbox.items_stretch {
+        align-items: stretch;
+        }
+
+    @-moz-document url-prefix() {
+        .b-flexbox {
+            width: 100%;
+            }
+        }
+
+/* item */
+.b-flexbox-item {
+    order: 0;
+    flex: 0 0 auto;
+    align-self: auto;
+    position: relative;
+    }
+    .b-flexbox-item.flex_1 {
+        flex: 1 1 auto;
+        }
+    .b-flexbox-item.align_stretch {
+        align-self: stretch;
+        }
+
+/* stretch subitem */
+.b-flexbox-item-stretch {
+    position: absolute !important;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    }

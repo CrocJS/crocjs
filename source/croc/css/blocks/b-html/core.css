@@ -1,0 +1,25 @@
+
+/* html + body */
+.b-html,
+.b-body {
+    height: 100%;
+    pointer-events: auto;
+    }
+    /* State no-events */
+    .b-body.state_noevents {
+        pointer-events: none;
+        }
+.b-html {
+    overflow-x: auto;
+    overflow-y: scroll;
+    }
+    /* Crop mobile */
+    .b-html.crop_mobile .b-body {
+        overflow: hidden;
+        }
+    /* View alert */
+    .b-html.view_alert .b-alert {
+        display: block;
+        }
+
+

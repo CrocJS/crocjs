@@ -16,9 +16,6 @@
             background: linear-gradient(to bottom, #4e88c4 0%,#235895 100%); /* W3C */
             box-shadow: 0 0 0 1px rgba(0, 0, 0, .1) inset, 0 2px 0 0 rgba(255, 255, 255, .1) inset;
             }
-            .ie8 .b-popup.skin_default.scheme_default .b-popup-head-h {
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e88c4', endColorstr='#235895', GradientType=0 ); /* IE6-8 */
-                }
         .b-popup.skin_default.scheme_default .b-popup-head-title {
             text-align: center;
             }
@@ -61,9 +58,6 @@
             background: linear-gradient(to bottom, rgba(237,237,237,1) 0%,rgba(223,223,223,1) 100%); /* W3C */
             box-shadow: 0 0 0 1px rgba(0, 0, 0, .1) inset, 0 2px 0 0 rgba(255, 255, 255, .1) inset;
             }
-            .ie8 .b-popup.skin_default.scheme_gray .b-popup-head-h {
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#dfdfdf', GradientType=0 ); /* IE6-8 */
-                }
         .b-popup.skin_default.scheme_gray .b-popup-head-title {
             text-align: center;
             }

@@ -155,7 +155,7 @@ var jsdepExt = module.exports = {
                 
                 target.include = [
                     '!!' + __dirname + '/source/croc/css/common.css',
-                    'l-html',
+                    'b-html',
                     'croc.package',
                     'croc.Compatibility',
                     'croc',

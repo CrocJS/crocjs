@@ -1,0 +1,15 @@
+
+/* clearfix */
+.b-clearfix:before,
+.b-clearfix:after {
+    content: '';
+    display: table;
+    }
+.b-clearfix:after {
+    clear: both;
+    }
+.b-clear {
+    clear: both;
+    }
+
+

@@ -37,13 +37,6 @@
     .b-map-multi-icon.mod_yandex {
         /*inline*/background-image: url(/croc/images/blocks/b-map-multi/yandex.svg);
         }
-    .ie8 .b-map-multi-icon {
-        background: url(/croc/images/blocks/b-map-multi/switcher-icons.png) 0 0 no-repeat;
-        }
-        .ie8 .b-map-multi-icon.mod_yandex {
-            background-position: -35px 0;
-            margin: 0 2px 1px;
-            }
 
 
 

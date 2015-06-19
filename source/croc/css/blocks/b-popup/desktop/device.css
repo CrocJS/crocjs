@@ -88,11 +88,6 @@
         position: relative;
         }
 
-/* b-popup-wrap */
-.ie8 .b-popup-wrap {
-    background: url(/croc/images/blocks/b-popup/bg-alpha-75.png);
-    }
-
 /* STATE: loading */
 .b-popup.state_loading {
     min-width: 400px;

@@ -1,0 +1,45 @@
+
+/* Scheme red */
+.b-button.set_system.scheme_red {
+    color: #fff;
+    text-shadow: 0 0 1px rgba(0, 0, 0, .25);
+    background: #e12929;
+    }
+    /* Event + State hover */
+    .b-button.set_system.scheme_red:not(.view_label):not(.state_disabled):hover,
+    .b-button.set_system.scheme_red.state_hover:not(.view_label):not(.state_disabled) {
+        color: #fff;
+        background: #f23d3d;
+        }
+    /* Event + State active */
+    .b-button.set_system.scheme_red:not(.view_label):not(.state_disabled):active,
+    .b-button.set_system.scheme_red.state_active:not(.view_label):not(.state_disabled) {
+        color: #fff;
+        background: #cb2f2f;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1) inset;
+        }
+    /* State active */
+    .b-button.set_system.scheme_red.state_active {
+        cursor: default;
+        }
+    /* State disabled */
+    .b-button.set_system.scheme_red.state_disabled {
+        color: #fad7d7;
+        cursor: default;
+        background: #f99999;
+        box-shadow: none;
+        z-index: 0;
+        }
+        .b-button.set_system.scheme_red.state_disabled:hover,
+        .b-button.set_system.scheme_red.state_disabled:active {
+            color: #fad7d7 !important;
+            }
+        .b-button.set_system.scheme_red.state_disabled * {
+            opacity: .5;
+            }
+        .b-button.set_system.scheme_red.state_disabled .b-button-input {
+            cursor: default;
+            z-index: -1;
+            }
+
+

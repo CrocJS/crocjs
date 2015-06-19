@@ -20,9 +20,6 @@
         outline: none;
         z-index: 2;
         }
-        #js.ie8 .b-input-radio input[type=radio] {
-            -ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
-            }
     #js .b-input-radio-h {
         display: inline-block;
         vertical-align: middle;

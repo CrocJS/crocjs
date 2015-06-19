@@ -1,6 +1,6 @@
 <Page:>
     <!DOCTYPE html>
-    <html class="l-html" id="nojs">
+    <html class="b-html" id="nojs">
         <head>
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">

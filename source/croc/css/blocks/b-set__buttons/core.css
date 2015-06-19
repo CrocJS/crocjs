@@ -1,0 +1,20 @@
+﻿
+/* b-set buttons */
+.b-set__buttons.b-set {
+    
+    }
+
+/* Spacing 0 */
+.b-set__buttons.b-set.spacing_0 {
+    letter-spacing: normal;
+    font-size: 0;
+    }
+    .b-set__buttons.b-set.spacing_0 > .b-set-cell.b-button.set_system {
+        border-left-width: 1px;
+        border-radius: 0;
+        }
+        .b-set__buttons.b-set.spacing_0 > .b-set-cell.b-button.set_system:first-child {
+            border-left: 0;
+            }
+
+
