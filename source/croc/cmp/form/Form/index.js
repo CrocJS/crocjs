@@ -143,6 +143,12 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
+         * Конфигурация для менеджера состояний
+         * @type {Object}
+         */
+        stateManager: null,
+        
+        /**
          * Функция получения значений перед отправкой данных на сервер
          * @type {function():Object}
          */

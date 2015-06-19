@@ -1,0 +1,14 @@
+<index: attributes="footer head">
+    <div class="b-tooltip set_default scheme_{{scheme}} dir_{{dir}}">
+        <div class="b-tooltip-tri" as="v.triElement"></div>
+        <div class="b-tooltip-head">{{@head}}</div>
+        <div class="b-tooltip-body" style="{{bodyStyle}}" as="v.bodyElement">
+            {{if viewPassed('body')}}
+                <virtualview is="body"/>
+            {{else}}
+                {{@content}}
+            {{/if}}
+        </div>
+        {{@footer}}
+    </div>
+</index:>

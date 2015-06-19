@@ -39,10 +39,7 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble.View', {
         this._model.on('change', 'onReposition', this.onReposition.bind(this));
         
         this._widget.once('changeRendered', function() {
-            if (!this._widget.getTarget()) {
-                this._widget.setTarget($(this._widget.getDetachParent()));
-            }
-            this._widget.setDetachParent(document.body);
+            this.__onBubbleRendered();
             
             this._widget.on('changeShown', function(shown) {
                 if (shown) {
@@ -326,10 +323,10 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble.View', {
          */
         __applyKeepActualPosition: function(value) {
             if (value) {
-                if (this.getShown()) {
+                if (this._widget.getShown()) {
                     this.__keepActualPositionInterval =
                         this._widget.getShowDisposer().setInterval(function() {
-                            if (!this._model.get('opening') && !this._model.get('closing')) {
+                            if (!this._data.opening && !this._model.closing) {
                                 this._widget.reposition();
                             }
                         }.bind(this), 15);
@@ -744,6 +741,20 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble.View', {
                 }
                 else {
                     break;
+                }
+            }
+            
+            var docOffset = $(document.body).offset();
+            if ('left' in bubbleCss && docOffset.left) {
+                bubbleCss.left -= docOffset.left;
+                if ('left' in jointCss) {
+                    jointCss.left -= docOffset.left;
+                }
+            }
+            if ('top' in bubbleCss && docOffset.top) {
+                bubbleCss.top -= docOffset.top;
+                if ('top' in jointCss) {
+                    jointCss.top -= docOffset.top;
                 }
             }
         },

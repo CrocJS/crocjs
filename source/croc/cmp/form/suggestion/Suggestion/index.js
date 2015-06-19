@@ -373,9 +373,8 @@ croc.Class.define('croc.cmp.form.suggestion.Suggestion', {
             
             var inputOnChoose = this.getInputOnChoose();
             if (inputOnChoose) {
-                this.__setValueIntarnally = inputOnChoose === 'update';
-                this.__field.setValue(inputOnChoose === 'update' ? this.normalizeItem(item).text : '');
-                this.__setValueIntarnally = false;
+                this.__field.setValue(inputOnChoose === 'update' ? this.normalizeItem(item).text : '',
+                    {internal: inputOnChoose === 'update'});
             }
         },
         
@@ -390,8 +389,8 @@ croc.Class.define('croc.cmp.form.suggestion.Suggestion', {
             
             if (!this._options.disableFiltering) {
                 this.__filteringHandler = this._getDisposer().addListener(this.__field, 'changeInstantValue',
-                    function(value) {
-                        if (!this.__setValueIntarnally) {
+                    function(value, old, passed) {
+                        if (!passed || !passed.keepSearchString && !passed.internal) {
                             this._options.dirtyState = false;
                             //this.close(true);
                             this.__searchable.setSearchString(value);
@@ -404,14 +403,12 @@ croc.Class.define('croc.cmp.form.suggestion.Suggestion', {
                 if (this._options.itemSelectingMethod === 'keydown' && this.getOpen()) {
                     if (this._options.updateInputOnSelect) {
                         var selectedItem = this._options.selection[0];
-                        this.__setValueIntarnally = true;
                         if (selectedItem) {
-                            this.__field.setValue(this.normalizeItem(selectedItem).text);
+                            this.__field.setValue(this.normalizeItem(selectedItem).text, {internal: true});
                         }
                         else {
-                            this.__field.setValue(this.__searchable.getSearchString());
+                            this.__field.setValue(this.__searchable.getSearchString(), {internal: true});
                         }
-                        this.__setValueIntarnally = false;
                     }
                 }
             }.bind(this);

@@ -1,5 +1,5 @@
 <index:>
-    <tag is="{{tag}}" class="{{if !custom}}b-sbutton{{if set}} set_{{set}}{{/if}}{{if scheme}} scheme_{{scheme}}{{/if}} size_{{size}}{{/if}}{{if active}} state_active{{/if}}{{if disabled}} state_disabled{{/if}}{{if loading}} state_loading{{/if}}">
+    <tag is="{{href ? 'a' : tag}}" href="{{href}}" class="{{if !custom}}b-sbutton{{if set}} set_{{set}}{{/if}}{{if scheme}} scheme_{{scheme}}{{/if}} size_{{size}}{{/if}}{{if active}} state_active{{/if}}{{if disabled}} state_disabled{{/if}}{{if loading}} state_loading{{/if}}">
         {{if !custom}}
             {{if type}}
                 <input type="{{type}}" class="b-sbutton-input" value="{{value || text}}" disabled="{{disabled}}">

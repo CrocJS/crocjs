@@ -29,6 +29,13 @@ croc.Class.define('croc.cmp.form.StateManager', {
         updateStateChanged: null
     },
     
+    properties: {
+        instantValues: {
+            __setter: null,
+            event: true
+        }
+    },
+    
     options: {
         /**
          * Не хранить в состоянии пустые значения
@@ -47,20 +54,19 @@ croc.Class.define('croc.cmp.form.StateManager', {
         this.__stateUpdated = false;
         this.__values = null;
         this.__stateSaved = false;
+        this.__setInstantValues({});
         
-        this.__disposer = new croc.util.Disposer();
-        
-        this.on('updateState', function(item, value) {
+        this.on('updateState', function(item, value, values) {
             var state = item && value !== undefined ? this.getState(item, value) : this.getState();
             var stateUpdated = this.__initialState !== state;
             if (stateUpdated !== this.__stateUpdated) {
                 this.__stateUpdated = stateUpdated;
                 this.fireEvent('updateStateChanged', stateUpdated);
             }
+            this.__setInstantValues(_.clone(values));
         }, this);
         
         this.on('changeState', function() {
-            this.__values = null;
             var stateChanged = this.__initialState !== this.getState();
             if (stateChanged !== this.__stateChanged) {
                 this.__stateChanged = stateChanged;
@@ -77,32 +83,37 @@ croc.Class.define('croc.cmp.form.StateManager', {
          * @param {boolean} [options.dontReset=false]
          */
         addItem: function(item, options) {
-            if (_.contains(this.__items, item) !== -1) {
+            if (_.contains(this.__items, item)) {
                 return;
             }
             
             this.__items.push(item);
             this.__itemsOptions[croc.utils.objUniqueId(item)] = options || {};
             
-            this.__disposer.addListener(item, 'changeValue', function(value) {
+            this._getDisposer().addListener(item, 'changeValue', function() {
                 if (this.__stateSaved) {
-                    this.fireEvent('updateState', item, item.getPlainValue());
-                    this.fireEvent('changeState', item, item.getPlainValue());
+                    this.__values = null;
+                    var values = this.getValues();
+                    var value = item.getPlainValue();
+                    this.fireEvent('updateState', item, value, values);
+                    this.fireEvent('changeState', item, value, values);
                 }
             }, this);
             
             if (croc.Interface.check(item, 'croc.cmp.form.field.IUpdatableField')) {
-                this.__disposer.addListener(item, 'changeInstantValue', function(value) {
+                this._getDisposer().addListener(item, 'changeInstantValue', function(value) {
                     if (this.__stateSaved) {
-                        this.fireEvent('updateState', item, value);
+                        this.__mixValue(this.__values, item, value);
+                        this.fireEvent('updateState', item, value, this.__values);
                     }
                 }, this);
             }
             
             if (this.__stateSaved) {
                 this.__values = null;
-                this.fireEvent('updateState', item);
-                this.fireEvent('changeState', item);
+                var values = this.getValues();
+                this.fireEvent('updateState', item, undefined, values);
+                this.fireEvent('changeState', item, undefined, values);
             }
         },
         
@@ -173,9 +184,10 @@ croc.Class.define('croc.cmp.form.StateManager', {
             if (!croc.utils.arrRemove(this.__items, item)) {
                 return;
             }
-            this.__disposer.removeObject(item);
-            this.fireEvent('updateState', item);
-            this.fireEvent('changeState', item);
+            this._getDisposer().removeObject(item);
+            var values = this.getValues();
+            this.fireEvent('updateState', item, undefined, values);
+            this.fireEvent('changeState', item, undefined, values);
             delete this.__itemsOptions[croc.utils.objUniqueId(item)];
         },
         
@@ -203,8 +215,8 @@ croc.Class.define('croc.cmp.form.StateManager', {
             this.__initialState = this.getState();
             this.__stateSaved = true;
             
-            this.fireEvent('updateState');
-            this.fireEvent('changeState');
+            this.fireEvent('updateState', null, undefined, this.__initialValues);
+            this.fireEvent('changeState', null, undefined, this.__initialValues);
         },
         
         /**

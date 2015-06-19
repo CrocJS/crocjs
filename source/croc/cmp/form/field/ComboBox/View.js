@@ -217,10 +217,10 @@ croc.View.define('croc.cmp.form.field.ComboBox.View', {
         __setUpMultiselect: function() {
             var suggestion = this._widget.getSuggestion();
             var textField = this._widget.getTextField();
+            var fieldEl = this._widget.getFieldElement();
             
             //add button
             if (this._data.initialAddButton) {
-                var fieldEl = this._widget.getFieldElement();
                 croc.Object.listenProperties(
                     textField, 'focused',
                     textField, 'instantValue',
@@ -242,14 +242,13 @@ croc.View.define('croc.cmp.form.field.ComboBox.View', {
             }, this);
             
             if (this._data.initialEnableFiltering) {
-                var fieldElement = this._widget.getFieldElement();
                 if (this._data.initialAddButton) {
                     var addButton = $(this.addButtonElement);
-                    fieldElement.css('minWidth',
+                    fieldEl.css('minWidth',
                         addButton.outerWidth() + croc.utils.domNumericCss(addButton, 'marginRight'));
                 }
                 
-                fieldElement.autoGrowInput({
+                fieldEl.autoGrowInput({
                     comfortZone: 20
                 });
                 

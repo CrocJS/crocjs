@@ -1,0 +1,11 @@
+<index: arrays="button/buttons">
+    <div class="b-set spacing_0">
+        {{each @buttons as #button}}
+            <widget is="croc.cmp.form.Button"
+                size="{{size}}"
+                disabled="{{disabled}}"
+                active="{{#button.value === value}}"
+                on-click="setValue(#button.value, {toggle: true})">{{#button.content}}</widget>
+        {{/each}}
+    </div>
+</index:>

@@ -49,6 +49,11 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
             model: true
         },
         
+        disableOpening: {
+            value: false,
+            event: true
+        },
+        
         /**
          * Смещение по горизонтали относительно центра цели
          * @type {string}
@@ -358,7 +363,15 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
             this.__openDisposer.disposeAll();
         }, this);
         
-        this.once('model', this.__onBubbleModel, this);
+        this.once('beforeInitWidget', function() {
+            if (!this.getTarget() && this._parentElementAsTarget()) {
+                this.setTarget($(this.getDetachParent()));
+            }
+            this.setDetachParent(document.body);
+            
+            this._bubbleInitWidget();
+        }, this);
+        
         this.once('changeRendered', function() {
             //open on demand
             if (this._openOnRender && !this.getOpen()) {
@@ -368,6 +381,11 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
         this.on('changeShown', function(shown) {
             if (!shown) {
                 this.__showDisposer.disposeAll();
+            }
+        }, this);
+        this.on('changeDisableOpening', function(value) {
+            if (!value) {
+                this.close();
             }
         }, this);
         
@@ -485,12 +503,16 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
          * @returns {boolean}
          */
         open: function() {
+            if (!this.parent) {
+                this.render();
+            }
+            
             if (!this.getRendered()) {
                 this._openOnRender = _.toArray(arguments);
                 return false;
             }
             
-            if (!this.getTarget()) {
+            if (!this.getTarget() || this.getDisableOpening() || !this._isOpenAllowed()) {
                 return false;
             }
             
@@ -517,16 +539,30 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
         },
         
         /**
+         * @param [controller]
          * @param {boolean} [skipError]
          * @returns {croc.cmp.common.bubble.MBubble}
          */
         render: function(controller, skipError) {
+            if (this._selfRemoved) {
+                return this;
+            }
+            
             if (this.parent) {
                 if (skipError) {
                     return this;
                 }
                 else {
                     throw new Error('Widget has already rendered or it\'s being prepared for rendering.');
+                }
+            }
+            
+            if (!controller) {
+                if (croc.isClient) {
+                    controller = croc.app.page;
+                }
+                else {
+                    throw new Error('If you would like to render bubble on the server side you should pass any controller associated with current page.');
                 }
             }
             
@@ -538,6 +574,16 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
                 croc.app.model.push('_page.bubbles', {'class': this.constructor.classname, instance: this});
             }
             return this;
+        },
+        
+        remove: function() {
+            if (this._selfRendered && this._model) {
+                this._model.root.remove('_page.bubbles',
+                    _.findIndex(this._model.root.get('_page.bubbles'), function(x) {
+                        return x.instance === this;
+                    }, this));
+            }
+            this._selfRemoved = true;
         },
         
         /**
@@ -591,10 +637,9 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
         },
         
         /**
-         * Выполняется когда свойства виджета уже инициализированы
-         * @private
+         * @protected
          */
-        __onBubbleModel: function() {
+        _bubbleInitWidget: function() {
             var options = this._options;
             var targetEl = this.getTargetElement();
             
@@ -615,10 +660,7 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
             if (options.controlWidget) {
                 this._getDisposer().addListener(options.controlWidget, 'dispose', function() {
                     if (this._selfRendered) {
-                        this._model.root.remove('_page.bubbles',
-                            _.findIndex(this._model.root.get('_page.bubbles'), function(x) {
-                                return x.instance === this;
-                            }, this));
+                        this.remove();
                     }
                     else {
                         this.dispose();
@@ -642,6 +684,22 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
                 
                 manager.addItem(this);
             }
+        },
+        
+        /**
+         * @returns {boolean}
+         * @protected
+         */
+        _isOpenAllowed: function() {
+            return true;
+        },
+        
+        /**
+         * Allow to get parent DOM-element as target if it's not passed
+         * @returns {boolean}
+         */
+        _parentElementAsTarget: function() {
+            return true;
         }
     }
 });

@@ -118,7 +118,7 @@ croc.Class.define('croc.cmp.form.field.CheckBoxesGroup', {
                 }
                 if (this.getValue() && !item.getValue()) {
                     if (this._options.arrayValues) {
-                        if (this.getValue().indexOf(item.getIdentifier()) !== -1) {
+                        if (this.getValue().indexOf(item.getPermanentValue()) !== -1) {
                             item.setValue(true);
                         }
                     }

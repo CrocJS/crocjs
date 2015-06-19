@@ -276,7 +276,7 @@ function compileApp(options) {
         var fileDesc = target.filesHash[file];
         var symbol = fileDesc.symbols[0];
         if (ext === '.js' || ext === '.coffee') {
-            if (!fileDesc.meta || !fileDesc.meta.bower && fileDesc.meta.browserify !== false) {
+            if (!fileDesc.meta || !fileDesc.meta.bower && fileDesc.meta.server !== false) {
                 require(file);
                 if (global.croc && croc.Class) {
                     var cls = croc.Class.getClass(symbol);

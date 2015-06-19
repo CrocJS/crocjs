@@ -205,7 +205,7 @@ var jsdepExt = module.exports = {
     vendorJS: function(options) {
         function mapSources(sourcesObj) {
             return _.map(sourcesObj, function(file, symbol) {
-                var general = {symbol: symbol, meta: {browserify: false}, analyze: false};
+                var general = {symbol: symbol, meta: {server: false}, analyze: false};
                 if (_.isPlainObject(file)) {
                     return _.assign(general, file);
                 }

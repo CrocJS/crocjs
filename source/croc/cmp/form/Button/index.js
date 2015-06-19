@@ -97,6 +97,8 @@ croc.Class.define('croc.cmp.form.Button', {
          */
         custom: false,
         
+        href: {},
+        
         /**
          * Предотвратить стандартное поведение кнопки (sumbit формы)
          * @type {boolean}

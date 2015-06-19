@@ -369,6 +369,13 @@ croc.Class.define('croc.Object', {
             return this;
         },
         
+        addListenerFirst: function(eventName, callback, context, once) {
+            var listeners = this.listeners(eventName);
+            this.removeAllListeners(eventName);
+            this[once ? 'once' : 'on'](eventName, callback, context);
+            listeners.forEach(function(listener) {this.on(eventName, listener);}, this);
+        },
+        
         /**
          * Создать биндинг свойства prop объекта на свойство targetProp объекта target. Возможно указать mapper для трансформации
          * значения свойства. Возвращает функцию, которая разрывает биндинг при её вызове.

@@ -61,7 +61,7 @@ croc.Class.define('croc.cmp.Widget', {
          * @param {jQuery|croc.cmp.Widget} from
          */
         resolveElement: function(from) {
-            return from instanceof croc.cmp.Widget ? from.getElement() : from;
+            return from && from instanceof croc.cmp.Widget ? from.getElement() : from;
         }
     },
     
@@ -74,6 +74,13 @@ croc.Class.define('croc.cmp.Widget', {
         
         appear: null,
         
+        /**
+         * @param model
+         */
+        beforeInitModel: null,
+        
+        beforeInitWidget: null,
+        
         create: null,
         destroy: null,
         init: null,
@@ -82,11 +89,6 @@ croc.Class.define('croc.cmp.Widget', {
          * @param {croc.cmp.Widget} widget
          */
         initChild: null,
-        
-        /**
-         * @param model
-         */
-        model: null,
         
         /**
          * A child widget was removed
@@ -101,6 +103,9 @@ croc.Class.define('croc.cmp.Widget', {
     },
     
     properties: {
+        /**
+         * @type {Element}
+         */
         detachParent: {
             apply: function() {
                 this.__previousSibling = null;
@@ -255,6 +260,12 @@ croc.Class.define('croc.cmp.Widget', {
             var parent = this;
             var widget;
             do {
+                if (!parent.getElement()) {
+                    parent.onAppear(function() {
+                        this.bubbleResize();
+                    }, this);
+                    return;
+                }
                 var checkResult = parent.__checkSizeChange();
                 if (checkResult === null) {
                     this.__lastWidth = 0;
@@ -560,6 +571,7 @@ croc.Class.define('croc.cmp.Widget', {
                 }
             }, this);
             
+            this.fireEvent('beforeInitWidget');
             this._initWidget();
             this.v.onCreate();
             
@@ -596,6 +608,10 @@ croc.Class.define('croc.cmp.Widget', {
          */
         init: function() {
             if (this.__inited) {
+                //second init. copy model to attributes
+                _.forOwn(this._options, function(value, key) {
+                    this.setAttribute(key, value);
+                }, this);
                 return;
             }
             
@@ -657,8 +673,8 @@ croc.Class.define('croc.cmp.Widget', {
                 }
             }
             
+            this.fireEvent('beforeInitModel', this._model);
             this._initModel();
-            this.fireEvent('model', this._model);
             
             //view
             this._options.v = this.v = new (croc.cmp.Widget.getView(this.constructor))({model: model, widget: this});

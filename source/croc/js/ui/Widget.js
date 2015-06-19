@@ -1155,7 +1155,7 @@ croc.Class.define('croc.ui.Widget', {
             if (!this.__shown && (!this.__shownSet || this._options.hideMethod === 'detach')) {
                 this._applyShown(false);
             }
-
+            
             if (!this.__htmlGenerated) {
                 if (this._options.style) {
                     el.css(this._options.style);

@@ -270,7 +270,7 @@ croc.Class.define('croc.cmp.form.field.ComboBox', {
             if (!this.__isMultiSelect) {
                 if (this._wrapped && (!internal || !internal.dontSetTextFieldValue)) {
                     this._wrapped.setValue(this.__isSelect && value ? value.text : value,
-                        {wrappedInternalUpdate: true});
+                        {wrappedInternalUpdate: true, keepSearchString: this.__isSelect});
                     
                     if (this.__isSelect) {
                         this.__suggestion.getSearchableModel().setSearchString(null);

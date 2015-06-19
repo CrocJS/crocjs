@@ -1,6 +1,6 @@
 <index:>
     <form action="{{action || '#'}}" class="b-form{{if disabled}} state_disabled{{/if}}" method="post">
-        <virtualView is="body" optional/>
+        <virtualView is="body"/>
         {{if viewPassed('buttons')}}
             {{with 'buttons' as #section}}
                 <fieldset class="b-form-fset margin_normal">

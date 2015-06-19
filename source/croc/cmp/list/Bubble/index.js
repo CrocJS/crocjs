@@ -29,11 +29,6 @@ croc.Class.define('croc.cmp.list.Bubble', {
     },
     
     properties: {
-        disableOpening: {
-            value: false,
-            event: true
-        },
-        
         /**
          * Смещение по горизонтали относительно центра цели
          * @type {string}
@@ -178,17 +173,6 @@ croc.Class.define('croc.cmp.list.Bubble', {
         },
         
         /**
-         * Показать bubble. Если тултип был открыт, то возвращает true.
-         * @returns {boolean}
-         */
-        open: function() {
-            if (!this.getDisableOpening() && this._isOpenAllowed()) {
-                return croc.cmp.common.bubble.MBubble.prototype.open.apply(this, arguments);
-            }
-            return false;
-        },
-        
-        /**
          * Инициализация модели виджета
          * @protected
          */
@@ -225,18 +209,9 @@ croc.Class.define('croc.cmp.list.Bubble', {
         },
         
         /**
-         * Инициализация виджета после его отрисовки в DOM
+         * @returns {boolean}
          * @protected
          */
-        _initWidget: function() {
-            croc.cmp.list.Bubble.superclass._initWidget.apply(this, arguments);
-            this.on('changeDisableOpening', function(value) {
-                if (!value) {
-                    this.close();
-                }
-            }, this);
-        },
-        
         _isOpenAllowed: function() {
             return this.__model.getLength() > 0;
         },
