@@ -540,7 +540,7 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble.View', {
                 }
                 
                 //вычисляем размер bubble
-                this.__repositionAutoSize(options, isCenter, leftOrRight, target);
+                this.__repositionAutoSize(isCenter, leftOrRight, target);
                 var elHeight = element.outerHeight();
                 var elWidth = element.outerWidth();
                 

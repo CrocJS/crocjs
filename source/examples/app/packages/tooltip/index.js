@@ -29,8 +29,8 @@ module.exports = function(app) {
                 delete values.target;
             }
             
-            values.autoSizeGap = values.autoSizeGap ? parseFloat(values.autoSizeGap) : null;
-            values.openDelay = values.openDelay ? parseFloat(values.openDelay) : null;
+            values.autoSizeGap = values.autoSizeGap ? parseFloat(values.autoSizeGap) : 0;
+            values.openDelay = values.openDelay ? parseFloat(values.openDelay) : 0;
             if (values.triggerSelector) {
                 values.trigger = $('#samples');
                 values.triggerSelector = '.tooltip-target';
