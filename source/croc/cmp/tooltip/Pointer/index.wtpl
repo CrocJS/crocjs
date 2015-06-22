@@ -1,0 +1,9 @@
+<index:>
+    <div style="position: absolute;">
+        <div class="b-sbutton-h" style="{{bodyStyle}}" as="v.bodyElement">
+            <virtualView is="body">{{@content}}</virtualView>
+        </div>
+    </div>
+</index:>
+
+<cls:><view is="croc.cmp.Widget:cls"/> b-sbutton type_image set_tooltip mod_system scheme_{{scheme}} dir_{{dir}} size_{{size}}</cls:>
