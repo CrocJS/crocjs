@@ -225,6 +225,10 @@ croc.Class.define('croc.cmp.tooltip.Tooltip', {
     },
     
     members: {
+        setContent: function(content) {
+            this._model.set('newContent', content);
+        },
+        
         /**
          * Allow to get parent DOM-element as target if it's not passed
          * @returns {boolean}

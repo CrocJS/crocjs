@@ -96,7 +96,9 @@ croc.Class.define('croc.cmp.form.internal.SubmitController', {
         
         this.__form = options.form;
         this.__enableSubmit = false;
-        this.__form.getElement().on('submit', this.__onFormElSubmit.bind(this));
+        this.__form.onRender(function() {
+            this.__form.getElement().on('submit', this.__onFormElSubmit.bind(this));
+        }, this);
     },
     
     members: {

@@ -3,12 +3,16 @@
         <div class="b-tooltip-tri" as="v.triElement"></div>
         <div class="b-tooltip-head">{{@head}}</div>
         <div class="b-tooltip-body" style="{{bodyStyle}}" as="v.bodyElement">
-            {{if viewPassed('body')}}
-                <virtualview is="body"/>
-            {{else}}
-                {{@content}}
-            {{/if}}
+            <virtualView is="body">{{@content}}</virtualView>
         </div>
         {{@footer}}
     </div>
 </index:>
+
+<body:>
+    {{if newContent !== undefined}}
+        {{*newContent}}
+    {{else}}
+        {{@content}}
+    {{/if}}
+</body:>

@@ -129,36 +129,42 @@ croc.Class.define('croc.cmp.form.field.CheckBoxesGroup', {
                         }
                     }
                 }
-    
+                
                 item.on('changeValue', this.__onChangeItemValue, this);
                 this.__onChangeItemValue();
             }, this);
         },
-        
+    
         /**
          * Изменение значения группы
          * @param value
+         * @param old
+         * @param passed
          * @protected
          */
-        _doSetValue: function(value) {
+        _doSetValue: function(value, old, passed) {
+            if (passed && passed.checkGroupInternal) {
+                return;
+            }
             value = value || (this._options.arrayValues ? [] : {});
             this.getItems().forEach(function(item) {
                 if (this._options.arrayValues) {
-                    item.setValue(value.indexOf(item.getPermanentValue()) !== -1);
+                    item.setValue(value.indexOf(item.getPermanentValue()) !== -1, passed);
                 }
                 else {
                     var val = value[item.getIdentifier() || item.getParentIndex()];
                     item.setValue(
-                        !!val && (!this._options.groupCheckboxes || val.indexOf(item.getPermanentValue()) !== -1));
+                        !!val && (!this._options.groupCheckboxes || val.indexOf(item.getPermanentValue()) !== -1),
+                        passed);
                 }
             }, this);
         },
-    
+        
         /**
          * @private
          */
-        __onChangeItemValue: function() {
-            if (this.__dontHandleChangeValue) {
+        __onChangeItemValue: function(value, old, passed) {
+            if (passed && passed.checkGroupInternal) {
                 return;
             }
             var newValue;
@@ -187,9 +193,7 @@ croc.Class.define('croc.cmp.form.field.CheckBoxesGroup', {
                     newValue = null;
                 }
             }
-            this.__dontHandleChangeValue = true;
-            this.setValue(newValue);
-            this.__dontHandleChangeValue = false;
+            this.setValue(newValue, {checkGroupInternal: true});
         }
     }
 });

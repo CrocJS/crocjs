@@ -158,18 +158,18 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble.View', {
             this._model.set('closing', false);
             this._widget.fireEvent('open');
             
-            //animate
-            if (showAnimation) {
-                this.__showAnimation(showAnimation);
-            }
-            else {
-                element.css('opacity', 1);
-                element.stop(true);
-            }
-            
             this._widget.getOpenDisposer().defer(function() {
+                //animate
+                if (showAnimation) {
+                    this.__showAnimation(showAnimation);
+                }
+                else {
+                    element.css('opacity', 1);
+                    element.stop(true);
+                }
+                
                 element.css('visibility', '');
-            });
+            }, this);
             
             this._widget.getOpenDisposer().addCallback(function() {
                 this._model.set('currentPosition', null);
@@ -326,7 +326,7 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble.View', {
                 if (this._widget.getShown()) {
                     this.__keepActualPositionInterval =
                         this._widget.getShowDisposer().setInterval(function() {
-                            if (!this._data.opening && !this._model.closing) {
+                            if (!this._data.opening && !this._data.closing) {
                                 this._widget.reposition();
                             }
                         }.bind(this), 15);
@@ -417,7 +417,7 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble.View', {
             switch (type) {
                 case 'fly':
                     animation.opacity = 0;
-                    var shift = (curPos === 'left' || curPos === 'top' ? -1 : 1) * croc.cmp.common.bubble.MBubble.__FLY_OFFSET;
+                    var shift = (curPos === 'left' || curPos === 'top' ? -1 : 1) * croc.cmp.common.bubble.MBubble.View.__FLY_OFFSET;
                     animation[axis] = parseInt(element.css(axis), 10) + shift;
                     break;
                 
@@ -511,17 +511,18 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble.View', {
                     //берём следующую позицию для рассмотрения
                     curPos = sequence[sequence.indexOf(curPos) + 1] || sequence[0];
                 }
-                else if (options.autoPositioning && sequence.indexOf(curPos) === -1) {
+                else if (curPos !== 'center' && options.autoPositioning && sequence.indexOf(curPos) === -1) {
                     curPos = sequence[0];
                 }
                 this._model.set('currentPosition', curPos);
                 
-                _.assign(jointCss, {left: '', top: ''});
+                _.assign(jointCss, {left: '', top: '', display: ''});
                 
                 this._widget.fireEvent('beforePosition');
                 
                 //todo optimize здесь можно оптимизировать
                 var target = this.__resolveTarget();
+                this._model.flush();
                 
                 //переменная содержит потенциальное значение для bestPositionValue. Если переменная отлична от null
                 //значит для данной позиции bubble не вмещается на экран полностью.
@@ -596,6 +597,9 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble.View', {
                 }
                 
                 if (curPos === 'center') {
+                    if (jointCss) {
+                        jointCss.display = 'none';
+                    }
                     break;
                 }
                 
@@ -860,7 +864,7 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble.View', {
         __resolveTarget: function(curTargetOnly) {
             var target = this._widget.getTarget();
             if (typeof target === 'function') {
-                target = target(this);
+                target = target(this._widget);
             }
             
             if (target instanceof croc.cmp.Widget) {
@@ -916,10 +920,10 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble.View', {
          * @private
          */
         __showAnimation: function(type) {
-            this.__opening = true;
+            this._model.set('opening', true);
             
             var element = this._widget.getWrapperElement();
-            var curPos = this._model.get('currentPosition');
+            var curPos = this._data.currentPosition;
             if (!curPos || curPos === 'center') {
                 curPos = 'top';
             }

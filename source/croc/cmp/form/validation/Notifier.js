@@ -16,13 +16,14 @@ croc.Class.define('croc.cmp.form.validation.Notifier', {
             scheme: 'red',
             position: 'right',
             autoCloseTimeout: 4000,
-            openDelay: 400
+            openDelay: 400,
+            'class': 'mod_invalid'
         },
         
         /**
          * Регистраниция функции, которая по виджету класса cls возвращает target, к которому крепится тултип
          * @param {Function} cls
-         * @param {function(croc.cmp.form.validation.IValidatable, croc.ui.tooltip.Tooltip):jQuery} func
+         * @param {function(croc.cmp.form.validation.IValidatable, croc.cmp.tooltip.Tooltip):jQuery} func
          */
         registerTooltipTarget: function(cls, func) {
             this.__tooltipTargets[croc.utils.objUniqueId(cls)] = func;
@@ -48,7 +49,7 @@ croc.Class.define('croc.cmp.form.validation.Notifier', {
         croc.cmp.form.validation.Notifier.superclass.construct.apply(this, arguments);
         
         this.__tooltipAutoOpen = true;
-        this.__bubbleManager = new croc.ui.common.bubble.Manager({
+        this.__bubbleManager = new croc.cmp.common.bubble.Manager({
             closeBehavior: 'permanent'
         });
     
@@ -129,7 +130,7 @@ croc.Class.define('croc.cmp.form.validation.Notifier', {
         
         /**
          * @param {croc.cmp.form.validation.IValidatable} item
-         * @param {croc.ui.tooltip.Tooltip} tooltip
+         * @param {croc.cmp.tooltip.Tooltip} tooltip
          * @returns {jQuery|Array}
          * @private
          */
@@ -259,10 +260,9 @@ croc.Class.define('croc.cmp.form.validation.Notifier', {
             var conf = _.assign({}, croc.cmp.form.validation.Notifier.TOOLTIP_CONFIG, {
                 content: item.getInvalidMessage(),
                 position: this._options.tooltipPosition,
-                controlWidget: croc.ui.WidgetsManager.getPageWidget(),
+                //controlWidget: croc.cmp.WidgetsManager.getPageWidget(),
                 opener: item.getElement(),
-                manager: this.__bubbleManager,
-                newDesign: false
+                manager: this.__bubbleManager
             }, data.tooltipConf || {});
             
             if (!conf.target) {
@@ -275,14 +275,14 @@ croc.Class.define('croc.cmp.form.validation.Notifier', {
                 conf.trigger = this.__getTooltipTrigger(item);
             }
             
-            tooltip = data.tooltip = new croc.ui.tooltip.Tooltip(conf);
+            tooltip = data.tooltip = new croc.cmp.tooltip.Tooltip(conf).render();
             
             //todo перенести в стили
-            tooltip.listenProperty('rendered', function(value) {
-                if (value) {
-                    tooltip.getBodyElement().css('padding', '6px 9px');
-                }
-            });
+            //tooltip.listenProperty('rendered', function(value) {
+            //    if (value) {
+            //        tooltip.getBodyElement().css('padding', '6px 9px');
+            //    }
+            //});
             
             var meta = this.__getItemMeta(item);
             var autoOpen = this.__tooltipAutoOpen || meta.openTooltipAnyway;

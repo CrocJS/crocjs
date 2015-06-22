@@ -1,3 +1,6 @@
+//+use croc.cmp.tooltip.Tooltip
+//+use croc.cmp.tooltip.Pointer
+
 module.exports = function(app) {
     app.on('load', function() {
         var target = $('#target');
@@ -5,13 +8,14 @@ module.exports = function(app) {
         var form = app.page.form;
         var tooltip;
         
-        var showTooltip = function(values) {
+        var showTooltip = _.debounce(function(values) {
             if (tooltip) {
                 tooltip.remove();
             }
             
             values = _.clone(values);
             
+            var Cls = croc.Class.getClass('croc.cmp.tooltip.' + values.class);
             delete values.class;
             
             if (values.offset) {
@@ -32,8 +36,8 @@ module.exports = function(app) {
             values.autoSizeGap = values.autoSizeGap ? parseFloat(values.autoSizeGap) : 0;
             values.openDelay = values.openDelay ? parseFloat(values.openDelay) : 0;
             if (values.triggerSelector) {
-                values.trigger = $('#samples');
-                values.triggerSelector = '.tooltip-target';
+                values.trigger = $('#delegates');
+                values.triggerSelector = '.delegate';
                 values.target = null;
             }
             else {
@@ -48,21 +52,26 @@ module.exports = function(app) {
             }
             delete values['target: mouseTrigger'];
             
-            tooltip = new croc.cmp.tooltip.Tooltip(_.assign({
+            tooltip = new Cls(_.assign({
                 autoClose: false,
                 target: target,
-                //listeners: {
-                //    beforeOpen: croc.utils.fnRetentiveBind(function(tooltip, target) {
-                //        if (target && target instanceof jQuery && target.hasClass('tooltip-target')) {
-                //            tooltip.setContent(target.closest('.b-tooltip-body').html());
-                //        }
-                //    }, this)
-                //},
+                listeners: {
+                    beforeOpen: croc.utils.fnRetentiveBind(function(tooltip, target) {
+                        if (values.triggerSelector) {
+                            tooltip.setContent(target.html());
+                        }
+                    }, this)
+                },
                 style: 'max-width: 300px;'
             }, values));
             tooltip.open();
-        };
+        }, 10);
         
+        form.getItem('class').bind('value', form.getItem('content'), 'value', function(cls) {
+            return cls === 'Tooltip' ?
+                'тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип' :
+                'тултип тултип тултип тултип тултип';
+        });
         form.getStateManager().listenProperty('instantValues', showTooltip);
         
         app.Page.prototype.showTooltip = function() {

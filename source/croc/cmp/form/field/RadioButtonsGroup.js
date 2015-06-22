@@ -34,7 +34,7 @@ croc.Class.define('croc.cmp.form.field.RadioButtonsGroup', {
         getItemClass: function() {
             return croc.cmp.form.field.RadioButton;
         },
-    
+        
         /**
          * Отмечает первую неотключённую кнопку
          */
@@ -95,8 +95,8 @@ croc.Class.define('croc.cmp.form.field.RadioButtonsGroup', {
                     this.setValue(item.getPermanentValue());
                 }
                 
-                item.on('changeValue', function(value) {
-                    if (value) {
+                item.on('changeValue', function(value, old, passed) {
+                    if (value && (!passed || !passed.radioGroupInternal)) {
                         this.setValue(item.getPermanentValue());
                     }
                 }, this);
@@ -110,7 +110,7 @@ croc.Class.define('croc.cmp.form.field.RadioButtonsGroup', {
          */
         _doSetValue: function(value) {
             this.getItems().forEach(function(item) {
-                item.setValue(item.getPermanentValue() == value);
+                item.setValue(item.getPermanentValue() == value, {radioGroupInternal: true}); // jshint ignore:line
             });
         }
     }

@@ -483,6 +483,24 @@ croc.Class.define('croc.cmp.Widget', {
             }
         },
         
+        /**
+         * Если элемент отрисован, то callback вызывается сразу иначе на событие changeRendered
+         * @param {function} callback
+         * @param {Object} [context]
+         * @returns {Function}
+         */
+        onRender: function(callback, context) {
+            if (this.getRendered()) {
+                callback.call(context || window);
+                return _.noop;
+            }
+            else {
+                return this.once('changeRendered', function() {
+                    callback.call(context || window);
+                });
+            }
+        },
+        
         onWrapped: function(callback, context) {
             if (this._wrapped) {
                 callback.call(context || global, this._wrapped);
@@ -694,11 +712,11 @@ croc.Class.define('croc.cmp.Widget', {
             if (this.__parent) {
                 this.__parent.fireEvent('initChild', this);
                 if (croc.isClient) {
-                    if (this.__parent.getRendered()) {
+                    if (this.getRendered()) {
                         this.__parent.fireEvent('addChild', this);
                     }
                     else {
-                        this.__parent.once('changeRendered', function() {
+                        this.once('changeRendered', function() {
                             this.__parent.fireEvent('addChild', this);
                         }, this);
                     }

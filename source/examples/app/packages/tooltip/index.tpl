@@ -17,7 +17,7 @@
             position: fixed;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 0.1);
             width: 900px;
             padding: 10px;
             z-index: 10;
@@ -55,14 +55,13 @@
             background: #ffff00;
             opacity: 0.3;
             }
-        #samples {
-            position: relative;
-            top: 300px;
-            z-index: 0;
-            }
-        .tooltip-target {
+        .delegate {
             color: #fff;
-            background-color: #0000ff;
+            background-color: #144212;
+            width: 80px;
+            height: 80px;
+            padding: 10px;
+            position: absolute;
             }
     </style>
 </Head:>
@@ -70,6 +69,12 @@
 <Body:>
     <div class="b-page">
         <div id="target" style="left: 170px; top: 170px;"></div>
+        <div id="delegates">
+            <div class="delegate" style="left: 10px; top: 10px;">Delegate 1</div>
+            <div class="delegate" style="left: 10px; top: 300px;">Delegate 2</div>
+            <div class="delegate" style="left: 200px; top: 10px;">Delegate 3</div>
+            <div class="delegate" style="left: 200px; top: 300px;">Delegate 4</div>
+        </div>
         
         <widget is="croc.cmp.form.Form"
             labels="{{{position: 'left', size: '1'}}}"
@@ -80,23 +85,29 @@
             <passView is="body">
                 <view is=":fieldset">
                     <view is=":row" label="class">
-                        <widget is="croc.cmp.form.field.RadioButtonsGroup" identifier="class">
-                            <item value="croc.cmp.tooltip.Tooltip" checked>croc.cmp.tooltip.Tooltip</item>
-                            <item value="croc.cmp.tooltip.Pointer">croc.cmp.tooltip.Pointer</item>
+                        <widget is="croc.cmp.form.field.RadioButtonsGroup" identifier="class" value="{{tooltipClass}}">
+                            <item value="Tooltip" checked>croc.cmp.tooltip.Tooltip</item>
+                            <item value="Pointer">croc.cmp.tooltip.Pointer</item>
                         </widget>
                     </view>
                     <view is=":row" label="content">
-                        <widget is="croc.cmp.form.field.TextArea" identifier="content"
-                            value="тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип тултип"/>
+                        <widget is="croc.cmp.form.field.TextArea" identifier="content"/>
                     </view>
                     <view is=":row" label="position">
-                        <widget is="croc.cmp.form.field.RadioButtonsSet" identifier="position">
-                            <button value="left" checked>left</button>
-                            <button value="top">top</button>
-                            <button value="bottom">bottom</button>
-                            <button value="right">right</button>
-                            <button value="center">center</button>
-                        </widget>
+                        {{if tooltipClass === 'Tooltip'}}
+                            <widget is="croc.cmp.form.field.RadioButtonsSet" identifier="position">
+                                <button value="left" checked>left</button>
+                                <button value="top">top</button>
+                                <button value="bottom">bottom</button>
+                                <button value="right">right</button>
+                                <button value="center">center</button>
+                            </widget>
+                        {{else}}
+                            <widget is="croc.cmp.form.field.RadioButtonsSet" identifier="position">
+                                <button value="left">left</button>
+                                <button value="right" checked>right</button>
+                            </widget>
+                        {{/if}}
                     </view>
                     <view is=":row" label="hAlign">
                         <widget is="croc.cmp.form.field.RadioButtonsGroup" class="is_columns" identifier="hAlign">
@@ -117,18 +128,33 @@
                         </widget>
                     </view>
                     <view is=":row" label="scheme">
-                        <widget is="croc.cmp.form.field.RadioButtonsSet" identifier="scheme">
-                            <button value="white" checked>white</button>
-                            <button value="red">red</button>
-                        </widget>
+                        {{if tooltipClass === 'Tooltip'}}
+                            <widget is="croc.cmp.form.field.RadioButtonsSet" identifier="scheme">
+                                <button value="white" checked>white</button>
+                                <button value="red">red</button>
+                            </widget>
+                        {{else}}
+                            <widget is="croc.cmp.form.field.RadioButtonsSet" identifier="scheme">
+                                <button value="yellow" checked>yellow</button>
+                                <button value="red">red</button>
+                                <button value="blue">blue</button>
+                            </widget>
+                        {{/if}}
                     </view>
                     <view is=":row" label="sequence" labelHint="autoPositioningSequence">
-                        <widget is="croc.cmp.form.field.CheckBoxesGroup" identifier="autoPositioningSequence" arrayValues="{{true}}">
-                            <item value="top" checked>top</item>
-                            <item value="right" checked>right</item>
-                            <item value="bottom" checked>bottom</item>
-                            <item value="left" checked>left</item>
-                        </widget>
+                        {{if tooltipClass === 'Tooltip'}}
+                            <widget is="croc.cmp.form.field.CheckBoxesGroup" identifier="autoPositioningSequence" arrayValues="{{true}}">
+                                <item value="top" checked>top</item>
+                                <item value="right" checked>right</item>
+                                <item value="bottom" checked>bottom</item>
+                                <item value="left" checked>left</item>
+                            </widget>
+                        {{else}}
+                            <widget is="croc.cmp.form.field.CheckBoxesGroup" identifier="autoPositioningSequence" arrayValues="{{true}}">
+                                <item value="right" checked>right</item>
+                                <item value="left" checked>left</item>
+                            </widget>
+                        {{/if}}
                     </view>
                     <view is=":row" label="autoSizeGap">
                         <widget is="croc.cmp.form.field.TextField" identifier="autoSizeGap"/>

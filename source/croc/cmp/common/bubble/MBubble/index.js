@@ -590,7 +590,7 @@ croc.Mixin.define('croc.cmp.common.bubble.MBubble', {
          * Пересчитать позицию
          */
         reposition: function() {
-            if (this.getShown()) {
+            if (this._options.shown) {
                 this._model.increment('onReposition');
             }
         },

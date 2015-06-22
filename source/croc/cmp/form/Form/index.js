@@ -439,7 +439,34 @@ croc.Class.define('croc.cmp.form.Form', {
          */
         _initModel: function() {
             croc.cmp.form.Form.superclass._initModel.apply(this, arguments);
-            this.__stateManager = new croc.cmp.form.StateManager(this._options.stateManager || {});
+            
+            var options = this._options;
+            this.__stateManager = new croc.cmp.form.StateManager(options.stateManager || {});
+            this.__validationController = new croc.cmp.form.validation.Controller({
+                form: this,
+                notifierConf: options.notifier,
+                validationBehavior: options.validationBehavior,
+                validateForm: options.validateForm,
+                fieldsInvalidMessages: options.fieldsInvalidMessages
+            });
+            this.__validationManager = this.__validationController.getManager();
+            this.__notifier = this.__validationController.getNotifier();
+            this.__submitController = new croc.cmp.form.internal.SubmitController({
+                form: this,
+                action: options.action,
+                ajaxAction: options.ajaxAction,
+                ajaxSubmitDelay: options.ajaxSubmitDelay,
+                ajaxSubmitFn: options.ajaxSubmitFn,
+                autoAjaxSubmit: options.autoAjaxSubmit,
+                errorCodes: options.errorCodes,
+                preventSubmit: options.preventSubmit,
+                submitFailFunc: this._onSubmitFail.bind(this),
+                submitSuccessFunc: this._onSubmitSuccess.bind(this),
+                trimAllBeforeSubmit: this.trimAllBeforeSubmit,
+                valuesFunc: (options.submitValuesFn || this._getSubmitValues).bind(this)
+            });
+    
+            this.__submitController.bind(':changeSubmitting', this, '__submitting');
         },
         
         /**
@@ -488,39 +515,9 @@ croc.Class.define('croc.cmp.form.Form', {
          * @protected
          */
         _initWidget: function() {
-            //init members
-            var options = this._options;
-            this.__validationController = new croc.cmp.form.validation.Controller({
-                form: this,
-                notifierConf: options.notifier,
-                validationBehavior: options.validationBehavior,
-                validateForm: options.validateForm,
-                fieldsInvalidMessages: options.fieldsInvalidMessages
-            });
-            this.__validationManager = this.__validationController.getManager();
-            this.__notifier = this.__validationController.getNotifier();
-            this.__submitController = new croc.cmp.form.internal.SubmitController({
-                form: this,
-                action: options.action,
-                ajaxAction: options.ajaxAction,
-                ajaxSubmitDelay: options.ajaxSubmitDelay,
-                ajaxSubmitFn: options.ajaxSubmitFn,
-                autoAjaxSubmit: options.autoAjaxSubmit,
-                errorCodes: options.errorCodes,
-                preventSubmit: options.preventSubmit,
-                submitFailFunc: this._onSubmitFail.bind(this),
-                submitSuccessFunc: this._onSubmitSuccess.bind(this),
-                trimAllBeforeSubmit: this.trimAllBeforeSubmit,
-                valuesFunc: (options.submitValuesFn || this._getSubmitValues).bind(this)
-            });
-            
-            this.__submitController.bind(':changeSubmitting', this, '__submitting');
-            
-            //call parent
             croc.cmp.form.Form.superclass._initWidget.call(this);
             
             this.listenProperty('disabled', this.__applyDisabled, this);
-            
             if (!this._partialInitialState) {
                 this._initState();
             }

@@ -26,6 +26,9 @@
         padding: 9px 18px;
         border: none;
         }
+        .b-tooltip.set_default.mod_invalid .b-tooltip-body {
+            padding: 6px 9px;
+            }
     /* footbutton */
     .b-tooltip.set_default .b-tooltip-footbutton {
         padding-top: 9px;
@@ -40,7 +43,7 @@
     .b-tooltip.set_default.scheme_white .b-tooltip-tri {
         width: 15px;
         height: 15px;
-        background-image: url(/croc/images/blocks/b-tooltip/set_default/scheme_white_tri.png);
+        /*inline*/background-image: url(/croc/images/blocks/b-tooltip/set_default/scheme_white_tri.png);
         }
         /* Dir top-to-bottom */
         .b-tooltip.set_default.scheme_white.dir_ttb .b-tooltip-tri {
@@ -71,6 +74,54 @@
             }
         /* Dir right-to-left */
         .b-tooltip.set_default.scheme_white.dir_rtl .b-tooltip-tri {
+            display: block;
+            width: 8px;
+            left: 100%;
+            top: 50%;
+            margin: -8px 0 0 0;
+            background-position: 100% 0;
+            }
+
+/* Scheme red */
+.b-tooltip.set_default.scheme_red {
+    color: #fff;
+    background-color: #ff001f;
+    border: 1px solid #dadbdc;
+    }
+    .b-tooltip.set_default.scheme_red .b-tooltip-tri {
+        width: 15px;
+        height: 15px;
+        /*inline*/background-image: url(/croc/images/blocks/b-tooltip/set_default/scheme_red_tri.png);
+        }
+        /* Dir top-to-bottom */
+        .b-tooltip.set_default.scheme_red.dir_ttb .b-tooltip-tri {
+            display: block;
+            height: 8px;
+            left: 50%;
+            bottom: 100%;
+            margin: 0 0 0 -8px;
+            background-position: 0 0;
+            }
+        /* Dir bottom-to-top */
+        .b-tooltip.set_default.scheme_red.dir_btt .b-tooltip-tri {
+            display: block;
+            height: 8px;
+            left: 50%;
+            top: 100%;
+            margin: 0 0 0 -8px;
+            background-position: 0 100%;
+            }
+        /* Dir left-to-right */
+        .b-tooltip.set_default.scheme_red.dir_ltr .b-tooltip-tri {
+            display: block;
+            width: 8px;
+            right: 100%;
+            top: 50%;
+            margin: -8px 0 0 0;
+            background-position: 0 0;
+            }
+        /* Dir right-to-left */
+        .b-tooltip.set_default.scheme_red.dir_rtl .b-tooltip-tri {
             display: block;
             width: 8px;
             left: 100%;
