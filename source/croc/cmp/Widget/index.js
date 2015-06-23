@@ -145,7 +145,7 @@ croc.Class.define('croc.cmp.Widget', {
         /**
          * Add widget element attributes
          */
-        attrs: {},
+        attributes: {},
         
         /**
          * Expected type of child widget associated with section name

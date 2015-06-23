@@ -1,5 +1,3 @@
-croc.ns('croc.ui.form.field');
-
 /**
  * Слайдер (ползунок для выбора числового значения из заданного диапазона)
  * @extends {croc.ui.Container}
