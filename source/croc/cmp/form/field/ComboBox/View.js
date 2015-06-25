@@ -238,7 +238,7 @@ croc.View.define('croc.cmp.form.field.ComboBox.View', {
             this._model.del('rawState');
             //this.getFieldElement().trigger('autogrowinput');
             this._widget.on('validClassChanged', function() {
-                this._widget.onResize();
+                this._widget.checkResize();
             }, this);
             
             if (this._data.initialEnableFiltering) {

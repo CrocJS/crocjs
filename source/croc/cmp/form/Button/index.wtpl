@@ -8,7 +8,7 @@
                 {{if textHelper}}
                     <span class="b-sbutton-text-h"><view is="textContent" content="{{@content}}"></view></span>
                 {{else}}
-                    <view is="textContent" content="{{@content}}"></view>
+                    <view is="textContent">{{@content}}</view>
                 {{/if}}
             </span>
         {{else}}

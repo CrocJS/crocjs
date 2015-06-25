@@ -33,5 +33,12 @@ croc.Class.define('croc.cmp.form.field.TextField', {
          * @type {boolean}
          */
         password: {}
+    },
+    
+    members: {
+        _initModel: function() {
+            croc.cmp.form.field.TextField.superclass._initModel.apply(this, arguments);
+            //console.log(this.getMasked());
+        }
     }
 });

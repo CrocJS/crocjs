@@ -157,10 +157,10 @@ components.ComponentFactory.prototype.init = function(context, component) {
         model._at = scope.join('.');
         model.set('id', id);
         
+        model.data = model.get();
         if (!preInit) {
             components.setAttributes(context, model);
         }
-        model.data = model.get();
         model.data.$controller = component;
         parent.page._components[id] = component;
         _.assign(component, {

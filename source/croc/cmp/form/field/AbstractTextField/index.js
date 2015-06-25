@@ -242,6 +242,9 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
             if (this.getInstantValue()) {
                 this.setValue(this.getInstantValue());
             }
+            else if (this._options.value === undefined || this._options.value === null) {
+                this.setValue('');
+            }
             this.listenProperty('value', function(value, old, internal) {
                 this.setInstantValue(value, internal);
             }, this);
