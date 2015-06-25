@@ -2,14 +2,14 @@
 /* Scheme yellow */
 .b-button.set_system.scheme_yellow {
     color: #67510d;
-    text-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    text-shadow: 0 0 1px rgba(255, 255, 255, .75);
     background: #ffcc00;
     }
     /* Event + State hover */
     .b-button.set_system.scheme_yellow:not(.view_label):not(.state_disabled):hover,
     .b-button.set_system.scheme_yellow.state_hover:not(.view_label):not(.state_disabled) {
         color: #67510d;
-        background: #ffd632;
+        background: #ffde60;
         }
     /* Event + State active */
     .b-button.set_system.scheme_yellow:not(.view_label):not(.state_disabled):active,

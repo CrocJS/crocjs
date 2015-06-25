@@ -9,7 +9,7 @@
     .b-button.set_system.scheme_blue:not(.view_label):not(.state_disabled):hover,
     .b-button.set_system.scheme_blue.state_hover:not(.view_label):not(.state_disabled) {
         color: #fff;
-        background: #49a6fc;
+        background: #60b4ff;
         }
     /* Event + State active */
     .b-button.set_system.scheme_blue:not(.view_label):not(.state_disabled):active,
