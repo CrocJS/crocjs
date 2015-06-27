@@ -69,10 +69,7 @@ var jsdepExt = module.exports = {
             var add = options.add || [];
             var start = -add.length - 1;
             library.addSources(target, __dirname, [_.assign({
-                path: {
-                  'source/croc/css/blocks': '',
-                  'source/croc/css/blocks/core': ''
-                },
+                path: 'source/croc/css/blocks',
                 weight: start
             }, general)]);
             add.forEach(function(curPath, i) {
