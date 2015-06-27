@@ -222,11 +222,11 @@ croc.Class.define('croc.ui.form.suggestion.Default', {
          * @type {string}
          */
         htmlTemplate: '' +
-        '<div class="b-suggestion g-scrollable{cls}">' +
-        '   <div class="b-suggestion-container g-scrollable-h">' +
+        '<div class="b-suggestion b-scrollable{cls}">' +
+        '   <div class="b-suggestion-container b-scrollable-h">' +
         '      <div class="b-suggestion-error" style="display: none"></div>' +
         '      <div class="b-suggestion-list">{items}</div>' +
-        '      <div class="b-suggestion-more g-loader loader_small" style="display: none">&nbsp;</div>' +
+        '      <div class="b-suggestion-more b-loader loader_small" style="display: none">&nbsp;</div>' +
         '   </div>' +
         '</div>',
         
@@ -534,10 +534,10 @@ croc.Class.define('croc.ui.form.suggestion.Default', {
             this.__setUpOverflowing();
             
             //клик по маркерам приводит к клику по соответствующим элементам
-            this.getElement().find('.g-scrollable-prev-marker').click(function() {
+            this.getElement().find('.b-scrollable-prev-marker').click(function() {
                 this.getListItemElement(this.getVisibleItemsManager().getFirstVisibleItemIndex()).click();
             }.bind(this));
-            this.getElement().find('.g-scrollable-next-marker').click(function() {
+            this.getElement().find('.b-scrollable-next-marker').click(function() {
                 this.getListItemElement(this.getVisibleItemsManager().getLastVisibleItemIndex()).click();
             }.bind(this));
         },

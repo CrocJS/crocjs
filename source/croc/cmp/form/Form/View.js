@@ -22,7 +22,7 @@ croc.View.define('croc.cmp.form.Form.View', {
             croc.cmp.form.Form.View.superclass.onCreate.apply(this, arguments);
             this._widget.listenProperty('disabled', function(value) {
                 if (value) {
-                    this.__disabledLinks = this.getElement().find('.g-pseudo:not(.state_disabled)')
+                    this.__disabledLinks = this.getElement().find('.b-pseudolink:not(.state_disabled)')
                         .addClass('state_disabled');
                 }
                 else if (this.__disabledLinks) {

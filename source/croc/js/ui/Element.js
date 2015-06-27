@@ -89,7 +89,7 @@ croc.Class.define('croc.ui.Element', {
          */
         shown: {
             apply: function(value) {
-                this.__el.toggleClass('g-hidden', !value);
+                this.__el.toggleClass('b-hidden', !value);
             }
         },
         

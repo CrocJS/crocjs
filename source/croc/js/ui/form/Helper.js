@@ -83,7 +83,7 @@ croc.ui.form.Helper = {
     setUpExamplesForField: function(field, examples) {
         if (examples) {
             var examplesStr = examples.map(function(x) {
-                return '<span class="g-link g-pseudo js-example-link"><span class="g-pseudo-h">' + x + '</span></span>';
+                return '<span class="g-link b-pseudolink js-example-link"><span class="b-pseudolink-h">' + x + '</span></span>';
             }).join(' или ');
             field.getParentWidget().setFieldHint(field, 'Например, ' + examplesStr);
         }

@@ -785,7 +785,7 @@ croc.Class.define('croc.ui.Widget', {
                         croc.utils.domHide(this.__wrapperEl);
                     }
                     else {
-                        if (this.__wrapperEl.hasClass('g-hidden')) {
+                        if (this.__wrapperEl.hasClass('b-hidden')) {
                             croc.utils.domShow(this.__wrapperEl);
                         }
                         else {
@@ -962,7 +962,7 @@ croc.Class.define('croc.ui.Widget', {
             }
             
             this.__shownSet = false;
-            if (!this.__htmlGenerated && el.hasClass('g-hidden')) {
+            if (!this.__htmlGenerated && el.hasClass('b-hidden')) {
                 this.setShown(false);
                 this.__shownSet = true;
             }

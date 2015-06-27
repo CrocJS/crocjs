@@ -3,10 +3,10 @@
 /**
  * Добавляет скроллбары и возможность прокрутки колёсиком мыши для прокручиваемой области.
  * Если переданному элементу соответствует виджет, то реагирует на его события apper и resize.
- * На элементе должен быть класс g-scrollable, на внутреннем контейнере, который содержит контент, должен быть класс
- * g-scrollable-h. Если корневой элемент является этим контейнером, то класс g-scrollable-h не обязателен. Однако в
+ * На элементе должен быть класс b-scrollable, на внутреннем контейнере, который содержит контент, должен быть класс
+ * b-scrollable-h. Если корневой элемент является этим контейнером, то класс b-scrollable-h не обязателен. Однако в
  * этом случае скроллбары добавлены не будут (будет работать только прокрутка колёсиком мыши).
- * @see /prototypes/gui/system/g-scrollable.html
+ * @see /prototypes/gui/system/b-scrollable.html
  */
 croc.Class.define('croc.ui.common.Scrollable', {
     extend: croc.Object,
@@ -17,9 +17,9 @@ croc.Class.define('croc.ui.common.Scrollable', {
          * @static
          */
         __TEMPLATE_BAR: '' +
-        '<div class="g-scrollable-bar orient_{orient} size_{size}">' +
-        '   <div class="g-scrollable-bar-padding"></div>' +
-        '   <div class="g-scrollable-bar-button"><div class="g-scrollable-bar-button-h"></div></div>' +
+        '<div class="b-scrollable-bar orient_{orient} size_{size}">' +
+        '   <div class="b-scrollable-bar-padding"></div>' +
+        '   <div class="b-scrollable-bar-button"><div class="b-scrollable-bar-button-h"></div></div>' +
         '</div>'
     },
     
@@ -72,7 +72,7 @@ croc.Class.define('croc.ui.common.Scrollable', {
         },
         
         /**
-         * Корневой элемент (g-scrollable)
+         * Корневой элемент (b-scrollable)
          * @type {jQuery}
          */
         el: {},
@@ -118,7 +118,7 @@ croc.Class.define('croc.ui.common.Scrollable', {
         croc.ui.common.Scrollable.superclass.construct.apply(this, arguments);
         
         this.__el = options.el;
-        this.__scrollableEl = this.__el.find('.g-scrollable-h');
+        this.__scrollableEl = this.__el.find('.b-scrollable-h');
         if (this.__scrollableEl.length === 0) {
             this.__scrollableEl = this.__el;
         }
@@ -186,7 +186,7 @@ croc.Class.define('croc.ui.common.Scrollable', {
         },
         
         /**
-         * Контейнер с прокручиваемым контентом (g-scrollable-h)
+         * Контейнер с прокручиваемым контентом (b-scrollable-h)
          * @return {jQuery}
          */
         getScrollableElement: function() {
@@ -286,7 +286,7 @@ croc.Class.define('croc.ui.common.Scrollable', {
                         orientation: orientation,
                         draggableAreaClick: options.visibility === 'visible',
                         draggableAreaSelector: null,
-                        draggableSelector: '.g-scrollable-bar-button',
+                        draggableSelector: '.b-scrollable-bar-button',
                         animation: false,
                         transformValueFn: !options.discreteScrolling ? null :
                             this.__transformSliderValue.bind(this, orient)

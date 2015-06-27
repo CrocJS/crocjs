@@ -164,7 +164,7 @@ croc.Class.define('croc.ui.form.field.TextField', {
                 this.getFieldElement();
                 var newField = $(this.__fieldElement.prop('outerHTML')
                     .replace(/type\s*=\s*"?\w+"?/i, 'type="' + (this.getMasked() ? 'text' : 'password') + '"'))
-                    .removeAttr('name').addClass('g-hidden').insertAfter(this.__fieldElement);
+                    .removeAttr('name').addClass('b-hidden').insertAfter(this.__fieldElement);
                 this.__visibleFieldElement = this.__fieldElement;
                 this.__fieldElement = this.__fieldElement.add(newField);
             }
@@ -225,8 +225,8 @@ croc.Class.define('croc.ui.form.field.TextField', {
                 if (croc.util.Browser.isIE('<10')) {
                     this.__fieldElement.val(this.getValue() || '');
                     this.__visibleFieldElement = this.__fieldElement
-                        .filter('[type=' + (value ? 'password' : 'text') + ']').removeClass('g-hidden');
-                    var anotherEl = this.__fieldElement.not(this.__visibleFieldElement).addClass('g-hidden');
+                        .filter('[type=' + (value ? 'password' : 'text') + ']').removeClass('b-hidden');
+                    var anotherEl = this.__fieldElement.not(this.__visibleFieldElement).addClass('b-hidden');
                     if (this.getIdentifier()) {
                         this.__visibleFieldElement.attr('name', this.getIdentifier());
                         anotherEl.removeAttr('name');

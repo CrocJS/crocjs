@@ -6,7 +6,7 @@ croc.ns('croc.ui.bricks');
  * @example
  * <div class="b-togglebox{cls} {openClose}">
  *   <div class="b-togglebox-header">
- *       <span class="b-togglebox-header-link g-link g-pseudo"><span class="b-togglebox-header-link-icon"></span><span class="g-pseudo-h">
+ *       <span class="b-togglebox-header-link g-link b-pseudolink"><span class="b-togglebox-header-link-icon"></span><span class="b-pseudolink-h">
  *           {header}
  *       </span></span>
  *   </div>

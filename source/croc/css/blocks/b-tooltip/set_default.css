@@ -206,7 +206,7 @@
             }
     .b-tooltip.set_default.scheme_black a,
     .b-tooltip.set_default.scheme_black .g-link,
-    .b-tooltip.set_default.scheme_black .g-pseudo {
+    .b-tooltip.set_default.scheme_black .b-pseudolink {
         color: #fff;
         }
 

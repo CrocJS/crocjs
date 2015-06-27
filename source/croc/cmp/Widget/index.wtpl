@@ -2,5 +2,5 @@
     <div>{{@content}}</div>
 </index:>
 
-<cls:>js-widget{{if !shown}} g-hidden{{/if}}{{if mod}} mod_{{mod}}{{/if}}{{if class}} {{class}}{{/if}}{{if _addClasses}} {{_addClasses}}{{/if}}</cls:>
+<cls:>js-widget{{if !shown}} b-hidden{{/if}}{{if mod}} mod_{{mod}}{{/if}}{{if class}} {{class}}{{/if}}{{if _addClasses}} {{_addClasses}}{{/if}}</cls:>
 <style:>{{style}}</style:>

@@ -800,7 +800,7 @@ croc.Class.define('croc.ui.form.field.ComboBox', {
                     _.debounce(this.disposableFunc(function(blur, focus, value, suggOpen) {
                         var showAddButton = !value && !suggOpen && !fieldEl.is(':focus');
                         this.__toggleTextField(!showAddButton);
-                        this.__addButton.toggleClass('g-hidden', !showAddButton);
+                        this.__addButton.toggleClass('b-hidden', !showAddButton);
                     }, this), 50));
             }
             

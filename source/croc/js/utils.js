@@ -314,10 +314,10 @@ croc.define('croc.utils', {
     /**
      * Скрыть dom-элемент
      * @param {jQuery} el
-     * @param {string} [cls='g-hidden']
+     * @param {string} [cls='b-hidden']
      */
     domHide: function(el, cls) {
-        el.addClass(cls || 'g-hidden');
+        el.addClass(cls || 'b-hidden');
     },
     
     /**
@@ -387,7 +387,7 @@ croc.define('croc.utils', {
             var openerEl = target;
             //noinspection JSHint
             do {
-                scrollElements = scrollElements.add(openerEl.parents('.g-scrollable-h,.b-overlay'));
+                scrollElements = scrollElements.add(openerEl.parents('.b-scrollable-h,.b-overlay'));
             } while (openerEl = croc.utils.domGetOpenerOf(openerEl));
         }
         
@@ -468,7 +468,7 @@ croc.define('croc.utils', {
      * Показать dom-элемент
      * @param {jQuery} el
      * @param {boolean} [propagateAppear=false]
-     * @param {string} [cls='g-hidden']
+     * @param {string} [cls='b-hidden']
      */
     domShow: function(el, propagateAppear, cls) {
         var toShow;
@@ -479,7 +479,7 @@ croc.define('croc.utils', {
             }
             toShow = toShow.not(':visible');
         }
-        el.removeClass(cls || 'g-hidden');
+        el.removeClass(cls || 'b-hidden');
         if (propagateAppear) {
             toShow.each(function() {
                 var widget = croc.ui.Widget.getByElement(this);
@@ -541,10 +541,10 @@ croc.define('croc.utils', {
      * @param {jQuery} el
      * @param {boolean} [value]
      * @param {boolean} [propagateAppear=false]
-     * @param {string} [cls='g-hidden']
+     * @param {string} [cls='b-hidden']
      */
     domToggle: function(el, value, propagateAppear, cls) {
-        if (value || value === undefined && el.hasClass(cls || 'g-hidden')) {
+        if (value || value === undefined && el.hasClass(cls || 'b-hidden')) {
             croc.utils.domShow(el, propagateAppear, cls);
         }
         else {

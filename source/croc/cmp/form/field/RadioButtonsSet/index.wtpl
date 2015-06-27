@@ -1,5 +1,5 @@
 <index: arrays="button/buttons">
-    <div class="b-set spacing_0">
+    <div class="b-set__buttons b-set spacing_0">
         {{each @buttons as #button}}
             <widget is="croc.cmp.form.Button"
                 size="{{size}}"

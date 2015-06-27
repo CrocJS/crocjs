@@ -71,7 +71,7 @@ croc.Class.define('croc.ui.util.Blocker', {
             this.__element = options.target;
         }
         
-        this.__isPseudoLink = this.__element.is('span.g-pseudo');
+        this.__isPseudoLink = this.__element.is('span.b-pseudolink');
         
         if (this.getBlocked()) {
             this.__block();
@@ -85,8 +85,8 @@ croc.Class.define('croc.ui.util.Blocker', {
         __block: function() {
             if (this.__element && !this.__blockerElement) {
                 this.__blockerElement = this.__isPseudoLink ?
-                    $('<span class="g-loader loader_small" style="display: inline-block"></span>') :
-                    $('<div class="g-loader loader_' +
+                    $('<span class="b-loader loader_small" style="display: inline-block"></span>') :
+                    $('<div class="b-loader loader_' +
                     this.getType() +
                     (this.getOpacity() ? ' opacity_' + this.getOpacity() : '') + '"></div>').css({
                         position: 'absolute',

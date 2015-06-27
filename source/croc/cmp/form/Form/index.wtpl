@@ -12,7 +12,7 @@
                 </fieldset>
             {{/with}}
         {{/if}}
-        <div class="b-form-overlay g-hidden"></div>
+        <div class="b-form-overlay b-hidden"></div>
     </form>
 </index:>
 

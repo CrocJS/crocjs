@@ -729,7 +729,7 @@ croc.Class.define('croc.ui.form.field.TrackBar', {
                 this.__updateGraphState();
             }
             this.getElement().toggleClass('state_graph', graph)
-                .find('.js-trackbar-expanded').toggleClass('g-hidden', !graph);
+                .find('.js-trackbar-expanded').toggleClass('b-hidden', !graph);
         },
         
         /**

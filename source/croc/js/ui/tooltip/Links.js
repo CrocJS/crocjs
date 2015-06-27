@@ -160,7 +160,7 @@ croc.Class.define('croc.ui.tooltip.Links', {
             }
             else {
                 this.__listView.getElement().on('click', this.__listView.getListItemsSelector() +
-                    (this.__linksType === 'pseudo' ? ' .g-pseudo' : this.__linksType === 'real' ? ' a' : ''),
+                    (this.__linksType === 'pseudo' ? ' .b-pseudolink' : this.__linksType === 'real' ? ' a' : ''),
                     function(e) {
                         onClick(this.__listView.getListItemModel($(e.target)));
                     }.bind(this)
@@ -222,8 +222,8 @@ croc.Class.define('croc.ui.tooltip.Links', {
                 icon.text = item.text;
                 
                 if (this.__linksType === 'pseudo') {
-                    icon.cls += ' g-link g-pseudo';
-                    icon.text = '<span class="g-pseudo-h">' + icon.text + '</span>';
+                    icon.cls += ' g-link b-pseudolink';
+                    icon.text = '<span class="b-pseudolink-h">' + icon.text + '</span>';
                 }
                 else if (active || this.__linksType === 'block') {
                     icon.tag = 'a';
@@ -239,7 +239,7 @@ croc.Class.define('croc.ui.tooltip.Links', {
                 link = (active || this.__linksType === 'block' ?
                     (this.__inlineLink ? '<span class="{cls}">{text}</span>' : '{text}') :
                     this.__linksType === 'pseudo' ?
-                    '<span class="g-link g-pseudo' + (this.__inlineLink ? '{cls}' : '') + '"><span class="g-pseudo-h">{text}</span></span>' :
+                    '<span class="g-link b-pseudolink' + (this.__inlineLink ? '{cls}' : '') + '"><span class="b-pseudolink-h">{text}</span></span>' :
                     '<a href="{value}"' + (item.$$external ? ' target="_blank"' : '') + (this.__inlineLink ? ' class="{cls}"' : '') + '>{text}</a>')
                     
                     .render({

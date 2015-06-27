@@ -503,7 +503,7 @@ croc.Class.define('croc.ui.form.field.AbstractTextField', {
             var scroll = function() {
                 var scrollable = this.getFieldElement();
                 while (true) {
-                    scrollable = scrollable.parents('.g-scrollable-h:eq(0)');
+                    scrollable = scrollable.parents('.b-scrollable-h:eq(0)');
                     if (!scrollable.length) {
                         scrollable = winEl;
                         break;
@@ -719,14 +719,14 @@ croc.Class.define('croc.ui.form.field.AbstractTextField', {
         __setUpSuggest: function() {
             var suggestEl = this.getElement().find('.b-input-cell.cell_suggest');
             if (suggestEl.length) {
-                var link = suggestEl.find('.g-pseudo');
+                var link = suggestEl.find('.b-pseudolink');
                 link.on('click', function() {
                     this.setValue(link.text());
                     this.focus();
                 }.bind(this));
                 
                 this.listenProperty('instantValue', function(value) {
-                    suggestEl.toggleClass('g-hidden', !!value);
+                    suggestEl.toggleClass('b-hidden', !!value);
                 });
             }
         },

@@ -273,7 +273,7 @@ croc.Class.define('croc.ui.popup.Popup', {
                 items: options.content || null,
                 footer: !options.footerContent ? '' :
                 '<div class="b-popup-foot"><div class="b-popup-foot-h">' + options.footerContent + '</div></div>',
-                closeButtonCls: !options.closeable ? 'g-hidden' : options.closeButtonCls || ''
+                closeButtonCls: !options.closeable ? 'b-hidden' : options.closeButtonCls || ''
             });
         },
         
@@ -383,8 +383,8 @@ croc.Class.define('croc.ui.popup.Popup', {
          * @private
          */
         __setUpMobile: function() {
-            var scrollable = this.getElement().find('.js-popup-body').addClass('g-scrollable-h');
-            scrollable.parent().addClass('g-scrollable');
+            var scrollable = this.getElement().find('.js-popup-body').addClass('b-scrollable-h');
+            scrollable.parent().addClass('b-scrollable');
             croc.util.Mobile.scrollFix(scrollable);
             
             var onResize = function() {

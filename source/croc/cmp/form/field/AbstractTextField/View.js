@@ -49,7 +49,7 @@ croc.View.define('croc.cmp.form.field.AbstractTextField.View', {
             var scroll = function() {
                 var scrollable = this._widget.getFieldElement();
                 while (true) {
-                    scrollable = scrollable.parents('.g-scrollable-h:eq(0)');
+                    scrollable = scrollable.parents('.b-scrollable-h:eq(0)');
                     if (!scrollable.length) {
                         scrollable = winEl;
                         break;

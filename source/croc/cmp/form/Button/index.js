@@ -130,12 +130,6 @@ croc.Class.define('croc.cmp.form.Button', {
          * Button tag
          */
         tag: 'span',
-    
-        /**
-         * insert b-sbutton-text-h
-         * @type {boolean}
-         */
-        textHelper: {},
         
         /**
          * Тип кнопки: button, submit
@@ -164,6 +158,15 @@ croc.Class.define('croc.cmp.form.Button', {
          */
         getType: function() {
             return this.__type;
+        },
+        
+        /**
+         * Инициализация модели виджета
+         * @protected
+         */
+        _initModel: function() {
+            croc.cmp.form.Button.superclass._initModel.apply(this, arguments);
+            this._options.tag = this._options.href ? 'a' : this._options.type ? 'input' : this._options.tag;
         }
     }
 });

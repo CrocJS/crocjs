@@ -78,7 +78,7 @@ croc.ui.form.Form = croc.extend(croc.ui.Container, {
         '<form action="{action}" class="b-form{cls}" method="post">',
         '   <fieldset class="b-form-fset">',
         '       {items:fields}',
-        '       <div class="b-form-row g-hidden">',
+        '       <div class="b-form-row b-hidden">',
         '           <div class="b-sbutton-set spacing_1">',
         '               {items:buttons}',
         '           </div>',
@@ -363,7 +363,7 @@ croc.ui.form.Form = croc.extend(croc.ui.Container, {
             }
         }, this);
         
-        this.__disabledLinks = this.getElement().find('.g-pseudo:not(.state_disabled)');
+        this.__disabledLinks = this.getElement().find('.b-pseudolink:not(.state_disabled)');
         this.getElement().add(this.__disabledLinks).addClass('state_disabled');
         this.__disabled = true;
     },
@@ -870,7 +870,7 @@ croc.ui.form.Form = croc.extend(croc.ui.Container, {
         
         //show buttons row
         if (this.getItems('buttons').length > 0) {
-            this.__buttonsRow.removeClass('g-hidden');
+            this.__buttonsRow.removeClass('b-hidden');
         }
         
         if (!this.isHtmlGenerated()) {
@@ -919,7 +919,7 @@ croc.ui.form.Form = croc.extend(croc.ui.Container, {
                 this.__buttonsContainer.append(elements);
             }
             
-            this.__buttonsRow.removeClass('g-hidden');
+            this.__buttonsRow.removeClass('b-hidden');
         }
     },
     
@@ -1029,7 +1029,7 @@ croc.ui.form.Form = croc.extend(croc.ui.Container, {
         }
         
         if (item.getParentSection() === 'buttons' && this.getItems('buttons').length === 0) {
-            this.__buttonsRow.addClass('g-hidden');
+            this.__buttonsRow.addClass('b-hidden');
         }
     },
     

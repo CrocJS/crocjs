@@ -4,10 +4,10 @@
     max-width: none;
     }
 
-.b-tooltip.mod_link-select .g-pseudo.state_active,
-.b-tooltip.mod_link-select .g-pseudo.state_active:hover,
-.b-tooltip.mod_link-select .g-pseudo.state_active .g-pseudo-h,
-.b-tooltip.mod_link-select .g-pseudo.state_active .g-pseudo-h:hover {
+.b-tooltip.mod_link-select .b-pseudolink.state_active,
+.b-tooltip.mod_link-select .b-pseudolink.state_active:hover,
+.b-tooltip.mod_link-select .b-pseudolink.state_active .b-pseudolink-h,
+.b-tooltip.mod_link-select .b-pseudolink.state_active .b-pseudolink-h:hover {
     color: #000 !important;
     cursor: default;
     border: none;

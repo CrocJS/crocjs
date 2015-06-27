@@ -45,8 +45,8 @@
             padding: 4px 8px;
             }
 
-        .b-suggestion .g-scrollable-prev-marker,
-        .b-suggestion .g-scrollable-next-marker {
+        .b-suggestion .b-scrollable-prev-marker,
+        .b-suggestion .b-scrollable-next-marker {
             height: 26px;
             }
             
@@ -55,8 +55,8 @@
         font-size: 13px;
         line-height: 18px;
         }
-        .b-suggestion.size_1 .g-scrollable-prev-marker,
-        .b-suggestion.size_1 .g-scrollable-next-marker {
+        .b-suggestion.size_1 .b-scrollable-prev-marker,
+        .b-suggestion.size_1 .b-scrollable-next-marker {
             height: 26px;
             }
     
@@ -65,8 +65,8 @@
         font-size: 16px;
         line-height: 21px;
         }
-        .b-suggestion.size_1 .g-scrollable-prev-marker,
-        .b-suggestion.size_1 .g-scrollable-next-marker {
+        .b-suggestion.size_1 .b-scrollable-prev-marker,
+        .b-suggestion.size_1 .b-scrollable-next-marker {
             height: 29px;
             }
     
@@ -75,8 +75,8 @@
         font-size: 16px;
         line-height: 21px;
         }
-        .b-suggestion.size_1 .g-scrollable-prev-marker,
-        .b-suggestion.size_1 .g-scrollable-next-marker {
+        .b-suggestion.size_1 .b-scrollable-prev-marker,
+        .b-suggestion.size_1 .b-scrollable-next-marker {
             height: 29px;
             }
     
@@ -85,8 +85,8 @@
         font-size: 18px;
         line-height: 23px;
         }
-        .b-suggestion.size_1 .g-scrollable-prev-marker,
-        .b-suggestion.size_1 .g-scrollable-next-marker {
+        .b-suggestion.size_1 .b-scrollable-prev-marker,
+        .b-suggestion.size_1 .b-scrollable-next-marker {
             height: 31px;
             }
     
@@ -95,8 +95,8 @@
         font-size: 21px;
         line-height: 25px;
         }
-        .b-suggestion.size_1 .g-scrollable-prev-marker,
-        .b-suggestion.size_1 .g-scrollable-next-marker {
+        .b-suggestion.size_1 .b-scrollable-prev-marker,
+        .b-suggestion.size_1 .b-scrollable-next-marker {
             height: 33px;
             }
 
@@ -105,7 +105,7 @@
         background-color: #0073b8;
         color: #fff;
         }
-        .b-suggestion.size_1 .g-scrollable-prev-marker,
-        .b-suggestion.size_1 .g-scrollable-next-marker {
+        .b-suggestion.size_1 .b-scrollable-prev-marker,
+        .b-suggestion.size_1 .b-scrollable-next-marker {
             height: 26px;
             }

@@ -1,13 +1,13 @@
 <index: arrays="item/items">
     <div class="b-suggestion{{if size}} size_{{size}}{{/if}}">
         <virtualView is="top" optional/>
-        <div class="g-scrollable" on-create="v.initList($element)">
-            <div class="b-suggestion-container g-scrollable-h">
-                <!--<div class="b-suggestion-error g-hidden"></div>-->
+        <div class="b-scrollable" on-create="v.initList($element)">
+            <div class="b-suggestion-container b-scrollable-h">
+                <!--<div class="b-suggestion-error b-hidden"></div>-->
                 <div class="b-suggestion-list">
                     <virtualView is="items"/>
                 </div>
-                <!--<div class="b-suggestion-more g-loader loader_small g-hidden">&nbsp;</div>-->
+                <!--<div class="b-suggestion-more b-loader loader_small b-hidden">&nbsp;</div>-->
             </div>
         </div>
     </div>

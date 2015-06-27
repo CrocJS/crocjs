@@ -111,8 +111,8 @@ croc.Class.define('croc.cmp.list.manager.Scrolling', {
             
             if (this.__hasOverflowMarkers) {
                 var markers = $('' +
-                '<div class="g-scrollable-marker g-scrollable-prev-marker"></div>' +
-                '<div class="g-scrollable-marker g-scrollable-next-marker"></div>');
+                '<div class="b-scrollable-marker b-scrollable-prev-marker"></div>' +
+                '<div class="b-scrollable-marker b-scrollable-next-marker"></div>');
                 container.append(markers);
                 
                 if (this.__hideOverflowMarkers) {

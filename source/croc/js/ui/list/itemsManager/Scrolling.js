@@ -116,8 +116,8 @@ croc.Class.define('croc.ui.list.itemsManager.Scrolling', {
             
             if (this.__hasPrevNextMarker) {
                 var markers = $('' +
-                '<div class="g-scrollable-marker g-scrollable-prev-marker"></div>' +
-                '<div class="g-scrollable-marker g-scrollable-next-marker"></div>');
+                '<div class="b-scrollable-marker b-scrollable-prev-marker"></div>' +
+                '<div class="b-scrollable-marker b-scrollable-next-marker"></div>');
                 el.append(markers);
                 
                 if (this.__hidePrevNextMarkers) {

@@ -95,6 +95,6 @@ croc.Class.define('croc.ui.Render', {
         
         __ICON_HTML: '<{tag} {attrs} class="g-icon {cls}"><span class="g-icon-h" style="{style}">{content}</span>{text}</{tag}>',
         __ICON_HTML_RIGHT: '<{tag} {attrs} class="g-icon side_right {cls}">{text}<span class="g-icon-h" style="{style}">{content}</span></{tag}>',
-        __PSEUDO_HTML: '<{tag} class="g-pseudo{cls}"{attrs}><span class="g-pseudo-h">{text}</span></{tag}>'
+        __PSEUDO_HTML: '<{tag} class="b-pseudolink{cls}"{attrs}><span class="b-pseudolink-h">{text}</span></{tag}>'
     }
 });

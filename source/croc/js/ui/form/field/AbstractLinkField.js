@@ -53,8 +53,8 @@ croc.Class.define('croc.ui.form.field.AbstractLinkField', {
          * @type {string}
          */
         htmlTemplate: '' +
-        '<span class="g-pseudo type_field g-link {iconCls}{cls}">' +
-        '   {icon}<span class="g-pseudo-h">{title}</span>' +
+        '<span class="b-pseudolink type_field g-link {iconCls}{cls}">' +
+        '   {icon}<span class="b-pseudolink-h">{title}</span>' +
         '   <input type="hidden" value="{value}" name="{name}">' +
         '</span>',
         
@@ -96,7 +96,7 @@ croc.Class.define('croc.ui.form.field.AbstractLinkField', {
         },
         
         /**
-         * Возвращает элемент g-pseudo-h
+         * Возвращает элемент b-pseudolink-h
          * @returns {jQuery}
          */
         getTextElement: function() {
@@ -165,7 +165,7 @@ croc.Class.define('croc.ui.form.field.AbstractLinkField', {
         _initWidget: function() {
             croc.ui.form.field.AbstractLinkField.superclass._initWidget.call(this);
             
-            this.__textElement = this.getElement().find('.g-pseudo-h');
+            this.__textElement = this.getElement().find('.b-pseudolink-h');
             this.__input = this.getElement().find('input');
             
             if (!this.isHtmlGenerated()) {
