@@ -249,7 +249,7 @@ croc.Class.define('croc.cmp.form.validation.Notifier', {
             var tooltip = data.tooltip;
             
             if (tooltip) {
-                tooltip.destroy();
+                tooltip.remove();
                 delete data.tooltip;
             }
             
