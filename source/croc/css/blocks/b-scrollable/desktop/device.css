@@ -1,0 +1,173 @@
+
+/* b-scrollable */
+.b-scrollable {
+    position: relative;
+    }
+    .b-scrollable-h {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        }
+    .b-scrollable-bar {
+        position: absolute;
+        cursor: pointer;
+        }
+        .b-scrollable-bar.orient_ver {
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 10px;
+            }
+            .b-scrollable.scroll_both .b-scrollable-bar.size_1.orient_ver {
+                bottom: 4px;
+                }
+            .b-scrollable.scroll_both .b-scrollable-bar.size_2.orient_ver {
+                bottom: 6px;
+                }
+        .b-scrollable-bar.orient_hor {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            }
+            .b-scrollable.scroll_both .b-scrollable-bar.size_1.orient_hor {
+                right: 4px;
+                }
+            .b-scrollable.scroll_both .b-scrollable-bar.size_2.orient_hor {
+                right: 6px;
+                }
+        .b-scrollable-bar-padding {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: #404040;
+            opacity: 0.05;
+            }
+            .b-scrollable-bar.size_1 .b-scrollable-bar-padding {
+                border-radius: 2px;
+                }
+                .b-scrollable-bar.size_1.orient_hor .b-scrollable-bar-padding {
+                    top: 6px;
+                    }
+                .b-scrollable-bar.size_1.orient_ver .b-scrollable-bar-padding {
+                    left: 6px;
+                    }
+            .b-scrollable-bar.size_2 .b-scrollable-bar-padding {
+                border-radius: 3px;
+                }
+                .b-scrollable-bar.size_2.orient_hor .b-scrollable-bar-padding {
+                    top: 4px;
+                    }
+                .b-scrollable-bar.size_2.orient_ver .b-scrollable-bar-padding {
+                    left: 4px;
+                    }
+                
+        .b-scrollable-bar-button {
+            position: absolute;
+            }
+            .b-scrollable-bar.orient_hor .b-scrollable-bar-button {
+                left: 0;
+                bottom: 0;
+                top: 0;
+                width: 10%;
+                }
+            .b-scrollable-bar.orient_ver .b-scrollable-bar-button {
+                top: 0;
+                right: 0;
+                left: 0;
+                height: 10%;
+                }
+            .b-scrollable-bar-button-h {
+                background: #404040;
+                opacity: 0.2;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                transition: opacity 0.1s ease;
+                }
+                .b-scrollable-bar.size_1 .b-scrollable-bar-button-h {
+                    border-radius: 2px;
+                    }
+                    .b-scrollable-bar.orient_hor.size_1 .b-scrollable-bar-button-h {
+                        top: 6px;
+                        }
+                    .b-scrollable-bar.orient_ver.size_1 .b-scrollable-bar-button-h {
+                        left: 6px;
+                        }
+                .b-scrollable-bar.size_2 .b-scrollable-bar-button-h {
+                    border-radius: 3px;
+                    }
+                    .b-scrollable-bar.orient_hor.size_2 .b-scrollable-bar-button-h {
+                        top: 4px;
+                        }
+                    .b-scrollable-bar.orient_ver.size_2 .b-scrollable-bar-button-h {
+                        left: 4px;
+                        }
+                .b-scrollable-bar-button:hover .b-scrollable-bar-button-h,
+                .b-scrollable-bar-button.state_active .b-scrollable-bar-button-h {
+                    opacity: 0.5;
+                    }
+    /* scroll_hidden */
+    .b-scrollable.scroll_hidden .b-scrollable-bar {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        cursor: default;
+        }
+        .b-scrollable.scroll_hidden.scroll_delayed-hide .b-scrollable-bar {
+            transition: opacity 0.1s ease 2s;
+            }
+        .b-scrollable.scroll_hidden .b-scrollable-bar-button {
+            cursor: pointer;
+            }
+        .b-scrollable.scroll_hidden .b-scrollable-bar-padding {
+            display: none;
+            }
+            .b-scrollable.scroll_hidden:active .b-scrollable-bar,
+            .b-scrollable.scroll_hidden:hover .b-scrollable-bar {
+                transition: opacity 0.1s ease;
+                opacity: 1;
+                }
+    /* markers */
+    .b-scrollable-marker {
+        display: none;
+        height: 10px;
+        left: 0;
+        right: 0;
+        position: absolute;
+        pointer-events: none;
+        transition: opacity 0.1s ease;
+        }
+        .b-scrollable-marker.state_hover {
+            opacity: 0;
+            }
+    .b-scrollable-prev-marker {
+        top: 0;
+        background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0) 100%); /* W3C */
+        }
+    .b-scrollable-next-marker {
+        bottom: 0;
+        background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.01) 1%,rgba(255,255,255,1) 100%); /* W3C */
+        }
+        .b-scrollable.state_has-prev .b-scrollable-prev-marker,
+        .b-scrollable.state_has-next .b-scrollable-next-marker {
+            display: block;
+            }
+    /* fit_both */
+    .b-scrollable.fit_both {
+        width: 100%;
+        height: 100%;
+        }
+    /* fit_height */
+    .b-scrollable.fit_height {
+        height: 100%;
+        }
+    /* fit_width */
+    .b-scrollable.fit_width {
+        width: 100%;
+        }
+
+

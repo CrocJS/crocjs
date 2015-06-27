@@ -28,7 +28,7 @@
                         <widget is="croc.cmp.form.field.TextField" identifier="third" password="{{true}}" masked="{{passField}}"
                             instantValue="{{_myValue}}"></widget>
                         <labelHint>
-                            <span class="g-pseudo" on-click="toggle($at(passField))"><span class="g-pseudo-h">password: {{if passField}}on{{else}}off{{/if}}</span></span>
+                            <span class="b-pseudolink" on-click="toggle($at(passField))"><span class="b-pseudolink-h">password: {{if passField}}on{{else}}off{{/if}}</span></span>
                         </labelHint>
                     </view>
                     

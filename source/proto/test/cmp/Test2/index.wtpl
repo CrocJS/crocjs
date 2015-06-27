@@ -1,0 +1,3 @@
+<index:>
+    <div on-click="click()">{{#number}}</div>
+</index:>

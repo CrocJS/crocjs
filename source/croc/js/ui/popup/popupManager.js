@@ -8,7 +8,7 @@ croc.ui.common.bubble.Manager.registerConfig('popup', {
     listeners: {
         created: function() {
             var manager = this;
-            var htmlEl = $('.l-html');
+            var htmlEl = $('.b-html');
             var mobileCropListener;
             var animationDuration = Stm.env.ldevice === 'mobile' ? 100 : 200;
             this.getOpenCollection().on('change', function(index, remove, insert) {

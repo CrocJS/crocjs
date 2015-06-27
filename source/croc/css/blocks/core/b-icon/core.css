@@ -1,0 +1,22 @@
+﻿
+/* b-icon */
+.b-icon {
+    display: inline-block;
+    line-height: 1;
+    position: relative;
+    }
+
+.b-icon.set_image {
+    
+    }
+    .b-icon.set_image img {
+        vertical-align: -15%;
+        }
+
+
+
+
+
+
+
+

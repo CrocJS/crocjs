@@ -20,9 +20,6 @@
         outline: none;
         z-index: 2;
         }
-        #js.ie8 .b-input-checkbox input[type=checkbox] {
-            -ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
-            }
     .b-input-checkbox-h {
         display: inline-block;
         vertical-align: middle;

@@ -1,0 +1,5 @@
+<index:>
+    <div>
+        {{someAttr}}
+    </div>
+</index:>

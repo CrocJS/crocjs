@@ -1,0 +1,23 @@
+﻿
+/* b-pseudolink */
+.b-pseudolink {
+    cursor: pointer;
+    -webkit-transition: color 0.1s ease;
+    transition: color 0.1s ease;
+    }
+    .b-pseudolink-h {
+        text-decoration: none;
+        border-bottom: 1px dashed;
+        }
+
+/* View transparent */
+.b-pseudolink.view_transparent {
+    
+    }
+    .b-pseudolink.view_transparent .b-pseudolink-h {
+        text-decoration: inherit;
+        border-bottom: none;
+        }
+
+
+

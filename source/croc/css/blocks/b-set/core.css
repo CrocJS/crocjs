@@ -1,119 +1,100 @@
 
-/* Set of couple blocks / elements inline */
-
 /* b-set */
 .b-set {
     display: block;
-    letter-spacing: -0.27em;
+    letter-spacing: -4px; /* by default */
     white-space: nowrap;
     position: relative;
     }
-    .gecko .b-set {
-        letter-spacing: -0.31em;
-        }
-    /* item */
-    .b-set-item {
+    /* cell */
+    [class*="b-set-cell"] {
         display: inline-block;
-        vertical-align: top;
+        vertical-align: middle;
         letter-spacing: normal;
-        word-spacing: normal;
         white-space: normal;
         }
-        .b-set.dir_ttb .b-set-item {
-            display: block;
-            }
 
-/* Box inline */
-.b-set.box_inline {
+/* Vertical-align top */
+.b-set.valign_top {
+    
+    }
+    .b-set.valign_top > [class*="b-set-cell"],
+    [class*="b-set-cell"].valign_top {
+        vertical-align: top;
+        }
+/* Vertical-align middle */
+.b-set.valign_middle {
+    
+    }
+    .b-set.valign_middle > [class*="b-set-cell"],
+    [class*="b-set-cell"].valign_middle {
+        vertical-align: middle;
+        }
+/* Vertical-align bottom */
+.b-set.valign_bottom {
+    
+    }
+    .b-set.valign_bottom > [class*="b-set-cell"],
+    [class*="b-set-cell"].valign_bottom {
+        vertical-align: bottom;
+        }
+
+/* Box block */
+.b-set.box_block {
+    width: 100%;
+    }
+
+/* Cells 2 */
+.b-set.cells_2 {
+    
+    }
+    .b-set.cells_2 > .b-set-cell {
+        width: 50%;
+        }
+/* Cells 3 */
+.b-set.cells_3 {
+    
+    }
+    .b-set.cells_3 > .b-set-cell {
+        width: 33.33%;
+        }
+
+/* inline wrapper */
+.b-set-inline {
     display: inline-block;
     vertical-align: middle;
     }
-/* Box table */
-.b-set.box_table {
-    display: table;
-    width: 100%;
-    }
-    /* Vertical-align top */
-    .b-set.box_table.valign_top .b-set-item {
-        vertical-align: top;
-        }
-    /* Vertical-align middle */
-    .b-set.box_table.valign_middle .b-set-item {
-        vertical-align: middle;
-        }
-    /* Vertical-align bottom */
-    .b-set.box_table.valign_bottom .b-set-item {
-        vertical-align: bottom;
-        }
-    .b-set.box_table > .b-set-item {
-        display: table-cell;
-        vertical-align: top;
-        }
-/* Box flex */
-.b-set.box_flex {
-    display: flex;
-    letter-spacing: normal;
-    }
-    .b-set.box_flex .b-set-item {
-        display: block;
-        flex: 1 1 100%;
-        }
-    .b-set.box_flex.dir_ttb {
-        flex-direction: column;
-        }
-    .b-set.box_flex.dir_ttb.spacing_0 > .b-sbutton.set_system .b-sbutton-text {
-        border-top-width: 1px;
-        }
-        .b-set.box_flex.dir_ttb.spacing_0 > .b-sbutton.set_system:first-child .b-sbutton-text {
-            border-top-width: 0;
-            }
-        .b-set.box_flex.dir_ttb.spacing_0 > .b-sbutton.set_system:not(:first-child) .b-sbutton-text {
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-            }
-        .b-set.box_flex.dir_ttb.spacing_0 > .b-sbutton.set_system:not(:last-child) .b-sbutton-text {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-            }
 
-/* Spacing 0 */
-.b-set.spacing_0 {
-    
+/* cause of IE */
+.b-set[class*="spacing_"] .b-button.set_system {
+    /* display: block; */
     }
-    .b-set.spacing_0 > .b-set-item {
-        
-        }
-    /* buttons */
-    .b-set.spacing_0 > .b-sbutton {
-        
-        }
-        .b-set:not(.dir_ttb).spacing_0 > .b-sbutton.set_system .b-sbutton-text {
-            border-left-width: 1px;
-            }
-            .b-set:not(.dir_ttb).spacing_0 > .b-sbutton.set_system:first-child .b-sbutton-text {
-                border-left-width: 0;
-                }
-            .b-set:not(.dir_ttb).spacing_0 > .b-sbutton.set_system:not(:first-child) .b-sbutton-text {
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
-                }
-            .b-set:not(.dir_ttb).spacing_0 > .b-sbutton.set_system:not(:last-child) .b-sbutton-text {
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-                }
-        /* Scheme white */
-        .b-set.spacing_0 > .b-sbutton.set_system.scheme_white .b-sbutton-text {
-            border-left-width: 0;
-            }
-            .b-set.spacing_0 > .b-sbutton.set_system.scheme_white:first-child .b-sbutton-text {
-                border-left-width: 1px;
-                }
 /* Spacing 1 */
 .b-set.spacing_1 {
-    margin-left: -5px;
+    margin-left: -2px;
+    margin-right: -2px;
     }
-    .b-set.spacing_1 > .b-set-item {
+    .b-set.spacing_1 > .b-set-cell {
+        margin-left: 2px;
+        margin-right: 2px;
+        }
+/* Spacing 2 */
+.b-set.spacing_2 {
+    margin-left: -5px;
+    margin-right: -5px;
+    }
+    .b-set.spacing_2 > .b-set-cell {
         margin-left: 5px;
+        margin-right: 5px;
+        }
+/* Spacing 4 */
+.b-set.spacing_4 {
+    margin-left: -10px;
+    margin-right: -10px;
+    }
+    .b-set.spacing_4 > .b-set-cell {
+        margin-left: 10px;
+        margin-right: 10px;
         }
 
 

@@ -1,0 +1,15 @@
+
+/* +require b-form */
+
+/* b-button */
+@import url(core.css);
+
+/* System buttons */
+@import url(set_system.css);
+@import url(set_system.props.css);
+
+@import url(set_system.scheme_gray.css);
+@import url(set_system.scheme_blue.css);
+@import url(set_system.scheme_green.css);
+@import url(set_system.scheme_red.css);
+@import url(set_system.scheme_yellow.css);

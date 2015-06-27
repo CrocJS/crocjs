@@ -45,14 +45,10 @@
             width: 100%;
             margin: 0;
             padding: 3px 0; /* @default */
-            font-size: 13px;
-            line-height: 18px;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #000;
+            position: relative;
+            color: #333;
             background: url(about:blank);
             border: none;
-            outline: none;
-            position: relative;
             z-index: 1;
             box-sizing: border-box;
             }
@@ -149,9 +145,6 @@
                 box-sizing: border-box;
                 user-select: none;
                 }
-                .ie8 .b-input.set_default.type_combobox .b-input-combo-button {
-                    max-width: 90%;
-                    }
                 /* button action */
                 .b-input.set_default.type_combobox .b-input-combo-button-action {
                     display: block;
@@ -519,10 +512,7 @@
             line-height: 18px;
             }
             /* textarea */
-            .ie8 .b-input.set_default.type_area.size_1 .b-input-field-h {
-                height: 60px;
-                }
-            .l-html:not(.ie8) .b-input.set_default.type_area.size_1 .b-input-field-h {
+            .b-input.set_default.type_area.size_1 .b-input-field-h {
                 min-height: 60px;
                 }
         /* placeholder */
@@ -545,9 +535,6 @@
             .b-input.set_default.type_combobox.role_multiselect.size_1 .b-input-field-h {
                 height: 20px;
                 }
-                .ie8 .b-input.set_default.type_combobox.role_multiselect.size_1 .b-input-field-h {
-                    line-height: 20px;
-                    }
             .b-input.set_default.type_combobox.role_multiselect.size_1 .b-input-combo-button {
                 height: 20px;
                 margin-right: 3px;
@@ -595,10 +582,7 @@
             line-height: 20px;
             }
             /* textarea */
-            .ie8 .b-input.set_default.type_area.size_2 .b-input-field-h {
-                height: 68px;
-                }
-            .l-html:not(.ie8) .b-input.set_default.type_area.size_2 .b-input-field-h {
+            .b-input.set_default.type_area.size_2 .b-input-field-h {
                 min-height: 68px;
                 }
         /* placeholder */
@@ -621,9 +605,6 @@
             .b-input.set_default.type_combobox.role_multiselect.size_2 .b-input-field-h {
                 height: 22px;
                 }
-                .ie8 .b-input.set_default.type_combobox.role_multiselect.size_2 .b-input-field-h {
-                    line-height: 22px;
-                    }
             .b-input.set_default.type_combobox.role_multiselect.size_2 .b-input-combo-button {
                 height: 22px;
                 padding: 2px 8px;
@@ -669,10 +650,7 @@
             line-height: 22px;
             }
             /* textarea */
-            .ie8 .b-input.set_default.type_area.size_3 .b-input-field-h {
-                height: 78px;
-                }
-            .l-html:not(.ie8) .b-input.set_default.type_area.size_3 .b-input-field-h {
+            .b-input.set_default.type_area.size_3 .b-input-field-h {
                 min-height: 78px;
                 }
         /* placeholder */
@@ -695,9 +673,6 @@
             .b-input.set_default.type_combobox.role_multiselect.size_3 .b-input-field-h {
                 height: 30px;
                 }
-                .ie8 .b-input.set_default.type_combobox.role_multiselect.size_3 .b-input-field-h {
-                    line-height: 30px;
-                    }
             .b-input.set_default.type_combobox.role_multiselect.size_3 .b-input-combo-button {
                 height: 30px;
                 margin-right: 3px;
@@ -746,10 +721,7 @@
             line-height: 26px;
             }
             /* textarea */
-            .ie8 .b-input.set_default.type_area.size_4 .b-input-field-h {
-                height: 92px;
-                }
-            .l-html:not(.ie8) .b-input.set_default.type_area.size_4 .b-input-field-h {
+            .b-input.set_default.type_area.size_4 .b-input-field-h {
                 min-height: 92px;
                 }
         /* placeholder */
@@ -772,9 +744,6 @@
             .b-input.set_default.type_combobox.role_multiselect.size_4 .b-input-field-h {
                 height: 38px;
                 }
-                .ie8 .b-input.set_default.type_combobox.role_multiselect.size_4 .b-input-field-h {
-                    line-height: 38px;
-                    }
             .b-input.set_default.type_combobox.role_multiselect.size_4 .b-input-combo-button {
                 height: 38px;
                 margin-right: 3px;
@@ -822,10 +791,7 @@
             line-height: 32px;
             }
             /* textarea */
-            .ie8 .b-input.set_default.type_area.size_5 .b-input-field-h {
-                height: 112px;
-                }
-            .l-html:not(.ie8) .b-input.set_default.type_area.size_5 .b-input-field-h {
+            .b-input.set_default.type_area.size_5 .b-input-field-h {
                 min-height: 112px;
                 }
         /* placeholder */
@@ -848,9 +814,6 @@
             .b-input.set_default.type_combobox.role_multiselect.size_5 .b-input-field-h {
                 height: 46px;
                 }
-                .ie8 .b-input.set_default.type_combobox.role_multiselect.size_5 .b-input-field-h {
-                    line-height: 46px;
-                    }
             .b-input.set_default.type_combobox.role_multiselect.size_5 .b-input-combo-button {
                 height: 46px;
                 margin-right: 3px;
@@ -974,35 +937,3 @@
 .b-input.set_default.align_right .b-input-field-h {
     text-align: right;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

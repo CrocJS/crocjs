@@ -1,0 +1,12 @@
+<index:>
+    <div>
+        {{with 1 as #helper}}{{with generateUniqueId('field-', $context) as #number}}
+            {{some}}<br>
+            <widget is="test.cmp.Test2"></widget>
+        {{/with}}{{/with}}
+        {{with 1 as #helper}}{{with generateUniqueId('field-', $context) as #number}}
+            {{some}}<br>
+            <widget is="test.cmp.Test2"></widget>
+        {{/with}}{{/with}}
+    </div>
+</index:>

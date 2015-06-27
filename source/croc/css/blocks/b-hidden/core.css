@@ -1,0 +1,6 @@
+
+/* b-hidden */
+#js .b-hidden,
+#nojs .b-hidden {
+    display: none;
+    }

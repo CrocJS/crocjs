@@ -100,9 +100,6 @@
         .b-tooltip.skin_default.scheme_white .b-tooltip-body {
             background-color: #fff;
             }
-            .ie8 .b-tooltip.skin_default.scheme_white .b-tooltip-body {
-                border: 1px solid #ddd;
-                }
     /* Scheme red */
     .b-tooltip.skin_default.scheme_red {
         
@@ -115,9 +112,6 @@
             color: #fff;
             border-color: #fff;
             }
-            .ie8 .b-tooltip.skin_default.scheme_red .b-tooltip-body {
-                border: 1px solid #fff;
-                }
     /* Indent small */
     .b-tooltip.skin_default.dir_btt.indent_small {
         margin-top: -4px;
