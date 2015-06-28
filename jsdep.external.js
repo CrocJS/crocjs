@@ -62,7 +62,7 @@ var jsdepExt = module.exports = {
                 mask: '*/*.css',
                 symbol: function(ref) {
                     var symbol = ref.split('/');
-                    return symbol[1] === 'imports' ? symbol[0] : symbol.join('.');
+                    return symbol[1] === 'index' ? symbol[0] : symbol.join('.');
                 }
             };
             
