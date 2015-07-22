@@ -2,6 +2,9 @@
   "name": "crocodile-js",
   "version": "0.0.2-alpha0100",
   "description": "Crocodile js web-framework",
+  "scripts": {
+    "examples": "node source/examples/server.js"
+  },
   "dependencies": {
     "autoprefixer-core": "^5.1.7",
     "bless": "^3.0.3",
@@ -35,9 +38,6 @@
     "livedb-mingo": "^1.0.1",
     "racer-highway": "^2.0.1",
     "serve-favicon": "^2.2.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "readme": "ERROR: No README data found!",
   "gitHead": "5fa358af377d4baa1decde4fdb807e1cc30fcf11"
