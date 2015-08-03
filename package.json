@@ -1,6 +1,6 @@
 {
   "name": "crocodile-js",
-  "version": "0.0.2-alpha0101",
+  "version": "0.0.2-alpha0102",
   "description": "Crocodile js web-framework",
   "scripts": {
     "examples": "node source/examples/server.js"
