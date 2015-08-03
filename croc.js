@@ -5,5 +5,10 @@ module.exports = {
         compiled: 'public'
     },
     bower: '/bower_components',
-    viewSource: 'https://gitlab.sotmarket.ru/front-office/crocjs/blob/{branch}/'
+    viewSource: 'https://gitlab.sotmarket.ru/front-office/crocjs/blob/{branch}/',
+    apps: [
+        {
+            path: '/source/croc'
+        }
+    ]
 };
