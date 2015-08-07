@@ -362,6 +362,8 @@ function compileApp(options) {
     return (app.isPackage ? coreJsPromise : deferred.promise).then(function() {
         app._initCroc(controllers);
         function onModel(model) {
+            model.set('_page.device', Stm.env.device);
+            model.set('_page.ldevice', Stm.env.ldevice);
             app.model = model;
             if (app.isPackage && app.coreApp.entry) {
                 require(app.coreApp.entry)(app);
