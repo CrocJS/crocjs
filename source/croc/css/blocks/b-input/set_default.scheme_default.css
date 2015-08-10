@@ -1,0 +1,242 @@
+
+/* Set default */
+.b-input.set_default.scheme_default {
+    color: #000;
+    background: #fff;
+    border-color: #c0c0c0;
+    }
+    /* Event hover */
+    .b-input.set_default.scheme_default:hover {
+        border-color: #7d7d7d;
+        }
+    /* cells */
+    /* field */
+    .b-input.set_default.scheme_default .b-input-field {
+        
+        }
+        /* field */
+        .b-input.set_default.scheme_default .b-input-field-h {
+            color: #333;
+            background: url(about:blank);
+            }
+        /* placeholder */
+        .b-input.set_default.scheme_default .b-input-field-placeholder {
+            color: #999;
+            }
+        /* Type combobox */
+        .b-input.set_default.scheme_default.type_combobox {
+            
+            }
+            /* Role multiselect */
+                /* button action */
+                .b-input.set_default.scheme_default.type_combobox .b-input-combo-button-action {
+                    background: url(/croc/images/blocks/b-input/combobox/action_sbg.png) 0 0 no-repeat;
+                    }
+                /* View add */
+                .b-input.set_default.scheme_default.type_combobox .b-input-combo-button.view_add {
+                    color: #8c8c8c;
+                    background-color: #f3f3f3;
+                    }
+                    .b-input.set_default.scheme_default.type_combobox .b-input-combo-button.view_add:hover {
+                        color: #fff;
+                        background-color: #0081dd;
+                        }
+                    /* Sizes */
+                    .b-input.set_default.scheme_default.type_combobox.size_1 .b-input-combo-button.view_add .b-input-combo-button-action,
+                    .b-input.set_default.scheme_default.type_combobox.size_2 .b-input-combo-button.view_add .b-input-combo-button-action {
+                        background-position: 0 -48px;
+                        }
+                        /* hover */
+                        .b-input.set_default.scheme_default.type_combobox.size_1 .b-input-combo-button.view_add:hover .b-input-combo-button-action,
+                        .b-input.set_default.scheme_default.type_combobox.size_2 .b-input-combo-button.view_add:hover .b-input-combo-button-action {
+                            background-position: -12px -48px;
+                            }
+                    .b-input.set_default.scheme_default.type_combobox.size_3 .b-input-combo-button.view_add .b-input-combo-button-action,
+                    .b-input.set_default.scheme_default.type_combobox.size_4 .b-input-combo-button.view_add .b-input-combo-button-action,
+                    .b-input.set_default.scheme_default.type_combobox.size_5 .b-input-combo-button.view_add .b-input-combo-button-action {
+                        background-position: 0 -60px;
+                        }
+                        /* hover */
+                        .b-input.set_default.scheme_default.type_combobox.size_3 .b-input-combo-button.view_add:hover .b-input-combo-button-action,
+                        .b-input.set_default.scheme_default.type_combobox.size_4 .b-input-combo-button.view_add:hover .b-input-combo-button-action,
+                        .b-input.set_default.scheme_default.type_combobox.size_5 .b-input-combo-button.view_add:hover .b-input-combo-button-action {
+                            background-position: -12px -60px;
+                            }
+                /* View added */
+                .b-input.set_default.scheme_default.type_combobox .b-input-combo-button.view_added {
+                    color: #000;
+                    background-color: #ddd;
+                    }
+                    .b-input.set_default.scheme_default.type_combobox .b-input-combo-button.view_added:hover {
+                        color: #000;
+                        background-color: #ccc;
+                        }
+                    .b-input.set_default.scheme_default.type_combobox .b-input-combo-button.view_added.state_active {
+                        color: #fff;
+                        background-color: #0081dd;
+                        }
+                    /* Sizes */
+                    .b-input.set_default.scheme_default.type_combobox.size_1 .b-input-combo-button.view_added .b-input-combo-button-action,
+                    .b-input.set_default.scheme_default.type_combobox.size_2 .b-input-combo-button.view_added .b-input-combo-button-action {
+                        background-position: 0 0;
+                        }
+                        /* hover */
+                        .b-input.set_default.scheme_default.type_combobox.size_1 .b-input-combo-button.view_added .b-input-combo-button-action:hover,
+                        .b-input.set_default.scheme_default.type_combobox.size_2 .b-input-combo-button.view_added .b-input-combo-button-action:hover {
+                            background-position: -12px 0;
+                            }
+                    .b-input.set_default.scheme_default.type_combobox.size_3 .b-input-combo-button.view_added .b-input-combo-button-action,
+                    .b-input.set_default.scheme_default.type_combobox.size_4 .b-input-combo-button.view_added .b-input-combo-button-action,
+                    .b-input.set_default.scheme_default.type_combobox.size_5 .b-input-combo-button.view_added .b-input-combo-button-action {
+                        background-position: 0 -12px;
+                        }
+                        /* hover */
+                        .b-input.set_default.scheme_default.type_combobox.size_3 .b-input-combo-button.view_added .b-input-combo-button-action:hover,
+                        .b-input.set_default.scheme_default.type_combobox.size_4 .b-input-combo-button.view_added .b-input-combo-button-action:hover,
+                        .b-input.set_default.scheme_default.type_combobox.size_5 .b-input-combo-button.view_added .b-input-combo-button-action:hover {
+                            background-position: -12px -12px;
+                            }
+                    /* State active */
+                    .b-input.set_default.scheme_default.type_combobox .b-input-combo-button.view_added.state_active {
+                        
+                        }
+                        .b-input.set_default.scheme_default.type_combobox .b-input-combo-button.view_added.state_active:hover {
+                            background-color: #0070bf;
+                            }
+                        /* Sizes */
+                        .b-input.set_default.scheme_default.type_combobox.size_1 .b-input-combo-button.view_added.state_active .b-input-combo-button-action,
+                        .b-input.set_default.scheme_default.type_combobox.size_2 .b-input-combo-button.view_added.state_active .b-input-combo-button-action {
+                            background-position: 0 -24px;
+                            }
+                            /* hover */
+                            .b-input.set_default.scheme_default.type_combobox.size_1 .b-input-combo-button.view_added.state_active .b-input-combo-button-action:hover,
+                            .b-input.set_default.scheme_default.type_combobox.size_2 .b-input-combo-button.view_added.state_active .b-input-combo-button-action:hover {
+                                background-position: -12px -24px;
+                                }
+                        .b-input.set_default.scheme_default.type_combobox.size_3 .b-input-combo-button.view_added.state_active .b-input-combo-button-action,
+                        .b-input.set_default.scheme_default.type_combobox.size_4 .b-input-combo-button.view_added.state_active .b-input-combo-button-action,
+                        .b-input.set_default.scheme_default.type_combobox.size_5 .b-input-combo-button.view_added.state_active .b-input-combo-button-action {
+                            background-position: 0 -36px;
+                            }
+                            /* hover */
+                            .b-input.set_default.scheme_default.type_combobox.size_3 .b-input-combo-button.view_added.state_active .b-input-combo-button-action:hover,
+                            .b-input.set_default.scheme_default.type_combobox.size_4 .b-input-combo-button.view_added.state_active .b-input-combo-button-action:hover,
+                            .b-input.set_default.scheme_default.type_combobox.size_5 .b-input-combo-button.view_added.state_active .b-input-combo-button-action:hover {
+                                background-position: -12px -36px;
+                                }
+    .b-input.set_default.scheme_default .b-input-action {
+        
+        }
+        /* Role reset */
+        .b-input.set_default.scheme_default .b-input-action.role_reset {
+            /* background: #8d8d8d url(/croc/images/blocks/b-input/action-reset_sbg.png) 0 0 no-repeat; */
+            background: #8d8d8d url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAaCAQAAADCxM7pAAAANklEQVQoz2NgoAL474RKo0m++Q+SgNE4FOCQRDYBjyReo/HajcflQxsgfAzy/VCKFgIuHwAAAEoAXFvKlFBXAAAAAElFTkSuQmCC) 0 0 no-repeat;
+            }
+            .b-input.set_default.scheme_default .b-input-action.role_reset:hover {
+                background-color: #404040;
+                }
+            .b-input.set_default.scheme_default .b-input-action.role_reset:active {
+                background-color: #999;
+                box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .5) inset;
+                }
+        /* Role loader */
+        .b-input.set_default.scheme_default .b-input-action.role_loader {
+            background: url(/croc/images/gui/loaders/loader_small.gif) 0 0 no-repeat;
+            }
+        /* Role unfold */
+        .b-input.set_default.scheme_default .b-input-action.role_unfold {
+            /* background: url(/croc/images/blocks/b-input/action-unfold_sbg.png) 0 0 no-repeat; */
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAeCAQAAABZVYz/AAAASklEQVR4AWMYcBDI8B8FBqIr2IUkuQtTvxbDH6jkHyAbC+iFSvdit5+f4S1Q8i2QxgGSgdLJ+Hwwh2FkAU6G26hxBuRzjkYpjQAAtEpCRlIufnsAAAAASUVORK5CYII=) 0 0 no-repeat;
+            opacity: .35;
+            transition: opacity 0.1s ease;
+            }
+            .b-input.set_default .b-input-action.role_unfold.state_hover,
+            .b-input.set_default .b-input-action.role_unfold:hover {
+                opacity: 1;
+                }
+            /* Size 1-2 */
+            .b-input.set_default.scheme_default.size_1 .b-input-action.role_unfold,
+            .b-input.set_default.scheme_default.size_2 .b-input-action.role_unfold {
+                background-position: 0 0;
+                }
+            /* Size 3-4-5 */
+            .b-input.set_default.scheme_default.size_3 .b-input-action.role_unfold,
+            .b-input.set_default.scheme_default.size_4 .b-input-action.role_unfold,
+            .b-input.set_default.scheme_default.size_5 .b-input-action.role_unfold {
+                background-position: 0 -14px;
+                }
+    /* validation */
+    .b-input.set_default.scheme_default .b-input-cell.cell_validation {
+        
+        }
+        .b-input.set_default.scheme_default .b-input-validation {
+            background: url(/croc/images/blocks/b-input/validation_sbg.png) 0 0 no-repeat;
+            }
+    /* suggest */
+    .b-input.set_default.scheme_default .b-input-cell.cell_suggest {
+        color: #999;
+        }
+    /* hint */
+    .b-input.set_default.scheme_default .b-input-cell.cell_hint {
+        color: #999;
+        }
+    /* label */
+    .b-input.set_default.scheme_default .b-input-label {
+        background-color: #ebeced;
+        }
+
+/* State focus */
+.b-input.set_default.scheme_default.state_focus {
+    border-color: #ff6500;
+    box-shadow: 0 0 5px 0 #ff6500;
+    }
+    .b-input.set_default.scheme_default.state_focus .b-input-field-placeholder {
+        color: #ccc;
+        }
+/* State valid */
+.b-input.set_default.scheme_default.state_valid {
+    border-color: #1bc059;
+    }
+    .b-input.set_default.scheme_default.state_valid .b-input-cell.cell_validation {
+        background-color: #1bc059;
+        }
+        /* Size 1-2 */
+        .b-input.set_default.scheme_default.state_valid.size_1 .b-input-validation,
+        .b-input.set_default.scheme_default.state_valid.size_2 .b-input-validation {
+            background-position: 0 -36px;
+            }
+        /* Size 3-4-5 */
+        .b-input.set_default.scheme_default.state_valid.size_3 .b-input-validation,
+        .b-input.set_default.scheme_default.state_valid.size_4 .b-input-validation,
+        .b-input.set_default.scheme_default.state_valid.size_5 .b-input-validation {
+            background-position: 0 -52px;
+            }
+/* State error */
+.b-input.set_default.scheme_default.state_error {
+    border-color: #ff2610;
+    }
+    .b-input.set_default.scheme_default.state_error .b-input-cell.cell_validation {
+        background-color: #ff2610;
+        }
+        /* Size 1-2 */
+        .b-input.set_default.scheme_default.state_error.size_1 .b-input-validation,
+        .b-input.set_default.scheme_default.state_error.size_2 .b-input-validation {
+            background-position: 0 0;
+            }
+        /* Size 3-4-5 */
+        .b-input.set_default.scheme_default.state_error.size_3 .b-input-validation,
+        .b-input.set_default.scheme_default.state_error.size_4 .b-input-validation,
+        .b-input.set_default.scheme_default.state_error.size_5 .b-input-validation {
+            background-position: 0 -16px;
+            }
+/* State disabled */
+.b-input.set_default.scheme_default.state_disabled {
+    color: #7d7d7d;
+    background-color: #f8f8f8;
+    border-color: #c0c0c0;
+    }
+    .b-input.set_default.scheme_default.state_disabled .b-input-field-h {
+        color: #7d7d7d;
+        }
+
+

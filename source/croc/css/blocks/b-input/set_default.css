@@ -4,19 +4,13 @@
     display: block;
     font-size: 0;
     line-height: 0;
-    color: #000;
-    background: #fff;
-    border: 1px solid #c0c0c0;
+    border: 1px solid;
     position: relative;
     border-radius: 3px;
     background-clip: padding-box;
     box-sizing: border-box;
     transition: border-color 0.1s ease 0.1s, background-color 0.1s ease 0.1s, color 0.1s ease 0.1s, box-shadow 0.1s ease 0.1s;
     }
-    /* Event hover */
-    .b-input.set_default:hover {
-        border-color: #7d7d7d;
-        }
     .b-input.set_default .b-input-h {
         display: table;
         width: 100%;
@@ -46,7 +40,6 @@
             margin: 0;
             padding: 3px 0; /* @default */
             position: relative;
-            color: #333;
             background: url(about:blank);
             border: none;
             z-index: 1;
@@ -61,7 +54,6 @@
             padding: 0 5px;
             overflow: hidden;
             text-overflow: ellipsis;
-            color: #999;
             white-space: nowrap;
             box-sizing: border-box;
             transition: color 0.1s ease;
@@ -155,45 +147,17 @@
                     margin-top: -6px;
                     font-size: 0;
                     line-height: 0;
-                    background: url(/croc/images/blocks/b-input/combobox/action_sbg.png) 0 0 no-repeat;
                     }
                 /* View add */
                 .b-input.set_default.type_combobox .b-input-combo-button.view_add {
-                    color: #8c8c8c;
-                    background-color: #f3f3f3;
+                    
                     }
                     .b-input.set_default.type_combobox.addbutton_off .b-input-combo-button.view_add {
                         display: none;
                         }
-                    .b-input.set_default.type_combobox .b-input-combo-button.view_add:hover {
-                        color: #fff;
-                        background-color: #0081dd;
-                        }
-                    /* Sizes */
-                    .b-input.set_default.type_combobox.size_1 .b-input-combo-button.view_add .b-input-combo-button-action,
-                    .b-input.set_default.type_combobox.size_2 .b-input-combo-button.view_add .b-input-combo-button-action {
-                        background-position: 0 -48px;
-                        }
-                        /* hover */
-                        .b-input.set_default.type_combobox.size_1 .b-input-combo-button.view_add:hover .b-input-combo-button-action,
-                        .b-input.set_default.type_combobox.size_2 .b-input-combo-button.view_add:hover .b-input-combo-button-action {
-                            background-position: -12px -48px;
-                            }
-                    .b-input.set_default.type_combobox.size_3 .b-input-combo-button.view_add .b-input-combo-button-action,
-                    .b-input.set_default.type_combobox.size_4 .b-input-combo-button.view_add .b-input-combo-button-action,
-                    .b-input.set_default.type_combobox.size_5 .b-input-combo-button.view_add .b-input-combo-button-action {
-                        background-position: 0 -60px;
-                        }
-                        /* hover */
-                        .b-input.set_default.type_combobox.size_3 .b-input-combo-button.view_add:hover .b-input-combo-button-action,
-                        .b-input.set_default.type_combobox.size_4 .b-input-combo-button.view_add:hover .b-input-combo-button-action,
-                        .b-input.set_default.type_combobox.size_5 .b-input-combo-button.view_add:hover .b-input-combo-button-action {
-                            background-position: -12px -60px;
-                            }
                 /* View added */
                 .b-input.set_default.type_combobox .b-input-combo-button.view_added {
-                    color: #000;
-                    background-color: #ddd;
+                    
                     }
                     .b-input.set_default.type_combobox .b-input-combo-button.view_added .b-input-combo-button-action:before {
                         content: '';
@@ -210,15 +174,7 @@
                         width: 12px;
                         height: 12px;
                         }
-                    .b-input.set_default.type_combobox .b-input-combo-button.view_added:hover {
-                        color: #000;
-                        background-color: #ccc;
-                        }
-                    .b-input.set_default.type_combobox .b-input-combo-button.view_added.state_active {
-                        color: #fff;
-                        background-color: #0081dd;
-                        }
-                    /* raw state */
+                    /* State raw */
                     .b-input.set_default.type_combobox.state_raw {
                         
                         }
@@ -228,55 +184,6 @@
                         .b-input.set_default.type_combobox.state_raw .b-input-field-h {
                             font-size: 0;
                             }
-                    /* Sizes */
-                    .b-input.set_default.type_combobox.size_1 .b-input-combo-button.view_added .b-input-combo-button-action,
-                    .b-input.set_default.type_combobox.size_2 .b-input-combo-button.view_added .b-input-combo-button-action {
-                        background-position: 0 0;
-                        }
-                        /* hover */
-                        .b-input.set_default.type_combobox.size_1 .b-input-combo-button.view_added .b-input-combo-button-action:hover,
-                        .b-input.set_default.type_combobox.size_2 .b-input-combo-button.view_added .b-input-combo-button-action:hover {
-                            background-position: -12px 0;
-                            }
-                    .b-input.set_default.type_combobox.size_3 .b-input-combo-button.view_added .b-input-combo-button-action,
-                    .b-input.set_default.type_combobox.size_4 .b-input-combo-button.view_added .b-input-combo-button-action,
-                    .b-input.set_default.type_combobox.size_5 .b-input-combo-button.view_added .b-input-combo-button-action {
-                        background-position: 0 -12px;
-                        }
-                        /* hover */
-                        .b-input.set_default.type_combobox.size_3 .b-input-combo-button.view_added .b-input-combo-button-action:hover,
-                        .b-input.set_default.type_combobox.size_4 .b-input-combo-button.view_added .b-input-combo-button-action:hover,
-                        .b-input.set_default.type_combobox.size_5 .b-input-combo-button.view_added .b-input-combo-button-action:hover {
-                            background-position: -12px -12px;
-                            }
-                    /* State active */
-                    .b-input.set_default.type_combobox .b-input-combo-button.view_added.state_active {
-                        
-                        }
-                        .b-input.set_default.type_combobox .b-input-combo-button.view_added.state_active:hover {
-                            background-color: #0070bf;
-                            }
-                        /* Sizes */
-                        .b-input.set_default.type_combobox.size_1 .b-input-combo-button.view_added.state_active .b-input-combo-button-action,
-                        .b-input.set_default.type_combobox.size_2 .b-input-combo-button.view_added.state_active .b-input-combo-button-action {
-                            background-position: 0 -24px;
-                            }
-                            /* hover */
-                            .b-input.set_default.type_combobox.size_1 .b-input-combo-button.view_added.state_active .b-input-combo-button-action:hover,
-                            .b-input.set_default.type_combobox.size_2 .b-input-combo-button.view_added.state_active .b-input-combo-button-action:hover {
-                                background-position: -12px -24px;
-                                }
-                        .b-input.set_default.type_combobox.size_3 .b-input-combo-button.view_added.state_active .b-input-combo-button-action,
-                        .b-input.set_default.type_combobox.size_4 .b-input-combo-button.view_added.state_active .b-input-combo-button-action,
-                        .b-input.set_default.type_combobox.size_5 .b-input-combo-button.view_added.state_active .b-input-combo-button-action {
-                            background-position: 0 -36px;
-                            }
-                            /* hover */
-                            .b-input.set_default.type_combobox.size_3 .b-input-combo-button.view_added.state_active .b-input-combo-button-action:hover,
-                            .b-input.set_default.type_combobox.size_4 .b-input-combo-button.view_added.state_active .b-input-combo-button-action:hover,
-                            .b-input.set_default.type_combobox.size_5 .b-input-combo-button.view_added.state_active .b-input-combo-button-action:hover {
-                                background-position: -12px -36px;
-                                }
             /* sizes */
             .b-input.set_default.type_combobox.size_1 .b-input-h {
                 min-height: 24px;
@@ -327,17 +234,8 @@
             width: 11px;
             height: 11px;
             cursor: pointer;
-            /* background: #8d8d8d url(/croc/images/blocks/b-input/action-reset_sbg.png) 0 0 no-repeat; */
-            background: #8d8d8d url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAaCAQAAADCxM7pAAAANklEQVQoz2NgoAL474RKo0m++Q+SgNE4FOCQRDYBjyReo/HajcflQxsgfAzy/VCKFgIuHwAAAEoAXFvKlFBXAAAAAElFTkSuQmCC) 0 0 no-repeat;
             border-radius: 50%;
             }
-            .b-input.set_default .b-input-action.role_reset:hover {
-                background-color: #404040;
-                }
-            .b-input.set_default .b-input-action.role_reset:active {
-                background-color: #999;
-                box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .5) inset;
-                }
             .b-input.set_default .b-input-action.role_reset:before {
                 content: '';
                 display: block;
@@ -362,7 +260,6 @@
             .b-input.set_default.size_5 .b-input-action.role_reset {
                 width: 15px;
                 height: 15px;
-                background-position: 0 -11px;
                 }
                 .b-input.set_default.size_3 .b-input-action.role_reset:before,
                 .b-input.set_default.size_4 .b-input-action.role_reset:before,
@@ -375,7 +272,6 @@
             width: 16px;
             height: 11px;
             cursor: default;
-            background: url(/croc/images/gui/loaders/loader_small.gif) 0 0 no-repeat;
             }
             /* Size 3-4-5 */
             .b-input.set_default.size_3 .b-input-action.role_loader,
@@ -386,29 +282,12 @@
         /* Role unfold */
         .b-input.set_default .b-input-action.role_unfold {
             cursor: pointer;
-            /* background: url(/croc/images/blocks/b-input/action-unfold_sbg.png) 0 0 no-repeat; */
-            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAeCAQAAABZVYz/AAAASklEQVR4AWMYcBDI8B8FBqIr2IUkuQtTvxbDH6jkHyAbC+iFSvdit5+f4S1Q8i2QxgGSgdLJ+Hwwh2FkAU6G26hxBuRzjkYpjQAAtEpCRlIufnsAAAAASUVORK5CYII=) 0 0 no-repeat;
-            opacity: .35;
-            transition: opacity 0.1s ease;
             }
-            .b-input.set_default .b-input-action.role_unfold:before {
-                content: '';
-                display: block;
-                top: 0;
-                bottom: 0;
-                position: absolute;
-                background: url(about:blank);
-                }
-            .b-input.set_default .b-input-action.role_unfold.state_hover,
-            .b-input.set_default .b-input-action.role_unfold:hover {
-                opacity: 1;
-                }
             /* Size 1-2 */
             .b-input.set_default.size_1 .b-input-action.role_unfold,
             .b-input.set_default.size_2 .b-input-action.role_unfold {
                 width: 13px;
                 height: 13px;
-                background-position: 0 0;
                 }
                 .b-input.set_default.size_1 .b-input-action.role_unfold:before,
                 .b-input.set_default.size_2 .b-input-action.role_unfold:before {
@@ -421,7 +300,6 @@
             .b-input.set_default.size_5 .b-input-action.role_unfold {
                 width: 15px;
                 height: 15px;
-                background-position: 0 -14px;
                 }
                 .b-input.set_default.size_3 .b-input-action.role_unfold:before,
                 .b-input.set_default.size_4 .b-input-action.role_unfold:before,
@@ -439,7 +317,7 @@
         position: relative;
         }
         .b-input.set_default .b-input-validation {
-            background: url(/croc/images/blocks/b-input/validation_sbg.png) 0 0 no-repeat;
+            
             }
             /* Size 1-2 */
             .b-input.set_default.size_1 .b-input-validation,
@@ -459,7 +337,6 @@
         padding: 0 10px;
         font-size: 13px;
         line-height: 18px;
-        color: #999;
         white-space: nowrap;
         }
     /* hint */
@@ -467,7 +344,6 @@
         padding: 0 10px;
         font-size: 11px;
         line-height: 16px;
-        color: #999;
         white-space: nowrap;
         }
     /* button */
@@ -484,7 +360,6 @@
         font-size: 13px;
         line-height: 18px;
         text-align: center;
-        background-color: #ebeced;
         box-sizing: border-box;
         }
         /* Round left */
@@ -851,69 +726,26 @@
 
 /* State focus */
 .b-input.set_default.state_focus {
-    border-color: #ff6500;
-    box-shadow: 0 0 5px 0 #ff6500;
     transition: border-color 0.1s ease, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease;
     }
-    .b-input.set_default.state_focus .b-input-field-placeholder {
-        color: #ccc;
-        }
-    .b-input.set_default.state_focus .b-input-label {
-        /* background-color: #ddf2ff; */
-        }
     .webkit .b-input.set_default.state_focus .b-input-action:before {
         content: ' ';
         }
 /* State valid */
 .b-input.set_default.state_valid {
-    border-color: #1bc059;
+    
     }
-    .b-input.set_default.state_valid .b-input-cell.cell_validation {
-        display: table-cell;
-        background-color: #1bc059;
-        }
-        /* Size 1-2 */
-        .b-input.set_default.state_valid.size_1 .b-input-validation,
-        .b-input.set_default.state_valid.size_2 .b-input-validation {
-            background-position: 0 -36px;
-            }
-        /* Size 3-4-5 */
-        .b-input.set_default.state_valid.size_3 .b-input-validation,
-        .b-input.set_default.state_valid.size_4 .b-input-validation,
-        .b-input.set_default.state_valid.size_5 .b-input-validation {
-            background-position: 0 -52px;
-            }
 /* State error */
 .b-input.set_default.state_error {
-    border-color: #ff2610;
+    
     }
-    .b-input.set_default.state_error .b-input-cell.cell_validation {
-        display: table-cell;
-        background-color: #ff2610;
-        }
-        /* Size 1-2 */
-        .b-input.set_default.state_error.size_1 .b-input-validation,
-        .b-input.set_default.state_error.size_2 .b-input-validation {
-            background-position: 0 0;
-            }
-        /* Size 3-4-5 */
-        .b-input.set_default.state_error.size_3 .b-input-validation,
-        .b-input.set_default.state_error.size_4 .b-input-validation,
-        .b-input.set_default.state_error.size_5 .b-input-validation {
-            background-position: 0 -16px;
-            }
 /* State disabled */
 .b-input.set_default.state_disabled {
-    color: #7d7d7d;
-    background-color: #f8f8f8;
-    border-color: #c0c0c0;
+    
     }
-    .b-input.set_default.state_disabled .b-input-field-h {
-        color: #7d7d7d;
+    .b-input.set_default.state_disabled .b-input-cell.cell_action {
+        display: none;
         }
-        .b-input.set_default.state_disabled .b-input-cell.cell_action {
-            display: none;
-            }
 
 
 
