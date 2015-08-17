@@ -1,5 +1,6 @@
 /**
- * Абстракция над полем ввода (text/textarea)
+ * api-ru Абстракция над полем ввода (text/textarea)
+ * api-en Abstraction above the text field (text/textarea).
  * todo implement composite placeholder
  */
 croc.Class.define('croc.cmp.form.field.AbstractTextField', {
@@ -26,7 +27,8 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Выравнивание текста
+         * api-ru Выравнивание текста
+         * api-en Text alignment.
          * @type {string}
          */
         align: {
@@ -48,7 +50,8 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Мгновенное значение текстового поля
+         * api-ru Мгновенное значение текстового поля
+         * api-en Instant value of text field.
          * @type {string}
          */
         instantValue: {
@@ -57,7 +60,8 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * плэйсхолдер для поля
+         * api-ru плэйсхолдер для поля
+         * api-en Placeholder for field.
          * @type {string}
          */
         placeholder: {
@@ -66,7 +70,8 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Пометить поле как "только для чтения"
+         * api-ru Пометить поле как "только для чтения"
+         * api-en Mark the field as "only for reading".
          * @type {boolean}
          */
         readOnly: {
@@ -74,7 +79,8 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Функция трансформации значения поля после его смены
+         * api-ru Функция трансформации значения поля после его смены
+         * api-en Transformation function of field value after its change. 
          * @type {function(*):*}
          */
         transformOnChange: {
@@ -83,7 +89,8 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Транформация значения каждый update поля
+         * api-ru Транформация значения каждый update поля
+         * api-en Value transformation of every update field.
          * @type {function(string):string}
          */
         transformOnUpdate: {
@@ -103,8 +110,10 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
     
     options: {
         /**
-         * Указывает как следует реагировать при изменении внутреннего значения поля извне (в обход API TextField).
-         * Возможные значения: null - нет реакции, 'change' - изменить внешнее значение, 'update' - вызывать событие update
+         * api-ru Указывает как следует реагировать при изменении внутреннего значения поля извне (в обход API TextField).
+         *        Возможные значения: null - нет реакции, 'change' - изменить внешнее значение, 'update' - вызывать событие update
+         * api-en Shows how should react to change of field internal value from the outside (by pass API TextField).
+         *        Possible values: null - no reaction, 'change' - change external value, 'update' - call update event.
          * @type {String}
          */
         externalChangeReaction: {
@@ -112,8 +121,10 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Максимальное кол-во знаков (аттрибут maxlength)
-         * Если указаны правила валидации length или lengthRange, то определяется автоматически
+         * api-ru Максимальное кол-во знаков (аттрибут maxlength)
+         *        Если указаны правила валидации length или lengthRange, то определяется автоматически
+         * api-en Maximum number of characters (attribute maxlength).
+         *        It will automaticaly determines if length or lenthRange rule is set
          * @type {number}
          */
         maxLength: {
@@ -121,13 +132,15 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * На мобильных устройствах прокручивать страницу так, чтобы поле оказалось наверху, когда оно в фокусе
+         * api-ru На мобильных устройствах прокручивать страницу так, чтобы поле оказалось наверху, когда оно в фокусе
+         * api-en On mobile devices scroll the page so that the field turns out above, when it is in focus.
          * @type {boolean}
          */
         mobileScrollTop: {},
         
         /**
-         * Функция очистки поля (по нажатию на кнопку reset)
+         * api-ru Функция очистки поля (по нажатию на кнопку reset)
+         * api-en Function of field clean up (by cliking on reset button).
          * @type {function(croc.ui.form.field.AbstractTextField)}
          */
         resetFn: function(field) {
@@ -135,10 +148,12 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Особенности выделения текста внутри поля
-         * smartSelectOnClick - если текст выделен полностью, то клик приведёт к сбросу выделения, иначе текст выделяется
-         * полностью
-         * selectOnFocus - текст выделяется только при фокусе элемента
+         * api-ru Особенности выделения текста внутри поля
+         * api-ru smartSelectOnClick - если текст выделен полностью, то клик приведёт к сбросу выделения, иначе текст выделяется полностью
+         * api-ru selectOnFocus - текст выделяется только при фокусе элемента
+         * api-en Features of highlighting the text inside field. 
+         * api-en smartSelectOnClick - if text is highlighted completely, then click lead to the reset of highlighting, otherwise text is highlighted completely.
+         * api-en selectOnFocus - text is highlighted only in focus of element.
          * @type {string}
          */
         selectionBehavior: {
@@ -146,13 +161,15 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Показывать ли экшен у поля
+         * api-ru Показывать ли экшен у поля
+         * api-en Does field action needs to be shown.
          * @type {Boolean}
          */
         showAction: true,
         
         /**
-         * Показывать ли крестик для сброса значения поля или нет
+         * api-ru Показывать ли крестик для сброса значения поля или нет
+         * api-en Does reset icon needs to be shown?
          * @type {Boolean}
          */
         showReset: true,
@@ -167,7 +184,8 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Использовать проверку изменения значения по событию blur, вместо change
+         * api-ru Использовать проверку изменения значения по событию blur, вместо change
+         * api-en Use check of value changes on blur event, instead change.
          * @type {boolean}
          */
         _checkValueOnBlur: true
@@ -190,7 +208,8 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Пробелы на концах значения являются важными и их нельзя обрезать
+         * api-ru Пробелы на концах значения являются важными и их нельзя обрезать
+         * api-en Spaces on the end of the value are important and they can't be cut out.
          * @returns {boolean}
          */
         keepWhiteSpace: function() {
@@ -198,7 +217,8 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Передвинуть каретку в конец поля
+         * api-ru Передвинуть каретку в конец поля
+         * api-en Move cursor to the end of field.
          */
         moveCursorToEnd: function() {
             croc.utils.domSetCaretPos(this.getFieldElement(), this.getFieldElement().val().length);
@@ -234,7 +254,8 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Инициализация модели виджета
+         * api-ru Инициализация модели виджета
+         * api-en Initialization of widget model.
          * @protected
          */
         _initModel: function() {
@@ -259,7 +280,8 @@ croc.Class.define('croc.cmp.form.field.AbstractTextField', {
         },
         
         /**
-         * Инициализация виджета после его отрисовки в DOM
+         * api-ru Инициализация виджета после его отрисовки в DOM
+         * api-en Initialization of widget after its rendering in DOM.
          * @return {$.Deferred|undefined}
          * @protected
          */

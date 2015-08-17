@@ -1,5 +1,6 @@
 /**
- * Группа радиокнопок
+ * api-ru Группа радиокнопок
+ * api-en Group of radiobuttons.
  */
 croc.Class.define('croc.cmp.form.field.CheckBoxesGroup', {
     extend: croc.cmp.form.field.AbstractCheckGroup,
@@ -32,37 +33,43 @@ croc.Class.define('croc.cmp.form.field.CheckBoxesGroup', {
     
     options: {
         /**
-         * У дочерних чекбоксов одинаковые имена и значением поля является массив с их значениями (value)
+         * api-ru У дочерних чекбоксов одинаковые имена и значением поля является массив с их значениями (value)
+         * api-en Child checkboxes have the same names and field value is an array with their values.
          * @type {boolean}
          */
         arrayValues: {},
         
         /**
-         * Примешивает значения чекбоксов к значениям формы если arrayValues=false
+         * api-ru Примешивает значения чекбоксов к значениям формы если arrayValues=false
+         * api-en Export checkboxes values to form values if arrayValues=false.
          * @type {boolean}
          */
         exportsValues: true,
         
         /**
-         * Следует ли группировать чекбоксы в массивы по одинаковому идентификатору
+         * api-ru Следует ли группировать чекбоксы в массивы по одинаковому идентификатору
+         * api-en Does checkboxes needs to be grouped in arrays according to same ID?
          * @type {boolean}
          */
         groupCheckboxes: {},
         
         /**
-         * Удалять неотмеченные чекбоксы из значения
+         * api-ru Удалять неотмеченные чекбоксы из значения
+         * api-en Remove unchecked checkboxes out of values.
          * @type {boolean}
          */
         removeUnchecked: true,
         
         /**
-         * тип группы
+         * api-ru тип группы
+         * api-en Group type.
          * @type {string}
          */
         type: 'checkbox',
         
         /**
-         * Сообщения об ошибках валидации (validatorId => message)
+         * api-ru Сообщения об ошибках валидации (validatorId => message)
+         * api-en Messages of valodation errors (validatorId => message).
          * @type {Object.<string, string>}
          */
         validationMessages: {
@@ -80,7 +87,8 @@ croc.Class.define('croc.cmp.form.field.CheckBoxesGroup', {
         },
         
         /**
-         * Если возвращает объект, то он примешивается к значениям формы
+         * api-ru Если возвращает объект, то он примешивается к значениям формы
+         * api-en If returns the object, then it exports to form values.
          * @returns {Object}
          */
         exportValues: function() {
@@ -88,7 +96,8 @@ croc.Class.define('croc.cmp.form.field.CheckBoxesGroup', {
         },
         
         /**
-         * Считать ли поле (либо переданное значение) пустым
+         * api-ru Считать ли поле (либо переданное значение) пустым
+         * api-en Is field (or sent value) empty? 
          * @param {*} [value=null]
          * @returns {boolean}
          */
@@ -106,7 +115,8 @@ croc.Class.define('croc.cmp.form.field.CheckBoxesGroup', {
         },
         
         /**
-         * Инициализация модели виджета
+         * api-ru Инициализация модели виджета
+         * api-en Initialization of widget model.
          * @protected
          */
         _initModel: function() {
@@ -136,7 +146,8 @@ croc.Class.define('croc.cmp.form.field.CheckBoxesGroup', {
         },
     
         /**
-         * Изменение значения группы
+         * api-ru Изменение значения группы
+         * api-en Changing of group value.
          * @param value
          * @param old
          * @param passed

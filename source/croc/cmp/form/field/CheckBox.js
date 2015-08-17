@@ -8,12 +8,15 @@ croc.Class.define('croc.cmp.form.field.CheckBox', {
     
     options: {
         /**
-         * Сообщения об ошибках валидации (validatorId => message)
+         * api-ru Сообщения об ошибках валидации (validatorId => message)
+         * api-en Validation error messages (validatorId => message).
          * @type {Object.<string, string>}
          */
         validationMessages: {
             value: {
                 required: 'Флажок должен быть отмечен'
+                // api-ru
+                // required: api-en 'Flag should be marked'
             }
         }
     },

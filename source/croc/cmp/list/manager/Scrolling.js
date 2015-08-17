@@ -1,31 +1,37 @@
 /**
- * Менеджер позволяет прокручивать элементы списка. Если используется свойство visibleCount, то очень важно, чтобы
- * высота каждого элемента была одинаковой! (вплоть до пиксела)
+ * api-ru Менеджер позволяет прокручивать элементы списка. Если используется свойство visibleCount, то очень важно, чтобы
+ *        высота каждого элемента была одинаковой! (вплоть до пиксела)
+ * api-en Manager allows to scroll list of elements. If visibleCount property is used, then it's very important, that height
+ *        of every element were the same! (up to pixel)
  */
 croc.Class.define('croc.cmp.list.manager.Scrolling', {
     extend: croc.cmp.list.manager.Abstract,
     
     options: {
         /**
-         * Прокручивать список дискретно
+         * api-ru Прокручивать список дискретно
+         * api-en Scroll list discretely.
          * @type {boolean}
          */
         discreteScrolling: true,
         
         /**
-         * Если есть предыдущие невидимые элементы, показать соответствующий маркер (например, градиент)
+         * api-ru Если есть предыдущие невидимые элементы, показать соответствующий маркер (например, градиент)
+         * api-en If there are previous visible elements, show corresponding marker (for example, gradient)
          * @type {boolean}
          */
         hasOverflowMarkers: false,
         
         /**
-         * Скрывать маркеры при наведении мыши
+         * api-ru Скрывать маркеры при наведении мыши
+         * api-en Hide markers by mouse-over.
          * @type {boolean}
          */
         hideOverflowMarkers: false,
         
         /**
-         * Размер скроллбара
+         * api-ru Размер скроллбара
+         * api-en Size of scrollbar.
          * @type {string}
          */
         scrollbarSize: {
@@ -34,7 +40,8 @@ croc.Class.define('croc.cmp.list.manager.Scrolling', {
         },
         
         /**
-         * Нужен ли скроллбар
+         * api-ru Нужен ли скроллбар
+         * api-en Do we need scrollbar.
          * @type {boolean}
          */
         scrollbarVisibility: {
@@ -43,7 +50,8 @@ croc.Class.define('croc.cmp.list.manager.Scrolling', {
         },
         
         /**
-         * Шаг прокручивания списка в строках
+         * api-ru Шаг прокручивания списка в строках
+         * api-en Step of scrolling the list in lines.
          * @type {number}
          */
         scrollCount: 3
@@ -74,7 +82,8 @@ croc.Class.define('croc.cmp.list.manager.Scrolling', {
         },
         
         /**
-         * Перейти к элементу с индексом (показать его первым)
+         * api-ru Перейти к элементу с индексом (показать его первым)
+         * api-en Move to element with index (show it first).
          * @param {number} index
          */
         goToItem: function(index) {
@@ -92,7 +101,8 @@ croc.Class.define('croc.cmp.list.manager.Scrolling', {
         },
         
         /**
-         * Инициализация менеджера элементом
+         * api-ru Инициализация менеджера элементом
+         * api-en Initialization of manager by element.
          * @param {jQuery} container
          */
         initContainer: function(container) {
@@ -130,7 +140,8 @@ croc.Class.define('croc.cmp.list.manager.Scrolling', {
                     });
                 }
                 
-                //клик по маркерам приводит к клику по соответствующим элементам
+                // api-ru клик по маркерам приводит к клику по соответствующим элементам
+                // api-en click on markers lead to click on relevant elements.
                 markers.eq(0).click(function() {
                     this.getElement(this.getFirstVisibleIndex()).click();
                 }.bind(this));

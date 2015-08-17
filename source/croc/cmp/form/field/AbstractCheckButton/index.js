@@ -1,5 +1,6 @@
 /**
- * Базовый класс для чекбокса и радиокнопки
+ * api-ru Базовый класс для чекбокса и радиокнопки
+ * api-en Base class for checkbox and radiobutton.
  */
 croc.Class.define('croc.cmp.form.field.AbstractCheckButton', {
     type: 'abstract',
@@ -8,7 +9,8 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckButton', {
     
     properties: {
         /**
-         * Цветовая схема
+         * api-ru Цветовая схема
+         * api-en Color scheme.
          * @type {string}
          */
         scheme: {
@@ -29,7 +31,8 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckButton', {
     
     options: {
         /**
-         * мета-данные для добавления дочернего виджета
+         * api-ru мета-данные для добавления дочернего виджета
+         * api-en Metadata for adding a child widget.
          * @type {object}
          */
         meta: {
@@ -39,7 +42,8 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckButton', {
         },
         
         /**
-         * атрибут value поля
+         * api-ru атрибут value поля
+         * api-en Attribute value of field.
          * @type {string}
          */
         permanentValue: {
@@ -75,7 +79,8 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckButton', {
         },
         
         /**
-         * Атрибут value поля
+         * api-ru Атрибут value поля
+         * api-en Attribute value of field.
          * @returns {string}
          */
         getPermanentValue: function() {
@@ -83,7 +88,8 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckButton', {
         },
         
         /**
-         * Возвращает внутреннее (сырое) значение поля
+         * api-ru Возвращает внутреннее (сырое) значение поля
+         * api-en Returns inside (raw) value of field.
          * @protected
          */
         _getFieldValue: function() {
@@ -92,7 +98,8 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckButton', {
         },
         
         /**
-         * Инициализация виджета после его отрисовки в DOM
+         * api-ru Инициализация виджета после его отрисовки в DOM
+         * api-en Initialization of widget after its rendering in DOM.
          * @protected
          */
         _initWidget: function() {

@@ -1,12 +1,14 @@
 /**
- * Поле содержащее событие update
+ * api-ru Поле содержащее событие update
+ * api-en Field, which includes update event.
  */
 croc.Interface.define('croc.cmp.form.field.IUpdatableField', {
     extend: croc.cmp.form.field.IField,
     
     properties: {
         /**
-         * Мгновенное значение поля
+         * api-ru Мгновенное значение поля
+         * api-en Instant field value.
          * @type {*}
          */
         instantValue: {

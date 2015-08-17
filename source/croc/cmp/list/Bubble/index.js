@@ -1,6 +1,8 @@
 /**
- * Подсказки для поля ввода (могут работать и без него)
- * todo сделать $$label независимым от scope
+ * api-ru Подсказки для поля ввода (могут работать и без него)
+ * api-en Hints for input field (can work without it).
+ * api-ru todo сделать $$label независимым от scope
+ * api-en todo do $$label independent from scope.
  */
 croc.Class.define('croc.cmp.list.Bubble', {
     extend: croc.cmp.Widget,
@@ -9,16 +11,39 @@ croc.Class.define('croc.cmp.list.Bubble', {
     
     statics: {
         /**
-         * Максимальное количество видимых одновременно элементов
+         * api-ru Максимальное количество видимых одновременно элементов
+         * api-en Maximum amount of visible items at the same time.
          * @type {number}
          */
         MAX_VISIBLE_ITEMS_COUNT: Stm.env.ldevice === 'mobile' ? 5 : 10,
         
         /**
-         * Минимальное количество видимых одновременно элементов
+         * api-ru Минимальное количество видимых одновременно элементов
+         * api-en Minimum amount of visible items at the same time.
          * @type {number}
          */
-        MIN_VISIBLE_ITEMS_COUNT: 3
+        MIN_VISIBLE_ITEMS_COUNT: 3,
+        
+        /**
+         * api-ru Коды ошибки сервера и сообщения к ним
+         * api-en Server error codes and messages to them.
+         * @private
+         * @static
+         */
+        __ERROR_CODES: {
+          11: 'По запросу <b>{query}</b> ничего не найдено'
+          // api-ru
+          // api-en 11: 'Request <b>{query}</b> not found.'
+        },
+        
+        /**
+         * @private
+         * @static
+         */
+        __TEMPLATE_ITEM: '' +
+        '<div class="b-suggestion-item{cls}" title="{title}">' +
+        '   {text}' +
+        '</div>'
     },
     
     events: {
@@ -30,7 +55,8 @@ croc.Class.define('croc.cmp.list.Bubble', {
     
     properties: {
         /**
-         * Смещение по горизонтали относительно центра цели
+         * api-ru Смещение по горизонтали относительно центра цели
+         * api-en Horizontal offset relative to center of target.
          * @type {string}
          */
         hAlign: {
@@ -41,7 +67,8 @@ croc.Class.define('croc.cmp.list.Bubble', {
         partialRendering: {},
         
         /**
-         * Расположение относительно target
+         * api-ru Расположение относительно target
+         * api-en Position relative to target.
          * @type {string}
          */
         position: {
@@ -51,7 +78,8 @@ croc.Class.define('croc.cmp.list.Bubble', {
         },
         
         /**
-         * Модификатор цвета
+         * api-ru Модификатор цвета
+         * api-en Color modifier.
          * @type {string}
          */
         scheme: {
@@ -60,8 +88,8 @@ croc.Class.define('croc.cmp.list.Bubble', {
         },
         
         /**
-         * Размеры подсказок. Если подсказки ассоциируются с полем и они не имеют собственных размеров, то размеры подсказок
-         * становятся равными размерам поля.
+         * api-ru Размеры подсказок. Если подсказки ассоциируются с полем и они не имеют собственных размеров, то размеры подсказок становятся равными размерам поля.
+         * api-en Prompts sizes. If prompts are associated with field and have no own sizes, prompts sizes become equal to field sizes.
          * @type {string}
          */
         size: {
@@ -77,31 +105,36 @@ croc.Class.define('croc.cmp.list.Bubble', {
     
     options: {
         /**
-         * Автоматическое позиционирование bubble исходя из положения на экране
+         * api-ru Автоматическое позиционирование bubble исходя из положения на экране
+         * api-en Bubble automatic positioning based on position on screen.
          * @type {boolean}
          */
         autoPositioning: true,
         
         /**
-         * Порядок, в котором подбирается подходящая позиция при автопозиционировании
+         * api-ru Порядок, в котором подбирается подходящая позиция при автопозиционировании
+         * api-en Order, in which proper position is selected by automatic positioning.
          * @type {Array|Object}
          */
         autoPositioningSequence: ['top', 'bottom'],
         
         /**
-         * Можно ли смещать элемент
+         * api-ru Можно ли смещать элемент
+         * api-en Can element be shift.
          * @type {boolean}
          */
         autoShift: false,
         
         /**
-         * Флаг, закрывать ли bubble на клик по документу
+         * api-ru Флаг, закрывать ли bubble на клик по документу
+         * api-en Flag, is bubble closed by click on document.
          * @type {boolean}
          */
         closeOnHtmlClick: true,
         
         /**
-         * Флаг, позиционировать ли bubble при ресайзе/скролле
+         * api-ru Флаг, позиционировать ли bubble при ресайзе/скролле
+         * api-en Flag, is bubble positioning by resize/scroll. 
          * @type {boolean}
          */
         dynamicPositioning: true,
@@ -111,7 +144,8 @@ croc.Class.define('croc.cmp.list.Bubble', {
         labelItem: null,
         
         /**
-         * модель данных для компонента
+         * api-ru модель данных для компонента
+         * api-en Data model for component.
          * @type {Array|croc.data.chain.IList}
          */
         model: null,
@@ -122,9 +156,12 @@ croc.Class.define('croc.cmp.list.Bubble', {
         normalizeFn: _.identity,
         
         /**
-         * Смещение bubble относительно target
-         * число - смещение по горизонтали/вертикали
-         * массив - вектор смещения
+         * api-ru Смещение bubble относительно target
+         * api-ru число - смещение по горизонтали/вертикали
+         * api-ru массив - вектор смещения
+         * api-en Bubble offset relative to target.
+         * api-en Number - horizontal/vertical offset
+         * api-en Array - offset vector.
          * @type {number}
          */
         offset: 2,
@@ -135,7 +172,8 @@ croc.Class.define('croc.cmp.list.Bubble', {
         },
         
         /**
-         * Нужно ли показывать строку с описанием ошибки при её возникновении
+         * api-ru Нужно ли показывать строку с описанием ошибки при её возникновении
+         * api-en To show string, which describes error when its occur.
          * @type {Boolean}
          */
         showError: false,
@@ -143,7 +181,8 @@ croc.Class.define('croc.cmp.list.Bubble', {
         visibleCount: 10,
         
         /**
-         * Минимальное расстояние от края экрана до ближайшего края bubble при автопозиционировании
+         * api-ru Минимальное расстояние от края экрана до ближайшего края bubble при автопозиционировании
+         * api-en Minimum distance from edge of screen to closest edge of bubble in the automatic positioning. 
          * @type {Array.<number>}
          */
         screenGap: [5, 5, 5, 5],
@@ -173,7 +212,20 @@ croc.Class.define('croc.cmp.list.Bubble', {
         },
         
         /**
-         * Инициализация модели виджета
+         * api-ru Показать bubble. Если тултип был открыт, то возвращает true.
+         * api-en Show bubble. If tooltip is open, then return true. 
+         * @returns {boolean}
+         */
+        open: function() {
+            if (!this.getDisableOpening() && this._isOpenAllowed()) {
+                return croc.cmp.common.bubble.MBubble.prototype.open.apply(this, arguments);
+            }
+            return false;
+        },
+        
+        /**
+         * api-ru Инициализация модели виджета
+         * api-en Initialization of widget model.
          * @protected
          */
         _initModel: function() {

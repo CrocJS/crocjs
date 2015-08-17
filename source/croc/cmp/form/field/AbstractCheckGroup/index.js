@@ -1,5 +1,6 @@
 /**
- * Группа чекбоксов/радиокнопок
+ * api-ru Группа чекбоксов/радиокнопок
+ * api-en Group of checkboxes/radiobuttons
  */
 croc.Class.define('croc.cmp.form.field.AbstractCheckGroup', {
     type: 'abstract',
@@ -32,13 +33,15 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckGroup', {
         items: {},
         
         /**
-         * Должны ли кнопки идти в ряд. true - соответствует dir_ttb, false - dir_ltr
+         * api-ru Должны ли кнопки идти в ряд. true - соответствует dir_ttb, false - dir_ltr
+         * api-en Do buttons need to line up? True - match to dir_ttb, false - dir_ltr
          * @type {boolean}
          */
         inline: {},
         
         /**
-         * мета-данные для добавления дочернего виджета
+         * api-ru мета-данные для добавления дочернего виджета
+         * api-en Metadata for adding a child widget.
          * @type {object}
          */
         meta: {
@@ -55,7 +58,8 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckGroup', {
         },
         
         /**
-         * тип группы
+         * api-ru тип группы
+         * api-en Group type.
          * @type {string}
          */
         type: {}
@@ -79,7 +83,8 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckGroup', {
         },
         
         /**
-         * Возвращает true если кнопки выстроены в линию
+         * api-ru Возвращает true если кнопки выстроены в линию
+         * api-en Returns true if buttons are lined up.
          * @returns {boolean}
          */
         isInline: function() {
@@ -87,7 +92,8 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckGroup', {
         },
         
         /**
-         * Изменение значения группы
+         * api-ru Изменение значения группы
+         * api-en Changing of group value.
          * @param value
          * @protected
          */
@@ -96,7 +102,8 @@ croc.Class.define('croc.cmp.form.field.AbstractCheckGroup', {
         },
         
         /**
-         * Инициализация модели виджета
+         * api-ru Инициализация модели виджета
+         * api-en Initialization of widget model.
          * @protected
          */
         _initModel: function() {

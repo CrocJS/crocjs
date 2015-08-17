@@ -1,5 +1,6 @@
 /**
- * Базовый класс для всех виджетов, которые имеют привязку к одному единственному элементу
+ * api-ru Базовый класс для всех виджетов, которые имеют привязку к одному единственному элементу
+ * api-en Base class for all widgets that associated with one single element.
  */
 croc.Interface.define('croc.cmp.IWidget', {
     extend: croc.IObject,
@@ -57,13 +58,16 @@ croc.Interface.define('croc.cmp.IWidget', {
     
     members: {
         /**
-         * Всплывающий ресайз компонента
+         * api-ru Всплывающий ресайз компонента
+         * api-en Bubble component’s resizing
          */
         bubbleResize: function() {},
         
         /**
-         * Уведомить виджет о том, что размеры рамок изменились
-         * Причины вызова метода: reposition, modelChange, render, parentResize, bubbleResize, auto
+         * api-ru Уведомить виджет о том, что размеры рамок изменились
+         * api-ru Причины вызова метода: reposition, modelChange, render, parentResize, bubbleResize, auto
+         * api-en Notify the widget that frames sizes were changed
+         * api-en Cases of access method: reposition, modelChange, render, parentResize, bubbleResize, auto.
          * @param {string} [reason]
          * @returns {boolean}
          */
@@ -76,26 +80,30 @@ croc.Interface.define('croc.cmp.IWidget', {
         generateUniqueId: function(prefix, context) {},
         
         /**
-         * Секция дочерних элементов по-умолчанию
+         * api-ru Секция дочерних элементов по-умолчанию
+         * api-en Default child elements section.
          * @return {String}
          * @protected
          */
         getDefaultItemsSection: function() {},
         
         /**
-         * Получить DOM-элемент виджета
+         * api-ru Получить DOM-элемент виджета
+         * aoi-en Get widget DOM-element.
          * @returns {jQuery}
          */
         getElement: function() {},
         
         /**
-         * Идентификатор виджета
+         * api-ru Идентификатор виджета
+         * api-en Widget ID
          * @returns {string}
          */
         getIdentifier: function() {},
         
         /**
-         * Получить дочерний виджет по его идентификатору
+         * api-ru Получить дочерний виджет по его идентификатору
+         * api-en Get child widget by its ID
          * @param {string} identifier
          * @returns {croc.cmp.Widget}
          */
@@ -104,14 +112,16 @@ croc.Interface.define('croc.cmp.IWidget', {
         },
         
         /**
-         * Получить все дочерние виджеты
+         * api-ru Получить все дочерние виджеты
+         * api-en Get all child widgets
          * @param {string} [section=null]
          * @returns {Array.<croc.cmp.Widget>}
          */
         getItems: function(section) {},
         
         /**
-         * Родительский виджет
+         * api-ru Родительский виджет
+         * api-en Parent widget 
          * @return {croc.cmp.Widget}
          */
         getParent: function() {},
@@ -141,7 +151,8 @@ croc.Interface.define('croc.cmp.IWidget', {
         getValueByAlias: function(alias) {},
         
         /**
-         * Враппер виджета. Если нет то возвращает корневой элемент виджета.
+         * api-ru Враппер виджета. Если нет то возвращает корневой элемент виджета.
+         * api-en Wrapper widget. If there is none, then it returns root widget’s element.
          * @returns {jQuery}
          */
         getWrapperElement: function() {},
@@ -149,13 +160,15 @@ croc.Interface.define('croc.cmp.IWidget', {
         innerResize: function() {},
         
         /**
-         * Виден ли в данный момент виджет
+         * api-ru Виден ли в данный момент виджет
+         * api-en If widget is visible at the moment.
          * @returns {boolean}
          */
         isVisible: function() { },
         
         /**
-         * Если элемент виден, то callback вызывается сразу иначе на событие appear
+         * api-ru Если элемент виден, то callback вызывается сразу иначе на событие appear
+         * api-en If element is visible, then callback is called, otherwise it returns to event appear. 
          * @param {function} callback
          * @param {Object} [context]
          * @returns {Function}

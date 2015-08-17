@@ -1,12 +1,14 @@
 /**
- * Абстракция над полем ввода
+ * api-ru Абстракция над полем ввода
+ * api-en Abstraction over the input field.
  */
 croc.Class.define('croc.cmp.form.field.TextField', {
     extend: croc.cmp.form.field.AbstractTextField,
     
     properties: {
         /**
-         * Предназначено ли поле для ввода пароля
+         * api-ru Предназначено ли поле для ввода пароля
+         * api-en Is field intended for enter a password?
          * @type {boolean}
          */
         masked: {
@@ -23,13 +25,15 @@ croc.Class.define('croc.cmp.form.field.TextField', {
         cssType: 'text',
         
         /**
-         * Отключить собственный автокомплит поля. true - при suggestion !== null
+         * api-ru Отключить собственный автокомплит поля. true - при suggestion !== null
+         * api-en Turn off is the native field autocomplete. true - by suggestion !== null
          * @type {boolean}
          */
         disableAutocomplete: {},
         
         /**
-         * Предназначено ли поле для ввода пароля
+         * api-ru Предназначено ли поле для ввода пароля
+         * api-en Is field intended for enter a password?
          * @type {boolean}
          */
         password: {}

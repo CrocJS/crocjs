@@ -162,7 +162,8 @@ croc.Class.define('croc.cmp.form.field.ComboBox', {
         },
         
         /**
-         * Инициализация модели виджета
+         * api-ru Инициализация модели виджета
+         * api-en Initialization of widget model.
          * @protected
          */
         _initModel: function() {

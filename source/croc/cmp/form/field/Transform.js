@@ -1,7 +1,9 @@
 /**
- * Функции трансформации значения поля
+ * api-ru Функции трансформации значения поля
+ * api-en Transformation functions of field value.
  * todo comment me
- * todo trim... - разбить
+ * api-ru todo trim... - разбить
+ * api-en todo trim... - divide
  */
 croc.define('croc.cmp.form.field.Transform', {
     
@@ -52,10 +54,12 @@ croc.define('croc.cmp.form.field.Transform', {
     },
     
     /**
-     * число с палвающей точкой
+     * api-ru число с палвающей точкой
+     * api-en Number with floating point.
      * @param value
      * @param old
-     * @param {boolean} [spaces=false] разрешить пробелы
+     * api-ru @param {boolean} [spaces=false] разрешить пробелы
+     * api-en @param {boolean} [spaces=false] trim spaces.
      * @returns {*}
      */
     'float': function(value, old, spaces) {

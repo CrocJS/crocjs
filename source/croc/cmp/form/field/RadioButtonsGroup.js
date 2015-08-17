@@ -1,24 +1,28 @@
 /**
- * Группа радиокнопок
+ * api-ru Группа радиокнопок
+ * api-en Group of radiobuttons.
  */
 croc.Class.define('croc.cmp.form.field.RadioButtonsGroup', {
     extend: croc.cmp.form.field.AbstractCheckGroup,
     
     options: {
         /**
-         * Отметить первую кнопку в группе, если ни одна не отмечена
+         * api-ru Отметить первую кнопку в группе, если ни одна не отмечена
+         * api-en Check first button in group, if no one is checked.
          * @type {boolean}
          */
         checkFirst: {},
         
         /**
-         * тип группы
+         * api-ru тип группы
+         * api-en Group type.
          * @type {string}
          */
         type: 'radio',
         
         /**
-         * Сообщения об ошибках валидации (validatorId => message)
+         * api-ru Сообщения об ошибках валидации (validatorId => message)
+         * api-en Validation error messages (validatorId => message).
          * @type {Object.<string, string>}
          */
         validationMessages: {
@@ -36,7 +40,8 @@ croc.Class.define('croc.cmp.form.field.RadioButtonsGroup', {
         },
         
         /**
-         * Отмечает первую неотключённую кнопку
+         * api-ru Отмечает первую неотключённую кнопку
+         * api-en Check first enabled button.
          */
         checkFirstButton: function() {
             _.forEach(this.getItems(), function(button) {
@@ -48,7 +53,8 @@ croc.Class.define('croc.cmp.form.field.RadioButtonsGroup', {
         },
         
         /**
-         * Если возвращает объект, то он примешивается к значениям формы
+         * api-ru Если возвращает объект, то он примешивается к значениям формы
+         * api-en If returns the object, then it exports to form values.
          * @returns {Object}
          */
         exportValues: function() {
@@ -56,7 +62,8 @@ croc.Class.define('croc.cmp.form.field.RadioButtonsGroup', {
         },
         
         /**
-         * Возвращает отмеченную радиокнопку
+         * api-ru Возвращает отмеченную радиокнопку
+         * api-en Returns checked radiobutton.
          * @returns {croc.cmp.form.field.RadioButton}
          */
         getCheckedButton: function() {
@@ -64,7 +71,8 @@ croc.Class.define('croc.cmp.form.field.RadioButtonsGroup', {
         },
         
         /**
-         * Возвращает радиокнопку из группы по её значению
+         * api-ru Возвращает радиокнопку из группы по её значению
+         * api-en Returns radiobutton from group by its value.
          * @param {string} value
          * @returns {croc.cmp.form.field.RadioButton}
          */
@@ -73,7 +81,8 @@ croc.Class.define('croc.cmp.form.field.RadioButtonsGroup', {
         },
         
         /**
-         * Инициализация модели виджета
+         * api-ru Инициализация модели виджета
+         * api-en Initialization of widget model.
          * @protected
          */
         _initModel: function() {
@@ -104,7 +113,8 @@ croc.Class.define('croc.cmp.form.field.RadioButtonsGroup', {
         },
         
         /**
-         * Изменение значения группы
+         * api-ru Изменение значения группы
+         * api-en Changing of group value.
          * @param value
          * @protected
          */

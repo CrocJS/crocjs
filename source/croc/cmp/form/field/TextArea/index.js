@@ -22,7 +22,8 @@ croc.Class.define('croc.cmp.form.field.TextArea', {
     
     members: {
         /**
-         * Инициализация виджета после его отрисовки в DOM
+         * api-ru Инициализация виджета после его отрисовки в DOM
+         * api-en Initialization of widget after its rendering in DOM.
          * @protected
          */
         _initWidget: function() {
@@ -49,7 +50,8 @@ croc.Class.define('croc.cmp.form.field.TextArea', {
         },
         
         /**
-         * Обработать смену состояния валидации поля
+         * api-ru Обработать смену состояния валидации поля
+         * api-en Handle field validation state changing
          * @param {boolean} valid
          * @protected
          */

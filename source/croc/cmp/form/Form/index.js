@@ -12,7 +12,8 @@ croc.Class.define('croc.cmp.form.Form', {
     
     events: {
         /**
-         * валидация была пройдена, чтобы отменить стандартный сабмит формы, вызовите e.preventDefault()
+         * api-ru валидация была пройдена, чтобы отменить стандартный сабмит формы, вызовите e.preventDefault()
+         * api-en Validation was passed, to cancel standard form submit, call e.preventDefault()
          * @param {Event} e
          * @param {Object.<string, *>} value
          */
@@ -24,13 +25,15 @@ croc.Class.define('croc.cmp.form.Form', {
         submitServerError: null,
         
         /**
-         * активация формы (первое взаимодействие с одним из полей формы)
+         * api-ru активация формы (первое взаимодействие с одним из полей формы)
+         * api-en Form activation (first interaction with one of form fields)
          * @param {croc.cmp.form.field.IField} field
          */
         activate: null,
         
         /**
-         * возбуждается после инициализации состояния (_initSate), а также после каждого ресета
+         * api-ru возбуждается после инициализации состояния (_initSate), а также после каждого ресета
+         * api-en Initiates after initialization state (_initSate), and also after every reset.
          */
         initState: null,
         
@@ -66,7 +69,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Идёт ли отправка данных в данный момент
+         * api-ru Идёт ли отправка данных в данный момент
+         * api-en Is it submitting right now?
          * @type {boolean}
          */
         submitting: {
@@ -76,7 +80,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Предупреждать пользователя о несохранённых изменениях
+         * api-ru Предупреждать пользователя о несохранённых изменениях
+         * api-en Warn user about unsaved changes.
          * @type {boolean}
          */
         warnUnsavedChanges: {
@@ -87,7 +92,8 @@ croc.Class.define('croc.cmp.form.Form', {
     
     options: {
         /**
-         * Экшен формы либо url, на который будет отправлен запрос
+         * api-ru Экшен формы либо url, на который будет отправлен запрос
+         * api-en Form action or url to which a request are sent
          * @type {string}
          */
         action: {},
@@ -104,38 +110,44 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Значения, которые следует установить полям при их добавлении
+         * api-ru Значения, которые следует установить полям при их добавлении
+         * api-en Values, which should set to fields with their add.
          * @type {Object.<string, *>}
          */
         fieldsValues: null,
         
         /**
-         * Предотвратить отправку формы на сервер
+         * api-ru Предотвратить отправку формы на сервер
+         * api-en Prevent submission of form to server.
          * @type {boolean}
          */
         preventSubmit: false,
         
         /**
-         * Конфигурация добавляемых лэйблов
+         * api-ru Конфигурация добавляемых лэйблов
+         * api-en Configuration of add labels.
          * @type {object}
          */
         labels: {
             extend: true,
             value: {
                 /**
-                 * размер подсказки
+                 * api-ru размер подсказки
+                 * api-en Hint size. 
                  * @type {number}
                  */
                 hintSize: 12,
                 
                 /**
-                 * размер лэйблов (1-5)
+                 * api-ru размер лэйблов (1-5)
+                 * api-en Labels size (1-5)
                  * @type {string}
                  */
                 size: '1',
                 
                 /**
-                 * положение лэйблов
+                 * api-ru положение лэйблов
+                 * api-en Labels position.
                  * @type {string}
                  */
                 position: 'top'
@@ -149,31 +161,36 @@ croc.Class.define('croc.cmp.form.Form', {
         stateManager: null,
         
         /**
-         * Функция получения значений перед отправкой данных на сервер
+         * api-ru Функция получения значений перед отправкой данных на сервер
+         * api-en Function of values reception before submitting to server.
          * @type {function():Object}
          */
         submitValuesFn: {},
         
         /**
-         * Нужно ли триммить значения всех текстовых полей перед сабмитом
+         * api-ru Нужно ли триммить значения всех текстовых полей перед сабмитом
+         * api-en Is it necessary to trim values of all text fields before submit?
          * @type {boolean}
          */
         trimAllBeforeSubmit: true,
         
         /**
-         * Нужно ли производить валидацию формы
+         * api-ru Нужно ли производить валидацию формы
+         * api-en Is it necessary to execute form validation?
          * @type {boolean}
          */
         validateForm: true,
         
         /**
-         * Опции устанавливающие особенности валидации формы {@see croc.cmp.form.validation.Controller#validationBehavior}
+         * api-ru Опции устанавливающие особенности валидации формы {@see croc.cmp.form.validation.Controller#validationBehavior}
+         * api-en Options which set behavior of form validation {@see croc.cmp.form.validation.Controller#validationBehavior}
          * @type {Object}
          */
         validationBehavior: null,
         
         /**
-         * Игнорировать определённые поля, предупреждая о несохранённых изменениях
+         * api-ru Игнорировать определённые поля, предупреждая о несохранённых изменениях
+         * api-en Ignore certain fields, warning about unsaved changes.
          * @type {Array.<string>}
          */
         warnUnsavedChangesIgnoreFields: null
@@ -225,8 +242,8 @@ croc.Class.define('croc.cmp.form.Form', {
     
     members: {
         /**
-         * Снимает фокус с выделенного поля формы, а затем возвращает его, для того чтобы зафиксировать изменения
-         * этого поля.
+         * api-ru Снимает фокус с выделенного поля формы, а затем возвращает его, для того чтобы зафиксировать изменения этого поля.
+         * api-en Removes focus from selected field form, and then returns it, in order to capture changes of this field.
          */
         commitChanges: function() {
             if (document.activeElement && document.activeElement.blur &&
@@ -248,7 +265,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Секция дочерних элементов по-умолчанию
+         * api-ru Секция дочерних элементов по-умолчанию
+         * api-en Default child elements section.
          * @return {String}
          * @protected
          */
@@ -257,7 +275,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Объект уведомлений
+         * api-ru Объект уведомлений
+         * api-en Notifier object.
          * @return {croc.cmp.form.validation.Notifier}
          */
         getNotifier: function() {
@@ -272,7 +291,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Возвращает первую кнопку типа submit
+         * api-ru Возвращает первую кнопку типа submit
+         * api-en Returns first button of submit type.
          * @return {croc.cmp.form.Button}
          */
         getSubmitButton: function() {
@@ -280,7 +300,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Менеджер валидации
+         * api-ru Менеджер валидации
+         * api-en Validation manager.
          * @return {croc.cmp.form.validation.Manager}
          */
         getValidationManager: function() {
@@ -288,8 +309,10 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Получить значения полей формы в виде объекта.
-         * Алиас к {@link #getValues} для поддержки интерфейса {@link croc.cmp.form.validation.IValidatable}.
+         * api-ru Получить значения полей формы в виде объекта.
+         *        Алиас к {@link #getValues} для поддержки интерфейса {@link croc.cmp.form.validation.IValidatable}.
+         * api-en Get values of form fields as an object.
+         *        Alias to {@link #getValues} for support interface {@link croc.cmp.form.validation.IValidatable}.
          * @return {Object.<string, *>}
          */
         getValue: function() {
@@ -297,7 +320,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Получить значения полей формы в виде объекта
+         * api-ru Получить значения полей формы в виде объекта
+         * api-en Get values of form fields as an object.
          * @param {boolean} [complex=false]
          * @param {boolean} [includeEmpty=false]
          * @returns {Object.<string, *>}
@@ -327,7 +351,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Отключить повторную валидацию поля при потере фокуса
+         * api-ru Отключить повторную валидацию поля при потере фокуса
+         * api-en Disable field revalidation at focus loss.
          * @param {croc.cmp.form.field.IField} field
          */
         offFieldRevalidating: function(field) {
@@ -335,7 +360,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Сбросить значения и состояния полей
+         * api-ru Сбросить значения и состояния полей
+         * api-en Reset fields values and conditions.
          */
         reset: function() {
             this.__validationManager.resetValidation();
@@ -352,7 +378,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Явно назначить кнопку отправки формы
+         * api-ru Явно назначить кнопку отправки формы
+         * api-en Set submit button 
          * @param {croc.cmp.form.Button} button
          */
         setSubmitButton: function(button) {
@@ -376,19 +403,24 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Отправить форму. Форма отправляется, только если пройдена валидация.
-         * @returns {$.Deferred} resolve - если форма отправлена, reject в противном случае
+         * api-ru Отправить форму. Форма отправляется, только если пройдена валидация.
+         * api-ru @returns {$.Deferred} resolve - если форма отправлена, reject в противном случае
+         * api-en Submit form. Form submits only if validation was passed.
+         * api-en @returns {$.Deferred} resolve - if form was submited, reject the otherwise
          */
         submit: function() {
             return this.__submitController.submit();
         },
         
         /**
-         * Изменить доступность поля (видимость/disable и необходимость валидации)
          * @param {string|croc.cmp.form.field.IField} field
          * @param {boolean} available
-         * @param {boolean|string} [disable=false] делает поле недоступным не скрывая его
-         * @param {string|function(jQuery, boolean)} [toggleMethod=null] null|fade|slide - метод анимации появления/скрытия поля
+         * api-ru Изменить доступность поля (видимость/disable и необходимость валидации)
+         * api-ru @param {boolean|string} [disable=false] делает поле недоступным не скрывая его
+         * api-ru @param {string|function(jQuery, boolean)} [toggleMethod=null] null|fade|slide - метод анимации появления/скрытия поля
+         * api-en Set field as disabled.
+         * api-en @param {boolean|string} [disable=false] set field disabled but not hidden
+         * api-en @param {string|function(jQuery, boolean)} [toggleMethod=null] null|fade|slide - show/hide animation method of field
          */
         toggleField: function(field, available, disable, toggleMethod) {
             if (typeof field === 'string') {
@@ -417,7 +449,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Произвести валидацию полей формы
+         * api-ru Произвести валидацию полей формы
+         * api-en Execute form fiels validation
          * @returns {$.Deferred}
          */
         validate: function() {
@@ -425,7 +458,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Значения для отправки на сервер аяксом
+         * api-ru Значения для отправки на сервер аяксом
+         * api-ru Values for submit to server by AJAX
          * @returns {Object}
          * @protected
          */
@@ -434,7 +468,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Инициализация модели виджета
+         * api-ru Инициализация модели виджета
+         * api-en Initialization of widget model.
          * @protected
          */
         _initModel: function() {
@@ -470,7 +505,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * После вызова состояние формы считается начальным
+         * api-ru После вызова состояние формы считается начальным
+         * api-en After the call form statement regards initial
          * @protected
          */
         _initState: function() {
@@ -510,7 +546,8 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * Инициализация виджета после его отрисовки в DOM
+         * api-ru Инициализация виджета после его отрисовки в DOM
+         * api-en Initialization  of widget after its rendering in DOM.
          * @return {$.Deferred|undefined}
          * @protected
          */
@@ -524,13 +561,15 @@ croc.Class.define('croc.cmp.form.Form', {
         },
         
         /**
-         * ajax-запрос был выполнен неудачно
+         * api-ru ajax-запрос был выполнен неудачно
+         * api-en Ajax-query was executed wrong
          * @protected
          */
         _onSubmitFail: function(response) {},
         
         /**
-         * ajax-запрос был выполнен удачно
+         * api-ru ajax-запрос был выполнен удачно
+         * api-en query was executed successful
          * @param response
          * @param values
          * @protected
@@ -597,7 +636,8 @@ croc.Class.define('croc.cmp.form.Form', {
                 initValue();
                 
                 if (croc.isClient) {
-                    //если значения будут перекрыты браузером
+                    // * api-ru если значения будут перекрыты браузером
+                    // * api-en if values would be overwritten by browser
                     this._getDisposer().setTimeout(initValue, 100);
                 }
             }
@@ -632,7 +672,8 @@ croc.Class.define('croc.cmp.form.Form', {
         /**
          * @param {string|croc.cmp.form.field.IField} field
          * @param {boolean} available
-         * @param {string|Function} [toggleMethod=null] null|fade|slide - метод анимации появления/скрытия поля
+         * api-ru @param {string|Function} [toggleMethod=null] null|fade|slide - метод анимации появления/скрытия поля
+         * api-en @param {string|Function} [toggleMethod=null] null|fade|slide - show/hide animation method of field
          * @private
          */
         __toggleFieldVisibility: function(field, available, toggleMethod) {

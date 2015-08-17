@@ -1,5 +1,6 @@
 /**
- * Менеджер управляет видимостью элементов списка {@link croc.ui.list.View}
+ * api-ru Менеджер управляет видимостью элементов списка {@link croc.ui.list.View}
+ * api-en Manager controls the visibility of list items {@link croc.ui.list.View}
  */
 croc.Class.define('croc.cmp.list.manager.Abstract', {
     type: 'abstract',
@@ -7,8 +8,10 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
     
     properties: {
         /**
-         * Если количество невидимых элементов впереди видимых становится меньше этого числа, то у модели запрашиваются
-         * следующие элементы через метод {@link croc.data.IStreamList#prepareMore}
+         * api-ru Если количество невидимых элементов впереди видимых становится меньше этого числа, то у модели запрашиваются
+         *        следующие элементы через метод {@link croc.data.IStreamList#prepareMore}
+         * api-en If amount of invisible elements, ahead of visible, becomes smaller this number, model is requested 
+         *        the subsequent elements through the method {@link croc.data.IStreamList#prepareMore}
          * @type {number}
          */
         buffer: {
@@ -17,7 +20,8 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         },
         
         /**
-         * Индекс первого видимого элемента
+         * api-ru Индекс первого видимого элемента
+         * api-en Index of first visible element.
          * @type {number}
          */
         firstVisibleIndex: {
@@ -27,7 +31,8 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         },
         
         /**
-         * Соответствующее свойство модели
+         * api-ru Соответствующее свойство модели
+         * api-en Relevant feature of model.
          * @type {boolean}
          */
         hasMoreItems: {
@@ -38,7 +43,8 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         },
         
         /**
-         * Есть ли следующие скрытые элементы
+         * api-ru Есть ли следующие скрытые элементы
+         * api-en Are there any next hidden elements?
          * @type {boolean}
          */
         hasNextItems: {
@@ -48,7 +54,8 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         },
         
         /**
-         * Есть ли предыдущие скрытые элементы
+         * api-ru Есть ли предыдущие скрытые элементы
+         * api-en Are there any previous hidden elements?
          * @type {boolean}
          */
         hasPrevItems: {
@@ -58,7 +65,8 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         },
         
         /**
-         * Индекс последнего видимого элемента
+         * api-ru Индекс последнего видимого элемента
+         * api-en Index of last visible element
          * @type {number}
          */
         lastVisibleIndex: {
@@ -68,8 +76,10 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         },
         
         /**
-         * Количество одновременно видимых элементов.
-         * Сейчас работает только для сокрытия по высоте!
+         * api-ru Количество одновременно видимых элементов.
+         * api-ru Сейчас работает только для сокрытия по высоте!
+         * api-en Number of visible items at the same time.
+         * api-en Now only work for hiding in height. 
          * @type {number}
          */
         visibleCount: {
@@ -82,15 +92,15 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
     
     options: {
         /**
-         * Если есть скрытые предыдущие элементы, то добавляет элементу указанный
-         * класс.
+         * api-ru Если есть скрытые предыдущие элементы, то добавляет элементу указанный класс.
+         * api-en If there are hidden previous elements, then add pointed class to element.
          * @type {string}
          */
         hasPrevItemsClass: {},
         
         /**
-         * Если есть скрытые следующие элементы, то добавляет элементу указанный
-         * класс.
+         * api-ru Если есть скрытые следующие элементы, то добавляет элементу указанный класс.
+         * api-en If there are hidden next elements, then add pointed class to element.
          * @type {string}
          */
         hasNextItemsClass: {},
@@ -166,7 +176,8 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
     
     members: {
         /**
-         * Вычислить количество видимых в данный момент элементов
+         * api-ru Вычислить количество видимых в данный момент элементов
+         * api-en Calculate number of visible elements at this moment.
          * @returns {number}
          */
         calcVisibleCount: function() {
@@ -220,7 +231,8 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         },
         
         /**
-         * Модель представления
+         * api-ru Модель представления
+         * api-en View model
          * @returns {croc.data.chain.IList}
          */
         getRendererModel: function() {
@@ -228,7 +240,8 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         },
         
         /**
-         * Модель
+         * api-ru Модель
+         * api-en Model
          * @returns {croc.data.chain.IList}
          */
         getSourceModel: function() {
@@ -236,7 +249,8 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         },
         
         /**
-         * Возвращает модели
+         * api-ru Возвращает модели
+         * api-en Returns models
          * @returns {Array.<Object>}
          */
         getVisibleItems: function() {
@@ -244,13 +258,15 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         },
         
         /**
-         * Перейти к элементу с индексом (показать его первым)
+         * api-ru Перейти к элементу с индексом (показать его первым)
+         * api-en Move to element with index (show it first).
          * @param {number} index
          */
         goToItem: function(index) { throw 'abstract!'; },
         
         /**
-         * Инициализация менеджера элементом
+         * api-ry Инициализация менеджера элементом
+         * api-en Manager initialization by element.
          * @param {jQuery} container
          */
         initContainer: function(container) {
@@ -259,21 +275,24 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
         },
         
         /**
-         * Показать следующую страницу (считается, что на странице показано visibleCount элементов)
+         * api-ru Показать следующую страницу (считается, что на странице показано visibleCount элементов)
+         * api-en Show next page (it considers, that it shows on page visibleCount elements)
          */
         nextPage: function() {
             this.goToItem(this.getFirstVisibleIndex() + this.__visibleCount);
         },
         
         /**
-         * Показать предыдущую страницу (считается, что на странице показано visibleCount элементов)
+         * api-ru Показать предыдущую страницу (считается, что на странице показано visibleCount элементов)
+         * api-en Show previous page (it considers, that it shows on page visibleCount elements)
          */
         prevPage: function() {
             this.goToItem(this.getFirstVisibleIndex() - this.__visibleCount);
         },
         
         /**
-         * Показать переданный элемент
+         * api-ru Показать переданный элемент
+         * api-en Show sent element.
          * @param {croc.ui.Widget|jQuery|number|Object} item
          */
         showItem: function(item) {
@@ -286,7 +305,8 @@ croc.Class.define('croc.cmp.list.manager.Abstract', {
                 }
                 else if (this.__selectedItemGap ? index >= lastIndex : index > lastIndex) {
                     this.goToItem(index - this.calcVisibleCount() + (this.__selectedItemGap ? 2 : 1));
-                    //todo научить работать с элементами списка разной высоты
+                    // api-ru todo научить работать с элементами списка разной высоты
+                    // api-en todo teach to work with elements of list with different height
                     while (this.__selectedItemGap ?
                     index >= this.getLastVisibleIndex() :
                     index > this.getLastVisibleIndex()) {

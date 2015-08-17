@@ -8,7 +8,8 @@ _.defaults(Component.prototype, oldComponentPrototype);
 Component.config = croc.Object.config;
 
 /**
- * Базовый класс для всех виджетов, которые имеют привязку к одному единственному элементу
+ * api-ru Базовый класс для всех виджетов, которые имеют привязку к одному единственному элементу
+ * api-en Base class for all widgets that associated with one single element.
  */
 croc.Class.define('croc.cmp.Widget', {
     extend: Component,
@@ -34,7 +35,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Возвращает виджет по его DOM-элементу
+         * api-ru Возвращает виджет по его DOM-элементу
+         * api-en Returns widget by it DOM-element.
          * @param {jQuery|Element|string} el
          * @returns {croc.ui.Widget}
          * @static
@@ -47,7 +49,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Возвращает ближайший родительский виджет для переданного элемента
+         * api-ru Возвращает ближайший родительский виджет для переданного элемента
+         * api-en Returns closest parent widget for sent element.
          * @param {jQuery} el
          * @returns {croc.ui.Widget}
          */
@@ -57,7 +60,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Если передан виджет, то возрвщает его элемент, иначе возвращает параметр
+         * api-ru Если передан виджет, то возрвщает его элемент, иначе возвращает параметр
+         * api-en If widget is sent, then it returns his element, otherwise returns his parameter.
          * @param {jQuery|croc.cmp.Widget} from
          */
         resolveElement: function(from) {
@@ -157,7 +161,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Дополнительные классы для блока через пробел
+         * api-ru Дополнительные классы для блока через пробел
+         * api-en Additional classes for block through spacebar.
          * @type {string}
          */
         'class': {},
@@ -172,7 +177,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Метод сокрытия виджета при изменении свойства {@link #shown}.
+         * api-ru Метод сокрытия виджета при изменении свойства {@link #shown}.
+         * api-en The method of suppressing the widget at property changing {@link #shown}.
          * @type {string}
          */
         hideMethod: {
@@ -181,7 +187,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Идентификатор виджета, по которому его можно получить из родительского
+         * api-ru Идентификатор виджета, по которому его можно получить из родительского
+         * api-en Widget ID that can be taken from the parent widget.
          * @type {string}
          */
         identifier: {},
@@ -196,13 +203,15 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Секция, родительского виджета, в которой будет содержаться данный
+         * api-ru Секция, родительского виджета, в которой будет содержаться данный
+         * api-en The section of parent widget which includes current widget.
          * @type {string}
          */
         section: {},
         
         /**
-         * Css-стили корневого элемента виджета
+         * api-ru Css-стили корневого элемента виджета
+         * api-en CSS styles of the root widget’s element.
          * @type {string}
          */
         style: {
@@ -210,7 +219,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Дополнительные классы для корневого элемента
+         * api-ru Дополнительные классы для корневого элемента
+         * api-en Additional classes for the root element.
          * @type {Array.<string>}
          */
         _addClasses: {
@@ -235,7 +245,8 @@ croc.Class.define('croc.cmp.Widget', {
         $$deferConstruct: true,
         
         /**
-         * Подписаться на событие
+         * api-ru Подписаться на событие
+         * api-en Listen to event
          * @param {string} eventName
          * @param {Function|Object} [callback=null]
          * @param {Object} [context=null]
@@ -254,7 +265,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Всплывающий ресайз компонента
+         * api-ru Всплывающий ресайз компонента
+         * api-en Bubble component’s resizing.
          */
         bubbleResize: function() {
             var parent = this;
@@ -285,8 +297,10 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Уведомить виджет о том, что размеры рамок изменились
-         * Причины вызова метода: reposition, modelChange, render, parentResize, bubbleResize, auto
+         * api-ru Уведомить виджет о том, что размеры рамок изменились
+         * api-ru Причины вызова метода: reposition, modelChange, render, parentResize, bubbleResize, auto
+         * api-en Notify the widget that frames sizes were changed.
+         * api-en Cases of access method: reposition, modelChange, render, parentResize, bubbleResize, auto.
          * @param {string} [reason]
          * @returns {boolean}
          */
@@ -335,7 +349,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Мета-данные виджета
+         * api-ru Мета-данные виджета
+         * api-en Widget’s metadata
          * @returns {Object}
          */
         getMeta: function() {
@@ -347,7 +362,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Секция дочерних элементов по-умолчанию
+         * api-ru Секция дочерних элементов по-умолчанию
+         * api-en Default child elements section.
          * @return {String}
          * @protected
          */
@@ -356,7 +372,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Получить DOM-элемент виджета
+         * api-ru Получить DOM-элемент виджета
+         * api-en Get widget DOM-element.
          * @returns {jQuery}
          */
         getElement: function() {
@@ -365,7 +382,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Идентификатор виджета
+         * api-ru Идентификатор виджета
+         * api-en Widget ID
          * @returns {string}
          */
         getIdentifier: function() {
@@ -373,7 +391,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Получить дочерний виджет по его идентификатору
+         * api-ru Получить дочерний виджет по его идентификатору
+         * api-en Get child widget by its ID.
          * @param {string} identifier
          * @returns {croc.cmp.Widget}
          */
@@ -382,7 +401,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Получить все дочерние виджеты
+         * api-ru Получить все дочерние виджеты
+         * api-en Get all child widgets.
          * @param {string} [section=null]
          * @returns {Array.<croc.cmp.Widget>}
          */
@@ -391,7 +411,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Родительский виджет
+         * api-ru Родительский виджет
+         * api-en Parent widget.
          * @return {croc.cmp.Widget}
          */
         getParent: function() {
@@ -438,7 +459,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Враппер виджета. Если нет то возвращает корневой элемент виджета.
+         * api-ru Враппер виджета. Если нет то возвращает корневой элемент виджета.
+         * api-en Wrapper widget. If there is no wrapper, then it returns root widget’s element. 
          * @returns {jQuery}
          */
         getWrapperElement: function() {
@@ -458,7 +480,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Виден ли в данный момент виджет
+         * api-ru Виден ли в данный момент виджет
+         * api-en If widget is visible at this moment.
          * @returns {boolean}
          */
         isVisible: function() {
@@ -466,7 +489,8 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Если элемент виден, то callback вызывается сразу иначе на событие appear
+         * api-ru Если элемент виден, то callback вызывается сразу иначе на событие appear
+         * api-en If element is visible, then callback is called, otherwise it returns to event 'appear'.  
          * @param {function} callback
          * @param {Object} [context]
          * @returns {Function}
@@ -542,14 +566,16 @@ croc.Class.define('croc.cmp.Widget', {
         },
         
         /**
-         * Инициализация модели виджета
+         * api-ru Инициализация модели виджета
+         * api-en Initialization of widget model.
          * @protected
          */
         _initModel: function() {
         },
         
         /**
-         * Инициализация виджета после его отрисовки в DOM
+         * api-ru Инициализация виджета после его отрисовки в DOM
+         * api-en Initialization of widget after its rendering in DOM.
          * @protected
          */
         _initWidget: function() {
@@ -752,7 +778,8 @@ croc.Class.define('croc.cmp.Widget', {
     },
     
     /**
-     * Создать свойство для объекта
+     * api-ru Создать свойство для объекта
+     * api-en Create property for object.
      * @param name
      * @param prop
      * @param dest

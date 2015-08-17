@@ -1,19 +1,22 @@
 /**
- * Кнопка
+ * api-ru Кнопка
+ * api-en Button.
  */
 croc.Class.define('croc.cmp.form.Button', {
     extend: croc.cmp.Widget,
     
     events: {
         /**
-         * Кнопка была нажата
+         * api-ru Кнопка была нажата
+         * api-en Button was clicked.
          */
         click: null
     },
     
     properties: {
         /**
-         * активна ли кнопка
+         * api-ru активна ли кнопка
+         * api-en Is button active?
          * @type {boolean}
          */
         active: {
@@ -23,7 +26,8 @@ croc.Class.define('croc.cmp.form.Button', {
         },
         
         /**
-         * Заблокирована ли кнопка
+         * api-ru Заблокирована ли кнопка
+         * api-en Is button blocked?
          * @type {boolean}
          */
         disabled: {
@@ -33,7 +37,8 @@ croc.Class.define('croc.cmp.form.Button', {
         },
         
         /**
-         * Кнопка в состоянии загрузки
+         * api-ru Кнопка в состоянии загрузки
+         * api-en Button is in downloading state. 
          * @type {boolean}
          */
         loading: {
@@ -43,7 +48,8 @@ croc.Class.define('croc.cmp.form.Button', {
         },
         
         /**
-         * Набор кнопок
+         * api-ru Набор кнопок
+         * api-en Buttons set.
          * @type {string}
          */
         'set': {
@@ -53,7 +59,8 @@ croc.Class.define('croc.cmp.form.Button', {
         },
         
         /**
-         * Цветовая схема кнопки
+         * api-ru Цветовая схема кнопки
+         * api-en Button colot scheme.
          * @type {string}
          */
         scheme: {
@@ -63,7 +70,8 @@ croc.Class.define('croc.cmp.form.Button', {
         },
         
         /**
-         * Размер кнопки
+         * api-ru Размер кнопки
+         * api-en Button size.
          * @type {string}
          */
         size: {
@@ -73,7 +81,8 @@ croc.Class.define('croc.cmp.form.Button', {
         },
         
         /**
-         * Текст кнопки, если не задан, то равен value
+         * api-ru Текст кнопки, если не задан, то равен value
+         * api-en Button text, if it's not set, than equal to value.
          * @type {string}
          */
         text: {
@@ -82,7 +91,8 @@ croc.Class.define('croc.cmp.form.Button', {
         },
         
         /**
-         * Атрибут value кнопки
+         * api-ru Атрибут value кнопки
+         * api-en Button value attribute.
          * @type {string}
          */
         value: {
@@ -100,7 +110,8 @@ croc.Class.define('croc.cmp.form.Button', {
         href: {},
         
         /**
-         * Предотвратить стандартное поведение кнопки (sumbit формы)
+         * api-ru Предотвратить стандартное поведение кнопки (sumbit формы)
+         * api-en Prevent standard button action (form submit)
          * @type {boolean}
          */
         preventDefault: {
@@ -109,7 +120,8 @@ croc.Class.define('croc.cmp.form.Button', {
         },
         
         /**
-         * Радиокнопка - при клике меняется свойство active
+         * api-ru Радиокнопка - при клике меняется свойство active
+         * api-en Radiobutton - changes active property on click.
          * @type {boolean}
          */
         radio: {
@@ -118,7 +130,8 @@ croc.Class.define('croc.cmp.form.Button', {
         },
         
         /**
-         * Предотвратить всплывание события mousedown и click
+         * api-ru Предотвратить всплывание события mousedown и click
+         * api-en Prevent bubbling event by mousedown and click.
          * @type {boolean}
          */
         stopPropagation: {
@@ -132,7 +145,8 @@ croc.Class.define('croc.cmp.form.Button', {
         tag: 'span',
         
         /**
-         * Тип кнопки: button, submit
+         * api-ru Тип кнопки: button, submit
+         * api-en Button type: button, submit.
          * @type {string}
          */
         type: {
@@ -153,7 +167,8 @@ croc.Class.define('croc.cmp.form.Button', {
         },
         
         /**
-         * Тип кнопки
+         * api-ru Тип кнопки
+         * api-en Button type.
          * @return {string}
          */
         getType: function() {

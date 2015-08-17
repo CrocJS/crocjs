@@ -3,7 +3,8 @@ croc.Class.define('croc.cmp.list.Menu', {
     
     options: {
         /**
-         * Флаг, закрывать ли bubble при скролле
+         * api-ru Флаг, закрывать ли bubble при скролле
+         * api-en Close bubble on scroll flag
          * @type {boolean}
          */
         closeOnScroll: true,
@@ -13,7 +14,8 @@ croc.Class.define('croc.cmp.list.Menu', {
     
     members: {
         /**
-         * Инициализация виджета после его отрисовки в DOM
+         * api-ru Инициализация виджета после его отрисовки в DOM
+         * api-en Initialization of widget after its rendering in DOM.
          * @protected
          */
         _initWidget: function() {

@@ -1,5 +1,6 @@
 /**
- * Абстракция над html полем (select, textarea, input)
+ * api-ru Абстракция над html полем (select, textarea, input)
+ * api-en Abstraction over html field (select, textarea, input).
  */
 croc.Class.define('croc.cmp.form.field.AbstractHtmlControl', {
     type: 'abstract',
@@ -33,25 +34,29 @@ croc.Class.define('croc.cmp.form.field.AbstractHtmlControl', {
     
     options: {
         /**
-         * Управлять фокусом поля
+         * api-ru Управлять фокусом поля
+         * api-en Manage field focus.
          * @type {boolean}
          */
         manageFocus: true,
         
         /**
-         * атрибут tabindex
+         * api-ru атрибут tabindex
+         * api-en Tabindex attribute.
          * @type {string|number}
          */
         tabIndex: {},
         
         /**
-         * Таймаут перед назначением классов state_valid/state_error
+         * api-ru Таймаут перед назначением классов state_valid/state_error
+         * api-en Timeout before setting classes state_valid/state_error.
          * @type {number}
          */
         _changeValidClassTimeout: 50,
         
         /**
-         * Использовать проверку изменения значения по событию blur, вместо change
+         * api-ru Использовать проверку изменения значения по событию blur, вместо change
+         * api-en Use check of value change on blur event instead of change
          * @type {boolean}
          */
         _checkValueOnBlur: false
@@ -67,7 +72,8 @@ croc.Class.define('croc.cmp.form.field.AbstractHtmlControl', {
         },
         
         /**
-         * Html-элемент поля
+         * api-ru Html-элемент поля
+         * api-en Html-element of field 
          * @returns {jQuery}
          */
         getFieldElement: function() {
@@ -75,7 +81,8 @@ croc.Class.define('croc.cmp.form.field.AbstractHtmlControl', {
         },
         
         /**
-         * Управляет ли компонент фокусом поля
+         * api-ru Управляет ли компонент фокусом поля
+         * api-en Is field focus managed by component?
          * @returns {boolean}
          */
         managesFocus: function() {
@@ -83,7 +90,8 @@ croc.Class.define('croc.cmp.form.field.AbstractHtmlControl', {
         },
         
         /**
-         * Возвращает внутреннее (сырое) значение поля
+         * api-ru Возвращает внутреннее (сырое) значение поля
+         * api-en Return internal (raw) field value.
          * @protected
          */
         _getFieldValue: function() {
@@ -91,7 +99,8 @@ croc.Class.define('croc.cmp.form.field.AbstractHtmlControl', {
         },
         
         /**
-         * Инициализация виджета после его отрисовки в DOM
+         * api-ru Инициализация виджета после его отрисовки в DOM
+         * api-en Initialization of widget after its rendering in DOM.
          * @protected
          */
         _initWidget: function() {
